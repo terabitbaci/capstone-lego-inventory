@@ -1,0 +1,80 @@
+ {
+      "id": 298191,
+      "inv_part_id": 298191,
+      "part": {
+        "part_num": "87084",
+        "name": "Brick 2 x 3",
+        "part_cat_id": 4,
+        "part_url": "https://rebrickable.com/parts/87084/brick-2-x-3/",
+        "part_img_url": "https://m.rebrickable.com/media/parts/elements/4559584.jpg",
+        "external_ids": {
+          "BrickOwl": [
+            "998147"
+          ]
+        }
+      },
+      "color": {
+        "id": 10,
+        "name": "Bright Green",
+        "rgb": "4B9F4A",
+        "is_trans": false,
+        "external_ids": {
+          "LEGO": {
+            "ext_descrs": [
+              [
+                "Bright Green",
+                "BR.GREEN"
+              ]
+            ],
+            "ext_ids": [
+              37
+            ]
+          },
+          "BrickLink": {
+            "ext_descrs": [
+              [
+                "Bright Green"
+              ]
+            ],
+            "ext_ids": [
+              36
+            ]
+          },
+          "Peeron": {
+            "ext_descrs": [
+              [
+                "btgreen"
+              ]
+            ],
+            "ext_ids": [
+              null
+            ]
+          },
+          "BrickOwl": {
+            "ext_descrs": [
+              [
+                "Bright Green"
+              ]
+            ],
+            "ext_ids": [
+              41
+            ]
+          },
+          "LDraw": {
+            "ext_descrs": [
+              [
+                "Bright_Green"
+              ]
+            ],
+            "ext_ids": [
+              10
+            ]
+          }
+        }
+      },
+      "set_num": "10516-1",
+      "quantity": 2,
+      "is_spare": false,
+      "element_id": "4559584",
+      "num_sets": 16
+    },

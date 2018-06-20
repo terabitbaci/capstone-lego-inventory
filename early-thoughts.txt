@@ -1,0 +1,64 @@
+STEPS
+proof of concept - done 6/15/18
+wireframes and user stories
+HTML/CSS
+JS
+
+wireframes and user stories - 
+
+as a visitor
+I want to understand what I can do with this app
+so I can decide if I want to use it
+
+as a visitor
+I want to lookup a Lego set or MOC
+so I can see what information is returned
+
+as a visitor
+I want to register to use this app
+so I can create a personal Lego® inventory
+
+as a logged-in user
+I want to see instructions and begin entering my Lego sets
+so I can build my personal inventory
+
+as a logged-in user
+I want to add a individual part, color, and quantity to my inventory
+so my personal Lego inventory is up-to-date (+ Add Part)
+
+as a logged-in user
+I want to add a single set to my inventory
+so my personal Lego inventory is up-to-date (+ Add Set)
+
+as a logged-in user
+I want to adjust my inventory (subtract a set/MOC/part)
+so my personal Lego inventory is up-to-date 
+
+as a logged-in user
+I want to mark a set, MOC, or group of parts as in-use (part of a permanent build)
+so I can see what is left in my inventory
+
+as a logged-in user
+I want to see a list of my Lego sets
+so I can click on an option to view details
+
+as a logged-in user
+I want to be able to search for parts
+so I can use the part number to add it to my inventory
+
+
+
+
+
+uh-oh something went wrong
+
+
+Copyright ©2018 Teresa Bacigalupi
+
+LEGO® is a trademark of The LEGO Group of companies which does not sponsor, authorize or endorse this app.
+
+This data is sourced from Rebrickable.
+
+BrickSet
+BrickLink
+BrickOwl

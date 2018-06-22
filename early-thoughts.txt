@@ -46,6 +46,12 @@ as a logged-in user
 I want to be able to search for parts
 so I can use the part number to add it to my inventory
 
+--- new ---
+
+as a logged-in user
+I want to fold my in-use set/MOC/parts back into my inventory
+so I can see them in my list of sets/parts available for a build
+
 
 
 
@@ -56,7 +62,7 @@ uh-oh something went wrong
 Copyright ©2018 Teresa Bacigalupi
 
 LEGO® is a trademark of The LEGO Group of companies which does not sponsor, authorize or endorse this app.
-
+®
 This data is sourced from Rebrickable.
 
 BrickSet

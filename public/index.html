@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shakespeare Passport Node Capstone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar" style="display: none;">
+        <div id="nav-header">
+            <h4>Shakespeare Passport</h4>
+        </div>
+        <div id="nav-list">
+            <span id="loggedInName"></span>
+            <input type="hidden" id="loggedInUserName" value="">
+            <p> | </p>
+            <span><button type="button" id="logout">Logout</button></span>
+        </div>
+    </nav>
+
+    <section id="homepage-header">
+        <div class="background-div"></div>
+
+        <header role="banner">
+            <h1>Shakespeare Passport</h1>
+        </header>
+    </section>
+
+    <main role="main">
+        <section id="signup-home-page">
+            <div id="form-text">
+                <h3>All the World's a <span id="stage">Stage</span></h3>
+                <div class="form-text-section">
+                    <p>so help your memory out.</p>
+                    <p>Track all the plays you've Read, Seen, or Performed in.</p>
+                </div>
+            </div>
+            <form class="login-form">
+                <legend>Login</legend>
+                <fieldset>
+                    <label for="loginUsername">Email</label>
+                    <input type="email" id="loginUsername" placeholder="OtisThePug@hotmail.com" value="paul.thomp@gmail.com">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Lt_Fish1902" value="pass2018">
+                </fieldset>
+                <button type="submit" class="submit-button" id="login-button">Sign In</button>
+                <span>Need to <button id="change-form-signup">Sign-up</button>?</span>
+            </form>
+        </section>
+
+        <section id="signup-page" style="display: none;">
+            <form class="sign-up-form">
+                <legend>Sign up</legend>
+                <fieldset>
+                    <label for="signUpName">Name</label>
+                    <input type="name" id="signUpName" placeholder="Peter Piper" value="Paul Thompson">
+                    <label for="signUpUsername">Email</label>
+                    <input type="email" id="signUpUsername" placeholder="OtisThePug@hotmail.com" value="paul.thomp@gmail.com">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" placeholder="Lt_Fish1902" value="pass2018">
+                </fieldset>
+                <button type="submit" class="submit-button">Sign In</button>
+                <br>
+                <p id="signup-p">Have an account? <button id="change-form-login">Login</button></p>
+            </form>
+        </section>
+        <section id="user-dashboard">
+            <div id="entry-toolbar">
+                <div id="entry-views">
+                    <p>View By:</p>
+                    <button type="button" id="date-sort" onclick="populateUserDashboardDate()">Date</button>
+                    <p> | </p>
+                    <button id="read-sort" onclick="populateUserDashboardRead()">Read</button>
+                    <p> | </p>
+                    <button id="seen-sort" onclick="populateUserDashboardSeen()">Seen</button>
+                    <p> | </p>
+                    <button id="performed-sort" onclick="populateUserDashboardPerformed()">Performed</button>
+                </div>
+                <button id="add-entry-button">+ Add Entry</button>
+            </div>
+
+            <div id="user-list">
+                <p id="no-entry">No Entries - add an entry.</p>
+            </div>
+            <section id="add-entry-container" style="display: none;">
+                <div class="add-entry entry-wrapper">
+                    <a class="close-popup" href="#">&times;</a>
+                    <form class="entry-form">
+                        <legend>Create New Entry</legend>
+                        <fieldset>
+                            <label class="question" for="addEntryType">Entry Type:</label>
+                            <select name="entryType" class='addEntryType' required>
+                                    <option value="read">Read</option>
+                                    <option value="seen" selected>Seen</option>
+                                    <option value="performed">Performed</option>
+                                </select>
+                            <br>
+                            <label for="addInputDate">Date</label>
+                            <input type="date" class="addInputDate" value="2009-06-25">
+                            <button type="button" class="date-text">Need Date Range?</button>
+                            <br>
+                            <div class="play-info">
+                                <label for="addInputPlay">Play</label>
+                                <input type="text" class="addInputPlay" placeholder="Titus Andronicus" value="Titus Andronicus">
+                                <label for="addInputAuthor">Author</label>
+                                <input type="text" class="addInputAuthor" placeholder="The Bard" value="The Bard">
+                                <label for="addInputRole">Role</label>
+                                <input type="text" class="addInputRole" placeholder="Titus" value="Titus">
+                            </div>
+                            <div class="place-info">
+                                <label for="addInputCo">Company</label>
+                                <input type="text" class="addInputCo" placeholder="Flagstaff Shakespeare Company" value="Flagstaff Shakespeare Company">
+                                <label for="addInputLocation">Location</label>
+                                <input type="text" class="addInputLocation" placeholder="Museum of Northern Arizona" value="Museum of Northern Arizona">
+                            </div>
+                            <br>
+                            <label for="addInputNotes">Notes</label>
+                            <textarea name="Text1" class="addInputNotes" cols="40" rows="5">Some notes</textarea>
+                        </fieldset>
+                        <button type="submit" id="create-entry-button" class="submit-button">Add Entry</button>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <img src="images/flagstaff-shakes-logo.png" alt="Flagstaff Shakespeare Festival logo graphic with fancy Shakespeare 'S'" id="flag-shakes-logo">
+        <p>Copyright 2018</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>

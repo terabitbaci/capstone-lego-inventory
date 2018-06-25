@@ -65,6 +65,9 @@ LEGO® is a trademark of The LEGO Group of companies which does not sponsor, aut
 ®
 This data is sourced from Rebrickable.
 
+Icons:
+Lego Scared by TMD from the Noun Project
+
 BrickSet
 BrickLink
 BrickOwl

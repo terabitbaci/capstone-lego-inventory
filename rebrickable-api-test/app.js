@@ -1,5 +1,4 @@
-//curl - X GET--header 'Accept: application/json'--header 'Authorization: key 4f8845c5d9212c179c08fe6f0e0d2d0c'
-'https://rebrickable.com/api/v3/lego/sets/42053-1/parts/'
+//curl - X GET--header 'Accept: application/json'--header 'Authorization: key 4f8845c5d9212c179c08fe6f0e0d2d0c' 'https://rebrickable.com/api/v3/lego/sets/42053-1/parts/'
 
 function getDataFromApi(setNum) {
 

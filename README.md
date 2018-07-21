@@ -17,92 +17,75 @@ Delete Entry |
 ## User Cases
 This app is for three types of users:
 
-// Landing Page
+
+// update the use cases in the sticky notes at the top of each wireframe
+
+// Landing Page (code)
 as a visitor
-I want to understand what I can do with this app
+I want to understand what I can do with this app (or sign up, or log in)
 so I can decide if I want to use it
 
-// Test Drive
-as a visitor
-I want to lookup a Lego set or MOC
-so I can see what information is returned
-
-// Sign Up
+// Sign Up (code)
 as a visitor
 I want to register to use this app
 so I can create a personal Lego® inventory
 
-// Start Building Inventory
+// Start Building Inventory (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see instructions and begin entering my Lego sets
 so I can build my personal inventory
 
-// Confirm Added
+// Confirm Added (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
+// add window with spreadsheet of inventory,
+// with actions column for remove an item (HiCharts)
 as a logged-in user
-I want to see an image of the set/MOC/part I just entered
+I want to see the inventory of items I entered (and an image of the set/MOC/part)
+and click on an option to view details of each set
 so I can confirm the item was added to my inventory
 
-as a logged-in user
-I want to add another set/MOC/part to my inventory
-so my personal Lego inventory is up-to-date
-
-as a logged-in user
-I want to add a set/MOC/part to my inventory
-so my personal Lego inventory is up-to-date
-
-as a logged-in user
-I want to adjust my inventory (subtract a set/MOC/part)
-so my personal Lego inventory is up-to-date
-
-as a logged-in user
+as a logged-in user (code)
 I want to mark a set/MOC/parts as in-use (part of a permanent build)
 so I can see what is left in my inventory
 
-as a logged-in user
+as a logged-in user (code)
 I want to fold my in-use set/MOC/parts back into my inventory
 so I can see them in my list of sets/parts available for a build
 
-as a logged-in user
-I want to see a list of my Lego sets
-so I can click on an option to view details of each set
-
-as a logged-in user
+as a logged-in user (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_list
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
 // new
 
-as a logged-in user
-I want to fold my in-use set/MOC/parts back into my inventory
-so I can see them in my list of sets/parts available for a build
-
-as a logged-in user
+as a logged-in user (code)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy
 
-as a logged-in user
+as a logged-in user (code)
 I want to generate a checklist of needed parts for my planned build
 so I can check parts off as I purchase/collect them
 
-as a logged-in user
+as a logged-in user (code)
 I want to add parts to my inventory as I check them off my checklist of needed parts
 so I can maintain an accurate inventory as I prepare for my planned build
 
-as a logged-in user
+as a logged-in user (code)
 I want to create a wish list of sets/MOCs/parts
 so I have a master wish list to work from
 
-as a logged-in user
+as a logged-in user (code)
 I want to add sets/MOCs/parts to my inventory as I check them off my wish list
 so I can maintain an accurate inventory of my Legos
 
-as a logged-in user
+as a logged-in user (code)
 I want to enter a bin number for each part
 so I can maintain a home storage system for my Legos
 
 
 
 //About
+// keep blank for now; tools go to README page; trademark & Rebrickable in footers;
+// icons stay for now
 as a visitor
 I want to access the About page
 so I can learn what/who is behind this app
@@ -126,7 +109,7 @@ The app's functionality includes:
 * Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery
 * Back-End: Node.js | Express.js | Mocha | Chai | RESTful API Endpoints | MongoDB | Mongoose
 
-
+// Heroku, mLab, Robo 3T
 
 ## Responsive
 App is strongly built to be usuable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.

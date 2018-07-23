@@ -30,18 +30,25 @@ as a visitor
 I want to register to use this app
 so I can create a personal Lego® inventory
 
-// Start Building Inventory (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
+// Start Building Inventory (api)
+// https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see instructions and begin entering my Lego sets
 so I can build my personal inventory
 
-// Confirm Added (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
+// Confirm Added (api)
+// https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 // add window with spreadsheet of inventory,
 // with actions column for remove an item (HiCharts)
 as a logged-in user
 I want to see the inventory of items I entered (and an image of the set/MOC/part)
 and click on an option to view details of each set
 so I can confirm the item was added to my inventory
+
+// view details of an item
+as a logged-in user (api)
+I want to access the details of any item in my inventory
+so I can view photos and information on the item
 
 as a logged-in user (code)
 I want to mark a set/MOC/parts as in-use (part of a permanent build)
@@ -51,7 +58,8 @@ as a logged-in user (code)
 I want to fold my in-use set/MOC/parts back into my inventory
 so I can see them in my list of sets/parts available for a build
 
-as a logged-in user (api) https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_list
+as a logged-in user (api)
+// https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_list
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 

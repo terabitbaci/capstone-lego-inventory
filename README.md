@@ -45,7 +45,7 @@ I want to see the inventory of items I entered (and an image of the set/MOC/part
 and click on an option to view details of each set
 so I can confirm the item was added to my inventory
 
-// view details of an item
+// view details of an item (new wireframe)
 as a logged-in user (api)
 I want to access the details of any item in my inventory
 so I can view photos and information on the item
@@ -54,7 +54,7 @@ as a logged-in user (code)
 I want to mark a set/MOC/parts as in-use (part of a permanent build)
 so I can see what is left in my inventory
 
-as a logged-in user (code)
+as a logged-in user (code) (unclick perm build checkboxes)
 I want to fold my in-use set/MOC/parts back into my inventory
 so I can see them in my list of sets/parts available for a build
 
@@ -67,7 +67,7 @@ so I can capture the part number to add it to my inventory
 
 as a logged-in user (code)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
-so I can see what parts to buy
+so I can see what parts to buy (another page with a table of needed parts)
 
 as a logged-in user (code)
 I want to generate a checklist of needed parts for my planned build
@@ -85,7 +85,7 @@ as a logged-in user (code)
 I want to add sets/MOCs/parts to my inventory as I check them off my wish list
 so I can maintain an accurate inventory of my Legos
 
-as a logged-in user (code)
+as a logged-in user (code) (column to right of item number)
 I want to enter a bin number for each part
 so I can maintain a home storage system for my Legos
 

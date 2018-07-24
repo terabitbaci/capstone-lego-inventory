@@ -52,7 +52,7 @@ parts available for a build
 
 
 
-// view details of an item (new wireframe)
+// Item Details
 as a logged-in user (api)
 I want to access the details of any item in my inventory
 so I can view photos and information on the item

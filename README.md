@@ -36,14 +36,13 @@ as a logged-in user
 I want to see instructions and begin entering my Lego sets
 so I can build my personal inventory
 
-// Confirm Added (api)
+// Confirm Added & See Inventory (api)
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
-// add window with spreadsheet of inventory,
-// with actions column for remove an item (HiCharts)
+// add permanent build button
 as a logged-in user
-I want to see the inventory of items I entered (and an image of the set/MOC/part)
-and click on an option to view details of each set
-so I can confirm the item was added to my inventory
+I want to see my inventory with the most recent added item on the top line,
+with view-filtering, action options, and each inventory item clickable
+so I can confirm the item was added to my inventory, and to view my inventory
 
 // view details of an item (new wireframe)
 as a logged-in user (api)

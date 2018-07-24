@@ -38,7 +38,6 @@ so I can build my personal inventory
 
 // Confirm Added & See Inventory (api)
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
-// add permanent build button
 as a logged-in user
 I want to see my inventory with the most recent added item on the top line,
 with view-filtering, action options, and each inventory item clickable
@@ -93,6 +92,7 @@ so I can maintain a home storage system for my Legos
 //About
 // keep blank for now; tools go to README page; trademark & Rebrickable in footers;
 // icons stay for now
+// Login by Mint Shirt from the Noun Project
 as a visitor
 I want to access the About page
 so I can learn what/who is behind this app

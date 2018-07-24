@@ -68,6 +68,12 @@ as a logged-in user (api)
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
+// also
+
+as a logged-in user (???????)
+I want to click on an item in the search results
+so I can add the item
+
 // new
 
 as a logged-in user (code)

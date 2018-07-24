@@ -62,7 +62,7 @@ as a logged-in user (api)
 I want to access the details of any item in my inventory
 so I can view photos and information on the item
 
-
+// Search
 as a logged-in user (api)
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_list
 I want to be able to search for parts

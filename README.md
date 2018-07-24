@@ -50,6 +50,11 @@ I want to mark (toggle) a set/MOC/parts as in-use (part of a permanent build)
 so I can view what is left in my inventory, and have an accurate list of
 parts available for a build
 
+// also
+
+as a logged-in user (code)
+I want to enter a bin number for each part
+so I can maintain a home storage system for my Legos
 
 
 // Item Details
@@ -85,9 +90,6 @@ as a logged-in user (code)
 I want to add sets/MOCs/parts to my inventory as I check them off my wish list
 so I can maintain an accurate inventory of my Legos
 
-as a logged-in user (code) (column to right of item number)
-I want to enter a bin number for each part
-so I can maintain a home storage system for my Legos
 
 
 

@@ -80,7 +80,7 @@ so I can add the item
 
 // new
 
-as a logged-in user (code)
+as a logged-in user (code - comparison) (enter set/MOC to build; report on xxxx/xxxxx have, xxx needed; display checklist)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy (another page with a table of needed parts)
 

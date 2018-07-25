@@ -36,7 +36,7 @@ as a logged-in user
 I want to see instructions and begin entering my Lego sets
 so I can build my personal inventory
 
-// Confirm Added & See Inventory (api)
+// Confirm Added & See Inventory (api) (add magnifying glass)
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see my inventory with the most recent added item on the top line,
@@ -56,9 +56,9 @@ as a logged-in user (code)
 I want to enter a bin number for each part
 so I can maintain a home storage system for my Legos
 
+// also
 
-// Item Details
-as a logged-in user (api)
+as a logged-in user (api) (add column with eyes)
 I want to access the details of any item in my inventory
 so I can view photos and information on the item
 
@@ -68,9 +68,13 @@ as a logged-in user (api)
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
+// Search Results (add magnifying glass for search again)
+
+
 // also
 
-as a logged-in user (???????)
+as a logged-in user (???????) (highlight the part by adding a border; add & shopping cart buttons on top
+of other search results)
 I want to click on an item in the search results
 so I can add the item
 

@@ -58,7 +58,7 @@ so I can maintain a home storage system for my Legos
 
 // also
 
-as a logged-in user (api) (add column with eyes)
+as a logged-in user (api)
 I want to access the details of any item in my inventory
 so I can view photos and information on the item
 
@@ -101,6 +101,7 @@ I want to add sets/MOCs/parts to my inventory as I check them off my wish list
 so I can maintain an accurate inventory of my Legos
 
 
+// search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)
 
 
 //About

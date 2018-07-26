@@ -68,15 +68,12 @@ as a logged-in user (api)
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
-// Search Results (add magnifying glass for search again)
-
-
-// also
-
-as a logged-in user (???????) (highlight the part by adding a border; add & shopping cart buttons on top
+// Search Results
+as a logged-in user (highlight the part by adding a border; add & shopping cart buttons on top
 of other search results)
-I want to click on an item in the search results
+I want to look for and click on the part from my search
 so I can add the item
+
 
 // new
 

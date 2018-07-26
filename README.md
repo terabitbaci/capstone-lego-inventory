@@ -76,7 +76,20 @@ so I can add the item
 
 // new
 
-as a logged-in user (code - comparison) (enter set/MOC to build; report on xxxx/xxxxx have, xxx needed; display checklist)
+Plan a Build
+as a logged-in user
+I want to enter a planned build by set or MOC number
+so I can see what parts the set requires, how many parts I have, and what parts I need to acquire
+to complete the build
+
+
+Do Build Calculations
+Generate a Checklist
+
+as a logged-in user (code - comparison; loop through the initial code and secondary code, and figure out
+which are common to both)
+cross reference: what you have vs. what is necessary
+(enter set/MOC to build; report on xxxx/xxxxx have, xxx needed; display checklist)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy (another page with a table of needed parts)
 

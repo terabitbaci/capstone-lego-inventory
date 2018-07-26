@@ -93,8 +93,8 @@ cross reference: what you have vs. what is necessary
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy (another page with a table of needed parts)
 
-as a logged-in user (code)
-I want to generate a checklist of needed parts for my planned build
+as a logged-in user (code) (create a pdf and print) (standalone page with only the list of items and builds)
+I want to print a checklist of needed parts for my planned build
 so I can check parts off as I purchase/collect them
 
 as a logged-in user (code)

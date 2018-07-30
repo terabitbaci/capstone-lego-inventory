@@ -70,9 +70,13 @@ so I can capture the part number to add it to my inventory
 
 // Search Results
 as a logged-in user
-I want to look for and click on the part from my search
-so I can add the item
+I want to look for and click on the item from my search
+so I can perform an action on it
 
+// Search Results Action
+as a logged-in user
+I want to look for and click on the item from my search
+so I can view details of the item, add it to my inventory, or put it on my wishlist
 
 // new
 

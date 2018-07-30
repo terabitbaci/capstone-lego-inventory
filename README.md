@@ -83,11 +83,15 @@ so I can view details of the item, add it to my inventory, or put it on my wishl
 Plan a Build
 as a logged-in user
 I want to enter a planned build by set or MOC number
-so I can see what parts the set requires, how many parts I have, and what parts I need to acquire
-to complete the build
+so I can generate build calculations
 
 
 Do Build Calculations
+as a logged-in user
+I want to enter a planned build by set or MOC number
+so I can see what parts the set requires, how many parts I have, what parts I need
+to complete the build, and add those parts to my wishlist
+
 Generate a Checklist
 
 as a logged-in user (code - comparison; loop through the initial code and secondary code, and figure out

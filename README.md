@@ -105,7 +105,7 @@ so I can see what parts to buy (another page with a table of needed parts)
 Wishlist
 as a logged-in user
 I want to view my wishlist by build
-so I can print my wishlist, and add parts as I acquire them
+so I can print my wishlist (File > Print), and add parts as I acquire them
 
 
 Wishlist Item Options

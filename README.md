@@ -94,12 +94,19 @@ to complete the build, and add those parts to my wishlist
 
 Generate a Checklist
 
-as a logged-in user (code - comparison; loop through the initial code and secondary code, and figure out
-which are common to both)
+as a logged-in user (code - comparison; loop through the initial code and secondary code,
+and figure out which are common to both)
 cross reference: what you have vs. what is necessary
-(enter set/MOC to build; report on xxxx/xxxxx have, xxx needed; display checklist)
+(enter set/MOC to build; report on have: xxxx of xxxxx have; need: xxx; display checklist)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy (another page with a table of needed parts)
+
+
+Wishlist
+as a logged-in user
+I want to view my wishlist by build
+so I can print my wishlist, add parts as I acquire them
+
 
 as a logged-in user (code) (create a pdf and print) (standalone page with only the list of items and builds)
 I want to print a checklist of needed parts for my planned build

@@ -105,8 +105,14 @@ so I can see what parts to buy (another page with a table of needed parts)
 Wishlist
 as a logged-in user
 I want to view my wishlist by build
-so I can print my wishlist, add parts as I acquire them
+so I can print my wishlist, and add parts as I acquire them
 
+
+Wishlist Item Options
+as a logged-in user
+I want to click on a Wishlist item
+so I can view its details, add the newly-acquired number of parts to my inventory,
+and recalculate my build(s)
 
 as a logged-in user (code) (create a pdf and print) (standalone page with only the list of items and builds)
 I want to print a checklist of needed parts for my planned build

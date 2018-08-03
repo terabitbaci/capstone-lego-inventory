@@ -78,18 +78,16 @@ as a logged-in user
 I want to look for and click on the item from my search
 so I can view details of the item, add it to my inventory, or put it on my wishlist
 
-// new
-
-Plan a Build
+// Plan a Build
 as a logged-in user
 I want to enter a planned build by set or MOC number
 so I can generate build calculations
 
 
-Do Build Calculations
+// Build Calculation
 as a logged-in user
-I want to enter a planned build by set or MOC number
-so I can see what parts the set requires, how many parts I have, what parts I need
+I want to view the build calculations
+so I can see how many parts I have, how many parts I need
 to complete the build, and add those parts to my wishlist
 
 Generate a Checklist

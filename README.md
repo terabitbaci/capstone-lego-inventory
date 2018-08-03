@@ -132,6 +132,29 @@ The app's functionality includes:
 * User can Add Entries, Update Entries, and Delete Entries
 * User can sort entries by: Date & Type (Read, Seen, Performed)
 
+## Business Objects
+* User
+    * Username
+    * Password
+* Lego Item
+    * number
+    * type (set, MOC or part)
+    * image
+    * name
+    * username of owner
+    * source of part (set)
+    * years offered
+    * number in wishlist
+    * quantity of parts in a set/MOC
+    * username
+* Inventory
+    * number
+    * quantity (in inventory)
+    * status (y/n permanent build)
+    * quantity available
+    * bin (customer organization number)
+    * username
+
 ## Technology
 * Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery
 * Back-End: Node.js | Express.js | Mocha | Chai | RESTful API Endpoints | MongoDB | Mongoose

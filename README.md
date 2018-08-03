@@ -95,9 +95,7 @@ to complete the build, and add those parts to my wishlist
 Generate a Checklist
 
 as a logged-in user (code - comparison; loop through the initial code and secondary code,
-and figure out which are common to both)
-cross reference: what you have vs. what is necessary
-(enter set/MOC to build; report on have: xxxx of xxxxx have; need: xxx; display checklist)
+and figure out which are common to both. Cross reference: what you have vs. what is necessary)
 I want to enter a planned build to see what Lego parts I still need in order to do the build
 so I can see what parts to buy (another page with a table of needed parts)
 
@@ -114,21 +112,6 @@ I want to click on a Wishlist item
 so I can view its details, add the newly-acquired number of parts to my inventory,
 and recalculate my build(s)
 
-as a logged-in user (code) (create a pdf and print) (standalone page with only the list of items and builds)
-I want to print a checklist of needed parts for my planned build
-so I can check parts off as I purchase/collect them
-
-as a logged-in user (code)
-I want to add parts to my inventory as I check them off my checklist of needed parts
-so I can maintain an accurate inventory as I prepare for my planned build
-
-as a logged-in user (code)
-I want to create a wish list of sets/MOCs/parts
-so I have a master wish list to work from
-
-as a logged-in user (code)
-I want to add sets/MOCs/parts to my inventory as I check them off my wish list
-so I can maintain an accurate inventory of my Legos
 
 
 // search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)

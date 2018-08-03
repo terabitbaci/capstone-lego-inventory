@@ -83,33 +83,27 @@ as a logged-in user
 I want to enter a planned build by set or MOC number
 so I can generate build calculations
 
-
 // Build Calculation
 as a logged-in user
 I want to view the build calculations
 so I can see how many parts I have, how many parts I need
 to complete the build, and add those parts to my wishlist
 
-Generate a Checklist
-
-as a logged-in user (code - comparison; loop through the initial code and secondary code,
+// (code - comparison; loop through the initial code and secondary code,
 and figure out which are common to both. Cross reference: what you have vs. what is necessary)
-I want to enter a planned build to see what Lego parts I still need in order to do the build
-so I can see what parts to buy (another page with a table of needed parts)
 
 
-Wishlist
+// Wishlist
 as a logged-in user
 I want to view my wishlist by build
 so I can print my wishlist (File > Print), and add parts as I acquire them
 
 
-Wishlist Item Options
+// Wishlist Item Options
 as a logged-in user
 I want to click on a Wishlist item
 so I can view its details, add the newly-acquired number of parts to my inventory,
 and recalculate my build(s)
-
 
 
 // search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)

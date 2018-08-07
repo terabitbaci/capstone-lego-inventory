@@ -132,11 +132,11 @@ The app's functionality includes:
 * User can Add Entries, Update Entries, and Delete Entries
 * User can sort entries by: Date & Type (Read, Seen, Performed)
 
-## Business Objects
-* User
+## Business Objects (database structure)
+* User (collection)
     * Username
     * Password
-* Lego Item
+* Lego Item (collection)
     * number
     * type (set, MOC or part)
     * image
@@ -147,13 +147,14 @@ The app's functionality includes:
     * number in wishlist
     * quantity of parts in a set/MOC
     * username
-* Inventory
+* Inventory (collection)
     * number
     * quantity (in inventory)
     * status (y/n permanent build)
     * quantity available
     * bin (customer organization number)
     * username
+    * in your sets calculation ("good to have" feature)(from Show Details wireframe)
 
 ## Technology
 * Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery

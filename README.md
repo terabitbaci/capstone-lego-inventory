@@ -154,7 +154,8 @@ The app's functionality includes:
     * quantity available
     * bin (customer organization number)
     * username
-    * in your sets calculation ("good to have" feature)(from Show Details wireframe)
+    * 'in your sets' calculation ("good to have" feature)(from Show Details wireframe)
+    * type (set, MOC or part)
 
 ## Technology
 * Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery

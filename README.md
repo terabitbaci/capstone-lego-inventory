@@ -68,7 +68,7 @@ as a logged-in user (api)
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
-// Search Results
+// Search Results (One page for parts, one for MOCs, one for sets)
 as a logged-in user
 I want to look for and click on the item from my search
 so I can perform an action on it
@@ -150,11 +150,19 @@ The app's functionality includes:
 * Inventory (collection)
     * number
     * quantity (in inventory)
+    * name
     * status (y/n permanent build)
     * quantity available
     * bin (customer organization number)
     * username
     * 'in your sets' calculation ("good to have" feature)(from Show Details wireframe)
+    * type (set, MOC or part)
+* Wishlist (collection)
+    * number
+    * quantity (in wishlist)
+    * name
+    * username
+    * 'in these sets/MOCs' calculation
     * type (set, MOC or part)
 
 ## Technology

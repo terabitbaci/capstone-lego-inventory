@@ -137,13 +137,15 @@ The app's functionality includes:
     * Username
     * Password
 * Lego Item (collection)
-    * number
-    * type (set, MOC or part)
-    * image
+    * number (Lego)
+    * number (Rebrickable)
+    * type (set/MOC/part)
+    * image URL (set/MOC/part)
     * name
     * username of owner
-    * source of part (set)
-    * years offered
+    * source of part (sets the part is found in)
+    * number of parts (in set/MOC)
+    * years offered / year (design released)
     * number in wishlist
     * quantity of parts in a set/MOC
     * username

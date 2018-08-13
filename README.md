@@ -136,7 +136,7 @@ The app's functionality includes:
 * User (collection)
     * Username
     * Password
-* Lego Item (collection)
+* Lego Item (collection) (unique database info on items)
     * number (Lego)
     * number (Rebrickable)
     * type (set/MOC/part)
@@ -149,8 +149,9 @@ The app's functionality includes:
     * number in wishlist
     * quantity of parts in a set/MOC
     * username
-* Inventory (collection)
-    * number
+* Inventory (collection) (user-specific inventory)
+    * number (Lego)
+    * number (Rebrickable)
     * quantity (in inventory)
     * name
     * status (y/n permanent build)
@@ -159,8 +160,9 @@ The app's functionality includes:
     * username
     * 'in your sets' calculation ("good to have" feature)(from Show Details wireframe)
     * type (set, MOC or part)
-* Wishlist (collection)
-    * number
+* Wishlist (collection) (user-specific wishlist)
+    * number (Lego)
+    * number (Rebrickable)
     * quantity (in wishlist)
     * name
     * username

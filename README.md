@@ -145,8 +145,8 @@ The app's functionality includes:
     * username of owner
     * source of part (sets the part is found in)
     * number of parts (in set/MOC)
-    * years offered / year (design released)
-    * number in wishlist
+    * years offered / year design was released
+    * quantity in Wishlist
     * quantity of parts in a set/MOC
     * username
 * Inventory (collection) (user-specific inventory)
@@ -163,7 +163,7 @@ The app's functionality includes:
 * Wishlist (collection) (user-specific wishlist)
     * number (Lego)
     * number (Rebrickable)
-    * quantity (in wishlist)
+    * quantity (in Wishlist)
     * name
     * username
     * 'in these sets/MOCs' calculation

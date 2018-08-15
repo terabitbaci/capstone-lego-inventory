@@ -139,7 +139,7 @@ The app's functionality includes:
 * User (collection)
     * Username
     * Password
-* Lego Item (collection) (unique database info on items)
+* Lego Item (collection) (unique Lego elements saved in the database, and used to make inventories and Wishlists; these items don't belong to anybody)
     * number (Lego)
     * number (Rebrickable)
     * type (set/MOC/part)

@@ -71,6 +71,11 @@ as a logged-in user (api)
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
+// Search Error
+as a logged-in user
+I want to know if there is an error in my search
+so I can capture the part number to add it to my inventory
+
 // Search Results (One page for parts, one for MOCs, one for sets)
 as a logged-in user
 I want to look for and click on the item from my search
@@ -131,6 +136,8 @@ You can access a working prototype of the app here: https://legoinventory.heroku
 
 ## Functionality
 The app's functionality includes:
+Search looks for user's number (XXXXX) and possible Rebrickable number (XXXXX-1)
+
 * Every User has the ability to create an account that stores information unique to them
 * User can Add Entries, Update Entries, and Delete Entries
 * User can sort entries by: Date & Type (Read, Seen, Performed)
@@ -143,14 +150,14 @@ The app's functionality includes:
     * number (Lego)
     * number (Rebrickable)
     * type (set/MOC/part)
-    ** image URL to Rebrickable set/MOC/part
+    * image URL to Rebrickable set/MOC/part
     * name
     * username of owner
     * source of part (sets the part is found in)
     * number of parts (in set/MOC)
     * years offered / year design was released
-    ** designer of MOC
-    ** designer's website
+    * designer of MOC
+    * designer's website
     * quantity in Wishlist
     * quantity of parts in a set/MOC
     * username

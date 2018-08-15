@@ -146,6 +146,8 @@ The app's functionality includes:
     * source of part (sets the part is found in)
     * number of parts (in set/MOC)
     * years offered / year design was released
+    ** designer of MOC
+    ** designer's website
     * quantity in Wishlist
     * quantity of parts in a set/MOC
     * username

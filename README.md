@@ -42,11 +42,15 @@ as a logged-in user
 I want to see my inventory with the most recent added item on the top line,
 with view-filtering, action options, and each inventory item clickable
 so I can confirm the item was added to my inventory, and to view my inventory
+with view-filtering and action options, and each inventory item clickable
+to reveal more details and provide links
+so I can confirm the item was added to my inventory, and to view and
+perform actions on my inventory
 
 // also
 
 as a logged-in user (code)
-I want to mark (toggle) a set/MOC/parts as in-use (part of a permanent build)
+I want to mark (toggled lock icon) a set/MOC/parts as in-use (part of a permanent build)
 so I can view what is left in my inventory, and have an accurate list of
 parts available for a build
 
@@ -56,11 +60,12 @@ as a logged-in user (code)
 I want to enter a bin number for each part
 so I can maintain a home storage system for my Legos
 
-// also
-
-as a logged-in user (api)
-I want to access the details of any item in my inventory
-so I can view photos and information on the item
+// Show Details (api)
+as a logged-in user
+I want to view the photo and details of each set/MOC/part,
+and access links to its page (and MOC designer) on Rebrickable.com,
+and link to the item on my Wishlist
+so I can learn about the item and see stats on parts and quantities
 
 // Search
 as a logged-in user (api)

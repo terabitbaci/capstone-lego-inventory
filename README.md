@@ -143,7 +143,7 @@ The app's functionality includes:
     * number (Lego)
     * number (Rebrickable)
     * type (set/MOC/part)
-    * image URL (set/MOC/part)
+    ** image URL to Rebrickable set/MOC/part
     * name
     * username of owner
     * source of part (sets the part is found in)

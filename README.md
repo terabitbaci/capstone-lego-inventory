@@ -136,7 +136,7 @@ You can access a working prototype of the app here: https://legoinventory.heroku
 
 ## Functionality
 The app's functionality includes:
-Search looks for user's number (XXXXX) and possible Rebrickable number (XXXXX-1)
+Search feature looks for user's number (XXXXX) and possible Rebrickable number (XXXXX-1)
 
 * Every User has the ability to create an account that stores information unique to them
 * User can Add Entries, Update Entries, and Delete Entries

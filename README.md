@@ -47,25 +47,13 @@ and the ability to enter a bin number where each part is physically stored,
 so I can confirm the item was added to my inventory, have view options and
 and accurate list of parts available for a build, and perform actions on my inventory
 
-// also
-
-as a logged-in user (code)
-I want to mark (toggled lock icon) a set/MOC/parts as in-use (part of a permanent build)
-so I can view what is left in my inventory, and have an accurate list of
-parts available for a build
-
-// also
-
-as a logged-in user (code)
-I want to enter a bin number for each part
-so I can maintain a home storage system for my Legos
-
 // Show Details (api)
 as a logged-in user
 I want to view the photo and details of each set/MOC/part,
 and access links to its page (and MOC designer) on Rebrickable.com,
 and link to the item on my Wishlist
-so I can learn about the item and see stats on parts and quantities
+so I can learn about the item and see stats on parts and quantities,
+and access links to purchase the item
 
 // Search
 as a logged-in user (api)

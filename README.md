@@ -40,10 +40,12 @@ so I can build my personal inventory
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see my inventory with the most recent added item on the top line,
-with view-filtering and action options, and each inventory item clickable
-to reveal more details and provide links
-so I can confirm the item was added to my inventory, and to view and
-perform actions on my inventory
+with view-filtering and action options,
+and each inventory item clickable to reveal more details and provide links,
+with a feature to mark a set/MOC/part as in-use (part of a permanent build),
+and the ability to enter a bin number where each part is physically stored,
+so I can confirm the item was added to my inventory, have view options and
+and accurate list of parts available for a build, and perform actions on my inventory
 
 // also
 

@@ -20,9 +20,9 @@
                 <label for="login-form-password">password</label>
                 <input type="text" class='login-form-password' value="password" placeholder="Password">
                 <button type="submit">go</button>
-<p>Demo Account:</p>
-<p>Username: demo</p>
-<p>Password: demo</p>
+                <p>Demo Account:</p>
+                <p>Username: demo</p>
+                <p>Password: demo</p>
                 <p>Don't have an account? <a href="">Sign up here</a></p>
             </form>
         </section>
@@ -42,7 +42,16 @@
     </main>
     <!--    Start Building Inventory, Inventory Home, Show Details wireframes   -->
     <main role="main" id="inventoryPage" class="hide-everything">
-        <section id="startInventorySubpage"></section>
+        <section id="startInventorySubpage">
+            <section class="itemnum-form-wrapper">
+                <h2>Enter your set/MOC/part</h2>
+                <form action="" class="itemnum-form">
+                    <label for="itemnum-form-number">number</label>
+                    <input type="text" class='itemnum-form-number' value="number" placeholder="42053-1">
+                    <button type="submit">add to inventory</button>
+                </form>
+            </section>
+        </section>
         <section id="inventoryHomeSubpage"></section>
         <section id="showDetailsSubpage"></section>
     </main>

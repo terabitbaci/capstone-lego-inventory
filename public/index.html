@@ -60,11 +60,16 @@
         </section>
         <section id="inventoryHomeSubpage">
             <h2>My Inventory</h2>
-            <section class="itemnum-form-wrapper">
-                <h2>Enter your set/MOC/part</h2>
-                <form action="" class="itemnum-form">
-                    <label for="itemnum-form-number">number</label>
-                    <input type="text" class='itemnum-form-number' value="number" placeholder="42053-1">
+            <section class="number-form-wrapper">
+                <h3>Enter your set/MOC/part</h3>
+                <form action="" class="number-form">
+                    <label for="number-form-number">number</label>
+                    <input type="text" class='number-form-number' value="number" placeholder="42053-1">
+                    <select>
+                        <option value="set">set</option>
+                        <option value="MOC">MOC</option>
+                        <option value="part">part</option>
+                    </select>
                     <button type="submit">add to inventory</button>
                 </form>
             </section>
@@ -78,7 +83,8 @@
                     <button class="btn" onclick="filterSelection('parts')"> view parts</button>
                 </div>
                 <div id="filterLockButtons">
-                    <img src="{" mockup ":{"controls ":{"control ":[{"ID ":"153 ","h ":"12 ","measuredH ":"700 ","measuredW ":"700 ","properties ":{"src ":{"Anchor ":-1,"ID ":"C97D2F67-D12E-7AEC-7654-CD88DA88D5A9 "}},"typeID ":"Image ","w ":"12 ","x ":"353 ","y ":"429 ","zOrder ":"0 "}]},"measuredH ":"441 ","measuredW ":"365 ","mockupH ":"12 ","mockupW ":"12 ","version ":"1.0 "}}" alt="lock icon" title="add a lock for a permanent build">
+                    <button></button>
+                    <!--                    <img src="{" mockup ":{"controls ":{"control ":[{"ID ":"153 ","h ":"12 ","measuredH ":"700 ","measuredW ":"700 ","properties ":{"src ":{"Anchor ":-1,"ID ":"C97D2F67-D12E-7AEC-7654-CD88DA88D5A9 "}},"typeID ":"Image ","w ":"12 ","x ":"353 ","y ":"429 ","zOrder ":"0 "}]},"measuredH ":"441 ","measuredW ":"365 ","mockupH ":"12 ","mockupW ":"12 ","version ":"1.0 "}}" alt="lock icon" title="add a lock for a permanent build">-->
                     <button class="btn active" onclick="filterSelection('seeLocked')"> see</button>
                     <button class="btn" onclick="filterSelection('hideLocked')"> hide</button>
                 </div>

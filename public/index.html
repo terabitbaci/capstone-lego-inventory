@@ -62,6 +62,26 @@
                     <button type="submit">add to inventory</button>
                 </form>
             </section>
+
+            <!--  for filter CSS: see https://www.w3schools.com/howto/howto_js_filter_elements.asp  -->
+            <section>
+                <div id="filterViewButtons">
+                    <button class="btn active" onclick="filterSelection('all')"> view all</button>
+                    <button class="btn" onclick="filterSelection('sets')"> view sets</button>
+                    <button class="btn" onclick="filterSelection('MOCs')"> view MOCs</button>
+                    <button class="btn" onclick="filterSelection('parts')"> view parts</button>
+                </div>
+                <div id="filterLockButtons">
+                    <p>Add a lock for permanent builds</p>
+                    <img src="{" mockup ":{"controls ":{"control ":[{"ID ":"153 ","h ":"12 ","measuredH ":"700 ","measuredW ":"700 ","properties ":{"src ":{"Anchor ":-1,"ID ":"C97D2F67-D12E-7AEC-7654-CD88DA88D5A9 "}},"typeID ":"Image ","w ":"12 ","x ":"353 ","y ":"429 ","zOrder ":"0 "}]},"measuredH ":"441 ","measuredW ":"365 ","mockupH ":"12 ","mockupW ":"12 ","version ":"1.0 "}}" alt="lock icon">
+                    <button class="btn active" onclick="filterSelection('seeLocked')"> see</button>
+                    <button class="btn" onclick="filterSelection('hideLocked')"> hide</button>
+                </div>
+
+            </section>
+            <section>
+
+            </section>
         </section>
         <section id="showDetailsSubpage">
             <h2>My Inventory</h2>

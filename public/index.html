@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shakespeare Passport Node Capstone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -83,7 +84,7 @@
                     <button class="btn" onclick="filterSelection('parts')"> view parts</button>
                 </div>
                 <div id="filterLockButtons">
-                    <button></button>
+                    <button><i class="fas fa-lock"></i></button>
                     <!--                    <img src="{" mockup ":{"controls ":{"control ":[{"ID ":"153 ","h ":"12 ","measuredH ":"700 ","measuredW ":"700 ","properties ":{"src ":{"Anchor ":-1,"ID ":"C97D2F67-D12E-7AEC-7654-CD88DA88D5A9 "}},"typeID ":"Image ","w ":"12 ","x ":"353 ","y ":"429 ","zOrder ":"0 "}]},"measuredH ":"441 ","measuredW ":"365 ","mockupH ":"12 ","mockupW ":"12 ","version ":"1.0 "}}" alt="lock icon" title="add a lock for a permanent build">-->
                     <button class="btn active" onclick="filterSelection('seeLocked')"> see</button>
                     <button class="btn" onclick="filterSelection('hideLocked')"> hide</button>
@@ -99,7 +100,32 @@
                             <th>Name</th>
                             <th>Action</th>
                             <th>
-                                <<img src="" alt=""></th>
+                                <i class="fas fa-lock"></i></th>
+                        </tr>
+                        <tr>
+                            <td>42053-1</td>
+                            <td>shelf</td>
+                            <td>img</td>
+                            <td>Volvo EW160E</td>
+                            <td>button - font awesome minus</td>
+                            <td>lock icon</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">92947</td>
+                            <td colspan="4">Brick, Round 2 x 2 (Grill)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">img</td>
+                            <td colspan="2">total in inventory</td>
+                            <td colspan="2">25</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -268,7 +294,7 @@
         <p>Copyright 2018</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="client.js"></script>
+    <!--    <script src="client.js"></script>-->
 </body>
 
 </html>

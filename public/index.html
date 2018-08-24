@@ -261,7 +261,25 @@
                 </form>
             </section>
         </section>
-        <section id="searchErrorSubpage"></section>
+        <section id="searchErrorSubpage">
+            <h2>Item Not Found</h2>
+            <section class="number-form-wrapper">
+                <h3>Your set/MOC/part was not found</h3>
+                <p>Please check the number</p>
+                <p>Be sure to enter the type of the item (set, MOC, or part)</p>
+                <form action="" class="number-form">
+                    <label for="number-form-number">number</label>
+                    <input type="text" class='number-form-number' value="number" placeholder="42053-1">
+                    <select>
+                        <option value="set">set</option>
+                        <option value="MOC">MOC</option>
+                        <option value="part">part</option>
+                    </select>
+                    <button type="submit">search</button>
+                </form>
+            </section>
+        </section>
+
         <!--    actions on an opaque rectangle positioned absolute relative to the first layer (number 1 container consisting of 2 rows, 2 columns)    -->
         <section id="searchResultsActionSubpage"></section>
     </main>

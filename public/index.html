@@ -229,6 +229,8 @@
             </section>
         </section>
         <section id="showDetailsSubpage">
+            <!--        See inventoryHomeSubpage section above      -->
+            <!--
             <h2>My Inventory</h2>
             <section class="itemnum-form-wrapper">
                 <h2>Enter your set/MOC/part</h2>
@@ -238,11 +240,27 @@
                     <button type="submit">add to inventory</button>
                 </form>
             </section>
+-->
         </section>
     </main>
     <!--    Search, Search Error, Search Results, Search Results Action wireframes   -->
     <main role="main" id="searchPage" class="hide-everything">
-        <section id="searchSubpage"></section>
+        <section id="searchSubpage">
+            <h2>Search</h2>
+            <section class="number-form-wrapper">
+                <h3>Search for your set/MOC/part</h3>
+                <form action="" class="number-form">
+                    <label for="number-form-number">number</label>
+                    <input type="text" class='number-form-number' value="number" placeholder="42053-1">
+                    <select>
+                        <option value="set">set</option>
+                        <option value="MOC">MOC</option>
+                        <option value="part">part</option>
+                    </select>
+                    <button type="submit">search</button>
+                </form>
+            </section>
+        </section>
         <section id="searchErrorSubpage"></section>
         <!--    actions on an opaque rectangle positioned absolute relative to the first layer (number 1 container consisting of 2 rows, 2 columns)    -->
         <section id="searchResultsActionSubpage"></section>

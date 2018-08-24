@@ -69,7 +69,7 @@
                 <h3>Enter your set/MOC/part</h3>
                 <form action="" class="number-form">
                     <label for="number-form-number">number</label>
-                    <input type="text" class='number-form-number' value="number" placeholder="42053-1">
+                    <input type="text" class='number-form-number' value="42053-1" placeholder="42053-1">
                     <select>
                         <option value="set">set</option>
                         <option value="MOC">MOC</option>
@@ -271,7 +271,7 @@
             <h2>Item Not Found</h2>
             <section class="number-form-wrapper">
                 <h3>Your set/MOC/part was not found</h3>
-                <p>Please check the number</p><br>
+                <p>Please check the number</p>
                 <p>Be sure to enter the type of the item (set, MOC, or part)</p>
                 <form action="" class="number-form">
                     <label for="number-form-number">number</label>
@@ -374,8 +374,22 @@
     <br>
     <br>
     <!--    Plan a Build, Build Calculation wireframes  -->
-    <main role="main " id="buildPage " class="hide-everything ">
-        <section id="planBuildSubpage "></section>
+    <main role="main " id="buildPage" class="hide-everything">
+        <section id="planBuildSubpage">
+            <h2>Plan a Build</h2>
+            <section class="number-form-wrapper">
+                <h3>Enter the set or MOC you want to build</h3>
+                <form action="" class="number-form">
+                    <label for="number-form-number">number</label>
+                    <input type="text" class='number-form-number' value="enter number" placeholder="">
+                    <select>
+                        <option value="set">set</option>
+                        <option value="MOC">MOC</option>
+                    </select>
+                    <button type="submit">perform build calculation</button>
+                </form>
+            </section>
+        </section>
         <section id="buildCalculationSubpage "></section>
     </main>
     <br>

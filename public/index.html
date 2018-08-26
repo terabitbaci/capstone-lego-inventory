@@ -423,7 +423,27 @@
     <br>
     <!--    Wishlist, Wishlist Item Options wireframes  -->
     <main role="main " id="wishlistPage " class="hide-everything ">
-        <section id="wishlistSubpage "></section>
+        <section id="wishlistSubpage ">
+            <h2>Wishlist <button><i class="fas fa-cart-plus fa-xs"></i></button></h2>
+            <section class="number-form-wrapper">
+                <h3>Enter a set/MOC/part to add to your Wishlist</h3>
+                <form action="" class="number-form">
+                    <label for="number-form-number">number</label>
+                    <input type="text" class='number-form-number' value="42053-1" placeholder="42053-1">
+                    <select>
+                        <option value="set">set</option>
+                        <option value="MOC">MOC</option>
+                        <option value="part">part</option>
+                    </select>
+                    <p>To add a MOC:</p>
+                    <select>
+                        <option value="MOC all">add entire MOC</option>
+                        <option value="MOC needed">add only the parts you need</option>
+                    </select>
+                    <button type="submit">add to Wishlist</button>
+                </form>
+            </section>
+        </section>
         <section id="wishlistOptionsSubpage "></section>
     </main>
     <br>

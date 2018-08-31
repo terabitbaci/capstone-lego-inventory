@@ -57,6 +57,23 @@ Header styles (Main Module)
 (all the styles inside the < header > or < nav > tags)
 */
 
+header {
+    width: 100%;
+    background-color: lightyellow;
+    text-align: center;
+    position: relative;
+}
+
+.logo-wrapper h1 {
+    font-family: Arial;
+    font-size: 40px;
+}
+
+.logo-wrapper h3 {
+    font-family: Arial;
+    font-size: 30px;
+}
+
 
 /* -------------------------------------
 Content styles (Main Module)

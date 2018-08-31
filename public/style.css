@@ -48,9 +48,10 @@
 General styles (General Module, wrapping around the modules below)
 (the styles used everywhere in the page (like the Body) or styles which are used in more than 2 of the modules below (h2, h3, h4, h5, h6, p, a, ul, li))
 */
+
 body {
-  font-size: 16px;
-    font-family:
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 main {
@@ -60,6 +61,16 @@ main {
     max-width: 1000px;
     border: 1px solid gray;
     border-radius: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Patrick Hand', cursive;
+    /*    font-family: 'Neucha', cursive;*/
 }
 
 
@@ -92,7 +103,6 @@ header .logo-wrapper sup {
 }
 
 header .logo-wrapper h1 {
-    font-family: Arial;
     font-size: 30px;
     text-align: left;
     margin: 0;
@@ -100,13 +110,11 @@ header .logo-wrapper h1 {
 }
 
 header .logo-wrapper h3 {
-    font-family: Arial;
     font-size: 22px;
     text-align: left;
 }
 
 header .menu-wrapper h4 {
-    font-family: Arial;
     font-size: 21px;
     text-align: right;
     padding-right: 15px;
@@ -117,6 +125,30 @@ header .menu-wrapper h4 {
 Content styles (Main Module)
 (all the styles inside the < sections > or < aside > tags)
 */
+
+main h1 {
+    font-size: 40px;
+}
+
+main h2 {
+    font-size: 30px;
+}
+
+main h3 {
+    font-size: 25px;
+}
+
+main h4 {
+    font-size: 20px;
+}
+
+main h5 {
+    font-size: 17px;
+}
+
+main h6 {
+    font-size: 15px;
+}
 
 
 /* -------------------------------------

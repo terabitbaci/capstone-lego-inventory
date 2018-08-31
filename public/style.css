@@ -60,11 +60,10 @@ Header styles (Main Module)
 header {
     width: 100%;
     background-color: lightblue;
-    position: relative;
 }
 
-.logo-wrapper,
-.menu-wrapper {
+header .logo-wrapper,
+header .menu-wrapper {
     display: inline-block;
     vertical-align: middle;
     width: 20%;
@@ -72,12 +71,16 @@ header {
     padding-bottom: 15px;
 }
 
-.logo-wrapper {
+header .logo-wrapper {
     width: 79%;
     padding-left: 15px;
 }
 
-.logo-wrapper h1 {
+header .logo-wrapper sup {
+    font-size: 57%;
+}
+
+header .logo-wrapper h1 {
     font-family: Arial;
     font-size: 30px;
     text-align: left;
@@ -85,22 +88,17 @@ header {
     padding: 0;
 }
 
-.logo-wrapper h3 {
+header .logo-wrapper h3 {
     font-family: Arial;
     font-size: 22px;
     text-align: left;
 }
 
-.menu-wrapper h4 {
+header .menu-wrapper h4 {
     font-family: Arial;
     font-size: 21px;
     text-align: right;
     padding-right: 15px;
-}
-
-footer {
-    text-align: center;
-    padding-bottom: 20px;
 }
 
 
@@ -114,6 +112,18 @@ Content styles (Main Module)
 Footer styles (Main Module)
 (all the styles inside the < footer > tag)
 */
+
+footer {
+    width: 100%;
+    background-color: lightblue;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer sup {
+    font-size: 60%;
+}
 
 
 /* -------------------------------------

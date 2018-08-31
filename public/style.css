@@ -48,8 +48,19 @@
 General styles (General Module, wrapping around the modules below)
 (the styles used everywhere in the page (like the Body) or styles which are used in more than 2 of the modules below (h2, h3, h4, h5, h6, p, a, ul, li))
 */
+body {
+  font-size: 16px;
+    font-family:
+}
 
-body {}
+main {
+    padding: 15px;
+    width: 80%;
+    margin: 30px auto;
+    max-width: 1000px;
+    border: 1px solid gray;
+    border-radius: 15px;
+}
 
 
 /* -------------------------------------

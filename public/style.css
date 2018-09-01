@@ -52,7 +52,7 @@ General styles (General Module, wrapping around the modules below)
 body {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
-    background-color: #969B9F
+    background-color: #969B9F;
 }
 
 main {
@@ -82,6 +82,10 @@ h5,
 h6 {
     font-family: 'Patrick Hand', cursive;
     /*    font-family: 'Neucha', cursive;*/
+}
+
+h2 {
+    color: 0E4EB4;
 }
 
 input,
@@ -188,6 +192,7 @@ main h6 {
 .login-form-wrapper input,
 .signup-form-wrapper input {
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .login-form-wrapper button,

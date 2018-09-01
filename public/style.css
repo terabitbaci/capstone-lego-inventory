@@ -73,6 +73,29 @@ h6 {
     /*    font-family: 'Neucha', cursive;*/
 }
 
+input,
+select,
+button {
+    border: 1px solid red;
+    padding: 10px 25px;
+    border-radius: 15px;
+    color: gray;
+}
+
+button {
+    background-color: transparent;
+    color: red;
+}
+
+button:hover {
+    color: black;
+}
+
+label {
+    display: block;
+    margin: 10px;
+}
+
 
 /* -------------------------------------
 Header styles (Main Module)
@@ -127,11 +150,11 @@ Content styles (Main Module)
 */
 
 main h1 {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 main h2 {
-    font-size: 30px;
+    font-size: 28px;
 }
 
 main h3 {

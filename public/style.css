@@ -108,15 +108,15 @@ h2 {
 input,
 select,
 button {
-    border: 1px solid red;
+    border: 1px solid #0E4EB4;
     padding: 10px 25px;
     border-radius: 15px;
-    color: gray;
+    color: orange;
 }
 
 button {
     background-color: transparent;
-    color: red;
+    color: #0F3056;
 }
 
 button:hover {

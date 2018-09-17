@@ -47,9 +47,9 @@
             <h3>Sign Up</h3>
             <form action="" class="signup-form">
                 <label for="signup-form-username">username</label>
-                <input type="text" class='signup-form-username' value="username" placeholder="Username">
+                <input type="text" class='signup-form-username' value="username" placeholder="username">
                 <label for="signup-form-password">password</label>
-                <input type="text" class='signup-form-password' value="password" placeholder="Password">
+                <input type="text" class='signup-form-password' value="password" placeholder="password">
                 <button type="submit">sign up</button>
                 <p>Already have an account? <a href="">Log in here</a></p>
             </form>
@@ -93,17 +93,22 @@
 
             <!--  for filter CSS: see https://www.w3schools.com/howto/howto_js_filter_elements.asp  -->
             <section>
-                <div id="filterViewButtons">
-                    <button class="btn active" onclick="filterSelection('all')"> view all</button>
-                    <button class="btn" onclick="filterSelection('sets')"> view sets</button>
-                    <button class="btn" onclick="filterSelection('MOCs')"> view MOCs</button>
-                    <button class="btn" onclick="filterSelection('parts')"> view parts</button>
+                <div class="column" id="filterViewButtons">
+                    <label for="" class="column">filters</label>
+                    <select>
+                        <option value="viewAll">view all</option>
+                        <option value="viewSets">view sets</option>
+                        <option value="viewMOCs">view MOCs</option>
+                        <option value="viewParts">view parts</option>
+                    </select>
                 </div>
-                <div id="filterLockButtons">
-                    <button><i class="fas fa-lock"></i></button>
+                <div class="column float-right" id="filterLockButtons">
+                    <label for="" class="column">include permanent builds?</label>
+                    <select>
+                        <option value="see">yes</option>
+                        <option value="hide">no</option>
+                    </select>
                     <!--                    <img src="{" mockup":{"controls":{"control":[{"ID":"153","h":"12","measuredH":"700","measuredW":"700","properties":{"src":{"Anchor":-1,"ID":"C97D2F67-D12E-7AEC-7654-CD88DA88D5A9"}},"typeID":"Image","w":"12","x":"353","y":"429","zOrder":"0"}]},"measuredH":"441","measuredW":"365","mockupH":"12","mockupW":"12","version":"1.0"}}" alt="lock icon" title="add a lock for a permanent build">-->
-                    <button class="btn active" onclick="filterSelection('seeLocked')"> see</button>
-                    <button class="btn" onclick="filterSelection('hideLocked')"> hide</button>
                 </div>
             </section>
             <section>

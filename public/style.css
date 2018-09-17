@@ -57,7 +57,7 @@ body {
 
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: lightblue;
+    color: #CCC;
     opacity: 1;
     /* Firefox */
 }
@@ -91,6 +91,14 @@ main {
     text-align: center;
 }
 
+.column {
+    display: inline-block;
+}
+
+.float-right {
+    float: right;
+}
+
 h1,
 h2,
 h3,
@@ -110,6 +118,7 @@ select,
 button {
     border: 1px solid #0E4EB4;
     padding: 10px 25px;
+    margin: 5px;
     border-radius: 15px;
     color: orange;
 }
@@ -126,6 +135,13 @@ button:hover {
 label {
     display: block;
     margin: 10px;
+}
+
+.sm-btn {
+    font-size: 15px;
+    background-color: #EFC43F;
+    border-radius: 8px;
+    padding: 8px 15px;
 }
 
 

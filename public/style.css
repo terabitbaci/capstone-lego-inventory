@@ -127,7 +127,11 @@ h6 {
 }
 
 h2 {
-    color: 0E4EB4;
+    color: #0E4EB4;
+}
+
+h3 {
+    color: #C01C17;
 }
 
 input,

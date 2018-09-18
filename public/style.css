@@ -92,6 +92,7 @@ body {
     background-color: black;
     color: #fff;
     text-align: center;
+    font-size: 10pt;
     padding: 5px 0;
     border-radius: 6px;
     /* Position the tooltip text - see examples below! */
@@ -111,7 +112,7 @@ body {
 
 .tooltip .tooltiptext {
     top: -5px;
-    left: 150%;
+    right: 150%;
 }
 
 
@@ -121,12 +122,12 @@ body {
     content: " ";
     position: absolute;
     top: 20%;
-    right: 100%;
-    /* To the left of the tooltip */
+    left: 100%;
+    /* To the right of the tooltip */
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent black transparent transparent;
+    border-color: transparent transparent transparent black;
 }
 
 main {

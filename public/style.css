@@ -121,7 +121,7 @@ body {
 .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 100%;
     /* To the right of the tooltip */
     margin-top: -5px;

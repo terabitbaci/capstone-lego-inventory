@@ -162,6 +162,8 @@ table {
     border-spacing: 0;
     width: 100%;
     border: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 th,
@@ -173,10 +175,17 @@ td {
 th {
     color: #6D7296;
     background-color: #EFC43F;
+    padding: 10px;
 }
 
 td {
     color: #236C3B;
+    border-right: 1px solid #CCC;
+    padding: 10px;
+}
+
+td:first-child {
+    border-left: 1px solid #CCC;
 }
 
 th .instruction {
@@ -184,7 +193,11 @@ th .instruction {
 }
 
 tr:nth-child(odd) {
-    background-color: #f2f2f2==-;
+    background-color: #f2f2f2;
+}
+
+.table-center-cell {
+    text-align: center;
 }
 
 h1,
@@ -203,6 +216,8 @@ h2 {
 
 h3 {
     color: #C01C17;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 input,

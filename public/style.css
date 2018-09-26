@@ -75,7 +75,7 @@ body {
 
 /* Tooltip container */
 
-.tooltip {
+.tooltip .tooltip-right {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
@@ -86,7 +86,7 @@ body {
 
 /* Tooltip text */
 
-.tooltip .tooltiptext {
+.tooltip .tooltip-right .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -108,7 +108,7 @@ body {
 }
 
 
-/*tooltip positioning right*/
+/*tooltip positioning left*/
 
 .tooltip .tooltiptext {
     top: -5px;
@@ -116,19 +116,46 @@ body {
 }
 
 
+/*tooltip positioning right*/
+
+.tooltip-right .tooltiptext {
+    top: -5px;
+    left: 150%;
+}
+
+
 /*tooltip arrow positioning left*/
 
+
+/*
 .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
     top: 30%;
     left: 100%;
-    /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+border-color: transparent black transparent transparent;
+}
+*/
+
+
+/*tooltip arrow positioning right*/
+
+
+/*
+.tooltip-right .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 30%;
+    right: 100%;
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent transparent black;
 }
+*/
 
 main {
     padding: 25px;

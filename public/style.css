@@ -246,9 +246,15 @@ label {
 
 .sm-btn {
     font-size: 15px;
-    background-color: #EFC43F;
     border-radius: 8px;
     padding: 8px 15px;
+}
+
+.sm-input {
+    font-size: 15px;
+    border-radius: 8px;
+    padding: 8px 7px;
+    width: 58px;
 }
 
 

@@ -1,6 +1,6 @@
 # capstone-lego-inventory
 
-My Lego® Inventory was created by Teresa Bacigalupi (a Lego<sup>®</sup> Technic fan) using the following tools:
+My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) using the following tools:
 HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
 
 ## Screenshots

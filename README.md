@@ -1,6 +1,7 @@
 # capstone-lego-inventory
 
-The Shakespeare Passport app is designed for Theatrical Performers, Theatre Goers, and Theatre enthusiast alike. It allows a User to compile a list of plays by SEEN, PERFORMED, and READ tracking date and location.
+My Lego® Inventory was created by Teresa Bacigalupi (a Lego<sup>®</sup> Technic fan) using the following tools:
+HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
 
 ## Screenshots
 

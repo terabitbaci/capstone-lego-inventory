@@ -237,13 +237,24 @@ button {
 
 button {
     background-color: transparent;
-    color: #0F3056;
-    border: 2px solid;
+    border: 2px solid #6D7296;
 }
 
 button:hover {
+    background-color: #EFC43F;
     color: black;
 }
+
+/*
+button [type=submit] {
+    background-color: transparent;
+    border: 2px solid #C01C17;
+}
+
+button [type=submit]:hover {
+    color: #C01C17;
+}
+*/
 
 label {
     display: block;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Lego Inventory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand|Roboto|Courgette" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,11 +19,13 @@
             <h3>Create an Inventory of Your Lego<sup>®</sup> Sets, MOCs* and Parts</h3>
         </section>
         <section class="menu-wrapper">
-            <h4>Welcome</h4>
+            <h4>Welcome!</h4>
             <!--            add class or id for JS  -->
-            <h4>Visitor!</h4>
+            <h4>Visitor</h4>
         </section>
     </header>
+
+
     <main role="main" id="landingPage" class="hide-everything main-half-width">
         <section class="login-form-wrapper">
             <h2>Login</h2>
@@ -49,9 +51,9 @@
             <h2>Sign Up</h2>
             <form action="" class="signup-form">
                 <!--                <label for="signup-form-username">username</label>-->
-                <input type="text" class='signup-form-username' value="username" placeholder="username">
+                <input type="text" class="signup-form-username" value="username" placeholder="username">
                 <!--                <label for="signup-form-password">password</label>-->
-                <input type="text" class='signup-form-password' value="password" placeholder="password">
+                <input type="text" class="signup-form-password" value="password" placeholder="password">
                 <button type="submit">sign up</button>
                 <p>Already have an account?
                     <a href="#" id="change-form-login">Log in here</a>
@@ -61,36 +63,17 @@
     </main>
 
 
-    <!--    Start Building Inventory, Inventory Home, Show Details wireframes   -->
+    <!--    Inventory Home, Show Details wireframes   -->
     <main role="main" id="inventoryPage" class="hide-everything">
-        <section id="startInventorySubpage">
-            <h2>
-                <i class="fab fa-simplybuilt"></i> Start building your Inventory
-            </h2>
-            <section class="number-form-wrapper">
-                <h3>Enter your set/MOC/part</h3>
-                <form action="" class="number-form">
-                    <!--                    <label for="number-form-number">number</label>-->
-                    <input type="text" class='number-form-number' value="42053-1" placeholder="42053-1">
-                    <select>
-                        <option value="set">set</option>
-                        <option value="MOC">MOC</option>
-                        <option value="part">part</option>
-                    </select>
-                    <button type="submit">add to inventory</button>
-                </form>
-            </section>
-        </section>
-
         <section id="inventoryHomeSubpage">
             <h2>
                 <i class="fab fa-simplybuilt"></i> Inventory
             </h2>
             <section class="number-form-wrapper">
                 <h3>Enter your set/MOC/part</h3>
-                <form action="" class="number-form">
+                <form action="" class="add-to-inventory-form">
                     <!--                    <label for="number-form-number">number</label>-->
-                    <input type="text" class='number-form-number' value="42053-1" placeholder="42053-1">
+                    <input type="text" class="number-form-number" value="42053-1" placeholder="42053-1">
                     <select>
                         <option value="set">set</option>
                         <option value="MOC">MOC</option>
@@ -101,7 +84,7 @@
             </section>
 
             <!--  for filter CSS: see https://www.w3schools.com/howto/howto_js_filter_elements.asp  -->
-            <section>
+            <section id="inventory-filters">
                 <div class="column" id="filterViewButtons">
                     <label for="" class="column">filters</label>
                     <select>
@@ -120,7 +103,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="inventory-table">
                 <div style="overflow-x:auto;">
                     <table align="center">
                         <tr>
@@ -240,6 +223,13 @@
                         </tr>
                     </table>
                 </div>
+                <div id="back-to-top">
+                    <a href="#top">
+                        <i class="far fa-caret-square-up"></i>
+                    </a>
+                </div>
+
+
             </section>
         </section>
         <section id="showDetailsSubpage">
@@ -268,7 +258,7 @@
             <section class="number-form-wrapper">
                 <h3>Search for your set/MOC/part</h3>
                 <form action="" class="number-form">
-                    <label for="number-form-number">number</label>
+                    <!--                    <label for="number-form-number">number</label>-->
                     <input type="text" class='number-form-number' value="number" placeholder="42053-1">
                     <select>
                         <option value="set">set</option>
@@ -429,7 +419,7 @@
             <section class="number-form-wrapper">
                 <h3>Enter the set or MOC you want to build</h3>
                 <form action="" class="number-form">
-                    <label for="number-form-number">number</label>
+                    <!--                    <label for="number-form-number">number</label>-->
                     <input type="text" class='number-form-number' value="enter number" placeholder="">
                     <select>
                         <option value="set">set</option>
@@ -501,7 +491,7 @@
             <section class="number-form-wrapper">
                 <h3>Enter a set/MOC/part to add to your Wishlist</h3>
                 <form action="" class="number-form">
-                    <label for="number-form-number">number</label>
+                    <!--                    <label for="number-form-number">number</label>-->
                     <input type="text" class='number-form-number' value="42053-1" placeholder="42053-1">
                     <select>
                         <option value="set">set</option>
@@ -1025,7 +1015,37 @@ colspan="2">bin/storage location
         <p>*MOC ("my own creation") - registered builds by fans of Lego<sup>®</sup></p>
         <p>LEGO<sup>®</sup> is a trademark of The LEGO Group of companies which does not sponsor, authorize or endorse this app.</p>
         <p>This data is sourced from Rebrickable.</p>
-        <p>Copyright 2018</p>
+        <div class="wd">
+            <p>&copy 2018 Teresa Bacigalupi</p>
+        </div>
+        <ul>
+            <li>
+                <a href="mailto:teresabacigalupi@gmail.com?Subject=My Lego Inventory" target="_blank">
+                    <i class="fas fa-envelope-open"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/teresabacigalupi/" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/terabitbaci" target="_blank">
+                    <i class="fab fa-github-alt"></i>
+                </a>
+            </li>
+
+            <!--
+<li>
+    <div id="back-to-top">
+        <a href="#top">
+            <i class="far fa-caret-square-up"></i>
+        </a>
+    </div>
+</li>
+-->
+        </ul>
+
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--    <script src="client.js"></script>-->

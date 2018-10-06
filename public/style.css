@@ -143,6 +143,14 @@ main {
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.75);
 }
 
+main #back-to-top .fa-caret-square-up {
+    display: block;
+    position: fixed;
+    bottom: 30px;
+    right: 130px;
+    color: #236C3B;
+}
+
 .main-half-width {
     width: 40%;
     max-width: 400px;
@@ -245,16 +253,14 @@ button:hover {
     color: black;
 }
 
-/*
-button [type=submit] {
+button[type=submit] {
     background-color: transparent;
     border: 2px solid #C01C17;
 }
 
-button [type=submit]:hover {
+button[type=submit]:hover {
     color: #C01C17;
 }
-*/
 
 label {
     display: block;
@@ -386,6 +392,25 @@ footer {
     padding-top: 20px;
     padding-bottom: 20px;
     border: 0px;
+}
+
+footer ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+footer li a {
+    color: #236C3B;
+    text-shadow: #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+footer .wd {
+    font-family: Courgette;
+    padding-top: 9px;
 }
 
 footer sup {

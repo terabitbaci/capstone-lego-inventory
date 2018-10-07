@@ -42,6 +42,16 @@ $(".add-to-inventory-form").submit(function (event) {
     $('#inventory-table').show();
 });
 
+$('#filterViewButtons select').change(function (event) {
+    event.preventDefault();
+    alert("view all clicked");
+});
+
+$('#filterLockButtons select').change(function (event) {
+    event.preventDefault();
+    alert("include permanent clicked");
+});
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

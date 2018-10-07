@@ -13,15 +13,17 @@
 </head>
 
 <body>
-    <header>
+    <header id="top">
         <section class="logo-wrapper">
             <h1>My Lego<sup>®</sup> Inventory</h1>
             <h3>Create an Inventory of Your Lego<sup>®</sup> Sets, MOCs* and Parts</h3>
         </section>
         <section class="menu-wrapper">
-            <h4>Welcome!</h4>
-            <!--            add class or id for JS  -->
-            <h4>Visitor</h4>
+            <h4>Welcome Visitor!</h4>
+            <h4><a href="#" id="menu-inventory">inventory</a></h4>
+            <h4><a href="#" id="menu-wishlist">wishlist</a></h4>
+            <h4><a href="#" id="menu-plan">plan</a></h4>
+            <h4><a href="#" id="menu-search">search</a></h4>
         </section>
     </header>
 
@@ -55,7 +57,7 @@
                 <!--                <label for="signup-form-password">password</label>-->
                 <input type="text" class="signup-form-password" value="password" placeholder="password">
                 <button type="submit">sign up</button>
-                <p>Already have an account?
+                <p class="login-status-question">Already have an account?
                     <a href="#" id="change-form-login">Log in here</a>
                 </p>
             </form>
@@ -222,11 +224,6 @@
                             </td>
                         </tr>
                     </table>
-                </div>
-                <div id="back-to-top">
-                    <a href="#top">
-                        <i class="far fa-caret-square-up"></i>
-                    </a>
                 </div>
 
 
@@ -1045,10 +1042,14 @@ colspan="2">bin/storage location
 </li>
 -->
         </ul>
-
+        <div id="back-to-top">
+            <a href="#top">
+                <i class="far fa-caret-square-up fa-2x"></i>
+            </a>
+        </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--    <script src="client.js"></script>-->
+    <script src="client.js"></script>
 </body>
 
 </html>

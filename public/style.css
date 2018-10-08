@@ -288,13 +288,12 @@ header .logo-wrapper,
 header .menu-wrapper {
     display: inline-block;
     vertical-align: middle;
-    width: 20%;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
 header .logo-wrapper {
-    width: 79%;
+    width: 30%;
     padding-left: 15px;
 }
 
@@ -315,12 +314,32 @@ header .logo-wrapper h3 {
     color: #EFC43F;
 }
 
+header .menu-wrapper {
+    float: right;
+    width: 45%;
+    text-align: right;
+}
+
+header .menu-wrapper h2 {
+    font-size: 25px;
+    text-align: right;
+    padding-top: 8px;
+    padding-right: 15px;
+    color: #EFC43F;
+    display: block;
+}
+
 header .menu-wrapper h4 {
     font-size: 21px;
     text-align: right;
+    padding-top: 13px;
     padding-right: 15px;
     padding-left: 15px;
     display: inline-block;
+}
+
+header .menu-wrapper h4 a {
+    color: #EFC43F;
 }
 
 

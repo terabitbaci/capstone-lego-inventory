@@ -196,6 +196,18 @@ tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
+.inventory-part-details th {
+    color: #f2f2f2;
+    background-color: #6D7296;
+    padding: 10px;
+}
+
+.inventory-part-details,
+.inventory-MOC-details,
+.inventory-set-details tr:nth-child(odd) {
+    background-color: #CCC;
+}
+
 .table-center-cell {
     text-align: center;
 }

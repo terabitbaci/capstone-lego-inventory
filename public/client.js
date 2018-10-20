@@ -9,6 +9,9 @@ $(function () {
     $('#landingPage').show();
     $('#inventory-filters').hide();
     $('#inventory-table').hide();
+    $('.inventory-part-details-wrapper').parent().hide();
+    $('.inventory-MOC-details-wrapper').parent().hide();
+    $('.inventory-set-details-wrapper').parent().hide();
 });
 
 $(".signup-form").submit(function (event) {
@@ -20,6 +23,13 @@ $(".signup-form").submit(function (event) {
 $('#change-form-login').click(function (event) {
     event.preventDefault();
     location.reload();
+});
+
+$('.showPartDetails').click(function (event) {
+    event.preventDefault();
+    alert("hello");
+    //        $(this).parent().parent().closest('.inventory-part-details-wrapper').show();
+    $(this).parent().parent().next().show();
 });
 
 $(".login-form").submit(function (event) {

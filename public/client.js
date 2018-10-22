@@ -27,8 +27,16 @@ $('#change-form-login').click(function (event) {
 
 $('.showPartDetails').click(function (event) {
     event.preventDefault();
-    alert("hello");
-    //        $(this).parent().parent().closest('.inventory-part-details-wrapper').show();
+    $(this).parent().parent().next().show();
+});
+
+$('.showMOCDetails').click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().show();
+});
+
+$('.showSetDetails').click(function (event) {
+    event.preventDefault();
     $(this).parent().parent().next().show();
 });
 

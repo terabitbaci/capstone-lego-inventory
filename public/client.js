@@ -14,6 +14,50 @@ $(function () {
     $('.inventory-set-details-wrapper').parent().hide();
 });
 
+$('#menu-inventory').click(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#inventoryPage').show();
+    $('#inventory-filters').hide();
+    $('#inventory-table').hide();
+    $('.inventory-part-details-wrapper').parent().hide();
+    $('.inventory-MOC-details-wrapper').parent().hide();
+    $('.inventory-set-details-wrapper').parent().hide();
+});
+
+$('#menu-wishlist').click(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#wishlistPage').show();
+    $('#inventory-filters').hide();
+    $('#inventory-table').hide();
+    $('.inventory-part-details-wrapper').parent().hide();
+    $('.inventory-MOC-details-wrapper').parent().hide();
+    $('.inventory-set-details-wrapper').parent().hide();
+});
+
+$('#menu-plan').click(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#buildPage').show();
+    $('#inventory-filters').hide();
+    $('#inventory-table').hide();
+    $('.inventory-part-details-wrapper').parent().hide();
+    $('.inventory-MOC-details-wrapper').parent().hide();
+    $('.inventory-set-details-wrapper').parent().hide();
+});
+
+$('#menu-search').click(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#searchPage').show();
+    $('#inventory-filters').hide();
+    $('#inventory-table').hide();
+    $('.inventory-part-details-wrapper').parent().hide();
+    $('.inventory-MOC-details-wrapper').parent().hide();
+    $('.inventory-set-details-wrapper').parent().hide();
+});
+
 $(".signup-form").submit(function (event) {
     event.preventDefault();
     $('.hide-everything').hide();

@@ -114,6 +114,11 @@ $('#filterLockButtons select').change(function (event) {
     alert("include permanent clicked");
 });
 
+$('.itemLock').click(function (event) {
+    event.preventDefault();
+    $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+});
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

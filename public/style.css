@@ -281,8 +281,8 @@ button[type=submit]:hover {
 }
 
 button.itemLockActive {
-    background-color: #FFF;
-    color: red;
+    background-color: #EFC43F;
+    color: #C01C17;
 }
 
 label {

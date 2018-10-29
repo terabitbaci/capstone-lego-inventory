@@ -134,6 +134,16 @@ $('.addWishBtn').click(function (event) {
     alert("item(s) added to Wishlist");
 })
 
+$('.printBtn').click(function (event) {
+    event.preventDefault();
+    alert("list of needed parts sent to printer");
+})
+
+$('.newTabRebrickable').click(function (event) {
+    event.preventDefault();
+    alert("open a new tab in Rebrickable");
+})
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

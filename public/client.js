@@ -12,6 +12,10 @@ $(function () {
     $('.inventory-part-details-wrapper').parent().hide();
     $('.inventory-MOC-details-wrapper').parent().hide();
     $('.inventory-set-details-wrapper').parent().hide();
+    $('#searchPage').hide();
+    $('#searchResultsActionSubpage').hide();
+    $('#buildCalculationSubpage').hide();
+    $('#wishlistPage').hide();
 });
 
 $('#menu-inventory').click(function (event) {
@@ -124,10 +128,30 @@ $('.deleteBtn').click(function (event) {
     alert("item(s) deleted from Inventory");
 })
 
-$('.addBtn').click(function (event) {
+$('.inventoryAddBtn').click(function (event) {
     event.preventDefault();
     alert("item(s) added to Inventory");
 })
+
+$(".search-form").submit(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#searchPage').show();
+    $('#searchResultsActionSubpage').show();
+});
+
+$(".wishlist-form").submit(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#wishlistPage').show();
+});
+
+$(".plan-form").submit(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#buildPage').show();
+    $('#buildCalculationSubpage').show();
+});
 
 $('.addWishBtn').click(function (event) {
     event.preventDefault();

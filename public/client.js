@@ -124,6 +124,16 @@ $('.deleteBtn').click(function (event) {
     alert("item(s) deleted from Inventory");
 })
 
+$('.addBtn').click(function (event) {
+    event.preventDefault();
+    alert("item(s) added to Inventory");
+})
+
+$('.addWishBtn').click(function (event) {
+    event.preventDefault();
+    alert("item(s) added to Wishlist");
+})
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

@@ -119,6 +119,11 @@ $('.itemLock').click(function (event) {
     $(this).parent().find(".itemLock").toggleClass("itemLockActive");
 });
 
+$('.deleteBtn').click(function (event) {
+    event.preventDefault();
+    alert("item(s) deleted from Inventory");
+})
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

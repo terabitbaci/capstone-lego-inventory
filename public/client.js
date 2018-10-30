@@ -62,32 +62,6 @@ $('#menu-search').click(function (event) {
     $('.inventory-set-details-wrapper').parent().hide();
 });
 
-$(".signup-form").submit(function (event) {
-    event.preventDefault();
-    $('.hide-everything').hide();
-    $('#inventoryPage').show();
-});
-
-$('#change-form-login').click(function (event) {
-    event.preventDefault();
-    location.reload();
-});
-
-$('.showPartDetails').click(function (event) {
-    event.preventDefault();
-    $(this).parent().parent().next().show();
-});
-
-$('.showMOCDetails').click(function (event) {
-    event.preventDefault();
-    $(this).parent().parent().next().show();
-});
-
-$('.showSetDetails').click(function (event) {
-    event.preventDefault();
-    $(this).parent().parent().next().show();
-});
-
 $(".login-form").submit(function (event) {
     event.preventDefault();
     $('.hide-everything').hide();
@@ -98,6 +72,17 @@ $('#change-form-signup').click(function (event) {
     event.preventDefault();
     $('.hide-everything').hide();
     $('#signUpPage').show();
+});
+
+$(".signup-form").submit(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#inventoryPage').show();
+});
+
+$('#change-form-login').click(function (event) {
+    event.preventDefault();
+    location.reload();
 });
 
 $(".add-to-inventory-form").submit(function (event) {
@@ -118,6 +103,21 @@ $('#filterLockButtons select').change(function (event) {
     alert("include permanent clicked");
 });
 
+$('.showPartDetails').click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().show();
+});
+
+$('.showMOCDetails').click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().show();
+});
+
+$('.showSetDetails').click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().show();
+});
+
 $('.itemLock').click(function (event) {
     event.preventDefault();
     $(this).parent().find(".itemLock").toggleClass("itemLockActive");
@@ -126,12 +126,7 @@ $('.itemLock').click(function (event) {
 $('.deleteBtn').click(function (event) {
     event.preventDefault();
     alert("item(s) deleted from Inventory");
-})
-
-$('.inventoryAddBtn').click(function (event) {
-    event.preventDefault();
-    alert("item(s) added to Inventory");
-})
+});
 
 $(".search-form").submit(function (event) {
     event.preventDefault();
@@ -140,10 +135,19 @@ $(".search-form").submit(function (event) {
     $('#searchResultsActionSubpage').show();
 });
 
-$(".wishlist-form").submit(function (event) {
+$('.newTabRebrickable').click(function (event) {
     event.preventDefault();
-    $('.hide-everything').hide();
-    $('#wishlistPage').show();
+    alert("open a new tab in Rebrickable");
+});
+
+$('.inventoryAddBtn').click(function (event) {
+    event.preventDefault();
+    alert("item(s) added to Inventory");
+});
+
+$('.addWishBtn').click(function (event) {
+    event.preventDefault();
+    alert("item(s) added to Wishlist");
 });
 
 $(".plan-form").submit(function (event) {
@@ -153,25 +157,19 @@ $(".plan-form").submit(function (event) {
     $('#buildCalculationSubpage').show();
 });
 
-$('.addWishBtn').click(function (event) {
-    event.preventDefault();
-    alert("item(s) added to Wishlist");
-})
-
 $('.printBtn').click(function (event) {
     event.preventDefault();
     alert("list of needed parts sent to printer");
-})
+});
 
-$('.newTabRebrickable').click(function (event) {
+$(".wishlist-form").submit(function (event) {
     event.preventDefault();
-    alert("open a new tab in Rebrickable");
-})
+    $('.hide-everything').hide();
+    $('#wishlistPage').show();
+});
 
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();
     location.reload();
-
-
 });

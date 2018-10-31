@@ -222,6 +222,16 @@ tr:nth-child(even) {
     color: #FFF;
 }
 
+.removeBuild {
+    color: #236C3B;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.removeBuild:hover {
+    color: #C01C17;
+}
+
 .table-center-cell {
     text-align: center;
 }

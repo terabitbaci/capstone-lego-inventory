@@ -168,6 +168,25 @@ $(".wishlist-form").submit(function (event) {
     $('#wishlistPage').show();
 });
 
+$('.viewBuild').click(function (event) {
+    event.preventDefault();
+    $(this).parent().find(".viewBuild").removeClass("fa-toggle-on");
+    $(this).parent().find(".viewBuild").addClass("fa-toggle-off");
+    alert("viewing the build")
+});
+
+$('.removeBuild').click(function (event) {
+    event.preventDefault();
+    alert("build is removed\r(Removing a MOC build subtracts the needed parts from your Wishlist)");
+});
+
+$(".recalculate").click(function (event) {
+    event.preventDefault();
+    $('.hide-everything').hide();
+    $('#wishlistPage').show();
+    alert("recalculating")
+});
+
 $('#logout').click(function (event) {
     event.preventDefault();
     $('section').hide();

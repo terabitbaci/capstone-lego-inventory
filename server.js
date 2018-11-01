@@ -58,7 +58,6 @@ function closeServer() {
 app.post('/users/create', (req, res) => {
 
     //take the name, username and the password from the ajax api call
-    let name = req.body.name;
     let username = req.body.username;
     let password = req.body.password;
 
@@ -92,7 +91,6 @@ app.post('/users/create', (req, res) => {
 
             //using the mongoose DB schema, connect to the database and create the new user
             User.create({
-                name,
                 username,
                 password: hash,
             }, (err, item) => {
@@ -108,7 +106,6 @@ app.post('/users/create', (req, res) => {
                 if (item) {
 
                     //display the new user
-                    console.log(`User \`${username}\` created.`);
                     return res.json(item);
                 }
             });

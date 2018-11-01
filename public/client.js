@@ -64,8 +64,54 @@ $('#menu-search').click(function (event) {
 
 $(".login-form").submit(function (event) {
     event.preventDefault();
-    $('.hide-everything').hide();
-    $('#inventoryPage').show();
+
+    //take the input from the user
+    const username = $(".login-form-username").val();
+    const password = $(".login-form-password").val();
+
+    //validate the input
+    if (username == "") {
+        alert('Please input user name');
+    } else if (password == "") {
+        alert('Please input password');
+    }
+    //if the input is valid
+    else {
+        //create the payload object (what data we send to the api call)
+        const loginUserObject = {
+            username: username,
+            password: password
+        };
+        console.log(loginUserObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'POST',
+                url: '/users/login',
+                dataType: 'json',
+                data: JSON.stringify(loginUserObject),
+                contentType: 'application/json'
+            })
+            //if call is succefull
+            .done(function (result) {
+                console.log(result);
+                $('.hide-everything').hide();
+                $('#inventoryPage').show();
+                $('#loggedInName').text(result.username);
+                $('#loggedInUserName').val(result.username);
+                //            htmlUserDashboard();
+                populateUserDashboardDate(result.username); //AJAX call in here??
+                //                noEntries();
+
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    };
 });
 
 $('#change-form-signup').click(function (event) {
@@ -109,11 +155,8 @@ $(".signup-form").submit(function (event) {
                 console.log(result);
                 $('.hide-everything').hide();
                 $('#inventoryPage').show();
-                //            $('#loggedInName').text(result.name);
-                //            $('#loggedInUserName').val(result.username);
-                //            $('section').hide();
-                //            $('.navbar').show();
-                //            $('#user-dashboard').show();
+                $('#loggedInName').text(result.username);
+                $('#loggedInUserName').val(result.username);
                 //            populateUserDashboardDate(result.username);
             })
             //if the call is failing

@@ -113,7 +113,7 @@ app.post('/users/create', (req, res) => {
     });
 });
 
-// signing in a user
+// log in a user
 app.post('/users/login', function (req, res) {
 
     //take the username and the password from the ajax api call

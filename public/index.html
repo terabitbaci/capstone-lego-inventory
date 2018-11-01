@@ -13,13 +13,14 @@
 </head>
 
 <body>
+    <input type="hidden" id="loggedInUserName" value="">
     <header id="top">
         <section class="logo-wrapper">
             <h1>My Lego<sup>®</sup> Inventory</h1>
             <h3>All Your Sets, MOCs* and Parts!</h3>
         </section>
         <section class="menu-wrapper">
-            <h2>Welcome Visitor!</h2>
+            <h2>Welcome <span id='loggedInName'></span>!</h2>
             <h4><a href="#" id="menu-inventory">Inventory</a></h4>
             <h4><a href="#" id="menu-wishlist">Wishlist</a></h4>
             <h4><a href="#" id="menu-plan">Plan</a></h4>
@@ -32,9 +33,7 @@
         <section class="login-form-wrapper">
             <h2>Login</h2>
             <form action="" class="login-form">
-                <!--                <label for="login-form-username">username</label>-->
                 <input type="text" class='login-form-username' value="username" placeholder="Username">
-                <!--                <label for="login-form-password">password</label>-->
                 <input type="text" class='login-form-password' value="password" placeholder="Password">
                 <button type="submit">login</button>
                 <p>Demo Account:</p>

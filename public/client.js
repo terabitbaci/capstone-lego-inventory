@@ -100,8 +100,6 @@ $(".login-form").submit(function (event) {
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
                 //            htmlUserDashboard();
-                populateUserDashboardDate(result.username); //AJAX call in here??
-                //                noEntries();
 
             })
             //if the call is failing
@@ -175,6 +173,61 @@ $('#change-form-login').click(function (event) {
 
 $(".add-to-inventory-form").submit(function (event) {
     event.preventDefault();
+    //take the input from the user
+    const itemNum = $(".number-form-number").val();
+    const itemType = $(".number-form-type").val();
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //validate the input
+    if (itemNum == "") {
+        alert('Please enter item number');
+    }
+    //if the input is valid
+    else {
+
+        //create the payload object (what data we send to the api call)
+        const entryObject = {
+            itemNum: itemNum,
+            itemType: itemType,
+            loggedInUserName: loggedInUserName,
+        };
+        console.log(entryObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'POST',
+                url: '/item/create',
+                dataType: 'json',
+                data: JSON.stringify(entryObject),
+                contentType: 'application/json'
+            })
+            //if call is succefull
+            .done(function (result) {
+                console.log(result);
+                $('section').hide();
+                $('.navbar').show();
+                $('#user-dashboard').show();
+                $('#loggedInName').text(result.name);
+                $('#loggedInUserName').val(result.username);
+                $('#add-entry-container').hide();
+                //                noEntries();
+                //Add Entry to page
+                $('#user-list').prepend(addEntryRenderHTML(result));
+                $('html, body').animate({
+                    scrollTop: $(`#${result._id}`).offset().top
+                }, 1000);
+
+                //                $().scrollTop();
+
+                //                updateEditFormValues(result);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    };
     $('.hide-everything').hide();
     $('#inventoryPage').show();
     $('#inventory-filters').show();

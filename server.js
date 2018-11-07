@@ -1,13 +1,11 @@
 const User = require('./models/user');
 const Entry = require('./models/entry');
 const bodyParser = require('body-parser');
+const request = require("request");
 const config = require('./config');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const unirest = require('unirest');
 const events = require('events');
-const https = require('https');
-const http = require('http');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -59,56 +57,24 @@ function closeServer() {
 
 
 
-// external API call
-let getSetsFromRebrickable = function (setNumber) {
-    let emitter = new events.EventEmitter();
-    let options = {
-        host: 'rebrickable.com',
-        path: '/api/v3/lego/sets/' + setNumber + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+app.get('/lego/:code', function (req, res) {
+    var responseData;
+    request({
         method: 'GET',
-        headers: {
-            'Authorization': "4f8845c5d9212c179c08fe6f0e0d2d0c",
-            'Content-Type': "application/json",
-            'Port': 443
-        }
-    };
-
-    https.get(options, function (res) {
-        let body = '';
-        res.on('data', function (chunk) {
-            console.log(chunk);
-            body += chunk;
-            let jsonFormattedResults = JSON.parse(body);
-            emitter.emit('end', jsonFormattedResults);
-        });
-
-    }).on('error', function (e) {
-        emitter.emit('error', e);
-    });
-
-    return emitter;
-};
-
-
-// local API endpoints
-app.get('/get-set/:setNumber', function (req, res) {
-
-
-    //external api function call and response
-    let searchReq = getSetsFromRebrickable(req.params.setNumber);
-
-    //get the data from the first api call
-    searchReq.on('end', function (item) {
-        res.json(item);
-    });
-
-    //error handling
-    searchReq.on('error', function (code) {
-        res.sendStatus(code);
+        uri: 'https://rebrickable.com/api/v3/lego/sets/' + req.params.code + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+        gzip: true,
+        data: {
+            key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+        },
+        dataType: 'json',
+    }, function (error, response, body) {
+        // body is the decompressed response body
+        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
+        console.log('the decoded data is: ' + body);
+        res.json(body);
     });
 
 });
-
 
 // ---------------USER ENDPOINTS-------------------------------------
 // POST -----------------------------------

@@ -5,7 +5,6 @@ const request = require("request");
 const config = require('./config');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const events = require('events');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -57,24 +56,50 @@ function closeServer() {
 
 
 
-app.get('/lego/:code', function (req, res) {
-    var responseData;
+app.post('/item/create', function (req, res) {
+    let itemNum = req.body.itemNum;
+    let itemType = req.body.itemType;
+    let loggedInUserName = req.body.loggedInUserName;
+    let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    if (itemType == 'part') {
+        rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    } else if (itemType == 'moc') {
+        rebrickableUri = 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    }
     request({
         method: 'GET',
-        uri: 'https://rebrickable.com/api/v3/lego/sets/' + req.params.code + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+        uri: rebrickableUri,
         gzip: true,
         data: {
             key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
         },
         dataType: 'json',
     }, function (error, response, body) {
-        // body is the decompressed response body
-        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
-        console.log('the decoded data is: ' + body);
+
+        // save the api results into the database
         res.json(body);
     });
 
 });
+
+//app.get('/lego/:code', function (req, res) {
+//    var responseData;
+//    request({
+//        method: 'GET',
+//        uri: 'https://rebrickable.com/api/v3/lego/sets/' + req.params.code + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+//        gzip: true,
+//        data: {
+//            key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+//        },
+//        dataType: 'json',
+//    }, function (error, response, body) {
+//        // body is the decompressed response body
+//        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
+//        console.log('the decoded data is: ' + body);
+//        res.json(body);
+//    });
+//
+//});
 
 // ---------------USER ENDPOINTS-------------------------------------
 // POST -----------------------------------

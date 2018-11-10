@@ -62,7 +62,7 @@ app.post('/item/create', function (req, res) {
     let loggedInUserName = req.body.loggedInUserName;
     let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
     if (itemType == 'part') {
-        rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+        rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
     } else if (itemType == 'moc') {
         rebrickableUri = 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
     }
@@ -77,7 +77,14 @@ app.post('/item/create', function (req, res) {
     }, function (error, response, body) {
 
         // save the api results into the database
-        res.json(body);
+        res.json(JSON.parse(body));
+        if (itemType == 'set') {
+            // add set to the database
+        } else if (itemType == 'moc') {
+            // add MOC to the database
+        } else if (itemType == 'part') {
+            // add part to the database
+        }
     });
 
 });

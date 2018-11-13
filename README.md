@@ -112,7 +112,7 @@ and recalculate my build(s)
 
 
 ### Wireframe
-![Wireframe](lego-inventory.bmpr)
+![Wireframe](/github-images/wireframes/lego-inventory.bmpr)
 
 ## Working Prototype
 You can access a working prototype of the app here: https://legoinventory.herokuapp.com/

@@ -111,19 +111,8 @@ and recalculate my build(s)
 // search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)
 
 
-//About
-// keep blank for now; tools go to README page; trademark & Rebrickable in footers;
-// icons stay for now
-// Login by Mint Shirt from the Noun Project
-as a visitor
-I want to access the About page
-so I can learn what/who is behind this app
-
-### UI Flow
-![UI Flow handwritten draft](https://github.com/KatiLong/node-capstone/blob/master/github-images/node-capstone-user-flow.jpg)
-
-### Wireframe _main
-![Wireframe _Main](https://github.com/KatiLong/node-capstone/blob/master/github-images/wireframe-v1.jpg)
+### Wireframe
+![Wireframe](lego-inventory.bmpr)
 
 ## Working Prototype
 You can access a working prototype of the app here: https://legoinventory.herokuapp.com/

@@ -12,8 +12,10 @@ Inventory Page - View 1 | Inventory Page - View 2
 ![Inventory Page View 1](/github-images/inventory-page-1.png) | ![Inventory Page View 2](/github-images/inventory-page-2.png)
 Inventory Page - Part Details | Inventory Page - MOC Details
 ![Inventory Page - Part Details](/github-images/inventory-part-detail.png) | ![Inventory Page - MOC Details](/github-images/inventory-MOC-detail.png)
-Inventory Page - Set Details | Inventory Page - MOC Details
+Inventory Page - Set Details | Planned Build and Calculation Views
 ![Inventory Page - Part Details](/github-images/inventory-set-detail.png) | ![Inventory Page - Planned Build and Calculation Views](/github-images/build-plan-and-calculation-views.png)
+Search Views | Wishlist Page
+![Inventory Page - Part Details](/github-images/search-views-1-and-2.png) | ![Wishlist Page](/github-images/wishlist.png)
 
 
 ## User Cases

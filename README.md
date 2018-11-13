@@ -5,9 +5,9 @@ HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
 
 ## Screenshots
 
-Home Page View | Login Page View #2
+Home/Login Page View | Sign Up Page View
 :-------------------------:|:-------------------------:
-![Home Page](/github-images/login-page.png)  |  ![Login Page](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/login.jpg)
+![Home Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
 User Dashboard | Seen Entry
 ![User Dashboard](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/user-dashboard.jpg) | ![Seen Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/seen-entry.jpg)
 Add Entry  | Edit Entry

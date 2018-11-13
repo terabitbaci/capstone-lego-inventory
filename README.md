@@ -9,9 +9,8 @@ Landing/Login Page | Sign Up Page
 :-------------------------:|:-------------------------:
 ![Landing Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
 Inventory Page - View 1 | Inventory Page - View 2
-![Inventory Page View 1](inventory-page-1.png) | ![Inventory Page View 2](inventory-page-2.png))
-Add Entry  | Edit Entry
-![Inventory Page View 2](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/add-entry.jpg) | ![Edit Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/edit-entry.jpg)
+![Inventory Page View 1](/github-images/inventory-page-1.png) | ![Inventory Page View 2](/github-images/inventory-page-2.png))
+
 
 ## User Cases
 This app is for three types of users:

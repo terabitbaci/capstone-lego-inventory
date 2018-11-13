@@ -5,15 +5,13 @@ HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
 
 ## Screenshots
 
-Home/Login Page View | Sign Up Page View
+Landing/Login Page | Sign Up Page
 :-------------------------:|:-------------------------:
-![Home Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
-User Dashboard | Seen Entry
-![User Dashboard](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/user-dashboard.jpg) | ![Seen Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/seen-entry.jpg)
+![Landing Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
+Inventory Page - View 1 | Inventory Page - View 2
+![Inventory Page View 1](inventory-page-1.png) | ![Inventory Page View 2](inventory-page-2.png))
 Add Entry  | Edit Entry
-![Add Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/add-entry.jpg) | ![Edit Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/edit-entry.jpg)
-Delete Entry |
-![Delete Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/delete-entry.jpg) |
+![Inventory Page View 2](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/add-entry.jpg) | ![Edit Entry](https://github.com/KatiLong/shakespeare-passport-node-capstone/blob/master/github-images/edit-entry.jpg)
 
 ## User Cases
 This app is for three types of users:

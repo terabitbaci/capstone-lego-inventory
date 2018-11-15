@@ -246,17 +246,17 @@ $('#filterLockButtons select').change(function (event) {
 
 $('.showPartDetails').click(function (event) {
     event.preventDefault();
-    $(this).parent().parent().next().show();
+    $(this).parent().parent().next().toggle("slow");
 });
 
 $('.showMOCDetails').click(function (event) {
     event.preventDefault();
-    $(this).parent().parent().next().show();
+    $(this).parent().parent().next().toggle("slow");
 });
 
 $('.showSetDetails').click(function (event) {
     event.preventDefault();
-    $(this).parent().parent().next().show();
+    $(this).parent().parent().next().toggle("slow");
 });
 
 $('.itemLock').click(function (event) {

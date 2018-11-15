@@ -77,6 +77,46 @@ app.post('/item/create', function (req, res) {
     }, function (error, response, body) {
 
         // save the api results into the database
+        //                    * Lego Item(collection)(unique Lego elements saved in the database, and used to make inventories and Wishlists; these items don 't belong to anybody) *
+        //                        number(Lego) *
+        //                        number(Rebrickable) *
+        //                        type(set / MOC / part) *
+        //                        image URL to Rebrickable set / MOC / part *
+        //                        name *
+        //                        username of owner *
+        //                        source of part(sets the part is found in ) *
+        //                        number of parts( in set / MOC) *
+        //                        years offered / year design was released *
+        //                        designer of MOC *
+        //                        designer 's website *
+        //                        quantity in Wishlist *
+        //                        quantity of parts in a set / MOC *
+        //                        username *
+
+        //                     Inventory(collection)(user - specific inventory) *
+        //                        number(Lego) *
+        //                        number(Rebrickable) *
+        //                        quantity( in inventory) *
+        //                        name *
+        //                        status(y / n permanent build) *
+        //                        quantity available *
+        //                        bin(customer organization number) *
+        //                        username *
+        //                        'in your sets'
+        //                        calculation("good to have"
+        //                            feature)(from Show Details wireframe) *
+        //                        type(set, MOC or part) *
+
+        //                      Wishlist(collection)(user - specific wishlist) *
+        //                        number(Lego) *
+        //                        number(Rebrickable) *
+        //                        quantity( in Wishlist) *
+        //                        name *
+        //                        username *
+        //                        'in these sets/MOCs'
+        //                        calculation *
+        //                        type(set, MOC or part)
+
         res.json(JSON.parse(body));
         if (itemType == 'set') {
             // add set to the database

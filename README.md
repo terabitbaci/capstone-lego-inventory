@@ -118,7 +118,7 @@ Landing/Login Page | Sign Up Page
 Inventory Page | Inventory Page with Details
 ![Inventory Page](/github-images/wireframes/Inventory Home.png) | ![Inventory Page with Details](/github-images/wireframes/Show Details.png)
 Search Page | Search Error Page
-![Search Page](/github-images/wireframes/Search.png) | ![Search Error Page](/github-images/wireframes/Search Error.png)
+![Search Page](/github-images/wireframes/Search.png) | ![Search Error Page](/github-images/wireframes/Search-Error.png)
 Search Results | Search Results Action
 ![Search Results](/github-images/wireframes/Search Results.png) | ![Search Results Action](/github-images/wireframes/Search Results Action.png)
 Plan a Build | Build Calculation

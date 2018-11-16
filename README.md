@@ -114,17 +114,17 @@ search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179
 ### Wireframe
 Landing/Login Page | Sign Up Page
 :-------------------------:|:-------------------------:
-![Landing/Login Page](/github-images/wireframes/Landing Page.png)  |  ![Sign Up Page](/github-images/wireframes/Sign Up.png)
+![Landing/Login Page](/github-images/wireframes/Landing-Page.png)  |  ![Sign Up Page](/github-images/wireframes/Sign-Up.png)
 Inventory Page | Inventory Page with Details
-![Inventory Page](/github-images/wireframes/Inventory Home.png) | ![Inventory Page with Details](/github-images/wireframes/Show Details.png)
+![Inventory Page](/github-images/wireframes/Inventory-Home.png) | ![Inventory Page with Details](/github-images/wireframes/Show-Details.png)
 Search Page | Search Error Page
 ![Search Page](/github-images/wireframes/Search.png) | ![Search Error Page](/github-images/wireframes/Search-Error.png)
 Search Results | Search Results Action
-![Search Results](/github-images/wireframes/Search Results.png) | ![Search Results Action](/github-images/wireframes/Search Results Action.png)
+![Search Results](/github-images/wireframes/Search-Results.png) | ![Search Results Action](/github-images/wireframes/Search-Results-Action.png)
 Plan a Build | Build Calculation
-![Plan a Build](/github-images/wireframes/Plan a Build.png) | ![Build Calculation](/github-images/wireframes/Build-Calculation.png
+![Plan a Build](/github-images/wireframes/Plan-a-Build.png) | ![Build Calculation](/github-images/wireframes/Build-Calculation.png
 Wishlist | Wishlist Options
-![Wishlist](/github-images/wireframes/Wishlist.png) | ![Wishlist Options](/github-images/wireframes/Wishlist Item Options.png)
+![Wishlist](/github-images/wireframes/Wishlist.png) | ![Wishlist Options](/github-images/wireframes/Wishlist-Item-Options.png)
 
 
 ## Working Prototype

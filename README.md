@@ -122,7 +122,7 @@ Search Page | Search Error Page
 Search Results | Search Results Action
 ![Search Results](/github-images/wireframes/Search-Results.png) | ![Search Results Action](/github-images/wireframes/Search-Results-Action.png)
 Plan a Build | Build Calculation
-![Plan a Build](/github-images/wireframes/Plan-a-Build.png) | ![Build Calculation](/github-images/wireframes/Build-Calculation.png
+![Plan a Build](/github-images/wireframes/Plan-a-Build.png) | ![Build Calculation](/github-images/wireframes/Build-Calculation.png)
 Wishlist | Wishlist Options
 ![Wishlist](/github-images/wireframes/Wishlist.png) | ![Wishlist Options](/github-images/wireframes/Wishlist-Item-Options.png)
 

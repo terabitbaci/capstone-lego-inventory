@@ -22,26 +22,26 @@ Search Views | Wishlist Page
 This app is for three types of users:
 
 
-// update the use cases in the sticky notes at the top of each wireframe
+update the use cases in the sticky notes at the top of each wireframe
 
-// Landing Page (code)
+Landing Page (code)
 as a visitor
 I want to understand what I can do with this app (or sign up, or log in)
 so I can decide if I want to use it
 
-// Sign Up (code)
+Sign Up (code)
 as a visitor
 I want to register to use this app
 so I can create a personal Lego® inventory
 
-// Start Building Inventory (api)
-// https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
+Start Building Inventory (api)
+https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see instructions and begin entering my Lego sets
 so I can build my personal inventory
 
-// Inventory Home (Confirm Added & See Inventory) (api) (add magnifying glass)
-// https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
+Inventory Home (Confirm Added & See Inventory) (api) (add magnifying glass)
+https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_sets_parts_list
 as a logged-in user
 I want to see my inventory with the most recent added item on the top line,
 with view-filtering and action options,
@@ -51,7 +51,7 @@ and the ability to enter a bin number where each part is physically stored,
 so I can confirm the item was added to my inventory, have view options and
 and accurate list of parts available for a build, and perform actions on my inventory
 
-// Show Details (api)
+Show Details (api)
 as a logged-in user
 I want to view the photo and details of each set/MOC/part,
 and access links to its page (and MOC designer) on Rebrickable.com,
@@ -59,56 +59,56 @@ and link to the item on my Wishlist
 so I can learn about the item and see stats on parts and quantities,
 and access links to purchase the item
 
-// Search
+Search
 as a logged-in user (api)
 // https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_list
 I want to be able to search for parts
 so I can capture the part number to add it to my inventory
 
-// Search Error
+Search Error
 as a logged-in user
 I want to know if there is an error in my search
 so I can capture the part number to add it to my inventory
 
-// Search Results (One page for parts, one for MOCs, one for sets)
+Search Results (One page for parts, one for MOCs, one for sets)
 as a logged-in user
 I want to look for and click on the item from my search
 so I can perform an action on it
 
-// Search Results Action
+Search Results Action
 as a logged-in user
 I want to look for and click on the item from my search
 so I can view details of the item, add it to my inventory, or put it on my wishlist
 
-// Plan a Build
+Plan a Build
 as a logged-in user
 I want to enter a planned build by set or MOC number
 so I can generate build calculations
 
-// Build Calculation
+Build Calculation
 as a logged-in user
 I want to view the build calculations
 so I can see how many parts I have, how many parts I need
 to complete the build, and add those parts to my wishlist
 
-// (code - comparison; loop through the initial code and secondary code,
+(code - comparison; loop through the initial code and secondary code,
 and figure out which are common to both. Cross reference: what you have vs. what is necessary)
 
 
-// Wishlist
+Wishlist
 as a logged-in user
 I want to view my wishlist by build
 so I can print my wishlist (File > Print), and add parts as I acquire them
 
 
-// Wishlist Item Options
+Wishlist Item Options
 as a logged-in user
 I want to click on a Wishlist item
 so I can view its details, add the newly-acquired number of parts to my inventory,
 and recalculate my build(s)
 
 
-// search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)
+search for colors (https://rebrickable.com/api/v3/swagger/?key=4f8845c5d9212c179c08fe6f0e0d2d0c#!/lego/lego_parts_colors_list)
 
 
 ### Wireframe

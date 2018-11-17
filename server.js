@@ -1,5 +1,6 @@
 const User = require('./models/user');
 const Entry = require('./models/entry');
+const Part = require('./models/part');
 const bodyParser = require('body-parser');
 const request = require("request");
 const config = require('./config');
@@ -124,6 +125,30 @@ app.post('/item/create', function (req, res) {
             // add MOC to the database
         } else if (itemType == 'part') {
             // add part to the database
+            Part.create({
+                name: JSON.parse(body).name,
+                part_cat_id: JSON.parse(body).part_cat_id,
+                part_img_url: JSON.parse(body).part_img_url,
+                part_num: JSON.parse(body).part_num,
+                part_url: JSON.parse(body).part_url,
+                year_from: JSON.parse(body).year_from,
+                year_to: JSON.parse(body).year_to
+            }, (err, item) => {
+
+                //if creating a new user in the DB returns an error..
+                if (err) {
+                    //display it
+                    return res.status(500).json({
+                        message: 'Internal Server Error'
+                    });
+                }
+                //if creating a new user in the DB is succefull
+                if (item) {
+
+                    //display the new user
+                    return res.json(item);
+                }
+            });
         }
     });
 

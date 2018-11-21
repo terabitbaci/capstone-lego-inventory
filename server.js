@@ -1,5 +1,6 @@
 const User = require('./models/user');
 const Entry = require('./models/entry');
+const Set = require('./models/set');
 const Part = require('./models/part');
 const bodyParser = require('body-parser');
 const request = require("request");
@@ -118,9 +119,40 @@ app.post('/item/create', function (req, res) {
         //                        calculation *
         //                        type(set, MOC or part)
 
-        res.json(JSON.parse(body));
+        //        res.json(JSON.parse(body));
         if (itemType == 'set') {
             // add set to the database
+            for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+                Set.create({
+                    element_id: JSON.parse(body).results[setCounter].element_id,
+                    inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
+                    is_spare: JSON.parse(body).results[setCounter].is_spare,
+                    num_sets: JSON.parse(body).results[setCounter].num_sets,
+                    part_name: JSON.parse(body).results[setCounter].part.part_name,
+                    part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
+                    part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
+                    part_num: JSON.parse(body).results[setCounter].part.part_num,
+                    part_url: JSON.parse(body).results[setCounter].part.part_url,
+                    quantity: JSON.parse(body).results[setCounter].quantity,
+                    set_num: JSON.parse(body).results[setCounter].set_num
+                }, (err, item) => {
+
+                    //if creating a new user in the DB returns an error..
+                    if (err) {
+                        //display it
+                        return res.status(500).json({
+                            message: 'Internal Server Error'
+                        });
+                    }
+                    //if creating a new user in the DB is succefull
+                    if (item) {
+
+                        //display the new user
+                        //                        return res.json(JSON.parse(body));
+                    }
+                });
+            }
+            res.json(JSON.parse(body));
         } else if (itemType == 'moc') {
             // add MOC to the database
         } else if (itemType == 'part') {
@@ -146,7 +178,7 @@ app.post('/item/create', function (req, res) {
                 if (item) {
 
                     //display the new user
-                    return res.json(item);
+                    return res.json(JSON.parse(body));
                 }
             });
         }

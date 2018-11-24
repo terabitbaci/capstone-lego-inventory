@@ -62,7 +62,7 @@ app.post('/item/create', function (req, res) {
     let itemNum = req.body.itemNum;
     let itemType = req.body.itemType;
     let loggedInUserName = req.body.loggedInUserName;
-    let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1';
     if (itemType == 'part') {
         rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
     } else if (itemType == 'moc') {
@@ -133,6 +133,8 @@ app.post('/item/create', function (req, res) {
                     part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
                     part_num: JSON.parse(body).results[setCounter].part.part_num,
                     part_url: JSON.parse(body).results[setCounter].part.part_url,
+                    part_year_from: JSON.parse(body).results[setCounter].part.part_year_from,
+                    part_year_to: JSON.parse(body).results[setCounter].part.part_year_to,
                     quantity: JSON.parse(body).results[setCounter].quantity,
                     set_num: JSON.parse(body).results[setCounter].set_num
                 }, (err, item) => {

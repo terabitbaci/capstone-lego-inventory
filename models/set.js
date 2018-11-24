@@ -40,6 +40,14 @@ const setSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    part_year_from: {
+        type: String,
+        required: false
+    },
+    part_year_to: {
+        type: String,
+        required: false
+    },
     quantity: {
         type: String,
         required: false

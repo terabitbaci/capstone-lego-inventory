@@ -123,20 +123,21 @@ app.post('/item/create', function (req, res) {
         if (itemType == 'set') {
             // add set to the database
             for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
-                Set.create({
+                Part.create({
                     element_id: JSON.parse(body).results[setCounter].element_id,
                     inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
                     is_spare: JSON.parse(body).results[setCounter].is_spare,
                     num_sets: JSON.parse(body).results[setCounter].num_sets,
-                    part_name: JSON.parse(body).results[setCounter].part.part_name,
+                    part_name: JSON.parse(body).results[setCounter].part.name,
                     part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
                     part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
                     part_num: JSON.parse(body).results[setCounter].part.part_num,
                     part_url: JSON.parse(body).results[setCounter].part.part_url,
-                    part_year_from: JSON.parse(body).results[setCounter].part.part_year_from,
-                    part_year_to: JSON.parse(body).results[setCounter].part.part_year_to,
+                    part_year_from: JSON.parse(body).results[setCounter].part.year_from,
+                    part_year_to: JSON.parse(body).results[setCounter].part.year_to,
                     quantity: JSON.parse(body).results[setCounter].quantity,
-                    set_num: JSON.parse(body).results[setCounter].set_num
+                    set_num: JSON.parse(body).results[setCounter].set_num,
+                    loggedInUserName: loggedInUserName
                 }, (err, item) => {
 
                     //if creating a new user in the DB returns an error..
@@ -160,13 +161,20 @@ app.post('/item/create', function (req, res) {
         } else if (itemType == 'part') {
             // add part to the database
             Part.create({
-                name: JSON.parse(body).name,
+                element_id: 0,
+                inv_part_id: 0,
+                is_spare: 0,
+                num_sets: 0,
+                part_name: JSON.parse(body).name,
                 part_cat_id: JSON.parse(body).part_cat_id,
                 part_img_url: JSON.parse(body).part_img_url,
                 part_num: JSON.parse(body).part_num,
                 part_url: JSON.parse(body).part_url,
-                year_from: JSON.parse(body).year_from,
-                year_to: JSON.parse(body).year_to
+                part_year_from: JSON.parse(body).year_from,
+                part_year_to: JSON.parse(body).year_to,
+                quantity: 0,
+                set_num: 0,
+                loggedInUserName: loggedInUserName
             }, (err, item) => {
 
                 //if creating a new user in the DB returns an error..

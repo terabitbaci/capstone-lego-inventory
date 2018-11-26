@@ -4,7 +4,23 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcryptjs');
 
 const partSchema = new mongoose.Schema({
-    name: {
+    element_id: {
+        type: String,
+        required: false
+    },
+    inv_part_id: {
+        type: String,
+        required: false
+    },
+    is_spare: {
+        type: String,
+        required: false
+    },
+    num_sets: {
+        type: String,
+        required: false
+    },
+    part_name: {
         type: String,
         required: false
     },
@@ -24,14 +40,27 @@ const partSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    year_from: {
+    part_year_from: {
         type: String,
         required: false
     },
-    year_to: {
+    part_year_to: {
+        type: String,
+        required: false
+    },
+    quantity: {
+        type: String,
+        required: false
+    },
+    set_num: {
+        type: String,
+        required: false
+    },
+    loggedInUserName: {
         type: String,
         required: false
     }
+
 });
 
 const Part = mongoose.model('Part', partSchema);

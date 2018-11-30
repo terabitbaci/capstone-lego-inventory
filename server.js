@@ -78,119 +78,101 @@ app.post('/item/create', function (req, res) {
         dataType: 'json',
     }, function (error, response, body) {
 
-        // save the api results into the database
-        //                    * Lego Item(collection)(unique Lego elements saved in the database, and used to make inventories and Wishlists; these items don 't belong to anybody) *
-        //                        number(Lego) *
-        //                        number(Rebrickable) *
-        //                        type(set / MOC / part) *
-        //                        image URL to Rebrickable set / MOC / part *
-        //                        name *
-        //                        username of owner *
-        //                        source of part(sets the part is found in ) *
-        //                        number of parts( in set / MOC) *
-        //                        years offered / year design was released *
-        //                        designer of MOC *
-        //                        designer 's website *
-        //                        quantity in Wishlist *
-        //                        quantity of parts in a set / MOC *
-        //                        username *
-
-        //                     Inventory(collection)(user - specific inventory) *
-        //                        number(Lego) *
-        //                        number(Rebrickable) *
-        //                        quantity( in inventory) *
-        //                        name *
-        //                        status(y / n permanent build) *
-        //                        quantity available *
-        //                        bin(customer organization number) *
-        //                        username *
-        //                        'in your sets'
-        //                        calculation("good to have"
-        //                            feature)(from Show Details wireframe) *
-        //                        type(set, MOC or part) *
-
-        //                      Wishlist(collection)(user - specific wishlist) *
-        //                        number(Lego) *
-        //                        number(Rebrickable) *
-        //                        quantity( in Wishlist) *
-        //                        name *
-        //                        username *
-        //                        'in these sets/MOCs'
-        //                        calculation *
-        //                        type(set, MOC or part)
 
         //        res.json(JSON.parse(body));
         if (itemType == 'set') {
             // add set to the database
-            for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+            // if the search for set returns results
+            if (JSON.parse(body).results.length > 0) {
+                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+                    Part.create({
+                        element_id: JSON.parse(body).results[setCounter].element_id,
+                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
+                        is_spare: JSON.parse(body).results[setCounter].is_spare,
+                        num_sets: JSON.parse(body).results[setCounter].num_sets,
+                        part_name: JSON.parse(body).results[setCounter].part.name,
+                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
+                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
+                        part_num: JSON.parse(body).results[setCounter].part.part_num,
+                        part_url: JSON.parse(body).results[setCounter].part.part_url,
+                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
+                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
+                        quantity: JSON.parse(body).results[setCounter].quantity,
+                        set_num: JSON.parse(body).results[setCounter].set_num,
+                        loggedInUserName: loggedInUserName
+                    }, (err, item) => {
+
+                        //if creating a new part in the DB returns an error..
+                        if (err) {
+                            //display it
+                            return res.status(500).json({
+                                message: 'Internal Server Error'
+                            });
+                        }
+                        //if creating a new part in the DB is succefull
+                        if (item) {
+
+                            //display the new part
+                            //                        return res.json(JSON.parse(body));
+                        }
+                    });
+                }
+                return res.json(JSON.parse(body))
+            }
+            // if there are no results...
+            else {
+                return res.status(404).json({
+                    message: 'No results found'
+                });
+            }
+        } else if (itemType == 'moc') {
+            // add MOC to the database
+        } else if (itemType == 'part') {
+            // if the search for part returns results
+            if (Object.keys(JSON.parse(body)).length != 0) {
+                // add part to the database
                 Part.create({
-                    element_id: JSON.parse(body).results[setCounter].element_id,
-                    inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
-                    is_spare: JSON.parse(body).results[setCounter].is_spare,
-                    num_sets: JSON.parse(body).results[setCounter].num_sets,
-                    part_name: JSON.parse(body).results[setCounter].part.name,
-                    part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
-                    part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
-                    part_num: JSON.parse(body).results[setCounter].part.part_num,
-                    part_url: JSON.parse(body).results[setCounter].part.part_url,
-                    part_year_from: JSON.parse(body).results[setCounter].part.year_from,
-                    part_year_to: JSON.parse(body).results[setCounter].part.year_to,
-                    quantity: JSON.parse(body).results[setCounter].quantity,
-                    set_num: JSON.parse(body).results[setCounter].set_num,
+                    element_id: 0,
+                    inv_part_id: 0,
+                    is_spare: 0,
+                    num_sets: 0,
+                    part_name: JSON.parse(body).name,
+                    part_cat_id: JSON.parse(body).part_cat_id,
+                    part_img_url: JSON.parse(body).part_img_url,
+                    part_num: JSON.parse(body).part_num,
+                    part_url: JSON.parse(body).part_url,
+                    part_year_from: JSON.parse(body).year_from,
+                    part_year_to: JSON.parse(body).year_to,
+                    quantity: 0,
+                    set_num: 0,
                     loggedInUserName: loggedInUserName
                 }, (err, item) => {
 
-                    //if creating a new user in the DB returns an error..
+
+                    //if creating a new part in the DB returns an error..
                     if (err) {
                         //display it
                         return res.status(500).json({
                             message: 'Internal Server Error'
                         });
                     }
-                    //if creating a new user in the DB is succefull
+                    //if creating a new part in the DB is succefull
                     if (item) {
+                        console.log(JSON.parse(body));
 
-                        //display the new user
-                        //                        return res.json(JSON.parse(body));
+                        //display the new part
+                        return res.json(JSON.parse(body));
                     }
                 });
+
             }
-            res.json(JSON.parse(body));
-        } else if (itemType == 'moc') {
-            // add MOC to the database
-        } else if (itemType == 'part') {
-            // add part to the database
-            Part.create({
-                element_id: 0,
-                inv_part_id: 0,
-                is_spare: 0,
-                num_sets: 0,
-                part_name: JSON.parse(body).name,
-                part_cat_id: JSON.parse(body).part_cat_id,
-                part_img_url: JSON.parse(body).part_img_url,
-                part_num: JSON.parse(body).part_num,
-                part_url: JSON.parse(body).part_url,
-                part_year_from: JSON.parse(body).year_from,
-                part_year_to: JSON.parse(body).year_to,
-                quantity: 0,
-                set_num: 0,
-                loggedInUserName: loggedInUserName
-            }, (err, item) => {
 
-                //if creating a new user in the DB returns an error..
-                if (err) {
-                    //display it
-                    return res.status(500).json({
-                        message: 'Internal Server Error'
-                    });
-                }
-                //if creating a new user in the DB is succefull
-                if (item) {
-
-                    //display the new user
-                    return res.json(JSON.parse(body));
-                }
-            });
+            // if there are no results...
+            else {
+                return res.status(404).json({
+                    message: 'No results found'
+                });
+            }
         }
     });
 

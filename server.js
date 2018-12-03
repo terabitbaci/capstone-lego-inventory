@@ -62,25 +62,86 @@ app.post('/item/create', function (req, res) {
     let itemNum = req.body.itemNum;
     let itemType = req.body.itemType;
     let loggedInUserName = req.body.loggedInUserName;
-    let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1';
-    if (itemType == 'part') {
-        rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
-    } else if (itemType == 'moc') {
-        rebrickableUri = 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
-    }
-    request({
-        method: 'GET',
-        uri: rebrickableUri,
-        gzip: true,
-        data: {
-            key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
-        },
-        dataType: 'json',
-    }, function (error, response, body) {
+    //    let rebrickableUri = 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1';
+    //    if (itemType == 'part') {
+    //        rebrickableUri = 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    //    } else if (itemType == 'moc') {
+    //        rebrickableUri = 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c';
+    //    }
+    //    request({
+    //        method: 'GET',
+    //        uri: rebrickableUri,
+    //        gzip: true,
+    //        data: {
+    //            key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+    //        },
+    //        dataType: 'json',
+    //    }, function (error, response, body) {
 
 
-        //        res.json(JSON.parse(body));
-        if (itemType == 'set') {
+    //        res.json(JSON.parse(body));
+    if (itemType == 'set') {
+        // make request for set details
+        request({
+            method: 'GET',
+            uri: 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+            gzip: true,
+            data: {
+                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+            },
+            dataType: 'json',
+        }, function (error, response, body) {
+            // if the search for set details returns results
+            if (Object.keys(JSON.parse(body)).length != 0) {
+                // add set to the database
+                Set.create({
+                    set_num: JSON.parse(body).set_num,
+                    name: JSON.parse(body).name,
+                    year: JSON.parse(body).year,
+                    theme_id: JSON.parse(body).theme_id,
+                    num_parts: JSON.parse(body).num_parts,
+                    set_img_url: JSON.parse(body).set_img_url,
+                    set_url: JSON.parse(body).set_url,
+                    loggedInUserName: loggedInUserName
+                }, (err, item) => {
+
+
+                    //if creating a new set details in the DB returns an error..
+                    if (err) {
+                        //display it
+                        return res.status(500).json({
+                            message: 'Internal Server Error'
+                        });
+                    }
+                    //if creating a new set in the DB is successfull
+                    if (item) {
+                        console.log(JSON.parse(body));
+
+                        //display the new set
+                        return res.json(JSON.parse(body));
+                    }
+                });
+
+            }
+
+            // if there are no results...
+            else {
+                return res.status(404).json({
+                    message: 'No results found'
+                });
+            }
+        });
+        // ---------------------------------------------------------------------------------------------------------------------------
+        // make request for parts related to a set
+        request({
+            method: 'GET',
+            uri: 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
+            gzip: true,
+            data: {
+                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+            },
+            dataType: 'json',
+        }, function (error, response, body) {
             // add set to the database
             // if the search for set returns results
             if (JSON.parse(body).results.length > 0) {
@@ -125,9 +186,19 @@ app.post('/item/create', function (req, res) {
                     message: 'No results found'
                 });
             }
-        } else if (itemType == 'moc') {
-            // add MOC to the database
-        } else if (itemType == 'part') {
+        });
+    } else if (itemType == 'moc') {
+        // add MOC to the database
+    } else if (itemType == 'part') {
+        request({
+            method: 'GET',
+            uri: 'https://rebrickable.com/api/v3/lego/parts/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+            gzip: true,
+            data: {
+                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+            },
+            dataType: 'json',
+        }, function (error, response, body) {
             // if the search for part returns results
             if (Object.keys(JSON.parse(body)).length != 0) {
                 // add part to the database
@@ -173,8 +244,9 @@ app.post('/item/create', function (req, res) {
                     message: 'No results found'
                 });
             }
-        }
-    });
+        });
+    }
+
 
 });
 

@@ -1,6 +1,7 @@
 const User = require('./models/user');
 const Entry = require('./models/entry');
 const Set = require('./models/set');
+const Moc = require('./models/moc');
 const Part = require('./models/part');
 const bodyParser = require('body-parser');
 const request = require("request");
@@ -187,8 +188,156 @@ app.post('/item/create', function (req, res) {
                 });
             }
         });
+
+
+
+
+
     } else if (itemType == 'moc') {
         // add MOC to the database
+
+
+
+
+
+
+
+
+        // make request for moc details
+        request({
+            method: 'GET',
+            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
+            gzip: true,
+            data: {
+                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+            },
+            dataType: 'json',
+        }, function (error, response, body) {
+            // if the search for moc details returns results
+            if (Object.keys(JSON.parse(body)).length != 0) {
+                // add moc to the database
+                Moc.create({
+                    moc_num: JSON.parse(body).set_num,
+                    moc_name: JSON.parse(body).name,
+                    year: JSON.parse(body).year,
+                    theme_id: JSON.parse(body).theme_id,
+                    num_parts: JSON.parse(body).num_parts,
+                    moc_img_url: JSON.parse(body).moc_img_url,
+                    moc_url: JSON.parse(body).moc_url,
+                    designer_name: JSON.parse(body).designer_name,
+                    designer_url: JSON.parse(body).designer_url,
+                    loggedInUserName: loggedInUserName
+                }, (err, item) => {
+
+
+                    //if creating a new moc details in the DB returns an error..
+                    if (err) {
+                        //display it
+                        return res.status(500).json({
+                            message: 'Internal Server Error'
+                        });
+                    }
+                    //if creating a new moc in the DB is successfull
+                    if (item) {
+                        console.log(JSON.parse(body));
+
+                        //display the new set
+                        return res.json(JSON.parse(body));
+                    }
+                });
+
+            }
+
+            // if there are no results...
+            else {
+                return res.status(404).json({
+                    message: 'No results found'
+                });
+            }
+        });
+        // ---------------------------------------------------------------------------------------------------------------------------
+        // make request for parts related to a moc
+        request({
+            method: 'GET',
+            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=10&inc_part_details=1',
+            gzip: true,
+            data: {
+                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+            },
+            dataType: 'json',
+        }, function (error, response, body) {
+            //            console.log(JSON.parse(body));
+            // add moc to the database
+            // if the search for moc returns results
+            if (JSON.parse(body).results.length > 0) {
+                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+
+
+//                    console.log('element_id', JSON.parse(body).results[setCounter].element_id);
+ //                    console.log('inv_part_id', JSON.parse(body).results[setCounter].inv_part_id);
+ //                    console.log('is_spare', JSON.parse(body).results[setCounter].is_spare);
+ //                    console.log('num_sets', JSON.parse(body).results[setCounter].num_sets);
+ //                    console.log('part_name', JSON.parse(body).results[setCounter].part.name);
+ //                    console.log('part_cat_id', JSON.parse(body).results[setCounter].part.part_cat_id);
+ //                    console.log('part_img_url', JSON.parse(body).results[setCounter].part.part_img_url);
+ //                    console.log('part_num', JSON.parse(body).results[setCounter].part.part_num);
+ //                    console.log('part_url', JSON.parse(body).results[setCounter].part.part_url);
+ //                    console.log('part_year_from', JSON.parse(body).results[setCounter].part.year_from);
+ //                    console.log('part_year_to', JSON.parse(body).results[setCounter].part.year_to);
+ //                    console.log('quantity', JSON.parse(body).results[setCounter].quantity);
+ //                    console.log('set_num', JSON.parse(body).results[setCounter].set_num);
+
+
+                    Part.create({
+                        element_id: JSON.parse(body).results[setCounter].element_id,
+                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
+                        is_spare: JSON.parse(body).results[setCounter].is_spare,
+                        num_sets: JSON.parse(body).results[setCounter].num_sets,
+                        part_name: JSON.parse(body).results[setCounter].part.name,
+                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
+                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
+                        part_num: JSON.parse(body).results[setCounter].part.part_num,
+                        part_url: JSON.parse(body).results[setCounter].part.part_url,
+                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
+                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
+                        quantity: JSON.parse(body).results[setCounter].quantity,
+                        set_num: JSON.parse(body).results[setCounter].set_num,
+                        loggedInUserName: loggedInUserName
+                    }, (err, item) => {
+
+                        //if creating a new part in the DB returns an error..
+                        if (err) {
+                            //display it
+                            return res.status(500).json({
+                                message: 'Internal Server Error'
+                            });
+                        }
+                        //if creating a new part in the DB is succefull
+                        if (item) {
+
+                            //display the new part
+                            //                        return res.json(JSON.parse(body));
+                        }
+                    });
+                }
+                return res.json(JSON.parse(body))
+            }
+            // if there are no results...
+            else {
+                return res.status(404).json({
+                    message: 'No results found'
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+
     } else if (itemType == 'part') {
         request({
             method: 'GET',

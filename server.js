@@ -203,7 +203,7 @@ app.post('/item/create', function (req, res) {
 
 
 
-        // make request for moc details
+        //         make request for moc details
         request({
             method: 'GET',
             uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
@@ -241,8 +241,8 @@ app.post('/item/create', function (req, res) {
                     if (item) {
                         console.log(JSON.parse(body));
 
-                        //display the new set
-                        return res.json(JSON.parse(body));
+                        //display the moc
+                        //                        return res.json(JSON.parse(body));
                     }
                 });
 
@@ -259,13 +259,14 @@ app.post('/item/create', function (req, res) {
         // make request for parts related to a moc
         request({
             method: 'GET',
-            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=10&inc_part_details=1',
+            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
             gzip: true,
             data: {
                 key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
             },
             dataType: 'json',
         }, function (error, response, body) {
+            //            return res.json(JSON.parse(body));
             //            console.log(JSON.parse(body));
             // add moc to the database
             // if the search for moc returns results
@@ -273,19 +274,19 @@ app.post('/item/create', function (req, res) {
                 for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
 
 
-//                    console.log('element_id', JSON.parse(body).results[setCounter].element_id);
- //                    console.log('inv_part_id', JSON.parse(body).results[setCounter].inv_part_id);
- //                    console.log('is_spare', JSON.parse(body).results[setCounter].is_spare);
- //                    console.log('num_sets', JSON.parse(body).results[setCounter].num_sets);
- //                    console.log('part_name', JSON.parse(body).results[setCounter].part.name);
- //                    console.log('part_cat_id', JSON.parse(body).results[setCounter].part.part_cat_id);
- //                    console.log('part_img_url', JSON.parse(body).results[setCounter].part.part_img_url);
- //                    console.log('part_num', JSON.parse(body).results[setCounter].part.part_num);
- //                    console.log('part_url', JSON.parse(body).results[setCounter].part.part_url);
- //                    console.log('part_year_from', JSON.parse(body).results[setCounter].part.year_from);
- //                    console.log('part_year_to', JSON.parse(body).results[setCounter].part.year_to);
- //                    console.log('quantity', JSON.parse(body).results[setCounter].quantity);
- //                    console.log('set_num', JSON.parse(body).results[setCounter].set_num);
+                    //                    console.log('element_id', JSON.parse(body).results[setCounter].element_id);
+                    //                    console.log('inv_part_id', JSON.parse(body).results[setCounter].inv_part_id);
+                    //                    console.log('is_spare', JSON.parse(body).results[setCounter].is_spare);
+                    //                    console.log('num_sets', JSON.parse(body).results[setCounter].num_sets);
+                    //                    console.log('part_name', JSON.parse(body).results[setCounter].part.name);
+                    //                    console.log('part_cat_id', JSON.parse(body).results[setCounter].part.part_cat_id);
+                    //                    console.log('part_img_url', JSON.parse(body).results[setCounter].part.part_img_url);
+                    //                    console.log('part_num', JSON.parse(body).results[setCounter].part.part_num);
+                    //                    console.log('part_url', JSON.parse(body).results[setCounter].part.part_url);
+                    //                    console.log('part_year_from', JSON.parse(body).results[setCounter].part.year_from);
+                    //                    console.log('part_year_to', JSON.parse(body).results[setCounter].part.year_to);
+                    //                    console.log('quantity', JSON.parse(body).results[setCounter].quantity);
+                    //                    console.log('set_num', JSON.parse(body).results[setCounter].set_num);
 
 
                     Part.create({

@@ -77,7 +77,7 @@ app.post('/item/create', function (req, res) {
             dataType: 'json',
         }, function (error, response, body) {
             // if the search for set details returns results
-            if (Object.keys(JSON.parse(body)).length != 0) {
+            if (Object.keys(JSON.parse(body)).length > 1) {
                 // add set to the database
                 Set.create({
                     set_num: JSON.parse(body).set_num,
@@ -99,71 +99,72 @@ app.post('/item/create', function (req, res) {
                     //if creating a new set in the DB is successfull
                     if (item) {
                         //                        console.log(JSON.parse(body));
+                        // ---------------------------------------------------------------------------------------------------------------------------
+                        // make request for parts related to a set
+                        request({
+                            method: 'GET',
+                            uri: 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
+                            gzip: true,
+                            data: {
+                                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+                            },
+                            dataType: 'json',
+                        }, function (error, response, body) {
+                            // add set to the database
+                            // if the search for set returns results
+                            if (JSON.parse(body).results.length > 1) {
+                                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+                                    Part.create({
+                                        element_id: JSON.parse(body).results[setCounter].element_id,
+                                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
+                                        is_spare: JSON.parse(body).results[setCounter].is_spare,
+                                        num_sets: JSON.parse(body).results[setCounter].num_sets,
+                                        part_name: JSON.parse(body).results[setCounter].part.name,
+                                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
+                                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
+                                        part_num: JSON.parse(body).results[setCounter].part.part_num,
+                                        part_url: JSON.parse(body).results[setCounter].part.part_url,
+                                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
+                                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
+                                        quantity: JSON.parse(body).results[setCounter].quantity,
+                                        set_num: JSON.parse(body).results[setCounter].set_num,
+                                        loggedInUserName: loggedInUserName
+                                    }, (err, item) => {
+                                        //if creating a new part in the DB returns an error..
+                                        if (err) {
+                                            //display it
+                                            return res.status(500).json({
+                                                message: 'Internal Server Error'
+                                            });
+                                        }
+                                        //if creating a new part in the DB is succefull
+                                        if (item) {
+                                            //                        return res.json(JSON.parse(body));
+                                        }
+                                    });
+                                }
+                                return res.json({
+                                    'message': 'success'
+                                })
+                            }
+                            // if there are no results...
+                            else {
+                                return res.status(200).json({
+                                    message: 'Invalid part number'
+                                });
+                            }
+                        });
                     }
                 });
             }
             // if there are no results...
             else {
-                return res.status(404).json({
-                    message: 'No results found'
+                return res.status(200).json({
+                    message: 'Invalid set number'
                 });
             }
         });
-        // ---------------------------------------------------------------------------------------------------------------------------
-        // make request for parts related to a set
-        request({
-            method: 'GET',
-            uri: 'https://rebrickable.com/api/v3/lego/sets/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
-            gzip: true,
-            data: {
-                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
-            },
-            dataType: 'json',
-        }, function (error, response, body) {
-            // add set to the database
-            // if the search for set returns results
-            if (JSON.parse(body).results.length > 0) {
-                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
-                    Part.create({
-                        element_id: JSON.parse(body).results[setCounter].element_id,
-                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
-                        is_spare: JSON.parse(body).results[setCounter].is_spare,
-                        num_sets: JSON.parse(body).results[setCounter].num_sets,
-                        part_name: JSON.parse(body).results[setCounter].part.name,
-                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
-                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
-                        part_num: JSON.parse(body).results[setCounter].part.part_num,
-                        part_url: JSON.parse(body).results[setCounter].part.part_url,
-                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
-                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
-                        quantity: JSON.parse(body).results[setCounter].quantity,
-                        set_num: JSON.parse(body).results[setCounter].set_num,
-                        loggedInUserName: loggedInUserName
-                    }, (err, item) => {
-                        //if creating a new part in the DB returns an error..
-                        if (err) {
-                            //display it
-                            return res.status(500).json({
-                                message: 'Internal Server Error'
-                            });
-                        }
-                        //if creating a new part in the DB is succefull
-                        if (item) {
-                            //                        return res.json(JSON.parse(body));
-                        }
-                    });
-                }
-                return res.json({
-                    'message': 'success'
-                })
-            }
-            // if there are no results...
-            else {
-                return res.status(404).json({
-                    message: 'No results found'
-                });
-            }
-        });
+
     } else if (itemType == 'moc') {
         // add MOC to the database
         //         make request for moc details
@@ -177,7 +178,7 @@ app.post('/item/create', function (req, res) {
             dataType: 'json',
         }, function (error, response, body) {
             // if the search for moc details returns results
-            if (Object.keys(JSON.parse(body)).length != 0) {
+            if (Object.keys(JSON.parse(body)).length > 1) {
                 // add moc to the database
                 Moc.create({
                     moc_num: JSON.parse(body).set_num,
@@ -201,71 +202,72 @@ app.post('/item/create', function (req, res) {
                     //if creating a new moc in the DB is successfull
                     if (item) {
                         //                        console.log(JSON.parse(body));
+                        // ---------------------------------------------------------------------------------------------------------------------------
+                        // make request for parts related to a moc
+                        request({
+                            method: 'GET',
+                            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
+                            gzip: true,
+                            data: {
+                                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
+                            },
+                            dataType: 'json',
+                        }, function (error, response, body) {
+                            // add moc to the database
+                            // if the search for moc returns results
+                            if (JSON.parse(body).results.length > 1) {
+                                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
+                                    Part.create({
+                                        element_id: JSON.parse(body).results[setCounter].element_id,
+                                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
+                                        is_spare: JSON.parse(body).results[setCounter].is_spare,
+                                        num_sets: JSON.parse(body).results[setCounter].num_sets,
+                                        part_name: JSON.parse(body).results[setCounter].part.name,
+                                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
+                                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
+                                        part_num: JSON.parse(body).results[setCounter].part.part_num,
+                                        part_url: JSON.parse(body).results[setCounter].part.part_url,
+                                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
+                                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
+                                        quantity: JSON.parse(body).results[setCounter].quantity,
+                                        set_num: JSON.parse(body).results[setCounter].set_num,
+                                        loggedInUserName: loggedInUserName
+                                    }, (err, item) => {
+                                        //if creating a new part in the DB returns an error..
+                                        if (err) {
+                                            //display it
+                                            return res.status(500).json({
+                                                message: 'Internal Server Error'
+                                            });
+                                        }
+                                        //if creating a new part in the DB is succefull
+                                        if (item) {
+                                            //                        return res.json(JSON.parse(body));
+                                        }
+                                    });
+                                }
+                                return res.json({
+                                    'message': 'success'
+                                })
+                            }
+                            // if there are no results...
+                            else {
+                                return res.status(200).json({
+                                    message: 'Invalid part number'
+                                });
+                            }
+                        });
                     }
                 });
             }
             // if there are no results...
             else {
-                return res.status(404).json({
-                    message: 'No results found'
+                return res.status(200).json({
+                    message: 'Invalid MOC number'
                 });
             }
         });
-        // ---------------------------------------------------------------------------------------------------------------------------
-        // make request for parts related to a moc
-        request({
-            method: 'GET',
-            uri: 'https://rebrickable.com/api/v3/lego/mocs/' + itemNum + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c&page_size=1000&inc_part_details=1',
-            gzip: true,
-            data: {
-                key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
-            },
-            dataType: 'json',
-        }, function (error, response, body) {
-            // add moc to the database
-            // if the search for moc returns results
-            if (JSON.parse(body).results.length > 0) {
-                for (setCounter = 0; setCounter < JSON.parse(body).results.length; setCounter++) {
-                    Part.create({
-                        element_id: JSON.parse(body).results[setCounter].element_id,
-                        inv_part_id: JSON.parse(body).results[setCounter].inv_part_id,
-                        is_spare: JSON.parse(body).results[setCounter].is_spare,
-                        num_sets: JSON.parse(body).results[setCounter].num_sets,
-                        part_name: JSON.parse(body).results[setCounter].part.name,
-                        part_cat_id: JSON.parse(body).results[setCounter].part.part_cat_id,
-                        part_img_url: JSON.parse(body).results[setCounter].part.part_img_url,
-                        part_num: JSON.parse(body).results[setCounter].part.part_num,
-                        part_url: JSON.parse(body).results[setCounter].part.part_url,
-                        part_year_from: JSON.parse(body).results[setCounter].part.year_from,
-                        part_year_to: JSON.parse(body).results[setCounter].part.year_to,
-                        quantity: JSON.parse(body).results[setCounter].quantity,
-                        set_num: JSON.parse(body).results[setCounter].set_num,
-                        loggedInUserName: loggedInUserName
-                    }, (err, item) => {
-                        //if creating a new part in the DB returns an error..
-                        if (err) {
-                            //display it
-                            return res.status(500).json({
-                                message: 'Internal Server Error'
-                            });
-                        }
-                        //if creating a new part in the DB is succefull
-                        if (item) {
-                            //                        return res.json(JSON.parse(body));
-                        }
-                    });
-                }
-                return res.json({
-                    'message': 'success'
-                })
-            }
-            // if there are no results...
-            else {
-                return res.status(404).json({
-                    message: 'No results found'
-                });
-            }
-        });
+
     } else if (itemType == 'part') {
         request({
             method: 'GET',
@@ -277,7 +279,7 @@ app.post('/item/create', function (req, res) {
             dataType: 'json',
         }, function (error, response, body) {
             // if the search for part returns results
-            if (Object.keys(JSON.parse(body)).length != 0) {
+            if (Object.keys(JSON.parse(body)).length > 1) {
                 // add part to the database
                 Part.create({
                     element_id: 0,
@@ -304,17 +306,17 @@ app.post('/item/create', function (req, res) {
                     }
                     //if creating a new part in the DB is succefull
                     if (item) {
-                        //                     console.log(JSON.parse(body));
-                        return res.json({
-                            'message': 'success'
-                        })
+                        return res.json(JSON.parse(body));
+                        //                        return res.json({
+                        //                            'message': 'success'
+                        //                        })
                     }
                 });
             }
             // if there are no results...
             else {
-                return res.status(404).json({
-                    message: 'No results found'
+                return res.status(200).json({
+                    message: 'Invalid part number'
                 });
             }
         });

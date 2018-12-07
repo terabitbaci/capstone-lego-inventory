@@ -34,6 +34,10 @@ const setSchema = new mongoose.Schema({
     loggedInUserName: {
         type: String,
         required: false
+    },
+    addedToDB: {
+        type: Date,
+        default: Date.now
     }
 
 });

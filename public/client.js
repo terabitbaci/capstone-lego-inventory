@@ -212,10 +212,10 @@ $(".add-to-inventory-form").submit(function (event) {
                 $('#add-entry-container').hide();
                 //                noEntries();
                 //Add Entry to page
-                $('#user-list').prepend(addEntryRenderHTML(result));
-                $('html, body').animate({
-                    scrollTop: $(`#${result._id}`).offset().top
-                }, 1000);
+//                $('#user-list').prepend(addEntryRenderHTML(result));
+   //                $('html, body').animate({
+   //                    scrollTop: $(`#${result._id}`).offset().top
+   //                }, 1000);
 
                 //                $().scrollTop();
 

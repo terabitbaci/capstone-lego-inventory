@@ -42,6 +42,10 @@ const mocSchema = new mongoose.Schema({
     loggedInUserName: {
         type: String,
         required: false
+    },
+    addedToDB: {
+        type: Date,
+        default: Date.now
     }
 
 });

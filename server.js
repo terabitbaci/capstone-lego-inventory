@@ -149,7 +149,7 @@ app.post('/item/create', function (req, res) {
                             }
                             // if there are no results...
                             else {
-                                return res.status(200).json({
+                                return res.status(444).json({
                                     message: 'Invalid part number'
                                 });
                             }
@@ -159,7 +159,7 @@ app.post('/item/create', function (req, res) {
             }
             // if there are no results...
             else {
-                return res.status(200).json({
+                return res.status(444).json({
                     message: 'Invalid set number'
                 });
             }
@@ -252,7 +252,7 @@ app.post('/item/create', function (req, res) {
                             }
                             // if there are no results...
                             else {
-                                return res.status(200).json({
+                                return res.status(444).json({
                                     message: 'Invalid part number'
                                 });
                             }
@@ -262,7 +262,7 @@ app.post('/item/create', function (req, res) {
             }
             // if there are no results...
             else {
-                return res.status(200).json({
+                return res.status(444).json({
                     message: 'Invalid MOC number'
                 });
             }
@@ -315,7 +315,7 @@ app.post('/item/create', function (req, res) {
             }
             // if there are no results...
             else {
-                return res.status(200).json({
+                return res.status(444).json({
                     message: 'Invalid part number'
                 });
             }

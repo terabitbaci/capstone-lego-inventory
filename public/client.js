@@ -185,6 +185,7 @@ $(".add-to-inventory-form").submit(function (event) {
     //if the input is valid
     else {
 
+
         //create the payload object (what data we send to the api call)
         const entryObject = {
             itemNum: itemNum,
@@ -204,6 +205,8 @@ $(".add-to-inventory-form").submit(function (event) {
             //if call is succefull
             .done(function (result) {
                 console.log(result);
+                // if no results, check if the item number ends with "-1"
+                // if the doesn't end with "-1", add "-1" and make the api call one more time
                 $('section').hide();
                 $('.navbar').show();
                 $('#user-dashboard').show();
@@ -212,10 +215,10 @@ $(".add-to-inventory-form").submit(function (event) {
                 $('#add-entry-container').hide();
                 //                noEntries();
                 //Add Entry to page
-//                $('#user-list').prepend(addEntryRenderHTML(result));
-   //                $('html, body').animate({
-   //                    scrollTop: $(`#${result._id}`).offset().top
-   //                }, 1000);
+                //                $('#user-list').prepend(addEntryRenderHTML(result));
+                //                $('html, body').animate({
+                //                    scrollTop: $(`#${result._id}`).offset().top
+                //                }, 1000);
 
                 //                $().scrollTop();
 
@@ -223,7 +226,7 @@ $(".add-to-inventory-form").submit(function (event) {
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
+                console.log(jqXHR.status);
                 console.log(error);
                 console.log(errorThrown);
             });

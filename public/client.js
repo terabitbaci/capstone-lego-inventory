@@ -205,36 +205,62 @@ $(".add-to-inventory-form").submit(function (event) {
             //if call is succefull
             .done(function (result) {
                 console.log(result);
-                // if no results, check if the item number ends with "-1"
-                // if the doesn't end with "-1", add "-1" and make the api call one more time
-                $('section').hide();
-                $('.navbar').show();
-                $('#user-dashboard').show();
                 $('#loggedInName').text(result.name);
                 $('#loggedInUserName').val(result.username);
-                $('#add-entry-container').hide();
-                //                noEntries();
-                //Add Entry to page
-                //                $('#user-list').prepend(addEntryRenderHTML(result));
-                //                $('html, body').animate({
-                //                    scrollTop: $(`#${result._id}`).offset().top
-                //                }, 1000);
-
-                //                $().scrollTop();
-
-                //                updateEditFormValues(result);
+                $('.hide-everything').hide();
+                $('#inventoryPage').show();
+                $('#inventory-filters').show();
+                $('#inventory-table').show();
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR.status);
+                if (jqXHR.status == "444") {
+                    alert("The " + itemType + " with number " + itemNum + " was not found")
+                }
                 console.log(error);
                 console.log(errorThrown);
+                // if no results, check if the item number ends with "-1"
+                if (itemNum.includes("-1") == false) {
+                    // if the doesn't end with "-1", add "-1" and make the api call one more time
+                    const entryObject = {
+                        itemNum: itemNum + "-1",
+                        itemType: itemType,
+                        loggedInUserName: loggedInUserName,
+                    };
+                    console.log(entryObject);
+
+                    //make the api call using the payload above
+                    $.ajax({
+                            type: 'POST',
+                            url: '/item/create',
+                            dataType: 'json',
+                            data: JSON.stringify(entryObject),
+                            contentType: 'application/json'
+                        })
+                        //if call is succefull
+                        .done(function (result) {
+                            console.log(result);
+                            $('#loggedInName').text(result.name);
+                            $('#loggedInUserName').val(result.username);
+                            $('.hide-everything').hide();
+                            $('#inventoryPage').show();
+                            $('#inventory-filters').show();
+                            $('#inventory-table').show();
+                        })
+                        //if the call is failing
+                        .fail(function (jqXHR, error, errorThrown) {
+                            console.log(jqXHR.status);
+                            if (jqXHR.status == "444") {
+                                alert("The second search for the " + itemType + " with number " + itemNum + "-1 also returned no results")
+                            }
+                            console.log(error);
+                            console.log(errorThrown);
+                        });
+                }
+
             });
     };
-    $('.hide-everything').hide();
-    $('#inventoryPage').show();
-    $('#inventory-filters').show();
-    $('#inventory-table').show();
 });
 
 $('#filterViewButtons select').change(function (event) {

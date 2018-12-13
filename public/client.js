@@ -92,7 +92,7 @@ $(".login-form").submit(function (event) {
                 data: JSON.stringify(loginUserObject),
                 contentType: 'application/json'
             })
-            //if call is succefull
+            //if call is successful
             .done(function (result) {
                 console.log(result);
                 $('.hide-everything').hide();
@@ -148,7 +148,7 @@ $(".signup-form").submit(function (event) {
                 data: JSON.stringify(newUserObject),
                 contentType: 'application/json'
             })
-            //if call is succefull
+            //if call is successful
             .done(function (result) {
                 console.log(result);
                 $('.hide-everything').hide();
@@ -169,7 +169,28 @@ $(".signup-form").submit(function (event) {
 $('#change-form-login').click(function (event) {
     event.preventDefault();
     location.reload();
+
 });
+
+function showInventory(loggedInUserName) {
+    $.ajax({
+            type: 'GET',
+            url: '/inventory-part/show/' + loggedInUserName,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (result) {
+            console.log(result);
+
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
+}
 
 $(".add-to-inventory-form").submit(function (event) {
     event.preventDefault();
@@ -202,15 +223,16 @@ $(".add-to-inventory-form").submit(function (event) {
                 data: JSON.stringify(entryObject),
                 contentType: 'application/json'
             })
-            //if call is succefull
+            //if call is successful
             .done(function (result) {
                 console.log(result);
-                $('#loggedInName').text(result.name);
-                $('#loggedInUserName').val(result.username);
+//                $('#loggedInName').text(result.name);
+//                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
                 $('#inventory-table').show();
+                showInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -238,15 +260,16 @@ $(".add-to-inventory-form").submit(function (event) {
                             data: JSON.stringify(entryObject),
                             contentType: 'application/json'
                         })
-                        //if call is succefull
+                        //if call is successful
                         .done(function (result) {
                             console.log(result);
-                            $('#loggedInName').text(result.name);
-                            $('#loggedInUserName').val(result.username);
+//                            $('#loggedInName').text(result.name);
+//                            $('#loggedInUserName').val(result.username);
                             $('.hide-everything').hide();
                             $('#inventoryPage').show();
                             $('#inventory-filters').show();
                             $('#inventory-table').show();
+                            showInventory(loggedInUserName);
                         })
                         //if the call is failing
                         .fail(function (jqXHR, error, errorThrown) {

@@ -323,24 +323,7 @@ app.post('/item/create', function (req, res) {
     }
 });
 
-//app.get('/lego/:code', function (req, res) {
-//    var responseData;
-//    request({
-//        method: 'GET',
-//        uri: 'https://rebrickable.com/api/v3/lego/sets/' + req.params.code + '/parts?key=4f8845c5d9212c179c08fe6f0e0d2d0c',
-//        gzip: true,
-//        data: {
-//            key: '4f8845c5d9212c179c08fe6f0e0d2d0c'
-//        },
-//        dataType: 'json',
-//    }, function (error, response, body) {
-//        // body is the decompressed response body
-//        console.log('server encoded the data as: ' + (response.headers['content-encoding'] || 'identity'));
-//        console.log('the decoded data is: ' + body);
-//        res.json(body);
-//    });
-//
-//});
+
 
 // ---------------USER ENDPOINTS-------------------------------------
 // POST -----------------------------------
@@ -523,27 +506,23 @@ app.put('/entry/:id', function (req, res) {
 });
 
 // GET ------------------------------------
-// accessing all of a user's entries
-app.get('/entry-date/:user', function (req, res) {
+// accessing all of a user's items
+app.get('/inventory-part/show/:username', function (req, res) {
 
-    Entry
-        .find()
-        .sort('inputDate')
-        .then(function (entries) {
-            let entriesOutput = [];
-            entries.map(function (entry) {
-                if (entry.loggedInUserName == req.params.user) {
-                    entriesOutput.push(entry);
-                }
-            });
+    Part
+        .find({
+            loggedInUserName: req.params.username
+        })
+        .sort('-addedToDB')
+        .then(function (parts) {
             res.json({
-                entriesOutput
+                parts
             });
         })
         .catch(function (err) {
             console.error(err);
             res.status(500).json({
-                message: 'Internal server error'
+                message: 'Inventory part not found'
             });
         });
 });

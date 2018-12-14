@@ -182,7 +182,93 @@ function showInventory(loggedInUserName) {
         //if call is successful
         .done(function (result) {
             console.log(result);
+            let buildTheHtmlOutput = "";
+            $.each(result.parts, function (resultKey, resultValue) {
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td>';
+                buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_num + '</a>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '<td class="table-center-cell">';
+                buildTheHtmlOutput += '<a href="#" class="showPartDetails">';
+                buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                buildTheHtmlOutput += '</a>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '<td>';
+                buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_name + '</a>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '<td class="table-center-cell">';
+                buildTheHtmlOutput += '<button class="itemLock">';
+                buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                buildTheHtmlOutput += '</button>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '</tr>';
 
+
+
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td class="inventory-part-details-wrapper" colspan="4">';
+                buildTheHtmlOutput += 'PART details';
+                buildTheHtmlOutput += '<table class="inventory-part-details">';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<th colspan="2">92947</th>';
+                buildTheHtmlOutput += '<th colspan="4">Brick, Round 2 x 2 (Grill)</th>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"><img src="https://m.rebrickable.com/media/parts/elements/6024730.jpg" alt="Brick, Round 2 x 2 (Grill)" height="90px"></td>';
+                buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
+                buildTheHtmlOutput += '<td colspan="2">25</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">available</td>';
+                buildTheHtmlOutput += '<td colspan="2">7</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                buildTheHtmlOutput += '<td colspan="2">10220 (5), 10356 (3), 10646 (23)</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
+                buildTheHtmlOutput += '<td colspan="2">2011-2018</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">Wishlist';
+                buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '<td colspan="2">14</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                buildTheHtmlOutput += '<td>';
+                buildTheHtmlOutput += '<input type="number" class="sm-input" value="1">';
+                buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                buildTheHtmlOutput += '<div class="tooltip">';
+                buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '</button>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '<tr>';
+                buildTheHtmlOutput += '<td colspan="2"></td>';
+                buildTheHtmlOutput += '<td colspan="2">';
+                buildTheHtmlOutput += '<div class="tooltip">';
+                buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '<td>23-7</td>';
+                buildTheHtmlOutput += '</tr>';
+                buildTheHtmlOutput += '</table>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '</tr>';
+
+            });
+            //use the HTML output to show it in the index.html
+            $("#inventory-table table").append(buildTheHtmlOutput);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -226,8 +312,8 @@ $(".add-to-inventory-form").submit(function (event) {
             //if call is successful
             .done(function (result) {
                 console.log(result);
-//                $('#loggedInName').text(result.name);
-//                $('#loggedInUserName').val(result.username);
+                //                $('#loggedInName').text(result.name);
+                //                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
@@ -263,8 +349,8 @@ $(".add-to-inventory-form").submit(function (event) {
                         //if call is successful
                         .done(function (result) {
                             console.log(result);
-//                            $('#loggedInName').text(result.name);
-//                            $('#loggedInUserName').val(result.username);
+                            //                            $('#loggedInName').text(result.name);
+                            //                            $('#loggedInUserName').val(result.username);
                             $('.hide-everything').hide();
                             $('#inventoryPage').show();
                             $('#inventory-filters').show();

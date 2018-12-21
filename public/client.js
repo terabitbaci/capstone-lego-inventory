@@ -236,7 +236,7 @@ function showInventory(loggedInUserName) {
                     buildTheHtmlOutput += '<tr>';
                     buildTheHtmlOutput += '<td colspan="2"></td>';
                     buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
-                    buildTheHtmlOutput += '<td colspan="2">2011-2018</td>';
+                    buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
                     buildTheHtmlOutput += '</tr>';
                     buildTheHtmlOutput += '<tr>';
                     buildTheHtmlOutput += '<td colspan="2"></td>';

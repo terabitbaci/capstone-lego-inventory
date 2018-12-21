@@ -210,7 +210,7 @@ function showInventory(loggedInUserName) {
 
 
 
-                    buildTheHtmlOutput += '<tr>';
+                    buildTheHtmlOutput += '<tr style="display: none;">';
                     buildTheHtmlOutput += '<td class="inventory-part-details-wrapper" colspan="4">';
                     //                    buildTheHtmlOutput += 'PART details';
                     buildTheHtmlOutput += '<table class="inventory-part-details">';
@@ -392,7 +392,7 @@ $('#filterLockButtons select').change(function (event) {
     alert("include permanent clicked");
 });
 
-$('.inventory-table').on("click", ".showPartDetails", function (event) {
+$(document).on("click", ".showPartDetails", function (event) {
     event.preventDefault();
     $(this).parent().parent().next().toggle("slow");
 });

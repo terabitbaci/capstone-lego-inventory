@@ -526,6 +526,26 @@ app.get('/inventory-part/show/:username', function (req, res) {
             });
         });
 });
+app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
+
+    Part
+        .find({
+            loggedInUserName: req.params.username,
+            part_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (parts) {
+            res.json({
+                parts
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory part not found'
+            });
+        });
+});
 app.get('/entry-read/:user', function (req, res) {
 
     Entry

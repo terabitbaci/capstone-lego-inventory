@@ -11,7 +11,8 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result);
+                console.log(result.totalInInventory);
+                return result.totalInInventory
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {

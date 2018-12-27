@@ -507,43 +507,47 @@ app.put('/entry/:id', function (req, res) {
 
 // GET ------------------------------------
 // accessing all of a user's items
-app.get('/inventory-part/show/:username', function (req, res) {
-// retrieve distinct parts
-//    Part
-//        .aggregate({
-//            $group: {
-//                _id: "$part_num"
-//            }
-//        })
-//        .sort('-addedToDB')
-//        .then(function (parts) {
-//            res.json({
-//                parts
-//            });
-//        })
-//        .catch(function (err) {
-//            console.error(err);
-//            res.status(500).json({
-//                message: 'Inventory part not found'
-//            });
-//        });
+app.get('/inventory-part/show-aggregate/:username', function (req, res) {
+    // retrieve distinct parts
+    Part
+        .aggregate({
+            $group: {
+                _id: "$part_num"
+            }
+        })
+        .sort('-addedToDB')
+        .then(function (parts) {
+            res.json({
+                parts
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory part not found'
+            });
+        });
+});
+
+app.get('/inventory-part/show-details/:username/:partNumber', function (req, res) {
     // retrieve all parts
     Part
         .find({
-        loggedInUserName: req.params.username
-    })
+            loggedInUserName: req.params.username,
+            part_num: req.params.partNumber
+        })
         .sort('-addedToDB')
         .then(function (parts) {
-        res.json({
-            parts
-        });
-    })
+            res.json({
+                parts
+            });
+        })
         .catch(function (err) {
-        console.error(err);
-        res.status(500).json({
-            message: 'Inventory part not found'
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory part not found'
+            });
         });
-    });
 });
 app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
 

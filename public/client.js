@@ -12,7 +12,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             // if call is successful
             .done(function (result) {
                 console.log(result.totalInInventory);
-                return result.totalInInventory
+                $(".totalInInventoryValue" + itemNumber).text(result.totalInInventory);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -27,111 +27,149 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
     }
 }
 
+
 function showInventory(loggedInUserName) {
     $.ajax({
             type: 'GET',
-            url: '/inventory-part/show/' + loggedInUserName,
+            url: '/inventory-part/show-aggregate/' + loggedInUserName,
             dataType: 'json',
             contentType: 'application/json'
         })
         //if call is successful
-        .done(function (result) {
-            console.log(result);
+        .done(function (aggregateResult) {
+            console.log(aggregateResult);
+            console.log(aggregateResult.parts);
             let buildTheHtmlOutput = "";
             // check to see if there are any parts in the inventory
-            if (result.parts.length == 0) {
+            if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
             } else {
-                $.each(result.parts, function (resultKey, resultValue) {
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_num + '</a>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '<td class="table-center-cell">';
-                    buildTheHtmlOutput += '<a href="#" class="showPartDetails">';
-                    buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
-                    buildTheHtmlOutput += '</a>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_name + '</a>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '<td class="table-center-cell">';
-                    buildTheHtmlOutput += '<button class="itemLock">';
-                    buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
-                    buildTheHtmlOutput += '</button>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '</tr>';
+                $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
+                    //show the details of the aggregated parts
+                    $.ajax({
+                            type: 'GET',
+                            url: '/inventory-part/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            dataType: 'json',
+                            contentType: 'application/json'
+                        })
+                        //if call is successful
+                        .done(function (detailedResult) {
+                            console.log(detailedResult);
+                            console.log(detailedResult.parts);
+                            let buildTheHtmlOutput = "";
+                            let currentPartNumber = "";
+                            let oldPartNumber = "";
+                            // check to see if there are any parts in the inventory
+                            if (detailedResult.parts.length == 0) {
+                                alert("no parts in the inventory");
+                            } else {
+                                $.each(detailedResult.parts, function (resultKey, resultValue) {
+                                    currentPartNumber = resultValue.part_num;
+                                    console.log(currentPartNumber, oldPartNumber);
+                                    if (currentPartNumber != oldPartNumber) {
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_num + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<a href="#" class="showPartDetails">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                                        buildTheHtmlOutput += '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_name + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<button class="itemLock">';
+                                        buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                        buildTheHtmlOutput += '</button>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
 
 
 
-                    buildTheHtmlOutput += '<tr style="display: none;">';
-                    buildTheHtmlOutput += '<td class="inventory-part-details-wrapper" colspan="4">';
-                    //                    buildTheHtmlOutput += 'PART details';
-                    buildTheHtmlOutput += '<table class="inventory-part-details">';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
-                    buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
-                    buildTheHtmlOutput += '<td colspan="2">' + getTotalInInventory(resultValue.part_num, "part", loggedInUserName) + '</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">available</td>';
-                    buildTheHtmlOutput += '<td colspan="2">7</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                    buildTheHtmlOutput += '<td colspan="2">10220 (5), 10356 (3), 10646 (23)</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
-                    buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">Wishlist';
-                    buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '<td colspan="2">14</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
-                    buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input" value="1">';
-                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
-                    buildTheHtmlOutput += '<div class="tooltip">';
-                    buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
-                    buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
-                    buildTheHtmlOutput += '</div>';
-                    buildTheHtmlOutput += '</button>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td colspan="2"></td>';
-                    buildTheHtmlOutput += '<td colspan="2">';
-                    buildTheHtmlOutput += '<div class="tooltip">';
-                    buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
-                    buildTheHtmlOutput += '</div>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '<td>23-7</td>';
-                    buildTheHtmlOutput += '</tr>';
-                    buildTheHtmlOutput += '</table>';
-                    buildTheHtmlOutput += '</td>';
-                    buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr style="display: none;">';
+                                        buildTheHtmlOutput += '<td class="inventory-part-details-wrapper" colspan="4">';
+                                        //                    buildTheHtmlOutput += 'PART details';
+                                        buildTheHtmlOutput += '<table class="inventory-part-details">';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">available</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">7</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">10220 (5), 10356 (3), 10646 (23)</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">Wishlist';
+                                        buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">14</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<input type="number" class="sm-input" value="1">';
+                                        buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                                        buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</button>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>23-7</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '</table>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
 
+                                        //call the function to populate the inventory value
+                                        getTotalInInventory(resultValue.part_num, "part", loggedInUserName);
+                                        oldPartNumber = currentPartNumber;
+                                    }
+                                });
+                                //use the HTML output to show it in the index.html
+                                $("#inventory-table table").append(buildTheHtmlOutput);
+                                $('#inventoryPage').show();
+                                $('#inventory-filters').show();
+                                $('#inventory-table').show();
+                                $('#inventory-part-details-wrapper').hide();
+                            }
+                        })
+                        //if the call is failing
+                        .fail(function (jqXHR, error, errorThrown) {
+                            console.log(jqXHR.status);
+                            console.log(error);
+                            console.log(errorThrown);
+                        });
                 });
-                //use the HTML output to show it in the index.html
-                $("#inventory-table table").append(buildTheHtmlOutput);
-                $('#inventoryPage').show();
-                $('#inventory-filters').show();
-                $('#inventory-table').show();
-                $('#inventory-part-details-wrapper').hide();
+
             }
         })
         //if the call is failing

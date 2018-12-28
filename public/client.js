@@ -155,7 +155,7 @@ function showInventory(loggedInUserName) {
                                     }
                                 });
                                 //use the HTML output to show it in the index.html
-                                $("#inventory-table table").append(buildTheHtmlOutput);
+                                $("#inventory-table>table").append(buildTheHtmlOutput);
                                 $('#inventoryPage').show();
                                 $('#inventory-filters').show();
                                 $('#inventory-table').show();

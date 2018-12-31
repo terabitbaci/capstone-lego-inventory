@@ -31,6 +31,18 @@ const setSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    permanent_build: {
+        type: String,
+        required: false
+    },
+    in_wishlist: {
+        type: String,
+        required: false
+    },
+    storage_location: {
+        type: String,
+        required: false
+    },
     loggedInUserName: {
         type: String,
         required: false

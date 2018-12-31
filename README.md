@@ -189,9 +189,9 @@ App is strongly built to be usuable on mobile devices, as well as responsive acr
 ## Development Roadmap
 This is v1.0 of the app, but future enhancements are expected to include:
 * Part details functionality to-do list:
-    * total in inventory
+    * (done 12/28/18) total in inventory
     * available    (total minus the number in permanent builds)
-    * in your sets    (example: 10220 (5), 10356 (3), 10646 (23))
+    * in your sets    (example: 10220, 10356, 10646)
     * (done 12/21/18) appears in years
     * Wishlist
     * delete from inventory

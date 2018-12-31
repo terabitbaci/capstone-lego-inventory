@@ -87,6 +87,9 @@ app.post('/item/create', function (req, res) {
                     num_parts: JSON.parse(body).num_parts,
                     set_img_url: JSON.parse(body).set_img_url,
                     set_url: JSON.parse(body).set_url,
+                    permanent_build: 0,
+                    in_wishlist: 0,
+                    storage_location: '',
                     loggedInUserName: loggedInUserName
                 }, (err, item) => {
                     //if creating a new set details in the DB returns an error..
@@ -128,6 +131,9 @@ app.post('/item/create', function (req, res) {
                                         part_year_to: JSON.parse(body).results[setCounter].part.year_to,
                                         quantity: JSON.parse(body).results[setCounter].quantity,
                                         set_num: JSON.parse(body).results[setCounter].set_num,
+                                        permanent_build: 0,
+                                        in_wishlist: 0,
+                                        storage_location: '',
                                         loggedInUserName: loggedInUserName
                                     }, (err, item) => {
                                         //if creating a new part in the DB returns an error..
@@ -190,6 +196,9 @@ app.post('/item/create', function (req, res) {
                     moc_url: JSON.parse(body).moc_url,
                     designer_name: JSON.parse(body).designer_name,
                     designer_url: JSON.parse(body).designer_url,
+                    permanent_build: 0,
+                    in_wishlist: 0,
+                    storage_location: '',
                     loggedInUserName: loggedInUserName
                 }, (err, item) => {
                     //if creating a new moc details in the DB returns an error..
@@ -231,6 +240,9 @@ app.post('/item/create', function (req, res) {
                                         part_year_to: JSON.parse(body).results[setCounter].part.year_to,
                                         quantity: JSON.parse(body).results[setCounter].quantity,
                                         set_num: JSON.parse(body).results[setCounter].set_num,
+                                        permanent_build: 0,
+                                        in_wishlist: 0,
+                                        storage_location: '',
                                         loggedInUserName: loggedInUserName
                                     }, (err, item) => {
                                         //if creating a new part in the DB returns an error..
@@ -295,6 +307,9 @@ app.post('/item/create', function (req, res) {
                     part_year_to: JSON.parse(body).year_to,
                     quantity: 0,
                     set_num: 0,
+                    permanent_build: 0,
+                    in_wishlist: 0,
+                    storage_location: '',
                     loggedInUserName: loggedInUserName
                 }, (err, item) => {
                     //if creating a new part in the DB returns an error..
@@ -447,40 +462,7 @@ app.post('/users/login', function (req, res) {
 
 
 // -------------entry ENDPOINTS------------------------------------------------
-// POST -----------------------------------------
-// creating a new Entry
-app.post('/entry/create', (req, res) => {
-    let entryType = req.body.entryType;
-    let inputDate = req.body.inputDate;
-    let inputPlay = req.body.inputPlay;
-    let inputAuthor = req.body.inputAuthor;
-    let inputRole = req.body.inputRole;
-    let inputCo = req.body.inputCo;
-    let inputLocation = req.body.inputLocation;
-    let inputNotes = req.body.inputNotes;
-    let loggedInUserName = req.body.loggedInUserName;
 
-    Entry.create({
-        entryType,
-        inputDate,
-        inputPlay,
-        inputAuthor,
-        inputRole,
-        inputCo,
-        inputLocation,
-        inputNotes,
-        loggedInUserName
-    }, (err, item) => {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        if (item) {
-            return res.json(item);
-        }
-    });
-});
 
 // PUT --------------------------------------
 app.put('/entry/:id', function (req, res) {

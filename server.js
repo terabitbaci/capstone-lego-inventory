@@ -465,26 +465,27 @@ app.post('/users/login', function (req, res) {
 
 
 // PUT --------------------------------------
-app.put('/entry/:id', function (req, res) {
+app.put('/inventory-part/update-permanent-build', function (req, res) {
     let toUpdate = {};
     //    let updateableFields = ['achieveWhat', 'achieveHow', 'achieveWhen', 'achieveWhy']; //<--Marius? 'entryType
-    let updateableFields = ['entryType', 'inputDate', 'inputPlay', 'inputAuthor', 'inputRole', 'inputCo', 'inputLocation', 'inputNotes', 'loggedInUserName'];
+    let updateableFields = ['part_num', 'permanent_build'];
     updateableFields.forEach(function (field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    //    console.log(toUpdate);
-    Entry
-        .findByIdAndUpdate(req.params.id, {
-            $set: toUpdate
-        }).exec().then(function (achievement) {
-            return res.status(204).end();
-        }).catch(function (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
+    console.log(toUpdate);
+    //permanent_build
+    //    Part
+    //        .updateMany(req.body.part_num, {
+    //            $set: toUpdate
+    //        }).exec().then(function (updated_part) {
+    //            return res.status(204).end();
+    //        }).catch(function (err) {
+    //            return res.status(500).json({
+    //                message: 'Updating the permanent build failed'
+    //            });
+    //        });
 });
 
 // GET ------------------------------------

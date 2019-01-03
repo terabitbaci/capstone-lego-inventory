@@ -80,6 +80,8 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_name + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockPartNameValue">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
                                         buildTheHtmlOutput += '<button class="itemLock">';
                                         buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                         buildTheHtmlOutput += '</button>';
@@ -471,9 +473,49 @@ $('.showSetDetails').click(function (event) {
     $(this).parent().parent().next().toggle("slow");
 });
 
-$('.itemLock').click(function (event) {
+$(document).on('click', '.itemLock', function (event) {
     event.preventDefault();
     $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+    let itemLockPartNameValue = $(this).parent().find(".itemLockPartNameValue").val();
+    let itemLockPermanentBuildValue = $(this).parent().find(".itemLockPermanentBuildValue").val();
+    updatedItemLockPermanentBuildValue = 0;
+    //if the item is permanent build switch to the opposite
+    if (itemLockPermanentBuildValue == 1) {
+        updatedItemLockPermanentBuildValue = 0;
+    } else {
+        updatedItemLockPermanentBuildValue = 1;
+    }
+    console.log(itemLockPartNameValue);
+    //create the payload object (what data we send to the api call)
+    const updatePartByNameObject = {
+        part_num: itemLockPartNameValue,
+        permanent_build: updatedItemLockPermanentBuildValue
+    };
+
+    //make the api call using the payload above
+    $.ajax({
+            type: 'PUT',
+            url: '/inventory-part/update-permanent-build',
+            dataType: 'json',
+            data: JSON.stringify(updatePartByNameObject),
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (result) {
+            console.log(result);
+            $('.hide-everything').hide();
+            $('#inventoryPage').show();
+            $('#loggedInName').text(result.username);
+            $('#loggedInUserName').val(result.username);
+            showInventory(result.username);
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            alert('Incorrect Username or Password');
+        });
 });
 
 $('.deleteBtn').click(function (event) {

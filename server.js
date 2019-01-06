@@ -468,7 +468,7 @@ app.post('/users/login', function (req, res) {
 app.put('/inventory-part/update-permanent-build', function (req, res) {
     let toUpdate = {};
     //    let updateableFields = ['achieveWhat', 'achieveHow', 'achieveWhen', 'achieveWhy']; //<--Marius? 'entryType
-    let updateableFields = ['part_num', 'permanent_build'];
+    let updateableFields = ['part_name', 'permanent_build'];
     updateableFields.forEach(function (field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
@@ -476,16 +476,22 @@ app.put('/inventory-part/update-permanent-build', function (req, res) {
     });
     console.log(toUpdate);
     //permanent_build
-    //    Part
-    //        .updateMany(req.body.part_num, {
-    //            $set: toUpdate
-    //        }).exec().then(function (updated_part) {
-    //            return res.status(204).end();
-    //        }).catch(function (err) {
-    //            return res.status(500).json({
-    //                message: 'Updating the permanent build failed'
-    //            });
-    //        });
+    Part
+        .updateMany({
+            part_name: req.body.part_name
+        }, {
+            $set: {
+                permanent_build: req.body.permanent_build
+            }
+        }).exec().then(function (updated_part) {
+            return res.status(204).json({
+                updated_part: updated_part
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the permanent build failed'
+            });
+        });
 });
 
 // GET ------------------------------------

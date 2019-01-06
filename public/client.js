@@ -81,10 +81,24 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
                                         buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockPartNameValue">';
-                                        buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
-                                        buildTheHtmlOutput += '<button class="itemLock">';
-                                        buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
-                                        buildTheHtmlOutput += '</button>';
+
+                                        //if the item is not locked ...
+                                        if (resultValue.permanent_build == 0) {
+                                            //display it as is
+                                            buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+                                        //if it is locked ...
+                                        else {
+                                            //display the lock icon instead
+                                            buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '</tr>';
 
@@ -488,7 +502,7 @@ $(document).on('click', '.itemLock', function (event) {
     console.log(itemLockPartNameValue);
     //create the payload object (what data we send to the api call)
     const updatePartByNameObject = {
-        part_num: itemLockPartNameValue,
+        part_name: itemLockPartNameValue,
         permanent_build: updatedItemLockPermanentBuildValue
     };
 
@@ -503,11 +517,11 @@ $(document).on('click', '.itemLock', function (event) {
         //if call is successful
         .done(function (result) {
             console.log(result);
-            $('.hide-everything').hide();
-            $('#inventoryPage').show();
-            $('#loggedInName').text(result.username);
-            $('#loggedInUserName').val(result.username);
-            showInventory(result.username);
+            //            $('.hide-everything').hide();
+            //            $('#inventoryPage').show();
+            //            $('#loggedInName').text(result.username);
+            //            $('#loggedInUserName').val(result.username);
+            //            showInventory(result.username);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {

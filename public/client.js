@@ -11,8 +11,8 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result.totalInInventory);
-                $(".totalInInventoryValue" + itemNumber).text(result.totalInInventory);
+                console.log(result.totalQuantity);
+                $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -37,9 +37,8 @@ function showInventory(loggedInUserName) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
-            console.log(aggregateResult.parts);
-            let buildTheHtmlOutput = "";
+            //            console.log(aggregateResult);
+            //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
@@ -54,8 +53,8 @@ function showInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            console.log(detailedResult);
-                            console.log(detailedResult.parts);
+                            //                            console.log(detailedResult);
+                            //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
                             let currentPartNumber = "";
                             let oldPartNumber = "";

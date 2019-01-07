@@ -305,7 +305,7 @@ app.post('/item/create', function (req, res) {
                     part_url: JSON.parse(body).part_url,
                     part_year_from: JSON.parse(body).year_from,
                     part_year_to: JSON.parse(body).year_to,
-                    quantity: 0,
+                    quantity: 1,
                     set_num: 0,
                     permanent_build: 0,
                     in_wishlist: 0,
@@ -546,10 +546,18 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
             part_num: req.params.itemNumber
         })
         .sort('-addedToDB')
-        .then(function (parts) {
-            let totalInInventory = parts.length;
+        .then(function (results) {
+            //create a totalQuantity variable
+            let totalQuantity = 0;
+            //loop through the entire array of parts ...
+            for (let i = 0; i < results.length; i++) {
+                //... and sum up the quantities for them
+                totalQuantity = totalQuantity + parseInt(results[i].quantity);
+            }
+            console.log(totalQuantity);
+            //return the sum of all quantities for a specific part
             res.json({
-                totalInInventory
+                totalQuantity
             });
         })
         .catch(function (err) {

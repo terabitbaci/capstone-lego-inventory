@@ -11,7 +11,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result.totalQuantity);
+                ////console.log(result.totalQuantity);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
             })
             //if the call is failing
@@ -43,6 +43,8 @@ function showInventory(loggedInUserName) {
             if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
             } else {
+                //marius - uncomment this after the sets and mocs are displayed in the inventory
+                //$("#inventory-table>table").html("");
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
                     //show the details of the aggregated parts
                     $.ajax({
@@ -404,10 +406,12 @@ $(".add-to-inventory-form").submit(function (event) {
                 //                $('#loggedInName').text(result.name);
                 //                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
+
+                showInventory(loggedInUserName);
+
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
                 $('#inventory-table').show();
-                showInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {

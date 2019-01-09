@@ -11,8 +11,9 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                ////console.log(result.totalQuantity);
+                //console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
+                $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -43,7 +44,7 @@ function showInventory(loggedInUserName) {
             if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
             } else {
-                //marius - uncomment this after the sets and mocs are displayed in the inventory
+                //marius - uncomment this after the sets and mocs are displayed dynamically in the inventory
                 //$("#inventory-table>table").html("");
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
                     //show the details of the aggregated parts
@@ -66,7 +67,7 @@ function showInventory(loggedInUserName) {
                             } else {
                                 $.each(detailedResult.parts, function (resultKey, resultValue) {
                                     currentPartNumber = resultValue.part_num;
-                                    console.log(currentPartNumber, oldPartNumber);
+                                    //console.log(currentPartNumber, oldPartNumber);
                                     if (currentPartNumber != oldPartNumber) {
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td>';
@@ -121,7 +122,7 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">available</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">7</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';

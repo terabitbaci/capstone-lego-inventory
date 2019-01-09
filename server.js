@@ -549,15 +549,24 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
         .then(function (results) {
             //create a totalQuantity variable
             let totalQuantity = 0;
+            let totalAvailable = 0;
             //loop through the entire array of parts ...
             for (let i = 0; i < results.length; i++) {
                 //... and sum up the quantities for them
                 totalQuantity = totalQuantity + parseInt(results[i].quantity);
+
+                //if the part is not permanent build ...
+                if (parseInt(results[i].permanent_build) == 0) {
+                    //... count it as available
+                    totalAvailable = totalAvailable + parseInt(results[i].quantity);
+                }
             }
-            console.log(totalQuantity);
+
+            //console.log(totalQuantity, totalAvailable);
             //return the sum of all quantities for a specific part
             res.json({
-                totalQuantity
+                totalQuantity,
+                totalAvailable
             });
         })
         .catch(function (err) {

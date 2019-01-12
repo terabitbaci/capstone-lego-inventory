@@ -191,8 +191,8 @@ This is v1.0 of the app, but future enhancements are expected to include:
 * Part details functionality to-do list:
     * (done 01/07/19) make parts permanent build
     * (done 12/28/18) total in inventory
-    * (done 01/09/19)available (total minus the number in permanent builds)
-    * in your sets    (example: 10220, 10356, 10646)
+    * (done 01/09/19) available (total minus the number in permanent builds)
+    * in your sets (example: 10220, 10356, 10646)
     * (done 12/21/18) appears in years
     * Wishlist
     * delete from inventory

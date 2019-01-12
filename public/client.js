@@ -44,7 +44,7 @@ function showInventory(loggedInUserName) {
             if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
             } else {
-                //marius - uncomment this after the sets and mocs are displayed dynamically in the inventory
+                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
                 //$("#inventory-table>table").html("");
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
                     //show the details of the aggregated parts
@@ -65,10 +65,14 @@ function showInventory(loggedInUserName) {
                             if (detailedResult.parts.length == 0) {
                                 alert("no parts in the inventory");
                             } else {
+                                let inYourSetsOutput = "";
                                 $.each(detailedResult.parts, function (resultKey, resultValue) {
                                     currentPartNumber = resultValue.part_num;
+
                                     //console.log(currentPartNumber, oldPartNumber);
+                                    //if the part number is not duplicated
                                     if (currentPartNumber != oldPartNumber) {
+                                        //inYourSetsOutput = "";
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td>';
                                         buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_num + '</a>';
@@ -124,12 +128,16 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2">available</td>';
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
-                                        buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"></td>';
-                                        buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">10220 (5), 10356 (3), 10646 (23)</td>';
-                                        buildTheHtmlOutput += '</tr>';
-                                        buildTheHtmlOutput += '<tr>';
+                                        if (resultValue.set_num != 0) {
+                                            inYourSetsOutput += resultValue.set_num + ' (' + resultValue.quantity + ') ';
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.part_num + '">' + resultValue.set_num + ' (' + resultValue.quantity + ')</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                            buildTheHtmlOutput += '<tr>';
+                                        }
+
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
                                         buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
@@ -169,8 +177,17 @@ function showInventory(loggedInUserName) {
 
                                         //call the function to populate the inventory value
                                         getTotalInInventory(resultValue.part_num, "part", loggedInUserName);
+
+                                        //BOOKMARK build a function (getInYourSets) to dynamically populate the sets; appending the DOM is not working
+                                        //getInYourSets(resultValue.part_num, "part", loggedInUserName);
+                                        //$(".in-your-sets-" + resultValue.part_num).append(inYourSetsOutput);
+                                        //inYourSetsOutput += ', ' + resultValue.set_num + ' (' + resultValue.quantity + ')';
+
+
+                                        //check if the current part was already shown (so it doesn't show twice)
                                         oldPartNumber = currentPartNumber;
                                     }
+
                                 });
                                 //use the HTML output to show it in the index.html
                                 $("#inventory-table>table").append(buildTheHtmlOutput);

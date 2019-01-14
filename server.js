@@ -576,6 +576,47 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
             });
         });
 });
+
+app.get('/inventory-part/get-in-your-sets/:username/:itemNumber', function (req, res) {
+
+    Part
+        .find({
+            loggedInUserName: req.params.username,
+            part_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (results) {
+            //create a totalInYourSetsArray array
+            let totalInYourSetsArray = [];
+            //count the number of unique items added to the array
+            let arrayCounter = 0;
+            //loop through the entire array of parts ...
+            for (let i = 0; i < results.length; i++) {
+                //if the set_numb is not part of initial array ...
+                if (totalInYourSetsArray.indexOf(results[i].set_num) == -1) {
+                    //... add it
+                    totalInYourSetsArray[arrayCounter] = results[i].set_num;
+                    // ... and increment the number of unique items added to the array
+                    arrayCounter++;
+                }
+            }
+            //convert the array to string
+            let totalInYourSetsString = totalInYourSetsArray.toString();
+
+            //return all the set numbers for a specific part
+            res.json({
+                totalInYourSetsString
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory part not found'
+            });
+        });
+});
+
+
 app.get('/entry-read/:user', function (req, res) {
 
     Entry

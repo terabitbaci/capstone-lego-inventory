@@ -172,11 +172,16 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td colspan="2">14</td>';
                                         buildTheHtmlOutput += '</tr>';
+
+                                        //only delete parts that are not in permanent sets or mocs and no more than the max available value
+                                        //if the part is not locked show the delete functionality
+                                        //othewise display message to unlock
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<input type="number" class="sm-input" value="1">';
+                                        buildTheHtmlOutput += '<input type="number" class="sm-input" value="1" min="1" max="50">';
+                                        buildTheHtmlOutput += '<input type="hidden" class="deletePartNumValue" value="' + resultValue.part_num + '" >';
                                         buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
                                         buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
@@ -185,6 +190,8 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</button>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '</tr>';
+
+
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">';

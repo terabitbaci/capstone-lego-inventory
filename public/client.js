@@ -14,6 +14,9 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
                 //console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+                $(".deleteFromInventoryValue" + itemNumber).attr({
+                    "max": result.totalAvailable
+                });
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -57,6 +60,7 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 
 
 function showInventory(loggedInUserName) {
+    console.log("inside showInventory function");
     $.ajax({
             type: 'GET',
             url: '/inventory-part/show-aggregate/' + loggedInUserName,
@@ -154,6 +158,7 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
                                         if (resultValue.set_num != 0) {
+
                                             buildTheHtmlOutput += '<tr>';
                                             buildTheHtmlOutput += '<td colspan="2"></td>';
                                             buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
@@ -176,20 +181,34 @@ function showInventory(loggedInUserName) {
                                         //only delete parts that are not in permanent sets or mocs and no more than the max available value
                                         //if the part is not locked show the delete functionality
                                         //othewise display message to unlock
-                                        buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"></td>';
-                                        buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
-                                        buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<input type="number" class="sm-input" value="1" min="1" max="50">';
-                                        buildTheHtmlOutput += '<input type="hidden" class="deletePartNumValue" value="' + resultValue.part_num + '" >';
-                                        buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
-                                        buildTheHtmlOutput += '<div class="tooltip">';
-                                        buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
-                                        buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
-                                        buildTheHtmlOutput += '</div>';
-                                        buildTheHtmlOutput += '</button>';
-                                        buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '</tr>';
+
+                                        //if the part is not locked
+                                        if (resultValue.permanent_build == 0) {
+                                            //show the delete functionality
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td>';
+                                            buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="1">';
+                                            buildTheHtmlOutput += '<input type="hidden" class="deletePartNumValue" value="' + resultValue.part_num + '" >';
+                                            buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                                            buildTheHtmlOutput += '<div class="tooltip">';
+                                            buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                                            buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                                            buildTheHtmlOutput += '</div>';
+                                            buildTheHtmlOutput += '</button>';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        } else {
+                                            //display message to unlock it first
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td>';
+                                            buildTheHtmlOutput += 'unlock this part in order to delete it';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        }
 
 
                                         buildTheHtmlOutput += '<tr>';
@@ -537,9 +556,14 @@ $('.showSetDetails').click(function (event) {
 
 $(document).on('click', '.itemLock', function (event) {
     event.preventDefault();
-    $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the part name and the permanent initial value
     let itemLockPartNameValue = $(this).parent().find(".itemLockPartNameValue").val();
     let itemLockPermanentBuildValue = $(this).parent().find(".itemLockPermanentBuildValue").val();
+
     updatedItemLockPermanentBuildValue = 0;
     //if the item is permanent build switch to the opposite
     if (itemLockPermanentBuildValue == 1) {
@@ -565,11 +589,10 @@ $(document).on('click', '.itemLock', function (event) {
         //if call is successful
         .done(function (result) {
             console.log(result);
-            //            $('.hide-everything').hide();
-            //            $('#inventoryPage').show();
-            //            $('#loggedInName').text(result.username);
-            //            $('#loggedInUserName').val(result.username);
-            //            showInventory(result.username);
+            //show that the button is locked
+            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            //update the inventory after lock
+            showInventory(loggedInUserName);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -579,10 +602,53 @@ $(document).on('click', '.itemLock', function (event) {
             alert('Incorrect Username or Password');
         });
 });
-
-$('.deleteBtn').click(function (event) {
+$(document).on('click', '.deleteBtn', function (event) {
     event.preventDefault();
     alert("item(s) deleted from Inventory");
+
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the part name and the permanent initial value
+    let deletePartNumValue = $(this).parent().find(".deletePartNumValue").val();
+    let deleteFromInventoryValue = $(this).parent().find(".deleteFromInventoryValue" + deletePartNumValue).val();
+
+
+    //create the payload object (what data we send to the api call)
+    const deletePartByNameObject = {
+        part_name: deletePartNumValue,
+        deleteFromInventoryValue: deleteFromInventoryValue
+    };
+
+    console.log(deletePartByNameObject);
+
+    //make the api call using the payload above
+    $.ajax({
+            type: 'PUT',
+            url: '/inventory-part/delete-part-by-name',
+            dataType: 'json',
+            data: JSON.stringify(updatePartByNameObject),
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (result) {
+            console.log(result);
+            //show that the button is locked
+            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            //update the inventory after lock
+            showInventory(loggedInUserName);
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            alert('Incorrect Username or Password');
+        });
+
+
 });
 
 $(".search-form").submit(function (event) {

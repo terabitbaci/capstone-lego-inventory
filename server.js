@@ -616,6 +616,21 @@ app.get('/inventory-part/get-in-your-sets/:username/:itemNumber', function (req,
         });
 });
 
+// DELETE ----------------------------------------
+// deleting a part by name
+//bookmark - delete only parts that not inside the mocs and sets
+app.delete('/inventory-part/delete-part-by-name', function (req, res) {
+    Part.deleteMany({
+        part_name: req.body.part_name
+    }).exec().then(function (entry) {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
 
 app.get('/entry-read/:user', function (req, res) {
 
@@ -707,17 +722,7 @@ app.get('/entry/:id', function (req, res) {
         });
 });
 
-// DELETE ----------------------------------------
-// deleting an achievement by id
-app.delete('/entry/:id', function (req, res) {
-    Entry.findByIdAndRemove(req.params.id).exec().then(function (entry) {
-        return res.status(204).end();
-    }).catch(function (err) {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        });
-    });
-});
+
 
 // MISC ------------------------------------------
 // catch-all endpoint if client makes request to non-existent endpoint

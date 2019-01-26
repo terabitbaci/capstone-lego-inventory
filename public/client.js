@@ -26,8 +26,11 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="1">';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deletePartNumValue" value="' + resultValue.part_num + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deletePartIDValue" value="' + resultValue._id + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deletePartQuantityValue" value="' + resultValue.quantity + '" >';
                     buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
                     buildTheHtmlOutput += '<div class="tooltip">';
                     buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
@@ -71,6 +74,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
                 //console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+                $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
                 $(".deleteFromInventoryValue" + itemNumber).attr({
                     "max": result.totalAvailable
                 });
@@ -656,51 +660,65 @@ $(document).on('click', '.itemLock', function (event) {
 
 $(document).on('click', '.deleteBtn', function (event) {
     event.preventDefault();
-    alert("item(s) deleted from Inventory");
-
-    event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
     const loggedInUserName = $("#loggedInUserName").val();
 
     //get the part name and the permanent initial value
     let deletePartNumValue = $(this).parent().find(".deletePartNumValue").val();
+    let deletePartIDValue = $(this).parent().find(".deletePartIDValue").val();
+    let deletePartQuantityValue = $(this).parent().find(".deletePartQuantityValue").val();
+    let deletePartMaxQuantityValue = $(this).parent().find(".deletePartMaxQuantityValue" + deletePartNumValue).val();
+
     let deleteFromInventoryValue = $(this).parent().find(".deleteFromInventoryValue" + deletePartNumValue).val();
 
+    //basic validation (not able to delete 0 parts or more parts than we have in the inventory)
+    if (deletePartMaxQuantityValue < deleteFromInventoryValue) {
+        alert("You only have " + deletePartMaxQuantityValue + " parts to delete.");
+    } else if (deleteFromInventoryValue == 0) {
+        alert("Enter the number of parts to delete.");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
 
-    //create the payload object (what data we send to the api call)
-    const deletePartByNameObject = {
-        part_name: deletePartNumValue,
-        deleteFromInventoryValue: deleteFromInventoryValue
-    };
+        //create the payload object (what data we send to the api call)
+        const deletePartByNameObject = {
+            part_name: deletePartNumValue,
+            deleteFromInventoryValue: deleteFromInventoryValue,
+            deletePartIDValue: deletePartIDValue,
+            deletePartQuantityValue: deletePartQuantityValue,
+            deletePartMaxQuantityValue: deletePartMaxQuantityValue
+        };
 
-    console.log(deletePartByNameObject);
+        console.log(deletePartByNameObject);
 
-    //make the api call using the payload above
-    $.ajax({
-            type: 'DELETE',
-            url: '/inventory-part/delete-part-by-name',
-            dataType: 'json',
-            data: JSON.stringify(updatePartByNameObject),
-            contentType: 'application/json'
-        })
-        //if call is successful
-        .done(function (result) {
-            console.log(result);
-            //show that the button is locked
-            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
-            //update the inventory after lock
-            showInventory(loggedInUserName);
-        })
-        //if the call is failing
-        .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-            alert('Incorrect Username or Password');
-        });
+        //make the api call using the payload above
+        $.ajax({
+                type: 'DELETE',
+                url: '/inventory-part/delete-part-by-id',
+                dataType: 'json',
+                data: JSON.stringify(deletePartByNameObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                //show that the button is locked
+                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                alert("item(s) deleted from Inventory");
 
-
+                //update the inventory after lock
+                showInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
 });
 
 $(".search-form").submit(function (event) {

@@ -631,6 +631,33 @@ app.delete('/inventory-part/delete-part-by-name', function (req, res) {
     });
 });
 
+app.delete('/inventory-part/delete-part-by-id', function (req, res) {
+
+    //if the number of parts to delete is the same with maxim number of parts in the inventory, delete the entire part
+    if (req.body.deletePartMaxQuantityValue == req.body.deleteFromInventoryValue) {
+        Part.findByIdAndRemove(req.body.deletePartIDValue, function (err, items) {
+            if (err)
+                return res.status(404).json({
+                    message: 'Item not found.'
+                });
+
+            res.status(201).json(items);
+        });
+    }
+    // otherwise update only the quantity
+    else {
+        Part.update({
+            _id: req.body.deletePartIDValue
+        }, {
+            $set: {
+                quantity: (req.body.deletePartMaxQuantityValue - req.body.deleteFromInventoryValue)
+            }
+        }, function (items) {
+            res.status(201).json(items);
+        });
+    }
+});
+
 
 app.get('/entry-read/:user', function (req, res) {
 

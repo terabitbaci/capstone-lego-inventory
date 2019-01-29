@@ -231,13 +231,38 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
                                         buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
                                         buildTheHtmlOutput += '</tr>';
+
+
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
+                                        buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</button>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">Wishlist';
                                         buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
                                         buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">14</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.in_wishlist + '</td>';
                                         buildTheHtmlOutput += '</tr>';
+
+
 
                                         //only delete parts that are not in permanent sets or mocs and no more than the max available value
                                         //if the part is not locked show the delete functionality
@@ -264,15 +289,7 @@ function showInventory(loggedInUserName) {
                                         }
 
 
-                                        buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"></td>';
-                                        buildTheHtmlOutput += '<td colspan="2">';
-                                        buildTheHtmlOutput += '<div class="tooltip">';
-                                        buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
-                                        buildTheHtmlOutput += '</div>';
-                                        buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '<td>23-7</td>';
-                                        buildTheHtmlOutput += '</tr>';
+
                                         buildTheHtmlOutput += '</table>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '</tr>';
@@ -656,6 +673,62 @@ $(document).on('click', '.itemLock', function (event) {
             alert('Incorrect Username or Password');
         });
 });
+
+
+
+$(document).on('click', '.storageBinButton', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the part name and the permanent initial value
+    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinPartNumValue = $(this).parent().find(".storageBinPartNumValue").val();
+
+    //basic validation
+    if (storageBinValue == "") {
+        alert("Type a bin/drawer storage location");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
+
+        //create the payload object (what data we send to the api call)
+        const storageBinObject = {
+            loggedInUserName: loggedInUserName,
+            storage_location: storageBinValue,
+            part_name: storageBinPartNumValue
+        };
+
+        console.log(storageBinObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'PUT',
+                url: '/inventory-part/add-storage-bin',
+                dataType: 'json',
+                data: JSON.stringify(storageBinObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                alert("Added bin/storage location");
+
+                //update the inventory after lock
+                showInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
+});
+
 
 
 $(document).on('click', '.deleteBtn', function (event) {

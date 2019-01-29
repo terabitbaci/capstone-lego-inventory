@@ -194,6 +194,9 @@ This is v1.0 of the app, but future enhancements are expected to include:
     * (done 01/09/19) available (total minus the number in permanent builds)
     * (done 01/14/19) in your sets (example: 10220, 10356, 10646)
     * (done 12/21/18) appears in years
-    * Wishlist
-    * delete from inventory
+    * Wishlist (from the inventory page;
+            (1) look how many parts there are and
+            (2) if there none, have a button to add which is going to the wishlist pre-populateing the current part to be added, but
+            (3) if there are parts click on the link to see them in whishlist page)
+    * (done 01/25/19) delete from inventory
     * bin/storage location (entered by user)

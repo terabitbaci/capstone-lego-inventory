@@ -494,6 +494,34 @@ app.put('/inventory-part/update-permanent-build', function (req, res) {
         });
 });
 
+app.put('/inventory-part/add-storage-bin', function (req, res) {
+    let toUpdate = {};
+    let updateableFields = ['part_name', 'storage_location'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    console.log(toUpdate);
+    //permanent_build
+    Part
+        .updateMany({
+            part_name: req.body.part_name
+        }, {
+            $set: {
+                storage_location: req.body.storage_location
+            }
+        }).exec().then(function (updated_part) {
+            return res.status(204).json({
+                updated_part: updated_part
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the storage location failed'
+            });
+        });
+});
+
 // GET ------------------------------------
 // accessing all of a user's items
 app.get('/inventory-part/show-aggregate/:username', function (req, res) {

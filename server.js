@@ -467,7 +467,7 @@ app.post('/users/login', function (req, res) {
 // PUT --------------------------------------
 app.put('/inventory-part/update-permanent-build', function (req, res) {
     let toUpdate = {};
-    //    let updateableFields = ['achieveWhat', 'achieveHow', 'achieveWhen', 'achieveWhy']; //<--Marius? 'entryType
+
     let updateableFields = ['part_name', 'permanent_build'];
     updateableFields.forEach(function (field) {
         if (field in req.body) {

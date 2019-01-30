@@ -74,6 +74,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
                 //console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+                $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
                 $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
                 $(".deleteFromInventoryValue" + itemNumber).attr({
                     "max": result.totalAvailable
@@ -217,6 +218,7 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">available</td>';
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
+
                                         buildTheHtmlOutput += '</tr>';
                                         if (resultValue.set_num != 0) {
 
@@ -259,7 +261,7 @@ function showInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2">Wishlist';
                                         buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
                                         buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.in_wishlist + '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.part_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
 
 

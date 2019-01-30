@@ -578,6 +578,7 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
             //create a totalQuantity variable
             let totalQuantity = 0;
             let totalAvailable = 0;
+            let totalInWishList = 0;
             //loop through the entire array of parts ...
             for (let i = 0; i < results.length; i++) {
                 //... and sum up the quantities for them
@@ -588,13 +589,20 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
                     //... count it as available
                     totalAvailable = totalAvailable + parseInt(results[i].quantity);
                 }
+
+                //if the part is in the wishlist ...
+                if (parseInt(results[i].in_wishlist) == 1) {
+                    //... count it
+                    totalInWishList = totalInWishList + parseInt(results[i].quantity);
+                }
             }
 
-            //console.log(totalQuantity, totalAvailable);
+            console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
             //return the sum of all quantities for a specific part
             res.json({
                 totalQuantity,
-                totalAvailable
+                totalAvailable,
+                totalInWishList
             });
         })
         .catch(function (err) {

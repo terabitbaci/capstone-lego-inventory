@@ -698,7 +698,7 @@ $(document).on('click', '.storageBinButton', function (event) {
         const storageBinObject = {
             loggedInUserName: loggedInUserName,
             storage_location: storageBinValue,
-            part_name: storageBinPartNumValue
+            part_num: storageBinPartNumValue
         };
 
         console.log(storageBinObject);

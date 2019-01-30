@@ -496,7 +496,7 @@ app.put('/inventory-part/update-permanent-build', function (req, res) {
 
 app.put('/inventory-part/add-storage-bin', function (req, res) {
     let toUpdate = {};
-    let updateableFields = ['part_name', 'storage_location'];
+    let updateableFields = ['part_num', 'storage_location'];
     updateableFields.forEach(function (field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
@@ -506,7 +506,7 @@ app.put('/inventory-part/add-storage-bin', function (req, res) {
     //permanent_build
     Part
         .updateMany({
-            part_name: req.body.part_name
+            part_num: req.body.part_num
         }, {
             $set: {
                 storage_location: req.body.storage_location

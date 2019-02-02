@@ -200,3 +200,12 @@ This is v1.0 of the app, but future enhancements are expected to include:
             (3) if there are parts in the Wishlist, click on the link to see them in the Wishlist page (button: Go to Wishlist)
     * (done 01/25/19) delete from inventory
     * (done 01/30/19) bin/storage location (entered by user)
+
+* Set and mocs functionality to do list
+    * filter out the part inventory details to match the sets and mocs
+    * duplicate "showPartsInInventory" function
+    * duplicate "/inventory-part/show-aggregate/" api endpoint
+    * duplicate "/inventory-part/show-details/" api endpoint
+    * update "getTotalInInventory" function to support sets and mocs
+    * duplicate "getPartsToDelete" function to support sets and mocs
+    * ignore "getInYourSets" function to support sets and mocs

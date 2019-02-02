@@ -121,8 +121,8 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 }
 
 
-function showInventory(loggedInUserName) {
-    console.log("inside showInventory function");
+function showPartsInInventory(loggedInUserName) {
+    //console.log("inside showPartsInInventory function");
     $.ajax({
             type: 'GET',
             url: '/inventory-part/show-aggregate/' + loggedInUserName,
@@ -138,7 +138,7 @@ function showInventory(loggedInUserName) {
                 alert("no parts in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                //$("#inventory-table>table").html("");
+                $("#inventory-table #inventory-parts-table").html("");
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
                     //show the details of the aggregated parts
                     $.ajax({
@@ -152,6 +152,20 @@ function showInventory(loggedInUserName) {
                             //                            console.log(detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
+
+
+                            buildTheHtmlOutput += '<tr>';
+                            buildTheHtmlOutput += '<th>number</th>';
+                            buildTheHtmlOutput += '<th class="table-center-cell">image</th>';
+                            buildTheHtmlOutput += '<th>name</th>';
+                            buildTheHtmlOutput += '<th class="table-center-cell">';
+                            buildTheHtmlOutput += '<div class="tooltip">';
+                            buildTheHtmlOutput += '<span class="tooltiptext">click the lock for a permanent build</span>';
+                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"> </i>';
+                            buildTheHtmlOutput += '</div>';
+                            buildTheHtmlOutput += '</th>';
+                            buildTheHtmlOutput += '</tr>';
+
                             let currentPartNumber = "";
                             let oldPartNumber = "";
                             // check to see if there are any parts in the inventory
@@ -309,7 +323,7 @@ function showInventory(loggedInUserName) {
 
                                 });
                                 //use the HTML output to show it in the index.html
-                                $("#inventory-table>table").append(buildTheHtmlOutput);
+                                $("#inventory-table #inventory-parts-table").append(buildTheHtmlOutput);
                                 $('#inventoryPage').show();
                                 $('#inventory-filters').show();
                                 $('#inventory-table').show();
@@ -356,7 +370,7 @@ $('#menu-inventory').click(function (event) {
     $('.hide-everything').hide();
     $('#inventoryPage').show();
     const loggedInUserName = $("#loggedInUserName").val();
-    showInventory(loggedInUserName);
+    showPartsInInventory(loggedInUserName);
     $('#inventory-filters').hide();
     $('#inventory-table').hide();
     $('.inventory-part-details-wrapper').parent().hide();
@@ -434,7 +448,7 @@ $(".login-form").submit(function (event) {
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
-                showInventory(result.username);
+                showPartsInInventory(result.username);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -489,7 +503,7 @@ $(".signup-form").submit(function (event) {
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
-                showInventory(result.username);
+                showPartsInInventory(result.username);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -544,7 +558,7 @@ $(".add-to-inventory-form").submit(function (event) {
                 //                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
 
-                showInventory(loggedInUserName);
+                showPartsInInventory(loggedInUserName);
 
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
@@ -585,7 +599,7 @@ $(".add-to-inventory-form").submit(function (event) {
                             $('#inventoryPage').show();
                             $('#inventory-filters').show();
                             $('#inventory-table').show();
-                            showInventory(loggedInUserName);
+                            showPartsInInventory(loggedInUserName);
                         })
                         //if the call is failing
                         .fail(function (jqXHR, error, errorThrown) {
@@ -665,7 +679,7 @@ $(document).on('click', '.itemLock', function (event) {
             //show that the button is locked
             $(this).parent().find(".itemLock").toggleClass("itemLockActive");
             //update the inventory after lock
-            showInventory(loggedInUserName);
+            showPartsInInventory(loggedInUserName);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -719,7 +733,7 @@ $(document).on('click', '.storageBinButton', function (event) {
                 alert("Added bin/storage location");
 
                 //update the inventory after lock
-                showInventory(loggedInUserName);
+                showPartsInInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -784,7 +798,7 @@ $(document).on('click', '.deleteBtn', function (event) {
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock
-                showInventory(loggedInUserName);
+                showPartsInInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {

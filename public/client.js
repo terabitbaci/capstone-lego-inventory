@@ -139,6 +139,25 @@ function showPartsInInventory(loggedInUserName) {
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
                 $("#inventory-table #inventory-parts-table").html("");
+
+
+                //create the table head separately from the rest of the rows
+                let buildTheHeaderOutput = "";
+                buildTheHeaderOutput += '<tr>';
+                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
+                buildTheHeaderOutput += '<th>name</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">';
+                buildTheHeaderOutput += '<div class="tooltip">';
+                buildTheHeaderOutput += '<span class="tooltiptext">click the lock for a permanent build</span>';
+                buildTheHeaderOutput += '<i class="fas fa-lock fa-lg"> </i>';
+                buildTheHeaderOutput += '</div>';
+                buildTheHeaderOutput += '</th>';
+                buildTheHeaderOutput += '</tr>';
+                $("#inventory-table #inventory-parts-table").append(buildTheHeaderOutput);
+
+
+                //add the rest of the rows to the table
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
                     //show the details of the aggregated parts
                     $.ajax({
@@ -153,19 +172,6 @@ function showPartsInInventory(loggedInUserName) {
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
-
-                            buildTheHtmlOutput += '<tr>';
-                            buildTheHtmlOutput += '<th>number</th>';
-                            buildTheHtmlOutput += '<th class="table-center-cell">image</th>';
-                            buildTheHtmlOutput += '<th>name</th>';
-                            buildTheHtmlOutput += '<th class="table-center-cell">';
-                            buildTheHtmlOutput += '<div class="tooltip">';
-                            buildTheHtmlOutput += '<span class="tooltiptext">click the lock for a permanent build</span>';
-                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"> </i>';
-                            buildTheHtmlOutput += '</div>';
-                            buildTheHtmlOutput += '</th>';
-                            buildTheHtmlOutput += '</tr>';
-
                             let currentPartNumber = "";
                             let oldPartNumber = "";
                             // check to see if there are any parts in the inventory
@@ -178,7 +184,7 @@ function showPartsInInventory(loggedInUserName) {
                                     //console.log(currentPartNumber, oldPartNumber);
                                     //if the part number is not duplicated
                                     if (currentPartNumber != oldPartNumber) {
-                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<tr class="inventory-item">';
                                         buildTheHtmlOutput += '<td>';
                                         buildTheHtmlOutput += '<a href="#" class="showPartDetails">' + resultValue.part_num + '</a>';
                                         buildTheHtmlOutput += '</td>';
@@ -215,7 +221,7 @@ function showPartsInInventory(loggedInUserName) {
 
 
 
-                                        buildTheHtmlOutput += '<tr style="display: none;">';
+                                        buildTheHtmlOutput += '<tr  class="inventory-item-details" style="display: none;">';
                                         buildTheHtmlOutput += '<td class="inventory-part-details-wrapper" colspan="4">';
                                         //                    buildTheHtmlOutput += 'PART details';
                                         buildTheHtmlOutput += '<table class="inventory-part-details">';

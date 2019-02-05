@@ -192,11 +192,11 @@ th .instruction {
     font-size: 15px;
 }
 
-tr:nth-child(odd) {
+.inventory-item:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
+.inventory-item:nth-child(even) {
     background-color: #fff;
 }
 

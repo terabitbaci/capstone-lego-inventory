@@ -390,7 +390,7 @@ app.post('/users/create', (req, res) => {
                         message: 'Internal Server Error'
                     });
                 }
-                //if creating a new user in the DB is succefull
+                //if creating a new user in the DB is successfull
                 if (item) {
 
                     //display the new user

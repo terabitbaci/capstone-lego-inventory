@@ -481,7 +481,7 @@ $(".signup-form").submit(function (event) {
 
     //validate the input
     if (username == "") {
-        alert('Please add an user name');
+        alert('Please add a user name');
     } else if (password == "") {
         alert('Please add a password');
     }
@@ -563,8 +563,10 @@ $(".add-to-inventory-form").submit(function (event) {
                 //                $('#loggedInName').text(result.name);
                 //                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
-
+                //bookmark: start sets and mocs functionality from here
                 showPartsInInventory(loggedInUserName);
+                //showSetsInInventory(loggedInUserName);
+                //showMocsInInventory(loggedInUserName);
 
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();

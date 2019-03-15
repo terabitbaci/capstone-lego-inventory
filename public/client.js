@@ -121,6 +121,473 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 }
 
 
+function showSetsInInventory(loggedInUserName) {
+    //console.log("inside showPartsInInventory function");
+    $.ajax({
+            type: 'GET',
+            url: '/inventory-set/show-aggregate/' + loggedInUserName,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (aggregateResult) {
+            //            console.log(aggregateResult);
+            //            console.log(aggregateResult.parts);
+            // check to see if there are any parts in the inventory
+            if (aggregateResult.sets.length == 0) {
+                alert("no parts in the inventory");
+            } else {
+                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
+                //                $("#inventory-table #inventory-sets-table").html("");
+
+
+                //create the table head separately from the rest of the rows
+                let buildTheHeaderOutput = "";
+                buildTheHeaderOutput += '<tr>';
+                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
+                buildTheHeaderOutput += '<th>name</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">';
+                buildTheHeaderOutput += '<div class="tooltip">';
+                buildTheHeaderOutput += '<span class="tooltiptext">click the lock for a permanent build</span>';
+                buildTheHeaderOutput += '<i class="fas fa-lock fa-lg"> </i>';
+                buildTheHeaderOutput += '</div>';
+                buildTheHeaderOutput += '</th>';
+                buildTheHeaderOutput += '</tr>';
+                $("#inventory-table #inventory-sets-table").append(buildTheHeaderOutput);
+
+
+                //add the rest of the rows to the table
+                $.each(aggregateResult.sets, function (aggregatedResultKey, aggregatedResultValue) {
+                    //show the details of the aggregated parts
+                    $.ajax({
+                            type: 'GET',
+                            url: '/inventory-set/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            dataType: 'json',
+                            contentType: 'application/json'
+                        })
+                        //if call is successful
+                        .done(function (detailedResult) {
+                            //                            console.log(detailedResult);
+                            //                            console.log(detailedResult.parts);
+                            let buildTheHtmlOutput = "";
+
+                            let currentSetNumber = "";
+                            let oldSetNumber = "";
+                            // check to see if there are any sets in the inventory
+                            if (detailedResult.sets.length == 0) {
+                                alert("no sets in the inventory");
+                            } else {
+                                $.each(detailedResult.sets, function (resultKey, resultValue) {
+                                    currentSetNumber = resultValue.set_num;
+
+                                    //console.log(currentSetNumber, oldSetNumber);
+                                    //if the set number is not duplicated
+                                    if (currentSetNumber != oldSetNumber) {
+                                        buildTheHtmlOutput += '<tr class="inventory-item">';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.part_num + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                                        buildTheHtmlOutput += '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.part_name + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockSetNameValue">';
+
+                                        //if the item is not locked ...
+                                        if (resultValue.permanent_build == 0) {
+                                            //display it as is
+                                            buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+                                        //if it is locked ...
+                                        else {
+                                            //display the lock icon instead
+                                            buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+
+                                        buildTheHtmlOutput += '<tr  class="inventory-item-details" style="display: none;">';
+                                        buildTheHtmlOutput += '<td class="inventory-set-details-wrapper" colspan="4">';
+                                        //                    buildTheHtmlOutput += 'PART details';
+                                        buildTheHtmlOutput += '<table class="inventory-set-details">';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">available</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
+
+                                        buildTheHtmlOutput += '</tr>';
+                                        if (resultValue.set_num != 0) {
+
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.part_num + '"></td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                            buildTheHtmlOutput += '<tr>';
+                                        }
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
+                                        buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</button>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">Wishlist';
+                                        buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+
+                                        //only delete sets that are not permanent and no more than the max available value
+                                        //if the set is not locked show the delete functionality
+                                        //othewise display message to unlock
+
+                                        //if the part is not locked
+                                        if (resultValue.permanent_build == 0) {
+                                            //show the delete functionality
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td class="getSetsToDelete' + resultValue.part_num + '">';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        } else {
+                                            //display message to unlock it first
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td>';
+                                            buildTheHtmlOutput += 'unlock this set in order to delete it';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        }
+
+
+
+                                        buildTheHtmlOutput += '</table>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+                                        //call the function to populate the inventory value
+                                        getTotalInInventory(resultValue.part_num, "set", loggedInUserName);
+                                        getPartsToDelete(resultValue.part_num, "set", loggedInUserName);
+
+                                        //call the function to dynamically populate "in your sets"
+                                        getInYourSets(resultValue.part_num, "set", loggedInUserName);
+
+                                        //check if the current set was already shown (so it doesn't show twice)
+                                        oldSetNumber = currentSetNumber;
+                                    }
+
+                                });
+                                //use the HTML output to show it in the index.html
+                                $("#inventory-table #inventory-sets-table").append(buildTheHtmlOutput);
+                                $('#inventoryPage').show();
+                                $('#inventory-filters').show();
+                                $('#inventory-table').show();
+                                $('#inventory-set-details-wrapper').hide();
+                            }
+                        })
+                        //if the call is failing
+                        .fail(function (jqXHR, error, errorThrown) {
+                            console.log(jqXHR.status);
+                            console.log(error);
+                            console.log(errorThrown);
+                        });
+                });
+
+            }
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
+}
+
+function showMocsInInventory(loggedInUserName) {
+    //console.log("inside showPartsInInventory function");
+    $.ajax({
+            type: 'GET',
+            url: '/inventory-moc/show-aggregate/' + loggedInUserName,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (aggregateResult) {
+            //            console.log(aggregateResult);
+            //            console.log(aggregateResult.parts);
+            // check to see if there are any parts in the inventory
+            if (aggregateResult.mocs.length == 0) {
+                alert("no parts in the inventory");
+            } else {
+                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
+                //                $("#inventory-table #inventory-mocs-table").html("");
+
+
+                //create the table head separately from the rest of the rows
+                let buildTheHeaderOutput = "";
+                buildTheHeaderOutput += '<tr>';
+                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
+                buildTheHeaderOutput += '<th>name</th>';
+                buildTheHeaderOutput += '<th class="table-center-cell">';
+                buildTheHeaderOutput += '<div class="tooltip">';
+                buildTheHeaderOutput += '<span class="tooltiptext">click the lock for a permanent build</span>';
+                buildTheHeaderOutput += '<i class="fas fa-lock fa-lg"> </i>';
+                buildTheHeaderOutput += '</div>';
+                buildTheHeaderOutput += '</th>';
+                buildTheHeaderOutput += '</tr>';
+                $("#inventory-table #inventory-mocs-table").append(buildTheHeaderOutput);
+
+
+                //add the rest of the rows to the table
+                $.each(aggregateResult.mocs, function (aggregatedResultKey, aggregatedResultValue) {
+                    //show the details of the aggregated parts
+                    $.ajax({
+                            type: 'GET',
+                            url: '/inventory-moc/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            dataType: 'json',
+                            contentType: 'application/json'
+                        })
+                        //if call is successful
+                        .done(function (detailedResult) {
+                            //                            console.log(detailedResult);
+                            //                            console.log(detailedResult.parts);
+                            let buildTheHtmlOutput = "";
+
+                            let currentMocNumber = "";
+                            let oldMocNumber = "";
+                            // check to see if there are any mocs in the inventory
+                            if (detailedResult.mocs.length == 0) {
+                                alert("no mocs in the inventory");
+                            } else {
+                                $.each(detailedResult.mocs, function (resultKey, resultValue) {
+                                    currentMocNumber = resultValue.moc_num;
+
+                                    //console.log(currentMocNumber, oldMocNumber);
+                                    //if the moc number is not duplicated
+                                    if (currentMocNumber != oldMocNumber) {
+                                        buildTheHtmlOutput += '<tr class="inventory-item">';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.part_num + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                                        buildTheHtmlOutput += '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.part_name + '</a>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td class="table-center-cell">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockMocNameValue">';
+
+                                        //if the item is not locked ...
+                                        if (resultValue.permanent_build == 0) {
+                                            //display it as is
+                                            buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+                                        //if it is locked ...
+                                        else {
+                                            //display the lock icon instead
+                                            buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
+                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
+                                            buildTheHtmlOutput += '</button>';
+                                        }
+
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+
+                                        buildTheHtmlOutput += '<tr  class="inventory-item-details" style="display: none;">';
+                                        buildTheHtmlOutput += '<td class="inventory-moc-details-wrapper" colspan="4">';
+                                        //                    buildTheHtmlOutput += 'PART details';
+                                        buildTheHtmlOutput += '<table class="inventory-moc-details">';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '</tr>';
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">available</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
+
+                                        buildTheHtmlOutput += '</tr>';
+                                        if (resultValue.set_num != 0) {
+
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.part_num + '"></td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                            buildTheHtmlOutput += '<tr>';
+                                        }
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Big collector? Enter a bin/drawer storage location.</span>bin/storage location';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td>';
+
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<div class="tooltip">';
+                                        buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
+                                        buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
+                                        buildTheHtmlOutput += '</div>';
+                                        buildTheHtmlOutput += '</button>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+                                        buildTheHtmlOutput += '<tr>';
+                                        buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2">Wishlist';
+                                        buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+
+
+                                        //only delete mocs that are not permanent and no more than the max available value
+                                        //if the moc is not locked show the delete functionality
+                                        //othewise display message to unlock
+
+                                        //if the part is not locked
+                                        if (resultValue.permanent_build == 0) {
+                                            //show the delete functionality
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td class="getMocsToDelete' + resultValue.part_num + '">';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        } else {
+                                            //display message to unlock it first
+                                            buildTheHtmlOutput += '<tr>';
+                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
+                                            buildTheHtmlOutput += '<td>';
+                                            buildTheHtmlOutput += 'unlock this moc in order to delete it';
+                                            buildTheHtmlOutput += '</td>';
+                                            buildTheHtmlOutput += '</tr>';
+                                        }
+
+
+
+                                        buildTheHtmlOutput += '</table>';
+                                        buildTheHtmlOutput += '</td>';
+                                        buildTheHtmlOutput += '</tr>';
+
+                                        //call the function to populate the inventory value
+                                        getTotalInInventory(resultValue.part_num, "moc", loggedInUserName);
+                                        getPartsToDelete(resultValue.part_num, "moc", loggedInUserName);
+
+                                        //call the function to dynamically populate "in your sets"
+                                        getInYourSets(resultValue.part_num, "moc", loggedInUserName);
+
+                                        //check if the current moc was already shown (so it doesn't show twice)
+                                        oldMocNumber = currentMocNumber;
+                                    }
+
+                                });
+                                //use the HTML output to show it in the index.html
+                                $("#inventory-table #inventory-mocs-table").append(buildTheHtmlOutput);
+                                $('#inventoryPage').show();
+                                $('#inventory-filters').show();
+                                $('#inventory-table').show();
+                                $('#inventory-moc-details-wrapper').hide();
+                            }
+                        })
+                        //if the call is failing
+                        .fail(function (jqXHR, error, errorThrown) {
+                            console.log(jqXHR.status);
+                            console.log(error);
+                            console.log(errorThrown);
+                        });
+                });
+
+            }
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
+}
+
+
 function showPartsInInventory(loggedInUserName) {
     //console.log("inside showPartsInInventory function");
     $.ajax({
@@ -138,7 +605,7 @@ function showPartsInInventory(loggedInUserName) {
                 alert("no parts in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                $("#inventory-table #inventory-parts-table").html("");
+                //                $("#inventory-table #inventory-parts-table").html("");
 
 
                 //create the table head separately from the rest of the rows

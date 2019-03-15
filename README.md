@@ -209,3 +209,10 @@ This is v1.0 of the app, but future enhancements are expected to include:
     * update "getTotalInInventory" function to support sets and mocs
     * duplicate "getPartsToDelete" function to support sets and mocs
     * ignore "getInYourSets" function to support sets and mocs
+
+
+1 inside the trigger " $(".add-to-inventory-form").submit(function (event) { " duplicate
+- showPartsInInventory(loggedInUserName);
+to create:
+- showSetsInInventory(loggedInUserName); start from 226 and 456
+- showMocsInInventory(loggedInUserName);

@@ -461,8 +461,479 @@ app.post('/users/login', function (req, res) {
 });
 
 
-// -------------entry ENDPOINTS------------------------------------------------
 
+
+
+
+//=============== SETS api endpoints=======================================================
+
+
+// PUT --------------------------------------
+app.put('/inventory-set/update-permanent-build', function (req, res) {
+    let toUpdate = {};
+
+    let updateableFields = ['set_name', 'permanent_build'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    //console.log(toUpdate);
+    //permanent_build
+    Set
+        .updateMany({
+            set_name: req.body.set_name
+        }, {
+            $set: {
+                permanent_build: req.body.permanent_build
+            }
+        }).exec().then(function (updated_set) {
+            return res.status(204).json({
+                updated_set: updated_set
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the permanent build failed'
+            });
+        });
+});
+
+app.put('/inventory-set/add-storage-bin', function (req, res) {
+    let toUpdate = {};
+    let updateableFields = ['set_num', 'storage_location'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    //console.log(toUpdate);
+    //permanent_build
+    Set
+        .updateMany({
+            set_num: req.body.set_num
+        }, {
+            $set: {
+                storage_location: req.body.storage_location
+            }
+        }).exec().then(function (updated_set) {
+            return res.status(204).json({
+                updated_set: updated_set
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the storage location failed'
+            });
+        });
+});
+
+// GET ------------------------------------
+// accessing all of a user's items
+app.get('/inventory-set/show-aggregate/:username', function (req, res) {
+    // retrieve distinct sets
+    Set
+        .aggregate({
+            $group: {
+                _id: "$set_num"
+            }
+        })
+        .sort('-addedToDB')
+        .then(function (sets) {
+            res.json({
+                sets
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory set not found'
+            });
+        });
+});
+
+app.get('/inventory-set/show-details/:username/:setNumber', function (req, res) {
+    // retrieve all sets
+    Set
+        .find({
+            loggedInUserName: req.params.username,
+            set_num: req.params.setNumber
+        })
+        .sort('-addedToDB')
+        .then(function (sets) {
+            res.json({
+                sets
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory set not found'
+            });
+        });
+});
+app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
+
+    Set
+        .find({
+            loggedInUserName: req.params.username,
+            set_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (results) {
+            //create a totalQuantity variable
+            let totalQuantity = 0;
+            let totalAvailable = 0;
+            let totalInWishList = 0;
+            //loop through the entire array of sets ...
+            for (let i = 0; i < results.length; i++) {
+                //... and sum up the quantities for them
+                totalQuantity = totalQuantity + parseInt(results[i].quantity);
+
+                //if the set is not permanent build ...
+                if (parseInt(results[i].permanent_build) == 0) {
+                    //... count it as available
+                    totalAvailable = totalAvailable + parseInt(results[i].quantity);
+                }
+
+                //if the set is in the wishlist ...
+                if (parseInt(results[i].in_wishlist) == 1) {
+                    //... count it
+                    totalInWishList = totalInWishList + parseInt(results[i].quantity);
+                }
+            }
+
+            //console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
+            //return the sum of all quantities for a specific set
+            res.json({
+                totalQuantity,
+                totalAvailable,
+                totalInWishList
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory set not found'
+            });
+        });
+});
+
+app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, res) {
+
+    Set
+        .find({
+            loggedInUserName: req.params.username,
+            set_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (results) {
+            //create a totalInYourSetsArray array
+            let totalInYourSetsArray = [];
+            //count the number of unique items added to the array
+            let arrayCounter = 0;
+            //loop through the entire array of sets ...
+            for (let i = 0; i < results.length; i++) {
+                //if the set_numb is not set of initial array ...
+                if (totalInYourSetsArray.indexOf(results[i].set_num) == -1) {
+                    //... add it
+                    totalInYourSetsArray[arrayCounter] = results[i].set_num;
+                    // ... and increment the number of unique items added to the array
+                    arrayCounter++;
+                }
+            }
+            //convert the array to string
+            let totalInYourSetsString = totalInYourSetsArray.toString();
+
+            //return all the set numbers for a specific set
+            res.json({
+                totalInYourSetsString
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory set not found'
+            });
+        });
+});
+
+// DELETE ----------------------------------------
+// deleting a set by name
+//bookmark - delete only sets that not inside the mocs and sets
+app.delete('/inventory-set/delete-set-by-name', function (req, res) {
+    Set.deleteMany({
+        set_name: req.body.set_name
+    }).exec().then(function (entry) {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
+app.delete('/inventory-set/delete-set-by-id', function (req, res) {
+
+    //if the number of sets to delete is the same with maxim number of sets in the inventory, delete the entire set
+    if (req.body.deleteSetMaxQuantityValue == req.body.deleteFromInventoryValue) {
+        Set.findByIdAndRemove(req.body.deleteSetIDValue, function (err, items) {
+            if (err)
+                return res.status(404).json({
+                    message: 'Item not found.'
+                });
+
+            res.status(201).json(items);
+        });
+    }
+    // otherwise update only the quantity
+    else {
+        Set.update({
+            _id: req.body.deleteSetIDValue
+        }, {
+            $set: {
+                quantity: (req.body.deleteSetMaxQuantityValue - req.body.deleteFromInventoryValue)
+            }
+        }, function (items) {
+            res.status(201).json(items);
+        });
+    }
+});
+
+
+//=============== MOC api endpoints=======================================================
+
+// PUT --------------------------------------
+app.put('/inventory-moc/update-permanent-build', function (req, res) {
+    let toUpdate = {};
+
+    let updateableFields = ['moc_name', 'permanent_build'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    //console.log(toUpdate);
+    //permanent_build
+    Moc
+        .updateMany({
+            moc_name: req.body.moc_name
+        }, {
+            $set: {
+                permanent_build: req.body.permanent_build
+            }
+        }).exec().then(function (updated_moc) {
+            return res.status(204).json({
+                updated_moc: updated_moc
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the permanent build failed'
+            });
+        });
+});
+
+app.put('/inventory-moc/add-storage-bin', function (req, res) {
+    let toUpdate = {};
+    let updateableFields = ['moc_num', 'storage_location'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    //console.log(toUpdate);
+    //permanent_build
+    Moc
+        .updateMany({
+            moc_num: req.body.moc_num
+        }, {
+            $set: {
+                storage_location: req.body.storage_location
+            }
+        }).exec().then(function (updated_moc) {
+            return res.status(204).json({
+                updated_moc: updated_moc
+            });
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Updating the storage location failed'
+            });
+        });
+});
+
+// GET ------------------------------------
+// accessing all of a user's items
+app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
+    // retrieve distinct mocs
+    Moc
+        .aggregate({
+            $group: {
+                _id: "$moc_num"
+            }
+        })
+        .sort('-addedToDB')
+        .then(function (mocs) {
+            res.json({
+                mocs
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory moc not found'
+            });
+        });
+});
+
+app.get('/inventory-moc/show-details/:username/:mocNumber', function (req, res) {
+    // retrieve all mocs
+    Moc
+        .find({
+            loggedInUserName: req.params.username,
+            moc_num: req.params.mocNumber
+        })
+        .sort('-addedToDB')
+        .then(function (mocs) {
+            res.json({
+                mocs
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory moc not found'
+            });
+        });
+});
+app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
+
+    Moc
+        .find({
+            loggedInUserName: req.params.username,
+            moc_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (results) {
+            //create a totalQuantity variable
+            let totalQuantity = 0;
+            let totalAvailable = 0;
+            let totalInWishList = 0;
+            //loop through the entire array of mocs ...
+            for (let i = 0; i < results.length; i++) {
+                //... and sum up the quantities for them
+                totalQuantity = totalQuantity + parseInt(results[i].quantity);
+
+                //if the moc is not permanent build ...
+                if (parseInt(results[i].permanent_build) == 0) {
+                    //... count it as available
+                    totalAvailable = totalAvailable + parseInt(results[i].quantity);
+                }
+
+                //if the moc is in the wishlist ...
+                if (parseInt(results[i].in_wishlist) == 1) {
+                    //... count it
+                    totalInWishList = totalInWishList + parseInt(results[i].quantity);
+                }
+            }
+
+            //console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
+            //return the sum of all quantities for a specific moc
+            res.json({
+                totalQuantity,
+                totalAvailable,
+                totalInWishList
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory moc not found'
+            });
+        });
+});
+
+app.get('/inventory-moc/get-in-your-sets/:username/:itemNumber', function (req, res) {
+
+    Moc
+        .find({
+            loggedInUserName: req.params.username,
+            moc_num: req.params.itemNumber
+        })
+        .sort('-addedToDB')
+        .then(function (results) {
+            //create a totalInYourSetsArray array
+            let totalInYourSetsArray = [];
+            //count the number of unique items added to the array
+            let arrayCounter = 0;
+            //loop through the entire array of mocs ...
+            for (let i = 0; i < results.length; i++) {
+                //if the set_numb is not moc of initial array ...
+                if (totalInYourSetsArray.indexOf(results[i].set_num) == -1) {
+                    //... add it
+                    totalInYourSetsArray[arrayCounter] = results[i].set_num;
+                    // ... and increment the number of unique items added to the array
+                    arrayCounter++;
+                }
+            }
+            //convert the array to string
+            let totalInYourSetsString = totalInYourSetsArray.toString();
+
+            //return all the set numbers for a specific moc
+            res.json({
+                totalInYourSetsString
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Inventory moc not found'
+            });
+        });
+});
+
+// DELETE ----------------------------------------
+// deleting a moc by name
+//bookmark - delete only mocs that not inside the mocs and sets
+app.delete('/inventory-moc/delete-moc-by-name', function (req, res) {
+    Moc.deleteMany({
+        moc_name: req.body.moc_name
+    }).exec().then(function (entry) {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
+app.delete('/inventory-moc/delete-moc-by-id', function (req, res) {
+
+    //if the number of mocs to delete is the same with maxim number of mocs in the inventory, delete the entire moc
+    if (req.body.deleteMocMaxQuantityValue == req.body.deleteFromInventoryValue) {
+        Moc.findByIdAndRemove(req.body.deleteMocIDValue, function (err, items) {
+            if (err)
+                return res.status(404).json({
+                    message: 'Item not found.'
+                });
+
+            res.status(201).json(items);
+        });
+    }
+    // otherwise update only the quantity
+    else {
+        Moc.update({
+            _id: req.body.deleteMocIDValue
+        }, {
+            $set: {
+                quantity: (req.body.deleteMocMaxQuantityValue - req.body.deleteFromInventoryValue)
+            }
+        }, function (items) {
+            res.status(201).json(items);
+        });
+    }
+});
+
+
+
+//=============== PART api endpoints=======================================================
 
 // PUT --------------------------------------
 app.put('/inventory-part/update-permanent-build', function (req, res) {
@@ -474,7 +945,7 @@ app.put('/inventory-part/update-permanent-build', function (req, res) {
             toUpdate[field] = req.body[field];
         }
     });
-    console.log(toUpdate);
+    //console.log(toUpdate);
     //permanent_build
     Part
         .updateMany({
@@ -502,7 +973,7 @@ app.put('/inventory-part/add-storage-bin', function (req, res) {
             toUpdate[field] = req.body[field];
         }
     });
-    console.log(toUpdate);
+    //console.log(toUpdate);
     //permanent_build
     Part
         .updateMany({
@@ -597,7 +1068,7 @@ app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
                 }
             }
 
-            console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
+            //console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
             //return the sum of all quantities for a specific part
             res.json({
                 totalQuantity,
@@ -693,6 +1164,13 @@ app.delete('/inventory-part/delete-part-by-id', function (req, res) {
         });
     }
 });
+
+
+
+
+
+
+
 
 
 app.get('/entry-read/:user', function (req, res) {

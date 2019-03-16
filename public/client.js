@@ -55,8 +55,110 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
             });
     } else if (itemType == 'set') {
         // search for total number of this set in the inventory
+
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-set/show-details/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+
+
+            let buildTheHtmlOutput = "<table>";
+
+            $.each(result.parts, function (resultKey, resultValue) {
+                buildTheHtmlOutput += '<tr>';
+
+                buildTheHtmlOutput += '<td>Delete up to ';
+                buildTheHtmlOutput += resultValue.quantity;
+                buildTheHtmlOutput += ' from set / moc / part ';
+                buildTheHtmlOutput += resultValue.set_num;
+                buildTheHtmlOutput += '</td>';
+
+                buildTheHtmlOutput += '<td>';
+                buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.part_num + '" >';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + resultValue.quantity + '" >';
+                buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                buildTheHtmlOutput += '<div class="tooltip">';
+                buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '</button>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '</tr>';
+            });
+            buildTheHtmlOutput += '</table>';
+
+            $(".getSetsToDelete" + itemNumber).html(buildTheHtmlOutput);
+
+            //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
+
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
+
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-moc/show-details/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+
+
+            let buildTheHtmlOutput = "<table>";
+
+            $.each(result.parts, function (resultKey, resultValue) {
+                buildTheHtmlOutput += '<tr>';
+
+                buildTheHtmlOutput += '<td>Delete up to ';
+                buildTheHtmlOutput += resultValue.quantity;
+                buildTheHtmlOutput += ' from set / moc / part ';
+                buildTheHtmlOutput += resultValue.set_num;
+                buildTheHtmlOutput += '</td>';
+
+                buildTheHtmlOutput += '<td>';
+                buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.part_num + '" >';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
+                buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + resultValue.quantity + '" >';
+                buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                buildTheHtmlOutput += '<div class="tooltip">';
+                buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                buildTheHtmlOutput += '</div>';
+                buildTheHtmlOutput += '</button>';
+                buildTheHtmlOutput += '</td>';
+                buildTheHtmlOutput += '</tr>';
+            });
+            buildTheHtmlOutput += '</table>';
+
+            $(".getMocsToDelete" + itemNumber).html(buildTheHtmlOutput);
+
+            //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
+
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
     }
 }
 
@@ -88,8 +190,60 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             });
     } else if (itemType == 'set') {
         // search for total number of this set in the inventory
+
+        // search for total number of this part in the inventory
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-set/count/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+            $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
+            $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+            $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
+            $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
+            $(".deleteFromInventoryValue" + itemNumber).attr({
+                "max": result.totalAvailable
+            });
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
+
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
+
+        // search for total number of this part in the inventory
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-moc/count/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+            $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
+            $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+            $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
+            $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
+            $(".deleteFromInventoryValue" + itemNumber).attr({
+                "max": result.totalAvailable
+            });
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
     }
 }
 
@@ -115,8 +269,45 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
             });
     } else if (itemType == 'set') {
         // search for total number of this set in the inventory
+
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-set/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+            $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
+
+        $.ajax({
+            type: 'GET',
+            url: '/inventory-moc/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
+            dataType: 'json',
+            contentType: 'application/json'
+        })
+        // if call is successful
+            .done(function (result) {
+            //console.log(result);
+            $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
+        })
+        //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR.status);
+            console.log(error);
+            console.log(errorThrown);
+        });
     }
 }
 

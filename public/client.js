@@ -313,7 +313,6 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 
 
 function showSetsInInventory(loggedInUserName) {
-    //console.log("inside showPartsInInventory function");
     $.ajax({
             type: 'GET',
             url: '/inventory-set/show-aggregate/' + loggedInUserName,
@@ -322,7 +321,7 @@ function showSetsInInventory(loggedInUserName) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //            console.log(aggregateResult);
+            console.log(aggregateResult);
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
@@ -359,9 +358,11 @@ function showSetsInInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            //                            console.log(detailedResult);
+                            console.log(detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
+
+                        //bookmark test the output of the sets
 
                             let currentSetNumber = "";
                             let oldSetNumber = "";
@@ -546,7 +547,6 @@ function showSetsInInventory(loggedInUserName) {
 }
 
 function showMocsInInventory(loggedInUserName) {
-    //console.log("inside showPartsInInventory function");
     $.ajax({
             type: 'GET',
             url: '/inventory-moc/show-aggregate/' + loggedInUserName,
@@ -780,7 +780,6 @@ function showMocsInInventory(loggedInUserName) {
 
 
 function showPartsInInventory(loggedInUserName) {
-    //console.log("inside showPartsInInventory function");
     $.ajax({
             type: 'GET',
             url: '/inventory-part/show-aggregate/' + loggedInUserName,
@@ -1035,6 +1034,8 @@ $('#menu-inventory').click(function (event) {
     $('#inventoryPage').show();
     const loggedInUserName = $("#loggedInUserName").val();
     showPartsInInventory(loggedInUserName);
+    showSetsInInventory(loggedInUserName);
+    showMocsInInventory(loggedInUserName);
     $('#inventory-filters').hide();
     $('#inventory-table').hide();
     $('.inventory-part-details-wrapper').parent().hide();
@@ -1107,12 +1108,14 @@ $(".login-form").submit(function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+                //console.log(result);
                 $('.hide-everything').hide();
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
                 showPartsInInventory(result.username);
+                showSetsInInventory(result.username);
+                showMocsInInventory(result.username);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1168,6 +1171,8 @@ $(".signup-form").submit(function (event) {
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
                 showPartsInInventory(result.username);
+                showSetsInInventory(result.username);
+                showMocsInInventory(result.username);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1223,8 +1228,8 @@ $(".add-to-inventory-form").submit(function (event) {
                 $('.hide-everything').hide();
                 //bookmark: start sets and mocs functionality from here
                 showPartsInInventory(loggedInUserName);
-                //showSetsInInventory(loggedInUserName);
-                //showMocsInInventory(loggedInUserName);
+                showSetsInInventory(loggedInUserName);
+                showMocsInInventory(loggedInUserName);
 
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
@@ -1266,6 +1271,8 @@ $(".add-to-inventory-form").submit(function (event) {
                             $('#inventory-filters').show();
                             $('#inventory-table').show();
                             showPartsInInventory(loggedInUserName);
+                            showSetsInInventory(loggedInUserName);
+                            showMocsInInventory(loggedInUserName);
                         })
                         //if the call is failing
                         .fail(function (jqXHR, error, errorThrown) {
@@ -1346,6 +1353,8 @@ $(document).on('click', '.itemLock', function (event) {
             $(this).parent().find(".itemLock").toggleClass("itemLockActive");
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
+            showSetsInInventory(loggedInUserName);
+            showMocsInInventory(loggedInUserName);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -1400,6 +1409,8 @@ $(document).on('click', '.storageBinButton', function (event) {
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
+                showSetsInInventory(loggedInUserName);
+                showMocsInInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1465,6 +1476,8 @@ $(document).on('click', '.deleteBtn', function (event) {
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
+                showSetsInInventory(loggedInUserName);
+                showMocsInInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1516,7 +1529,9 @@ $(document).on('click', '.itemLock', function (event) {
             //show that the button is locked
             $(this).parent().find(".itemLock").toggleClass("itemLockActive");
             //update the inventory after lock
+            showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
+            showMocsInInventory(loggedInUserName);
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -1569,7 +1584,10 @@ $(document).on('click', '.storageBinButton', function (event) {
                 alert("Added bin/storage location");
 
                 //update the inventory after lock
+                showPartsInInventory(loggedInUserName);
                 showSetsInInventory(loggedInUserName);
+                showMocsInInventory(loggedInUserName);
+
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1634,7 +1652,9 @@ $(document).on('click', '.deleteBtn', function (event) {
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock
+                showPartsInInventory(loggedInUserName);
                 showSetsInInventory(loggedInUserName);
+                showMocsInInventory(loggedInUserName);
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -1689,7 +1709,10 @@ $(document).on('click', '.itemLock', function (event) {
             //show that the button is locked
             $(this).parent().find(".itemLock").toggleClass("itemLockActive");
             //update the inventory after lock
+            showPartsInInventory(loggedInUserName);
+            showSetsInInventory(loggedInUserName);
             showMocsInInventory(loggedInUserName);
+
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -1742,6 +1765,8 @@ $(document).on('click', '.storageBinButton', function (event) {
                 alert("Added bin/storage location");
 
                 //update the inventory after lock
+                showPartsInInventory(loggedInUserName);
+                showSetsInInventory(loggedInUserName);
                 showMocsInInventory(loggedInUserName);
             })
             //if the call is failing
@@ -1807,6 +1832,8 @@ $(document).on('click', '.deleteBtn', function (event) {
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock
+                showPartsInInventory(loggedInUserName);
+                showSetsInInventory(loggedInUserName);
                 showMocsInInventory(loggedInUserName);
             })
             //if the call is failing

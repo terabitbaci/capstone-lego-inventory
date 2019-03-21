@@ -224,3 +224,11 @@ In the client.js update the following part functionalities to work with the mocs
 '/inventory-part/add-storage-bin',
 '/inventory-part/delete-part-by-id',
 
+Data flow testing results
+- parts
+    - parts lock works but is not refreshing showing the locked part
+    - check duplicated triggers
+- sets
+    - sets not diplaying properly when the page loads
+
+

@@ -57,108 +57,108 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
         // search for total number of this set in the inventory
 
         $.ajax({
-            type: 'GET',
-            url: '/inventory-set/show-details/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-set/show-details/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
+                //console.log(result);
 
 
-            let buildTheHtmlOutput = "<table>";
+                let buildTheHtmlOutput = "<table>";
 
-            $.each(result.parts, function (resultKey, resultValue) {
-                buildTheHtmlOutput += '<tr>';
+                $.each(result.parts, function (resultKey, resultValue) {
+                    buildTheHtmlOutput += '<tr>';
 
-                buildTheHtmlOutput += '<td>Delete up to ';
-                buildTheHtmlOutput += resultValue.quantity;
-                buildTheHtmlOutput += ' from set / moc / part ';
-                buildTheHtmlOutput += resultValue.set_num;
-                buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += '<td>Delete up to ';
+                    buildTheHtmlOutput += resultValue.quantity;
+                    buildTheHtmlOutput += ' from set / moc / part ';
+                    buildTheHtmlOutput += resultValue.set_num;
+                    buildTheHtmlOutput += '</td>';
 
-                buildTheHtmlOutput += '<td>';
-                buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.part_num + '" >';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + resultValue.quantity + '" >';
-                buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
-                buildTheHtmlOutput += '<div class="tooltip">';
-                buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
-                buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
-                buildTheHtmlOutput += '</div>';
-                buildTheHtmlOutput += '</button>';
-                buildTheHtmlOutput += '</td>';
-                buildTheHtmlOutput += '</tr>';
-            });
-            buildTheHtmlOutput += '</table>';
+                    buildTheHtmlOutput += '<td>';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.part_num + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + resultValue.quantity + '" >';
+                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                    buildTheHtmlOutput += '<div class="tooltip">';
+                    buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                    buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                    buildTheHtmlOutput += '</div>';
+                    buildTheHtmlOutput += '</button>';
+                    buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += '</tr>';
+                });
+                buildTheHtmlOutput += '</table>';
 
-            $(".getSetsToDelete" + itemNumber).html(buildTheHtmlOutput);
+                $(".getSetsToDelete" + itemNumber).html(buildTheHtmlOutput);
 
-            //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
+                //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
 
-        })
-        //if the call is failing
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
 
         $.ajax({
-            type: 'GET',
-            url: '/inventory-moc/show-details/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-moc/show-details/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
+                //console.log(result);
 
 
-            let buildTheHtmlOutput = "<table>";
+                let buildTheHtmlOutput = "<table>";
 
-            $.each(result.parts, function (resultKey, resultValue) {
-                buildTheHtmlOutput += '<tr>';
+                $.each(result.parts, function (resultKey, resultValue) {
+                    buildTheHtmlOutput += '<tr>';
 
-                buildTheHtmlOutput += '<td>Delete up to ';
-                buildTheHtmlOutput += resultValue.quantity;
-                buildTheHtmlOutput += ' from set / moc / part ';
-                buildTheHtmlOutput += resultValue.set_num;
-                buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += '<td>Delete up to ';
+                    buildTheHtmlOutput += resultValue.quantity;
+                    buildTheHtmlOutput += ' from set / moc / part ';
+                    buildTheHtmlOutput += resultValue.set_num;
+                    buildTheHtmlOutput += '</td>';
 
-                buildTheHtmlOutput += '<td>';
-                buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.part_num + '" >';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
-                buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + resultValue.quantity + '" >';
-                buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
-                buildTheHtmlOutput += '<div class="tooltip">';
-                buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
-                buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
-                buildTheHtmlOutput += '</div>';
-                buildTheHtmlOutput += '</button>';
-                buildTheHtmlOutput += '</td>';
-                buildTheHtmlOutput += '</tr>';
-            });
-            buildTheHtmlOutput += '</table>';
+                    buildTheHtmlOutput += '<td>';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.part_num + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + resultValue.quantity + '" >';
+                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                    buildTheHtmlOutput += '<div class="tooltip">';
+                    buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
+                    buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
+                    buildTheHtmlOutput += '</div>';
+                    buildTheHtmlOutput += '</button>';
+                    buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += '</tr>';
+                });
+                buildTheHtmlOutput += '</table>';
 
-            $(".getMocsToDelete" + itemNumber).html(buildTheHtmlOutput);
+                $(".getMocsToDelete" + itemNumber).html(buildTheHtmlOutput);
 
-            //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
+                //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
 
-        })
-        //if the call is failing
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
     }
 }
 
@@ -193,28 +193,28 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
 
         // search for total number of this part in the inventory
         $.ajax({
-            type: 'GET',
-            url: '/inventory-set/count/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-set/count/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
-            $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
-            $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
-            $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
-            $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
-            $(".deleteFromInventoryValue" + itemNumber).attr({
-                "max": result.totalAvailable
-            });
-        })
-        //if the call is failing
+                //console.log(result);
+                $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
+                $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+                $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
+                $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
+                $(".deleteFromInventoryValue" + itemNumber).attr({
+                    "max": result.totalAvailable
+                });
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
 
 
     } else if (itemType == 'moc') {
@@ -222,28 +222,28 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
 
         // search for total number of this part in the inventory
         $.ajax({
-            type: 'GET',
-            url: '/inventory-moc/count/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-moc/count/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
-            $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
-            $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
-            $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
-            $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
-            $(".deleteFromInventoryValue" + itemNumber).attr({
-                "max": result.totalAvailable
-            });
-        })
-        //if the call is failing
+                //console.log(result);
+                $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
+                $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
+                $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
+                $(".deletePartMaxQuantityValue" + itemNumber).val(result.totalAvailable);
+                $(".deleteFromInventoryValue" + itemNumber).attr({
+                    "max": result.totalAvailable
+                });
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
     }
 }
 
@@ -271,43 +271,43 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
         // search for total number of this set in the inventory
 
         $.ajax({
-            type: 'GET',
-            url: '/inventory-set/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-set/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
-            $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
-        })
-        //if the call is failing
+                //console.log(result);
+                $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
 
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
 
         $.ajax({
-            type: 'GET',
-            url: '/inventory-moc/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
-            dataType: 'json',
-            contentType: 'application/json'
-        })
-        // if call is successful
+                type: 'GET',
+                url: '/inventory-moc/get-in-your-sets/' + loggedInUserName + '/' + itemNumber,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            // if call is successful
             .done(function (result) {
-            //console.log(result);
-            $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
-        })
-        //if the call is failing
+                //console.log(result);
+                $(".in-your-sets-" + itemNumber).text(result.totalInYourSetsString);
+            })
+            //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR.status);
-            console.log(error);
-            console.log(errorThrown);
-        });
+                console.log(jqXHR.status);
+                console.log(error);
+                console.log(errorThrown);
+            });
     }
 }
 
@@ -1475,6 +1475,350 @@ $(document).on('click', '.deleteBtn', function (event) {
             });
     }
 });
+
+///////////////////////////////sets/////////////////////////////
+
+$(document).on('click', '.itemLock', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the set name and the permanent initial value
+    let itemLockSetNameValue = $(this).parent().find(".itemLockSetNameValue").val();
+    let itemLockPermanentBuildValue = $(this).parent().find(".itemLockPermanentBuildValue").val();
+
+    updatedItemLockPermanentBuildValue = 0;
+    //if the item is permanent build switch to the opposite
+    if (itemLockPermanentBuildValue == 1) {
+        updatedItemLockPermanentBuildValue = 0;
+    } else {
+        updatedItemLockPermanentBuildValue = 1;
+    }
+    console.log(itemLockSetNameValue);
+    //create the payload object (what data we send to the api call)
+    const updateSetByNameObject = {
+        set_name: itemLockSetNameValue,
+        permanent_build: updatedItemLockPermanentBuildValue
+    };
+
+    //make the api call using the payload above
+    $.ajax({
+            type: 'PUT',
+            url: '/inventory-set/update-permanent-build',
+            dataType: 'json',
+            data: JSON.stringify(updateSetByNameObject),
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (result) {
+            console.log(result);
+            //show that the button is locked
+            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            //update the inventory after lock
+            showSetsInInventory(loggedInUserName);
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            alert('Incorrect Username or Password');
+        });
+});
+
+
+$(document).on('click', '.storageBinButton', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the set name and the permanent initial value
+    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinSetNumValue = $(this).parent().find(".storageBinSetNumValue").val();
+
+    //basic validation
+    if (storageBinValue == "") {
+        alert("Type a bin/drawer storage location");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
+
+        //create the payload object (what data we send to the api call)
+        const storageBinObject = {
+            loggedInUserName: loggedInUserName,
+            storage_location: storageBinValue,
+            set_num: storageBinSetNumValue
+        };
+
+        console.log(storageBinObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'PUT',
+                url: '/inventory-set/add-storage-bin',
+                dataType: 'json',
+                data: JSON.stringify(storageBinObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                alert("Added bin/storage location");
+
+                //update the inventory after lock
+                showSetsInInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
+});
+
+
+
+$(document).on('click', '.deleteBtn', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the set name and the permanent initial value
+    let deleteSetNumValue = $(this).parent().find(".deleteSetNumValue").val();
+    let deleteSetIDValue = $(this).parent().find(".deleteSetIDValue").val();
+    let deleteSetQuantityValue = $(this).parent().find(".deleteSetQuantityValue").val();
+    let deleteSetMaxQuantityValue = $(this).parent().find(".deleteSetMaxQuantityValue" + deleteSetNumValue).val();
+
+    let deleteFromInventoryValue = $(this).parent().find(".deleteFromInventoryValue" + deleteSetNumValue).val();
+
+    //basic validation (not able to delete 0 sets or more sets than we have in the inventory)
+    if (deleteSetMaxQuantityValue < deleteFromInventoryValue) {
+        alert("You only have " + deleteSetMaxQuantityValue + " sets to delete.");
+    } else if (deleteFromInventoryValue == 0) {
+        alert("Enter the number of sets to delete.");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
+
+        //create the payload object (what data we send to the api call)
+        const deleteSetByNameObject = {
+            set_name: deleteSetNumValue,
+            deleteFromInventoryValue: deleteFromInventoryValue,
+            deleteSetIDValue: deleteSetIDValue,
+            deleteSetQuantityValue: deleteSetQuantityValue,
+            deleteSetMaxQuantityValue: deleteSetMaxQuantityValue
+        };
+
+        console.log(deleteSetByNameObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'DELETE',
+                url: '/inventory-set/delete-set-by-id',
+                dataType: 'json',
+                data: JSON.stringify(deleteSetByNameObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                //show that the button is locked
+                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                alert("item(s) deleted from Inventory");
+
+                //update the inventory after lock
+                showSetsInInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
+});
+
+
+
+
+////////////////////moc/////////////////////////////////
+
+$(document).on('click', '.itemLock', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the moc name and the permanent initial value
+    let itemLockMocNameValue = $(this).parent().find(".itemLockMocNameValue").val();
+    let itemLockPermanentBuildValue = $(this).parent().find(".itemLockPermanentBuildValue").val();
+
+    updatedItemLockPermanentBuildValue = 0;
+    //if the item is permanent build switch to the opposite
+    if (itemLockPermanentBuildValue == 1) {
+        updatedItemLockPermanentBuildValue = 0;
+    } else {
+        updatedItemLockPermanentBuildValue = 1;
+    }
+    console.log(itemLockMocNameValue);
+    //create the payload object (what data we send to the api call)
+    const updateMocByNameObject = {
+        moc_name: itemLockMocNameValue,
+        permanent_build: updatedItemLockPermanentBuildValue
+    };
+
+    //make the api call using the payload above
+    $.ajax({
+            type: 'PUT',
+            url: '/inventory-moc/update-permanent-build',
+            dataType: 'json',
+            data: JSON.stringify(updateMocByNameObject),
+            contentType: 'application/json'
+        })
+        //if call is successful
+        .done(function (result) {
+            console.log(result);
+            //show that the button is locked
+            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            //update the inventory after lock
+            showMocsInInventory(loggedInUserName);
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            alert('Incorrect Username or Password');
+        });
+});
+
+
+$(document).on('click', '.storageBinButton', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the moc name and the permanent initial value
+    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinMocNumValue = $(this).parent().find(".storageBinMocNumValue").val();
+
+    //basic validation
+    if (storageBinValue == "") {
+        alert("Type a bin/drawer storage location");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
+
+        //create the payload object (what data we send to the api call)
+        const storageBinObject = {
+            loggedInUserName: loggedInUserName,
+            storage_location: storageBinValue,
+            moc_num: storageBinMocNumValue
+        };
+
+        console.log(storageBinObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'PUT',
+                url: '/inventory-moc/add-storage-bin',
+                dataType: 'json',
+                data: JSON.stringify(storageBinObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                alert("Added bin/storage location");
+
+                //update the inventory after lock
+                showMocsInInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
+});
+
+
+
+$(document).on('click', '.deleteBtn', function (event) {
+    event.preventDefault();
+
+    //get the loggedInUserName in order to update the inventory after lock
+    const loggedInUserName = $("#loggedInUserName").val();
+
+    //get the moc name and the permanent initial value
+    let deleteMocNumValue = $(this).parent().find(".deleteMocNumValue").val();
+    let deleteMocIDValue = $(this).parent().find(".deleteMocIDValue").val();
+    let deleteMocQuantityValue = $(this).parent().find(".deleteMocQuantityValue").val();
+    let deleteMocMaxQuantityValue = $(this).parent().find(".deleteMocMaxQuantityValue" + deleteMocNumValue).val();
+
+    let deleteFromInventoryValue = $(this).parent().find(".deleteFromInventoryValue" + deleteMocNumValue).val();
+
+    //basic validation (not able to delete 0 mocs or more mocs than we have in the inventory)
+    if (deleteMocMaxQuantityValue < deleteFromInventoryValue) {
+        alert("You only have " + deleteMocMaxQuantityValue + " mocs to delete.");
+    } else if (deleteFromInventoryValue == 0) {
+        alert("Enter the number of mocs to delete.");
+    }
+    //if the input is valid ...
+    else {
+        //prompt "are you sure?"
+
+        //create the payload object (what data we send to the api call)
+        const deleteMocByNameObject = {
+            moc_name: deleteMocNumValue,
+            deleteFromInventoryValue: deleteFromInventoryValue,
+            deleteMocIDValue: deleteMocIDValue,
+            deleteMocQuantityValue: deleteMocQuantityValue,
+            deleteMocMaxQuantityValue: deleteMocMaxQuantityValue
+        };
+
+        console.log(deleteMocByNameObject);
+
+        //make the api call using the payload above
+        $.ajax({
+                type: 'DELETE',
+                url: '/inventory-moc/delete-moc-by-id',
+                dataType: 'json',
+                data: JSON.stringify(deleteMocByNameObject),
+                contentType: 'application/json'
+            })
+            //if call is successful
+            .done(function (result) {
+                console.log(result);
+                //show that the button is locked
+                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                alert("item(s) deleted from Inventory");
+
+                //update the inventory after lock
+                showMocsInInventory(loggedInUserName);
+            })
+            //if the call is failing
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Incorrect Username or Password');
+            });
+    }
+});
+
 
 $(".search-form").submit(function (event) {
     event.preventDefault();

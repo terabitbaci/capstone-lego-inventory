@@ -218,6 +218,7 @@ to create:
 - showSetsInInventory(loggedInUserName); start from 226 and 456
 - showMocsInInventory(loggedInUserName);
 
+DONE 03/20/2019
 In the client.js update the following part functionalities to work with the mocs and sets
 '/inventory-part/update-permanent-build',
 '/inventory-part/add-storage-bin',

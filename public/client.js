@@ -79,9 +79,9 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.part_num + '" >';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.set_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.set_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + resultValue.quantity + '" >';
                     buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
@@ -128,13 +128,13 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '<td>Delete up to ';
                     buildTheHtmlOutput += resultValue.quantity;
                     buildTheHtmlOutput += ' from set / moc / part ';
-                    buildTheHtmlOutput += resultValue.set_num;
+                    buildTheHtmlOutput += resultValue.moc_num;
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.part_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.part_num + '" value="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.part_num + '" >';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.moc_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.moc_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + resultValue.quantity + '" >';
                     buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
@@ -362,7 +362,7 @@ function showSetsInInventory(loggedInUserName) {
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
-                        //bookmark test the output of the sets
+                            //bookmark test the output of the sets
 
                             let currentSetNumber = "";
                             let oldSetNumber = "";
@@ -378,18 +378,18 @@ function showSetsInInventory(loggedInUserName) {
                                     if (currentSetNumber != oldSetNumber) {
                                         buildTheHtmlOutput += '<tr class="inventory-item">';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.part_num + '</a>';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.set_num + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
                                         buildTheHtmlOutput += '<a href="#" class="showSetDetails">';
-                                        buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.set_img_url + '" alt="' + resultValue.name + '" height="60px">';
                                         buildTheHtmlOutput += '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.part_name + '</a>';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.name + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
-                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockSetNameValue">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.name + '" class="itemLockSetNameValue">';
 
                                         //if the item is not locked ...
                                         if (resultValue.permanent_build == 0) {
@@ -418,18 +418,18 @@ function showSetsInInventory(loggedInUserName) {
                                         //                    buildTheHtmlOutput += 'PART details';
                                         buildTheHtmlOutput += '<table class="inventory-set-details">';
                                         buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
-                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.set_num + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.name + '</th>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.set_img_url + '" alt="' + resultValue.name + '" height="90px"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.set_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">available</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.set_num + '">-</td>';
 
                                         buildTheHtmlOutput += '</tr>';
                                         if (resultValue.set_num != 0) {
@@ -437,13 +437,13 @@ function showSetsInInventory(loggedInUserName) {
                                             buildTheHtmlOutput += '<tr>';
                                             buildTheHtmlOutput += '<td colspan="2"></td>';
                                             buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.part_num + '"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.set_num + '"></td>';
                                             buildTheHtmlOutput += '</tr>';
                                             buildTheHtmlOutput += '<tr>';
                                         }
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.year + '</td>';
                                         buildTheHtmlOutput += '</tr>';
 
 
@@ -456,7 +456,7 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
 
-                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.set_num + '" >';
                                         buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
                                         buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
@@ -473,7 +473,7 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2">Wishlist';
                                         buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
                                         buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.set_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
 
 
@@ -488,7 +488,7 @@ function showSetsInInventory(loggedInUserName) {
                                             buildTheHtmlOutput += '<tr>';
                                             buildTheHtmlOutput += '<td colspan="2"></td>';
                                             buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
-                                            buildTheHtmlOutput += '<td class="getSetsToDelete' + resultValue.part_num + '">';
+                                            buildTheHtmlOutput += '<td class="getSetsToDelete' + resultValue.set_num + '">';
                                             buildTheHtmlOutput += '</td>';
                                             buildTheHtmlOutput += '</tr>';
                                         } else {
@@ -509,11 +509,11 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</tr>';
 
                                         //call the function to populate the inventory value
-                                        getTotalInInventory(resultValue.part_num, "set", loggedInUserName);
-                                        getPartsToDelete(resultValue.part_num, "set", loggedInUserName);
+                                        getTotalInInventory(resultValue.set_num, "set", loggedInUserName);
+                                        getPartsToDelete(resultValue.set_num, "set", loggedInUserName);
 
                                         //call the function to dynamically populate "in your sets"
-                                        getInYourSets(resultValue.part_num, "set", loggedInUserName);
+                                        getInYourSets(resultValue.set_num, "set", loggedInUserName);
 
                                         //check if the current set was already shown (so it doesn't show twice)
                                         oldSetNumber = currentSetNumber;
@@ -555,7 +555,7 @@ function showMocsInInventory(loggedInUserName) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //            console.log(aggregateResult);
+            console.log(aggregateResult);
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
@@ -592,7 +592,7 @@ function showMocsInInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            //                            console.log(detailedResult);
+                            console.log(detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
@@ -610,18 +610,18 @@ function showMocsInInventory(loggedInUserName) {
                                     if (currentMocNumber != oldMocNumber) {
                                         buildTheHtmlOutput += '<tr class="inventory-item">';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.part_num + '</a>';
+                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.moc_num + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
                                         buildTheHtmlOutput += '<a href="#" class="showMocDetails">';
-                                        buildTheHtmlOutput += '<img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="60px">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.moc_img_url + '" alt="' + resultValue.moc_name + '" height="60px">';
                                         buildTheHtmlOutput += '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.part_name + '</a>';
+                                        buildTheHtmlOutput += '<a href="#" class="showMocDetails">' + resultValue.moc_name + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
-                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.part_name + '" class="itemLockMocNameValue">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.moc_name + '" class="itemLockMocNameValue">';
 
                                         //if the item is not locked ...
                                         if (resultValue.permanent_build == 0) {
@@ -650,18 +650,18 @@ function showMocsInInventory(loggedInUserName) {
                                         //                    buildTheHtmlOutput += 'PART details';
                                         buildTheHtmlOutput += '<table class="inventory-moc-details">';
                                         buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.part_num + '</th>';
-                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.part_name + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="2">' + resultValue.moc_num + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.moc_name + '</th>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.part_img_url + '" alt="' + resultValue.part_name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.moc_img_url + '" alt="' + resultValue.moc_name + '" height="90px"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.moc_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">available</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.moc_num + '">-</td>';
 
                                         buildTheHtmlOutput += '</tr>';
                                         if (resultValue.set_num != 0) {
@@ -669,13 +669,13 @@ function showMocsInInventory(loggedInUserName) {
                                             buildTheHtmlOutput += '<tr>';
                                             buildTheHtmlOutput += '<td colspan="2"></td>';
                                             buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.part_num + '"></td>';
+                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.moc_num + '"></td>';
                                             buildTheHtmlOutput += '</tr>';
                                             buildTheHtmlOutput += '<tr>';
                                         }
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
-                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.part_year_from + ' - ' + resultValue.part_year_to + '</td>';
+                                        buildTheHtmlOutput += '<td colspan="2">' + resultValue.year + '</td>';
                                         buildTheHtmlOutput += '</tr>';
 
 
@@ -688,7 +688,7 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
 
-                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.moc_num + '" >';
                                         buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
                                         buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
@@ -705,7 +705,7 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2">Wishlist';
                                         buildTheHtmlOutput += '<i class="fas fa-shopping-cart"></i>';
                                         buildTheHtmlOutput += '</td>';
-                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.part_num + '">-</td>';
+                                        buildTheHtmlOutput += '<td colspan="2" class="totalInWishListAvailable' + resultValue.moc_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
 
 
@@ -720,7 +720,7 @@ function showMocsInInventory(loggedInUserName) {
                                             buildTheHtmlOutput += '<tr>';
                                             buildTheHtmlOutput += '<td colspan="2"></td>';
                                             buildTheHtmlOutput += '<td colspan="2">delete from inventory</td>';
-                                            buildTheHtmlOutput += '<td class="getMocsToDelete' + resultValue.part_num + '">';
+                                            buildTheHtmlOutput += '<td class="getMocsToDelete' + resultValue.moc_num + '">';
                                             buildTheHtmlOutput += '</td>';
                                             buildTheHtmlOutput += '</tr>';
                                         } else {
@@ -741,11 +741,11 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</tr>';
 
                                         //call the function to populate the inventory value
-                                        getTotalInInventory(resultValue.part_num, "moc", loggedInUserName);
-                                        getPartsToDelete(resultValue.part_num, "moc", loggedInUserName);
+                                        getTotalInInventory(resultValue.moc_num, "moc", loggedInUserName);
+                                        getPartsToDelete(resultValue.moc_num, "moc", loggedInUserName);
 
                                         //call the function to dynamically populate "in your sets"
-                                        getInYourSets(resultValue.part_num, "moc", loggedInUserName);
+                                        getInYourSets(resultValue.moc_num, "moc", loggedInUserName);
 
                                         //check if the current moc was already shown (so it doesn't show twice)
                                         oldMocNumber = currentMocNumber;
@@ -1303,6 +1303,17 @@ $(document).on("click", ".showPartDetails", function (event) {
     event.preventDefault();
     $(this).parent().parent().next().toggle("slow");
 });
+
+$(document).on("click", ".showSetDetails", function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().toggle("slow");
+});
+
+$(document).on("click", ".showMocDetails", function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next().toggle("slow");
+});
+
 
 $('.showMOCDetails').click(function (event) {
     event.preventDefault();

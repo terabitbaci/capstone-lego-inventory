@@ -586,22 +586,22 @@ app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
             //loop through the entire array of sets ...
             for (let i = 0; i < results.length; i++) {
                 //... and sum up the quantities for them
-                totalQuantity = totalQuantity + parseInt(results[i].quantity);
+                totalQuantity = totalQuantity + 1;
 
                 //if the set is not permanent build ...
                 if (parseInt(results[i].permanent_build) == 0) {
                     //... count it as available
-                    totalAvailable = totalAvailable + parseInt(results[i].quantity);
+                    totalAvailable = totalAvailable + 1;
                 }
 
                 //if the set is in the wishlist ...
                 if (parseInt(results[i].in_wishlist) == 1) {
                     //... count it
-                    totalInWishList = totalInWishList + parseInt(results[i].quantity);
+                    totalInWishList = totalInWishList + 1;
                 }
             }
 
-            //console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
+            console.log("sets --> ", req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
             //return the sum of all quantities for a specific set
             res.json({
                 totalQuantity,
@@ -819,22 +819,22 @@ app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
             //loop through the entire array of mocs ...
             for (let i = 0; i < results.length; i++) {
                 //... and sum up the quantities for them
-                totalQuantity = totalQuantity + parseInt(results[i].quantity);
+                totalQuantity = totalQuantity + 1;
 
                 //if the moc is not permanent build ...
                 if (parseInt(results[i].permanent_build) == 0) {
                     //... count it as available
-                    totalAvailable = totalAvailable + parseInt(results[i].quantity);
+                    totalAvailable = totalAvailable + 1;
                 }
 
                 //if the moc is in the wishlist ...
                 if (parseInt(results[i].in_wishlist) == 1) {
                     //... count it
-                    totalInWishList = totalInWishList + parseInt(results[i].quantity);
+                    totalInWishList = totalInWishList + 1;
                 }
             }
 
-            //console.log(req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
+            console.log("mocs --> ", req.params.itemNumber, totalQuantity, totalAvailable, totalInWishList);
             //return the sum of all quantities for a specific moc
             res.json({
                 totalQuantity,

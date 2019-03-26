@@ -163,6 +163,7 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
 }
 
 function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
+    //console.log(itemNumber, itemType, loggedInUserName);
     if (itemType == 'part') {
         // search for total number of this part in the inventory
         $.ajax({
@@ -190,8 +191,6 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             });
     } else if (itemType == 'set') {
         // search for total number of this set in the inventory
-
-        // search for total number of this part in the inventory
         $.ajax({
                 type: 'GET',
                 url: '/inventory-set/count/' + loggedInUserName + '/' + itemNumber,
@@ -200,7 +199,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                //console.log(result);
+                console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
                 $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
@@ -219,8 +218,6 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
 
     } else if (itemType == 'moc') {
         // search for total number of this moc in the inventory
-
-        // search for total number of this part in the inventory
         $.ajax({
                 type: 'GET',
                 url: '/inventory-moc/count/' + loggedInUserName + '/' + itemNumber,
@@ -229,7 +226,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                //console.log(result);
+                console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
                 $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);

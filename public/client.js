@@ -199,7 +199,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result);
+                //console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
                 $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
@@ -226,7 +226,7 @@ function getTotalInInventory(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result);
+                // console.log(result);
                 $(".totalInInventoryValue" + itemNumber).text(result.totalQuantity);
                 $(".totalInInventoryAvailable" + itemNumber).text(result.totalAvailable);
                 $(".totalInWishListAvailable" + itemNumber).text(result.totalInWishList);
@@ -310,6 +310,7 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 
 
 function showSetsInInventory(loggedInUserName) {
+    console.log("inside showSetsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-set/show-aggregate/' + loggedInUserName,
@@ -318,15 +319,14 @@ function showSetsInInventory(loggedInUserName) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
+            //console.log(aggregateResult);
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
                 alert("no parts in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                //                $("#inventory-table #inventory-sets-table").html("");
-
+                $("#inventory-table #inventory-sets-table").html("");
 
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
@@ -355,7 +355,7 @@ function showSetsInInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            console.log(detailedResult);
+                            //console.log("detailed results sets", detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
@@ -392,7 +392,7 @@ function showSetsInInventory(loggedInUserName) {
                                         if (resultValue.permanent_build == 0) {
                                             //display it as is
                                             buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<button class="itemLockSet">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -400,7 +400,7 @@ function showSetsInInventory(loggedInUserName) {
                                         else {
                                             //display the lock icon instead
                                             buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<button class="itemLockSet itemLockActive">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -544,6 +544,7 @@ function showSetsInInventory(loggedInUserName) {
 }
 
 function showMocsInInventory(loggedInUserName) {
+    console.log("inside showMocsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-moc/show-aggregate/' + loggedInUserName,
@@ -552,14 +553,14 @@ function showMocsInInventory(loggedInUserName) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
+            //console.log(aggregateResult);
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
                 alert("no parts in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                //                $("#inventory-table #inventory-mocs-table").html("");
+                $("#inventory-table #inventory-mocs-table").html("");
 
 
                 //create the table head separately from the rest of the rows
@@ -589,7 +590,7 @@ function showMocsInInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            console.log(detailedResult);
+                            //console.log("detailed results mocs", detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
@@ -624,7 +625,7 @@ function showMocsInInventory(loggedInUserName) {
                                         if (resultValue.permanent_build == 0) {
                                             //display it as is
                                             buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<button class="itemLockMoc">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -632,7 +633,7 @@ function showMocsInInventory(loggedInUserName) {
                                         else {
                                             //display the lock icon instead
                                             buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<button class="itemLockMoc itemLockActive">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -777,6 +778,7 @@ function showMocsInInventory(loggedInUserName) {
 
 
 function showPartsInInventory(loggedInUserName) {
+    console.log("inside showPartsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-part/show-aggregate/' + loggedInUserName,
@@ -792,7 +794,7 @@ function showPartsInInventory(loggedInUserName) {
                 alert("no parts in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                //                $("#inventory-table #inventory-parts-table").html("");
+                $("#inventory-table #inventory-parts-table").html("");
 
 
                 //create the table head separately from the rest of the rows
@@ -822,7 +824,7 @@ function showPartsInInventory(loggedInUserName) {
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            //                            console.log(detailedResult);
+                            //console.log("detailed results parts", detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
@@ -857,7 +859,7 @@ function showPartsInInventory(loggedInUserName) {
                                         if (resultValue.permanent_build == 0) {
                                             //display it as is
                                             buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock">';
+                                            buildTheHtmlOutput += '<button class="itemLockPart">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -865,7 +867,7 @@ function showPartsInInventory(loggedInUserName) {
                                         else {
                                             //display the lock icon instead
                                             buildTheHtmlOutput += '<input type="hidden" value="1" class="itemLockPermanentBuildValue">';
-                                            buildTheHtmlOutput += '<button class="itemLock itemLockActive">';
+                                            buildTheHtmlOutput += '<button class="itemLockPart itemLockActive">';
                                             buildTheHtmlOutput += '<i class="fas fa-lock fa-lg"></i>';
                                             buildTheHtmlOutput += '</button>';
                                         }
@@ -1322,7 +1324,7 @@ $('.showSetDetails').click(function (event) {
     $(this).parent().parent().next().toggle("slow");
 });
 
-$(document).on('click', '.itemLock', function (event) {
+$(document).on('click', '.itemLockPart', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
@@ -1358,7 +1360,7 @@ $(document).on('click', '.itemLock', function (event) {
         .done(function (result) {
             console.log(result);
             //show that the button is locked
-            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
@@ -1479,7 +1481,7 @@ $(document).on('click', '.deleteBtn', function (event) {
             .done(function (result) {
                 console.log(result);
                 //show that the button is locked
-                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock
@@ -1499,7 +1501,7 @@ $(document).on('click', '.deleteBtn', function (event) {
 
 ///////////////////////////////sets/////////////////////////////
 
-$(document).on('click', '.itemLock', function (event) {
+$(document).on('click', '.itemLockSet', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
@@ -1535,7 +1537,7 @@ $(document).on('click', '.itemLock', function (event) {
         .done(function (result) {
             console.log(result);
             //show that the button is locked
-            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
@@ -1656,7 +1658,7 @@ $(document).on('click', '.deleteBtn', function (event) {
             .done(function (result) {
                 console.log(result);
                 //show that the button is locked
-                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock
@@ -1679,7 +1681,7 @@ $(document).on('click', '.deleteBtn', function (event) {
 
 ////////////////////moc/////////////////////////////////
 
-$(document).on('click', '.itemLock', function (event) {
+$(document).on('click', '.itemLockMoc', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
@@ -1715,7 +1717,7 @@ $(document).on('click', '.itemLock', function (event) {
         .done(function (result) {
             console.log(result);
             //show that the button is locked
-            $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+            $(this).parent().find(".itemLockMoc").toggleClass("itemLockActive");
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
@@ -1836,7 +1838,7 @@ $(document).on('click', '.deleteBtn', function (event) {
             .done(function (result) {
                 console.log(result);
                 //show that the button is locked
-                $(this).parent().find(".itemLock").toggleClass("itemLockActive");
+                $(this).parent().find(".itemLockMoc").toggleClass("itemLockActive");
                 alert("item(s) deleted from Inventory");
 
                 //update the inventory after lock

@@ -323,7 +323,7 @@ function showSetsInInventory(loggedInUserName) {
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
-                alert("no parts in the inventory");
+                alert("no sets in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
                 $("#inventory-table #inventory-sets-table").html("");
@@ -379,16 +379,17 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
                                         buildTheHtmlOutput += '<a href="#" class="showSetDetails">';
-                                        buildTheHtmlOutput += '<img src="' + resultValue.set_img_url + '" alt="' + resultValue.name + '" height="60px">';
+                                        buildTheHtmlOutput += '<img src="' + resultValue.set_img_url + '" alt="' + resultValue.set_name + '" height="60px">';
                                         buildTheHtmlOutput += '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
-                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.name + '</a>';
+                                        buildTheHtmlOutput += '<a href="#" class="showSetDetails">' + resultValue.set_name + '</a>';
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td class="table-center-cell">';
-                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.name + '" class="itemLockSetNameValue">';
+                                        buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.set_name + '" class="itemLockSetNameValue">';
 
                                         //if the item is not locked ...
+                                        console.log(resultValue.permanent_build);
                                         if (resultValue.permanent_build == 0) {
                                             //display it as is
                                             buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
@@ -416,10 +417,10 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<table class="inventory-set-details">';
                                         buildTheHtmlOutput += '<tr>';
                                         buildTheHtmlOutput += '<th colspan="2">' + resultValue.set_num + '</th>';
-                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.name + '</th>';
+                                        buildTheHtmlOutput += '<th colspan="4">' + resultValue.set_name + '</th>';
                                         buildTheHtmlOutput += '</tr>';
                                         buildTheHtmlOutput += '<tr>';
-                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.set_img_url + '" alt="' + resultValue.name + '" height="90px"></td>';
+                                        buildTheHtmlOutput += '<td colspan="2"><img src="' + resultValue.set_img_url + '" alt="' + resultValue.set_name + '" height="90px"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">total in inventory</td>';
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryValue' + resultValue.set_num + '">-</td>';
                                         buildTheHtmlOutput += '</tr>';
@@ -453,9 +454,9 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
 
-                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.set_num + '" >';
-                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
-                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinSetNumValue" value="' + resultValue.set_num + '" >';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValueSet" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButtonSet">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
                                         buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
                                         buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
@@ -557,7 +558,7 @@ function showMocsInInventory(loggedInUserName) {
             //            console.log(aggregateResult.parts);
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
-                alert("no parts in the inventory");
+                alert("no mocs in the inventory");
             } else {
                 //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
                 $("#inventory-table #inventory-mocs-table").html("");
@@ -686,9 +687,9 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</td>';
                                         buildTheHtmlOutput += '<td>';
 
-                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.moc_num + '" >';
-                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
-                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<input type="hidden" class="storageBinMocNumValue" value="' + resultValue.moc_num + '" >';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValueMoc" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButtonMoc">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
                                         buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
                                         buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
@@ -921,8 +922,8 @@ function showPartsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td>';
 
                                         buildTheHtmlOutput += '<input type="hidden" class="storageBinPartNumValue" value="' + resultValue.part_num + '" >';
-                                        buildTheHtmlOutput += '<input type="text" class="storageBinValue" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
-                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButton">';
+                                        buildTheHtmlOutput += '<input type="text" class="storageBinValuePart" value="' + resultValue.storage_location + '" placeholder="Enter storage location">';
+                                        buildTheHtmlOutput += '<button class="sm-btn storageBinButtonPart">';
                                         buildTheHtmlOutput += '<div class="tooltip">';
                                         buildTheHtmlOutput += '<span class="tooltiptext">Add bin/drawer storage location</span>';
                                         buildTheHtmlOutput += '<i class="fas fa-plus-circle"> </i>';
@@ -1377,18 +1378,18 @@ $(document).on('click', '.itemLockPart', function (event) {
 
 
 
-$(document).on('click', '.storageBinButton', function (event) {
+$(document).on('click', '.storageBinButtonPart', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
     const loggedInUserName = $("#loggedInUserName").val();
 
     //get the part name and the permanent initial value
-    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinValuePart = $(this).parent().find(".storageBinValuePart").val();
     let storageBinPartNumValue = $(this).parent().find(".storageBinPartNumValue").val();
 
     //basic validation
-    if (storageBinValue == "") {
+    if (storageBinValuePart == "") {
         alert("Type a bin/drawer storage location");
     }
     //if the input is valid ...
@@ -1398,7 +1399,7 @@ $(document).on('click', '.storageBinButton', function (event) {
         //create the payload object (what data we send to the api call)
         const storageBinObject = {
             loggedInUserName: loggedInUserName,
-            storage_location: storageBinValue,
+            storage_location: storageBinValuePart,
             part_num: storageBinPartNumValue
         };
 
@@ -1524,7 +1525,7 @@ $(document).on('click', '.itemLockSet', function (event) {
         set_name: itemLockSetNameValue,
         permanent_build: updatedItemLockPermanentBuildValue
     };
-
+    //console.log(updateSetByNameObject);
     //make the api call using the payload above
     $.ajax({
             type: 'PUT',
@@ -1537,6 +1538,7 @@ $(document).on('click', '.itemLockSet', function (event) {
         .done(function (result) {
             console.log(result);
             //show that the button is locked
+            console.log($(this).parent().find(".itemLockSet"));
             $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
@@ -1553,18 +1555,18 @@ $(document).on('click', '.itemLockSet', function (event) {
 });
 
 
-$(document).on('click', '.storageBinButton', function (event) {
+$(document).on('click', '.storageBinButtonSet', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
     const loggedInUserName = $("#loggedInUserName").val();
 
     //get the set name and the permanent initial value
-    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinValueSet = $(this).parent().find(".storageBinValueSet").val();
     let storageBinSetNumValue = $(this).parent().find(".storageBinSetNumValue").val();
 
     //basic validation
-    if (storageBinValue == "") {
+    if (storageBinValueSet == "") {
         alert("Type a bin/drawer storage location");
     }
     //if the input is valid ...
@@ -1574,7 +1576,7 @@ $(document).on('click', '.storageBinButton', function (event) {
         //create the payload object (what data we send to the api call)
         const storageBinObject = {
             loggedInUserName: loggedInUserName,
-            storage_location: storageBinValue,
+            storage_location: storageBinValueSet,
             set_num: storageBinSetNumValue
         };
 
@@ -1734,18 +1736,18 @@ $(document).on('click', '.itemLockMoc', function (event) {
 });
 
 
-$(document).on('click', '.storageBinButton', function (event) {
+$(document).on('click', '.storageBinButtonMoc', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
     const loggedInUserName = $("#loggedInUserName").val();
 
     //get the moc name and the permanent initial value
-    let storageBinValue = $(this).parent().find(".storageBinValue").val();
+    let storageBinValueMoc = $(this).parent().find(".storageBinValueMoc").val();
     let storageBinMocNumValue = $(this).parent().find(".storageBinMocNumValue").val();
 
     //basic validation
-    if (storageBinValue == "") {
+    if (storageBinValueMoc == "") {
         alert("Type a bin/drawer storage location");
     }
     //if the input is valid ...
@@ -1755,7 +1757,7 @@ $(document).on('click', '.storageBinButton', function (event) {
         //create the payload object (what data we send to the api call)
         const storageBinObject = {
             loggedInUserName: loggedInUserName,
-            storage_location: storageBinValue,
+            storage_location: storageBinValueMoc,
             moc_num: storageBinMocNumValue
         };
 

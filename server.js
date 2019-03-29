@@ -81,7 +81,7 @@ app.post('/item/create', function (req, res) {
                 // add set to the database
                 Set.create({
                     set_num: JSON.parse(body).set_num,
-                    name: JSON.parse(body).name,
+                    set_name: JSON.parse(body).name,
                     year: JSON.parse(body).year,
                     theme_id: JSON.parse(body).theme_id,
                     num_parts: JSON.parse(body).num_parts,
@@ -187,7 +187,7 @@ app.post('/item/create', function (req, res) {
             if (Object.keys(JSON.parse(body)).length > 1) {
                 // add moc to the database
                 Moc.create({
-                    moc_num: JSON.parse(body).set_num,
+                    moc_num: JSON.parse(body).moc_num,
                     moc_name: JSON.parse(body).name,
                     year: JSON.parse(body).year,
                     theme_id: JSON.parse(body).theme_id,

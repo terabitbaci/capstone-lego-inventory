@@ -7,7 +7,7 @@ const setSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    name: {
+    set_name: {
         type: String,
         required: false
     },

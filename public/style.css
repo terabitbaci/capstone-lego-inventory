@@ -253,13 +253,13 @@ th .instruction {
 */
 
 .inventory-part-details,
-.inventory-MOC-details,
+.inventory-moc-details,
 .inventory-set-details {
     font-size: 13px;
 }
 
 .inventory-part-details th,
-.inventory-MOC-details th,
+.inventory-moc-details th,
 .inventory-set-details th {
     background-color: #EFC43F;
     color: #FFF;

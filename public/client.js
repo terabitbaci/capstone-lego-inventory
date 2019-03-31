@@ -430,15 +430,15 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.set_num + '">-</td>';
 
                                         buildTheHtmlOutput += '</tr>';
-                                        if (resultValue.set_num != 0) {
-
-                                            buildTheHtmlOutput += '<tr>';
-                                            buildTheHtmlOutput += '<td colspan="2"></td>';
-                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.set_num + '"></td>';
-                                            buildTheHtmlOutput += '</tr>';
-                                            buildTheHtmlOutput += '<tr>';
-                                        }
+                                        //                                        if (resultValue.set_num != 0) {
+                                        //
+                                        //                                            buildTheHtmlOutput += '<tr>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.set_num + '"></td>';
+                                        //                                            buildTheHtmlOutput += '</tr>';
+                                        //                                            buildTheHtmlOutput += '<tr>';
+                                        //                                        }
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
                                         buildTheHtmlOutput += '<td colspan="2">' + resultValue.year + '</td>';
@@ -511,7 +511,7 @@ function showSetsInInventory(loggedInUserName) {
                                         getPartsToDelete(resultValue.set_num, "set", loggedInUserName);
 
                                         //call the function to dynamically populate "in your sets"
-                                        getInYourSets(resultValue.set_num, "set", loggedInUserName);
+                                        //getInYourSets(resultValue.set_num, "set", loggedInUserName);
 
                                         //check if the current set was already shown (so it doesn't show twice)
                                         oldSetNumber = currentSetNumber;
@@ -663,15 +663,15 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<td colspan="2" class="totalInInventoryAvailable' + resultValue.moc_num + '">-</td>';
 
                                         buildTheHtmlOutput += '</tr>';
-                                        if (resultValue.set_num != 0) {
-
-                                            buildTheHtmlOutput += '<tr>';
-                                            buildTheHtmlOutput += '<td colspan="2"></td>';
-                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
-                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.moc_num + '"></td>';
-                                            buildTheHtmlOutput += '</tr>';
-                                            buildTheHtmlOutput += '<tr>';
-                                        }
+                                        //                                        if (resultValue.set_num != 0) {
+                                        //
+                                        //                                            buildTheHtmlOutput += '<tr>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2"></td>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2">in your sets</td>';
+                                        //                                            buildTheHtmlOutput += '<td colspan="2" class="in-your-sets-' + resultValue.moc_num + '"></td>';
+                                        //                                            buildTheHtmlOutput += '</tr>';
+                                        //                                            buildTheHtmlOutput += '<tr>';
+                                        //                                        }
                                         buildTheHtmlOutput += '<td colspan="2"></td>';
                                         buildTheHtmlOutput += '<td colspan="2">appears in years</td>';
                                         buildTheHtmlOutput += '<td colspan="2">' + resultValue.year + '</td>';
@@ -744,7 +744,7 @@ function showMocsInInventory(loggedInUserName) {
                                         getPartsToDelete(resultValue.moc_num, "moc", loggedInUserName);
 
                                         //call the function to dynamically populate "in your sets"
-                                        getInYourSets(resultValue.moc_num, "moc", loggedInUserName);
+                                        //getInYourSets(resultValue.moc_num, "moc", loggedInUserName);
 
                                         //check if the current moc was already shown (so it doesn't show twice)
                                         oldMocNumber = currentMocNumber;

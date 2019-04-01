@@ -637,7 +637,6 @@ function showMocsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '</tr>';
 
 
-
                                         buildTheHtmlOutput += '<tr  class="inventory-item-details" style="display: none;">';
                                         buildTheHtmlOutput += '<td class="inventory-moc-details-wrapper" colspan="4">';
                                         //                    buildTheHtmlOutput += 'PART details';

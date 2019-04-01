@@ -79,8 +79,8 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.set_num + '" value="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deleteSetMaxQuantityValue' + resultValue.set_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.set_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + (resultKey + 1) + '" >';
@@ -132,8 +132,8 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.moc_num + '" value="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deleteMocMaxQuantityValue' + resultValue.moc_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.moc_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + (resultKey + 1) + '" >';
@@ -320,14 +320,12 @@ function showSetsInInventory(loggedInUserName) {
         //if call is successful
         .done(function (aggregateResult) {
             //console.log(aggregateResult);
-            //            console.log(aggregateResult.parts);
+
+            $("#inventory-table #inventory-sets-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
                 alert("no sets in the inventory");
             } else {
-                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                $("#inventory-table #inventory-sets-table").html("");
-
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';
@@ -555,15 +553,11 @@ function showMocsInInventory(loggedInUserName) {
         //if call is successful
         .done(function (aggregateResult) {
             //console.log(aggregateResult);
-            //            console.log(aggregateResult.parts);
+            $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
                 alert("no mocs in the inventory");
             } else {
-                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                $("#inventory-table #inventory-mocs-table").html("");
-
-
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';
@@ -789,15 +783,11 @@ function showPartsInInventory(loggedInUserName) {
         //if call is successful
         .done(function (aggregateResult) {
             //            console.log(aggregateResult);
-            //            console.log(aggregateResult.parts);
+            $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
                 alert("no parts in the inventory");
             } else {
-                //BOOKMARK - uncomment this after the sets and mocs are displayed dynamically in the inventory
-                $("#inventory-table #inventory-parts-table").html("");
-
-
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';

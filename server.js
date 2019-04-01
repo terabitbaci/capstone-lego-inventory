@@ -183,11 +183,12 @@ app.post('/item/create', function (req, res) {
             },
             dataType: 'json',
         }, function (error, response, body) {
+            //console.log(JSON.parse(body));
             // if the search for moc details returns results
             if (Object.keys(JSON.parse(body)).length > 1) {
                 // add moc to the database
                 Moc.create({
-                    moc_num: JSON.parse(body).moc_num,
+                    moc_num: JSON.parse(body).set_num,
                     moc_name: JSON.parse(body).name,
                     year: JSON.parse(body).year,
                     theme_id: JSON.parse(body).theme_id,

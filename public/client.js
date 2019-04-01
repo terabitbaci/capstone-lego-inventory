@@ -31,7 +31,7 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '<input type="hidden" class="deletePartNumValue" value="' + resultValue.part_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deletePartIDValue" value="' + resultValue._id + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deletePartQuantityValue" value="' + resultValue.quantity + '" >';
-                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                    buildTheHtmlOutput += '<button class="sm-btn deleteBtnPart">';
                     buildTheHtmlOutput += '<div class="tooltip">';
                     buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
                     buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
@@ -64,27 +64,27 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                //console.log(result);
+                console.log(result);
 
 
                 let buildTheHtmlOutput = "<table>";
 
-                $.each(result.parts, function (resultKey, resultValue) {
+                $.each(result.sets, function (resultKey, resultValue) {
                     buildTheHtmlOutput += '<tr>';
 
                     buildTheHtmlOutput += '<td>Delete up to ';
-                    buildTheHtmlOutput += resultValue.quantity;
+                    buildTheHtmlOutput += (resultKey + 1);
                     buildTheHtmlOutput += ' from set / moc / part ';
                     buildTheHtmlOutput += resultValue.set_num;
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
                     buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.set_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.set_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.set_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
-                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + resultValue.quantity + '" >';
-                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteSetQuantityValue" value="' + (resultKey + 1) + '" >';
+                    buildTheHtmlOutput += '<button class="sm-btn deleteBtnSet">';
                     buildTheHtmlOutput += '<div class="tooltip">';
                     buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
                     buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
@@ -117,27 +117,27 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                //console.log(result);
+                console.log(result);
 
 
                 let buildTheHtmlOutput = "<table>";
 
-                $.each(result.parts, function (resultKey, resultValue) {
+                $.each(result.mocs, function (resultKey, resultValue) {
                     buildTheHtmlOutput += '<tr>';
 
                     buildTheHtmlOutput += '<td>Delete up to ';
-                    buildTheHtmlOutput += resultValue.quantity;
+                    buildTheHtmlOutput += (resultKey + 1);
                     buildTheHtmlOutput += ' from set / moc / part ';
                     buildTheHtmlOutput += resultValue.moc_num;
                     buildTheHtmlOutput += '</td>';
 
                     buildTheHtmlOutput += '<td>';
                     buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="' + resultValue.quantity + '">';
-                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.moc_num + '" value="' + resultValue.quantity + '">';
+                    buildTheHtmlOutput += '<input type="hidden" class="sm-input deletePartMaxQuantityValue' + resultValue.moc_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.moc_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';
-                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + resultValue.quantity + '" >';
-                    buildTheHtmlOutput += '<button class="sm-btn deleteBtn">';
+                    buildTheHtmlOutput += '<input type="hidden" class="deleteMocQuantityValue" value="' + (resultKey + 1) + '" >';
+                    buildTheHtmlOutput += '<button class="sm-btn deleteBtnMoc">';
                     buildTheHtmlOutput += '<div class="tooltip">';
                     buildTheHtmlOutput += '<span class="tooltiptext">delete from Inventory</span>';
                     buildTheHtmlOutput += '<i class="fas fa-minus-circle"> </i>';
@@ -1435,7 +1435,7 @@ $(document).on('click', '.storageBinButtonPart', function (event) {
 
 
 
-$(document).on('click', '.deleteBtn', function (event) {
+$(document).on('click', '.deleteBtnPart', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
@@ -1613,7 +1613,7 @@ $(document).on('click', '.storageBinButtonSet', function (event) {
 
 
 
-$(document).on('click', '.deleteBtn', function (event) {
+$(document).on('click', '.deleteBtnSet', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock
@@ -1793,7 +1793,7 @@ $(document).on('click', '.storageBinButtonMoc', function (event) {
 
 
 
-$(document).on('click', '.deleteBtn', function (event) {
+$(document).on('click', '.deleteBtnMoc', function (event) {
     event.preventDefault();
 
     //get the loggedInUserName in order to update the inventory after lock

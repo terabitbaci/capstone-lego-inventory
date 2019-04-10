@@ -1279,7 +1279,24 @@ $(".add-to-inventory-form").submit(function (event) {
 
 $('#filterViewButtons select').change(function (event) {
     event.preventDefault();
-    alert("view all clicked");
+    let selectedOption = $("#filterViewButtons select").val();
+    if (selectedOption == "viewAll") {
+        $("#inventory-sets-table").show();
+        $("#inventory-mocs-table").show();
+        $("#inventory-parts-table").show();
+    } else if (selectedOption == "viewSets") {
+        $("#inventory-sets-table").show();
+        $("#inventory-mocs-table").hide();
+        $("#inventory-parts-table").hide();
+    } else if (selectedOption == "viewMOCs") {
+        $("#inventory-sets-table").hide();
+        $("#inventory-mocs-table").show();
+        $("#inventory-parts-table").hide();
+    } else if (selectedOption == "viewParts") {
+        $("#inventory-sets-table").hide();
+        $("#inventory-mocs-table").hide();
+        $("#inventory-parts-table").show();
+    }
 });
 
 $('#filterLockButtons select').change(function (event) {

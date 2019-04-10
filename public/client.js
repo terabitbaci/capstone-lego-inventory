@@ -67,14 +67,17 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                 console.log(result);
 
 
-                let buildTheHtmlOutput = "<table>";
+                let buildTheHtmlOutput = "";
 
                 $.each(result.sets, function (resultKey, resultValue) {
+                    buildTheHtmlOutput = "";
+                    $(".getSetsToDelete" + itemNumber).html("");
+                    buildTheHtmlOutput += '<table>';
                     buildTheHtmlOutput += '<tr>';
 
                     buildTheHtmlOutput += '<td>Delete up to ';
                     buildTheHtmlOutput += (resultKey + 1);
-                    buildTheHtmlOutput += ' from set / moc / part ';
+                    buildTheHtmlOutput += ' set(s) ';
                     buildTheHtmlOutput += resultValue.set_num;
                     buildTheHtmlOutput += '</td>';
 
@@ -92,13 +95,9 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</button>';
                     buildTheHtmlOutput += '</td>';
                     buildTheHtmlOutput += '</tr>';
+                    buildTheHtmlOutput += '</table>';
+                    $(".getSetsToDelete" + itemNumber).html(buildTheHtmlOutput);
                 });
-                buildTheHtmlOutput += '</table>';
-
-                $(".getSetsToDelete" + itemNumber).html(buildTheHtmlOutput);
-
-                //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
-
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {
@@ -120,14 +119,17 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                 console.log(result);
 
 
-                let buildTheHtmlOutput = "<table>";
+                let buildTheHtmlOutput = "";
 
                 $.each(result.mocs, function (resultKey, resultValue) {
-                    buildTheHtmlOutput += '<tr>';
+                    buildTheHtmlOutput = "";
+                    $(".getMocsToDelete" + itemNumber).html("");
+                    buildTheHtmlOutput += '<table>';
 
+                    buildTheHtmlOutput += '<tr>';
                     buildTheHtmlOutput += '<td>Delete up to ';
                     buildTheHtmlOutput += (resultKey + 1);
-                    buildTheHtmlOutput += ' from set / moc / part ';
+                    buildTheHtmlOutput += ' MOC(s) ';
                     buildTheHtmlOutput += resultValue.moc_num;
                     buildTheHtmlOutput += '</td>';
 
@@ -145,13 +147,10 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '</button>';
                     buildTheHtmlOutput += '</td>';
                     buildTheHtmlOutput += '</tr>';
+
+                    buildTheHtmlOutput += '</table>';
+                    $(".getMocsToDelete" + itemNumber).html(buildTheHtmlOutput);
                 });
-                buildTheHtmlOutput += '</table>';
-
-                $(".getMocsToDelete" + itemNumber).html(buildTheHtmlOutput);
-
-                //bookmark - rebuild the delete functionality to delete a specific part (by id) or decrease the quantity of it
-
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {

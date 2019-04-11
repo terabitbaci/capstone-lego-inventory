@@ -1301,7 +1301,15 @@ $('#filterViewButtons select').change(function (event) {
 
 $('#filterLockButtons select').change(function (event) {
     event.preventDefault();
-    alert("include permanent clicked");
+    let selectedOption = $("#filterLockButtons select").val();
+    alert(selectedOption);
+    if (selectedOption == "see") {
+        $(".itemLockSet").parent().parent().show();
+        $(".itemLockMoc").parent().parent().show();
+        $(".itemLockPart").parent().parent().show();
+    } else if (selectedOption == "hide") {
+        $(".itemLockActive").parent().parent().hide();
+    }
 });
 
 $(document).on("click", ".showPartDetails", function (event) {

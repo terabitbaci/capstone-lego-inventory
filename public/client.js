@@ -1232,7 +1232,7 @@ $(".add-to-inventory-form").submit(function (event) {
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR.status);
                 if (jqXHR.status == "444") {
-                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1.")
+                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1...")
                 }
                 console.log(error);
                 console.log(errorThrown);

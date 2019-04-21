@@ -184,7 +184,7 @@ Search feature looks for user's number (XXXXX) and possible Rebrickable number (
 // Heroku, mLab, Robo 3T
 
 ## Responsive
-App is strongly built to be usuable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.
+App is built to be usable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.
 
 ## Development Roadmap
 This is v1.0 of the app, but future enhancements are expected to include:
@@ -223,6 +223,16 @@ In the client.js update the following part functionalities to work with the mocs
 '/inventory-part/update-permanent-build',
 '/inventory-part/add-storage-bin',
 '/inventory-part/delete-part-by-id',
+
+Inventory Page Review April 21, 2019
+Add bin location to a part is successful, but closes the details table
+Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
+Deleting a set/moc does not also delete their respective parts
+Show message when no sets/mocs/parts are viewable because of filtering
+Show message describing what filtering is present
+Remove the message "hide" (during filtering for permanent builds
+Remove the message "see" (during filtering)
+
 
 Data flow testing results
 - parts

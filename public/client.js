@@ -1289,31 +1289,37 @@ $('#filterViewButtons select').change(function (event) {
         $("#inventory-sets-table").show();
         $("#inventory-mocs-table").show();
         $("#inventory-parts-table").show();
+        displayError("Displaying MOCs, sets and parts");
     } else if (selectedOption == "viewSets") {
         $("#inventory-sets-table").show();
         $("#inventory-mocs-table").hide();
         $("#inventory-parts-table").hide();
+        displayError("Displaying sets only");
     } else if (selectedOption == "viewMOCs") {
         $("#inventory-sets-table").hide();
         $("#inventory-mocs-table").show();
         $("#inventory-parts-table").hide();
+        displayError("Displaying MOCs only");
     } else if (selectedOption == "viewParts") {
         $("#inventory-sets-table").hide();
         $("#inventory-mocs-table").hide();
         $("#inventory-parts-table").show();
+        displayError("Displaying parts only");
     }
 });
 
 $('#filterLockButtons select').change(function (event) {
     event.preventDefault();
     let selectedOption = $("#filterLockButtons select").val();
-    displayError(selectedOption);
     if (selectedOption == "see") {
         $(".itemLockSet").parent().parent().show();
         $(".itemLockMoc").parent().parent().show();
         $(".itemLockPart").parent().parent().show();
+        displayError("Displaying locked and unlocked items");
     } else if (selectedOption == "hide") {
         $(".itemLockActive").parent().parent().hide();
+        $(".itemLockActive").parent().parent().next().hide();
+        displayError("Displaying only unlocked items");
     }
 });
 

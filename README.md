@@ -220,18 +220,19 @@ to create:
 
 DONE 03/20/2019
 In the client.js update the following part functionalities to work with the mocs and sets
-'/inventory-part/update-permanent-build',
-'/inventory-part/add-storage-bin',
-'/inventory-part/delete-part-by-id',
+* '/inventory-part/update-permanent-build',
+* '/inventory-part/add-storage-bin',
+* '/inventory-part/delete-part-by-id',
 
 Inventory Page Review April 21, 2019
-Add bin location to a part is successful, but closes the details table
-Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
-Deleting a set/moc does not also delete their respective parts
-Show message when no sets/mocs/parts are viewable because of filtering
-Show message describing what filtering is present
-Remove the message "hide" (during filtering for permanent builds
-Remove the message "see" (during filtering)
+* Add bin location to a part is successful, but closes the details table
+* (done)Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
+* Deleting a set/moc does not also delete their respective parts (server)
+* Show message when no sets/mocs/parts are viewable because of filtering
+* (done)Show message describing what filtering is present
+* (done)Remove the message "hide" (during filtering for permanent builds
+* (done)Remove the message "see" (during filtering)
+* Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
 
 
 Data flow testing results

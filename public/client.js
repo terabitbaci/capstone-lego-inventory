@@ -4,7 +4,7 @@
 function displayError(message) {
     $("#messageBox span").html(message);
     $("#messageBox").fadeIn();
-    $("#messageBox").fadeOut(10000);
+    $("#messageBox").fadeOut(3000);
 };
 
 function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
@@ -68,7 +68,7 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
 
 
                 let buildTheHtmlOutput = "";
@@ -120,7 +120,7 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
             })
             // if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
 
 
                 let buildTheHtmlOutput = "";
@@ -313,7 +313,7 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 
 
 function showSetsInInventory(loggedInUserName) {
-    console.log("inside showSetsInInventory");
+    //    console.log("inside showSetsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-set/show-aggregate/' + loggedInUserName,
@@ -390,7 +390,7 @@ function showSetsInInventory(loggedInUserName) {
                                         buildTheHtmlOutput += '<input type="hidden" value="' + resultValue.set_name + '" class="itemLockSetNameValue">';
 
                                         //if the item is not locked ...
-                                        console.log(resultValue.permanent_build);
+                                        //                                        console.log(resultValue.permanent_build);
                                         if (resultValue.permanent_build == 0) {
                                             //display it as is
                                             buildTheHtmlOutput += '<input type="hidden" value="0" class="itemLockPermanentBuildValue">';
@@ -546,7 +546,7 @@ function showSetsInInventory(loggedInUserName) {
 }
 
 function showMocsInInventory(loggedInUserName) {
-    console.log("inside showMocsInInventory");
+    //    console.log("inside showMocsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-moc/show-aggregate/' + loggedInUserName,
@@ -775,7 +775,7 @@ function showMocsInInventory(loggedInUserName) {
 
 
 function showPartsInInventory(loggedInUserName) {
-    console.log("inside showPartsInInventory");
+    //    console.log("inside showPartsInInventory");
     $.ajax({
             type: 'GET',
             url: '/inventory-part/show-aggregate/' + loggedInUserName,
@@ -1158,7 +1158,7 @@ $(".signup-form").submit(function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 $('.hide-everything').hide();
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
@@ -1203,8 +1203,8 @@ $(".add-to-inventory-form").submit(function (event) {
             itemType: itemType,
             loggedInUserName: loggedInUserName,
         };
-        console.log(entryObject);
-
+        //        console.log(entryObject);
+        displayError("Loading...");
         //make the api call using the payload above
         $.ajax({
                 type: 'POST',
@@ -1215,7 +1215,7 @@ $(".add-to-inventory-form").submit(function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 //                $('#loggedInName').text(result.name);
                 //                $('#loggedInUserName').val(result.username);
                 $('.hide-everything').hide();
@@ -1223,7 +1223,7 @@ $(".add-to-inventory-form").submit(function (event) {
                 showPartsInInventory(loggedInUserName);
                 showSetsInInventory(loggedInUserName);
                 showMocsInInventory(loggedInUserName);
-
+                displayError("Loaded");
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
                 $('#inventory-table').show();
@@ -1256,7 +1256,7 @@ $(".add-to-inventory-form").submit(function (event) {
                         })
                         //if call is successful
                         .done(function (result) {
-                            console.log(result);
+//                            console.log(result);
                             //                            $('#loggedInName').text(result.name);
                             //                            $('#loggedInUserName').val(result.username);
                             $('.hide-everything').hide();
@@ -1383,7 +1383,7 @@ $(document).on('click', '.itemLockPart', function (event) {
         })
         //if call is successful
         .done(function (result) {
-            console.log(result);
+//            console.log(result);
             //show that the button is locked
             $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
             //update the inventory after lock
@@ -1439,7 +1439,7 @@ $(document).on('click', '.storageBinButtonPart', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 displayError("Added bin/storage location");
 
                 //update the inventory after lock
@@ -1504,7 +1504,7 @@ $(document).on('click', '.deleteBtnPart', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
                 displayError("item(s) deleted from Inventory");
@@ -1560,7 +1560,7 @@ $(document).on('click', '.itemLockSet', function (event) {
         })
         //if call is successful
         .done(function (result) {
-            console.log(result);
+//            console.log(result);
             //show that the button is locked
             console.log($(this).parent().find(".itemLockSet"));
             $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
@@ -1616,7 +1616,7 @@ $(document).on('click', '.storageBinButtonSet', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 displayError("Added bin/storage location");
 
                 //update the inventory after lock
@@ -1664,6 +1664,7 @@ $(document).on('click', '.deleteBtnSet', function (event) {
         //create the payload object (what data we send to the api call)
         const deleteSetByNameObject = {
             set_name: deleteSetNumValue,
+            loggedInUserName: loggedInUserName,
             deleteFromInventoryValue: deleteFromInventoryValue,
             deleteSetIDValue: deleteSetIDValue,
             deleteSetQuantityValue: deleteSetQuantityValue,
@@ -1682,7 +1683,7 @@ $(document).on('click', '.deleteBtnSet', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
                 displayError("item(s) deleted from Inventory");
@@ -1741,7 +1742,7 @@ $(document).on('click', '.itemLockMoc', function (event) {
         })
         //if call is successful
         .done(function (result) {
-            console.log(result);
+//            console.log(result);
             //show that the button is locked
             $(this).parent().find(".itemLockMoc").toggleClass("itemLockActive");
             //update the inventory after lock
@@ -1797,7 +1798,7 @@ $(document).on('click', '.storageBinButtonMoc', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 displayError("Added bin/storage location");
 
                 //update the inventory after lock
@@ -1844,6 +1845,7 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
         //create the payload object (what data we send to the api call)
         const deleteMocByNameObject = {
             moc_name: deleteMocNumValue,
+            loggedInUserName: loggedInUserName,
             deleteFromInventoryValue: deleteFromInventoryValue,
             deleteMocIDValue: deleteMocIDValue,
             deleteMocQuantityValue: deleteMocQuantityValue,
@@ -1862,7 +1864,7 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
             })
             //if call is successful
             .done(function (result) {
-                console.log(result);
+//                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockMoc").toggleClass("itemLockActive");
                 displayError("item(s) deleted from Inventory");

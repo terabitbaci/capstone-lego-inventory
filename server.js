@@ -57,7 +57,24 @@ function closeServer() {
     }));
 }
 
-
+function deletePartsCorrespondingWithDeletedSetsOrMocs(set_name, loggedInUserName) {
+    console.log("inside the function", set_name, loggedInUserName);
+    Part.deleteMany({
+        set_name,
+        loggedInUserName
+    }).exec().then(function (entry) {
+        console.log("done", entry.deletedCount);
+        return {
+            set_name,
+            loggedInUserName
+        };
+    }).catch(function (err) {
+        console.log("fail");
+        return {
+            message: err
+        };
+    });
+}
 
 app.post('/item/create', function (req, res) {
     let itemNum = req.body.itemNum;
@@ -672,8 +689,10 @@ app.delete('/inventory-set/delete-set-by-name', function (req, res) {
     });
 });
 
-app.delete('/inventory-set/delete-set-by-id', function (req, res) {
 
+
+app.delete('/inventory-set/delete-set-by-id', function (req, res) {
+    console.log(req.body.set_name, req.body.loggedInUserName);
     //if the number of sets to delete is the same with maxim number of sets in the inventory, delete the entire set
     if (req.body.deleteSetMaxQuantityValue == req.body.deleteFromInventoryValue) {
         Set.findByIdAndRemove(req.body.deleteSetIDValue, function (err, items) {
@@ -681,8 +700,9 @@ app.delete('/inventory-set/delete-set-by-id', function (req, res) {
                 return res.status(404).json({
                     message: 'Item not found.'
                 });
-
-            res.status(201).json(items);
+            //delete all the parts related to the deleted set
+            deletePartsCorrespondingWithDeletedSetsOrMocs(req.body.set_name, req.body.loggedInUserName);
+            res.status(200).json(items);
         });
     }
     // otherwise update only the quantity
@@ -906,7 +926,7 @@ app.delete('/inventory-moc/delete-moc-by-name', function (req, res) {
 });
 
 app.delete('/inventory-moc/delete-moc-by-id', function (req, res) {
-
+    console.log(req.body.moc_name, req.body.loggedInUserName);
     //if the number of mocs to delete is the same with maxim number of mocs in the inventory, delete the entire moc
     if (req.body.deleteMocMaxQuantityValue == req.body.deleteFromInventoryValue) {
         Moc.findByIdAndRemove(req.body.deleteMocIDValue, function (err, items) {
@@ -914,8 +934,9 @@ app.delete('/inventory-moc/delete-moc-by-id', function (req, res) {
                 return res.status(404).json({
                     message: 'Item not found.'
                 });
-
-            res.status(201).json(items);
+            //delete all the parts related to the deleted moc
+            deletePartsCorrespondingWithDeletedSetsOrMocs(req.body.moc_name, req.body.loggedInUserName);
+            res.status(200).json(items);
         });
     }
     // otherwise update only the quantity

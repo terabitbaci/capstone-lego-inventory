@@ -1662,8 +1662,8 @@ $(document).on('click', '.deleteBtnSet', function (event) {
         //prompt "are you sure?"
 
         //create the payload object (what data we send to the api call)
-        const deleteSetByNameObject = {
-            set_name: deleteSetNumValue,
+        const deleteSetByNumberObject = {
+            set_num: deleteSetNumValue,
             loggedInUserName: loggedInUserName,
             deleteFromInventoryValue: deleteFromInventoryValue,
             deleteSetIDValue: deleteSetIDValue,
@@ -1671,14 +1671,14 @@ $(document).on('click', '.deleteBtnSet', function (event) {
             deleteSetMaxQuantityValue: deleteSetMaxQuantityValue
         };
 
-        console.log(deleteSetByNameObject);
+        console.log(deleteSetByNumberObject);
 
         //make the api call using the payload above
         $.ajax({
                 type: 'DELETE',
-                url: '/inventory-set/delete-set-by-id',
+                url: '/inventory-set/delete-set-by-number',
                 dataType: 'json',
-                data: JSON.stringify(deleteSetByNameObject),
+                data: JSON.stringify(deleteSetByNumberObject),
                 contentType: 'application/json'
             })
             //if call is successful
@@ -1843,8 +1843,8 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
         //prompt "are you sure?"
 
         //create the payload object (what data we send to the api call)
-        const deleteMocByNameObject = {
-            moc_name: deleteMocNumValue,
+        const deleteMocByNumberObject = {
+            set_num: deleteMocNumValue,
             loggedInUserName: loggedInUserName,
             deleteFromInventoryValue: deleteFromInventoryValue,
             deleteMocIDValue: deleteMocIDValue,
@@ -1852,14 +1852,14 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
             deleteMocMaxQuantityValue: deleteMocMaxQuantityValue
         };
 
-        console.log(deleteMocByNameObject);
+        console.log(deleteMocByNumberObject);
 
         //make the api call using the payload above
         $.ajax({
                 type: 'DELETE',
-                url: '/inventory-moc/delete-moc-by-id',
+                url: '/inventory-moc/delete-moc-by-number',
                 dataType: 'json',
-                data: JSON.stringify(deleteMocByNameObject),
+                data: JSON.stringify(deleteMocByNumberObject),
                 contentType: 'application/json'
             })
             //if call is successful

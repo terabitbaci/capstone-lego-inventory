@@ -57,7 +57,7 @@ function closeServer() {
     }));
 }
 
-function deletePartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName) {
+function deleteALLPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName) {
     //console.log("inside the function", set_num, loggedInUserName);
     Part.deleteMany({
         set_num,
@@ -676,23 +676,9 @@ app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, 
 
 // DELETE ----------------------------------------
 // deleting a set by name
-//bookmark - delete only sets that not inside the mocs and sets
-app.delete('/inventory-set/delete-set-by-name', function (req, res) {
-    Set.deleteMany({
-        set_name: req.body.set_name
-    }).exec().then(function (entry) {
-        return res.status(204).end();
-    }).catch(function (err) {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        });
-    });
-});
 
-
-
-app.delete('/inventory-set/delete-set-by-id', function (req, res) {
-    console.log(req.body.set_name, req.body.loggedInUserName);
+app.delete('/inventory-set/delete-set-by-number', function (req, res) {
+    console.log(req.body.set_num, req.body.loggedInUserName);
     //if the number of sets to delete is the same with maxim number of sets in the inventory, delete the entire set
     if (req.body.deleteSetMaxQuantityValue == req.body.deleteFromInventoryValue) {
         Set.findByIdAndRemove(req.body.deleteSetIDValue, function (err, items) {
@@ -701,7 +687,7 @@ app.delete('/inventory-set/delete-set-by-id', function (req, res) {
                     message: 'Item not found.'
                 });
             //delete all the parts related to the deleted set
-            deletePartsCorrespondingWithDeletedSetsOrMocs(req.body.set_name, req.body.loggedInUserName);
+            deleteALLPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName);
             res.status(200).json(items);
         });
     }
@@ -714,7 +700,10 @@ app.delete('/inventory-set/delete-set-by-id', function (req, res) {
                 quantity: (req.body.deleteSetMaxQuantityValue - req.body.deleteFromInventoryValue)
             }
         }, function (items) {
-            res.status(201).json(items);
+            //calculate % of the parts that need deleteing by updating the quantity for them
+            //let partsPercentageToRemove = ( 100 / parseInt(req.body.deleteFromInventoryValue) ) * parseInt(req.body.deleteSetMaxQuantityValue);
+            //deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName, partsPercentageToRemove);
+            res.status(200).json(items);
         });
     }
 });
@@ -912,21 +901,8 @@ app.get('/inventory-moc/get-in-your-sets/:username/:itemNumber', function (req, 
 
 // DELETE ----------------------------------------
 // deleting a moc by name
-//bookmark - delete only mocs that not inside the mocs and sets
-app.delete('/inventory-moc/delete-moc-by-name', function (req, res) {
-    Moc.deleteMany({
-        moc_name: req.body.moc_name
-    }).exec().then(function (entry) {
-        return res.status(204).end();
-    }).catch(function (err) {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        });
-    });
-});
-
-app.delete('/inventory-moc/delete-moc-by-id', function (req, res) {
-    console.log(req.body.moc_name, req.body.loggedInUserName);
+app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
+    console.log(req.body.set_num, req.body.loggedInUserName);
     //if the number of mocs to delete is the same with maxim number of mocs in the inventory, delete the entire moc
     if (req.body.deleteMocMaxQuantityValue == req.body.deleteFromInventoryValue) {
         Moc.findByIdAndRemove(req.body.deleteMocIDValue, function (err, items) {
@@ -935,7 +911,7 @@ app.delete('/inventory-moc/delete-moc-by-id', function (req, res) {
                     message: 'Item not found.'
                 });
             //delete all the parts related to the deleted moc
-            deletePartsCorrespondingWithDeletedSetsOrMocs(req.body.moc_name, req.body.loggedInUserName);
+            deleteALLPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName);
             res.status(200).json(items);
         });
     }

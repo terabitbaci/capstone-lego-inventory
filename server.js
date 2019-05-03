@@ -57,15 +57,15 @@ function closeServer() {
     }));
 }
 
-function deletePartsCorrespondingWithDeletedSetsOrMocs(set_name, loggedInUserName) {
-    console.log("inside the function", set_name, loggedInUserName);
+function deletePartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName) {
+    //console.log("inside the function", set_num, loggedInUserName);
     Part.deleteMany({
-        set_name,
+        set_num,
         loggedInUserName
     }).exec().then(function (entry) {
         console.log("done", entry.deletedCount);
         return {
-            set_name,
+            set_num,
             loggedInUserName
         };
     }).catch(function (err) {

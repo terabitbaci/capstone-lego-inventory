@@ -12,15 +12,15 @@ const setSchema = new mongoose.Schema({
         required: false
     },
     year: {
-        type: String,
+        type: Number,
         required: false
     },
     theme_id: {
-        type: String,
+        type: Number,
         required: false
     },
     num_parts: {
-        type: String,
+        type: Number,
         required: false
     },
     set_img_url: {
@@ -32,11 +32,11 @@ const setSchema = new mongoose.Schema({
         required: false
     },
     permanent_build: {
-        type: String,
+        type: Number,
         required: false
     },
     in_wishlist: {
-        type: String,
+        type: Number,
         required: false
     },
     storage_location: {

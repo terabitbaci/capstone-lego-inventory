@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 
 const partSchema = new mongoose.Schema({
     element_id: {
-        type: String,
+        type: Number,
         required: false
     },
     inv_part_id: {
-        type: String,
+        type: Number,
         required: false
     },
     is_spare: {
@@ -17,7 +17,7 @@ const partSchema = new mongoose.Schema({
         required: false
     },
     num_sets: {
-        type: String,
+        type: Number,
         required: false
     },
     part_name: {
@@ -25,7 +25,7 @@ const partSchema = new mongoose.Schema({
         required: false
     },
     part_cat_id: {
-        type: String,
+        type: Number,
         required: false
     },
     part_img_url: {
@@ -41,15 +41,15 @@ const partSchema = new mongoose.Schema({
         required: false
     },
     part_year_from: {
-        type: String,
+        type: Number,
         required: false
     },
     part_year_to: {
-        type: String,
+        type: Number,
         required: false
     },
     quantity: {
-        type: String,
+        type: Number,
         required: false
     },
     set_num: {
@@ -57,11 +57,11 @@ const partSchema = new mongoose.Schema({
         required: false
     },
     permanent_build: {
-        type: String,
+        type: Number,
         required: false
     },
     in_wishlist: {
-        type: String,
+        type: Number,
         required: false
     },
     storage_location: {

@@ -76,6 +76,22 @@ function deleteALLPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserN
     });
 }
 
+function deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName, partsPercentageToRemove) {
+    console.log("inside the deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs function", set_num, loggedInUserName, partsPercentageToRemove);
+
+    Part.update({
+        set_num,
+        loggedInUserName
+    }, {
+        $mul: {
+            quantity: (parseFloat(partsPercentageToRemove / 100))
+        }
+    }, function (items) {
+        console.log("updated part results is ===> ", items);
+        return items;
+    });
+}
+
 app.post('/item/create', function (req, res) {
     let itemNum = req.body.itemNum;
     let itemType = req.body.itemType;
@@ -700,9 +716,10 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
                 quantity: (req.body.deleteSetMaxQuantityValue - req.body.deleteFromInventoryValue)
             }
         }, function (items) {
-            //calculate % of the parts that need deleteing by updating the quantity for them
-            //let partsPercentageToRemove = ( 100 / parseInt(req.body.deleteFromInventoryValue) ) * parseInt(req.body.deleteSetMaxQuantityValue);
-            //deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName, partsPercentageToRemove);
+            //calculate % of the parts that need deleteing by updating the quantity for them (parseInt = convert strings into numbers)
+            let partsPercentageToRemove = (100 * parseInt(req.body.deleteFromInventoryValue)) / parseInt(req.body.deleteSetMaxQuantityValue);
+            console.log(partsPercentageToRemove, "<== partsPercentageToRemove")
+            deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName, partsPercentageToRemove);
             res.status(200).json(items);
         });
     }

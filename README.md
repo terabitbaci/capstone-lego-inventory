@@ -242,4 +242,6 @@ Data flow testing results
 - sets
     - sets not diplaying properly when the page loads
 
+Delete parts related to a set or moc
+- when deleting fewer sets or mocs than the maximum, find unique parts and delete them instead of decreasing the quantity of each
 

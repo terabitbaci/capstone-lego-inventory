@@ -79,16 +79,20 @@ function deleteALLPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserN
 function deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName, partsPercentageToRemove) {
     console.log("inside the deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs function", set_num, loggedInUserName, partsPercentageToRemove);
 
-    Part.update({
+    //decrease quantity is not ideal; find and remove unique parts
+    Part.updateMany({
         set_num,
         loggedInUserName
     }, {
         $mul: {
             quantity: (parseFloat(partsPercentageToRemove / 100))
         }
-    }, function (items) {
+    }).exec().then(function (items) {
         console.log("updated part results is ===> ", items);
         return items;
+    }).catch(function (err) {
+        console.log("fail updated part results is ===>", err);
+        return err;
     });
 }
 
@@ -707,7 +711,7 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
             res.status(200).json(items);
         });
     }
-    // otherwise update only the quantity
+    // otherwise update only the quantity (https://stackoverflow.com/questions/19065615/how-to-delete-n-numbers-of-documents-in-mongodb)
     else {
         Set.update({
             _id: req.body.deleteSetIDValue

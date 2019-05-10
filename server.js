@@ -701,15 +701,22 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
     console.log(req.body.set_num, req.body.loggedInUserName);
     //if the number of sets to delete is the same with maxim number of sets in the inventory, delete the entire set
     if (req.body.deleteSetMaxQuantityValue == req.body.deleteFromInventoryValue) {
-        Set.findByIdAndRemove(req.body.deleteSetIDValue, function (err, items) {
-            if (err)
-                return res.status(404).json({
-                    message: 'Item not found.'
-                });
-            //delete all the parts related to the deleted set
+
+        Set.deleteMany({
+            set_num: req.body.set_num,
+            loggedInUserName: req.body.loggedInUserName
+        }).exec().then(function (entry) {
             deleteALLPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName);
-            res.status(200).json(items);
+            console.log("done", entry.deletedCount);
+            res.status(200).json(entry.deletedCount);
+
+        }).catch(function (err) {
+            console.log("fail");
+            return {
+                message: err
+            };
         });
+
     }
     // otherwise update only the quantity (https://stackoverflow.com/questions/19065615/how-to-delete-n-numbers-of-documents-in-mongodb)
     else {
@@ -926,15 +933,22 @@ app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
     console.log(req.body.set_num, req.body.loggedInUserName);
     //if the number of mocs to delete is the same with maxim number of mocs in the inventory, delete the entire moc
     if (req.body.deleteMocMaxQuantityValue == req.body.deleteFromInventoryValue) {
-        Moc.findByIdAndRemove(req.body.deleteMocIDValue, function (err, items) {
-            if (err)
-                return res.status(404).json({
-                    message: 'Item not found.'
-                });
-            //delete all the parts related to the deleted moc
+
+        Moc.deleteMany({
+            moc_num: req.body.set_num,
+            loggedInUserName: req.body.loggedInUserName
+        }).exec().then(function (entry) {
             deleteALLPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName);
-            res.status(200).json(items);
+            console.log("done", entry.deletedCount);
+            res.status(200).json(entry.deletedCount);
+
+        }).catch(function (err) {
+            console.log("fail");
+            return {
+                message: err
+            };
         });
+
     }
     // otherwise update only the quantity
     else {

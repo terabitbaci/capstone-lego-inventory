@@ -128,7 +128,7 @@ app.post('/item/create', function (req, res) {
                     in_wishlist: 0,
                     storage_location: '',
                     loggedInUserName: loggedInUserName
-                }, (err, item) => {
+                }, (err, newSet) => {
                     //if creating a new set details in the DB returns an error..
                     if (err) {
                         //display it
@@ -137,7 +137,8 @@ app.post('/item/create', function (req, res) {
                         });
                     }
                     //if creating a new set in the DB is successfull
-                    if (item) {
+                    if (newSet) {
+                        console.log("newSet ==>", newSet);
                         //                        console.log(JSON.parse(body));
                         // ---------------------------------------------------------------------------------------------------------------------------
                         // make request for parts related to a set
@@ -168,6 +169,8 @@ app.post('/item/create', function (req, res) {
                                         part_year_to: JSON.parse(body).results[setCounter].part.year_to,
                                         quantity: JSON.parse(body).results[setCounter].quantity,
                                         set_num: JSON.parse(body).results[setCounter].set_num,
+                                        from_set_id: newSet._id,
+                                        from_moc_id: 0,
                                         permanent_build: 0,
                                         in_wishlist: 0,
                                         storage_location: '',
@@ -238,7 +241,7 @@ app.post('/item/create', function (req, res) {
                     in_wishlist: 0,
                     storage_location: '',
                     loggedInUserName: loggedInUserName
-                }, (err, item) => {
+                }, (err, newMoc) => {
                     //if creating a new moc details in the DB returns an error..
                     if (err) {
                         //display it
@@ -247,7 +250,9 @@ app.post('/item/create', function (req, res) {
                         });
                     }
                     //if creating a new moc in the DB is successfull
-                    if (item) {
+                    if (newMoc) {
+
+                        console.log("newMoc ==> ", newMoc);
                         //                        console.log(JSON.parse(body));
                         // ---------------------------------------------------------------------------------------------------------------------------
                         // make request for parts related to a moc
@@ -278,6 +283,8 @@ app.post('/item/create', function (req, res) {
                                         part_year_to: JSON.parse(body).results[setCounter].part.year_to,
                                         quantity: JSON.parse(body).results[setCounter].quantity,
                                         set_num: JSON.parse(body).results[setCounter].set_num,
+                                        from_set_id: 0,
+                                        from_moc_id: newMoc._id,
                                         permanent_build: 0,
                                         in_wishlist: 0,
                                         storage_location: '',
@@ -345,6 +352,8 @@ app.post('/item/create', function (req, res) {
                     part_year_to: JSON.parse(body).year_to,
                     quantity: 1,
                     set_num: 0,
+                    from_set_id: 0,
+                    from_moc_id: 0,
                     permanent_build: 0,
                     in_wishlist: 0,
                     storage_location: '',

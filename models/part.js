@@ -56,6 +56,14 @@ const partSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    from_set_id: {
+        type: String,
+        required: false
+    },
+    from_moc_id: {
+        type: String,
+        required: false
+    },
     permanent_build: {
         type: Number,
         required: false

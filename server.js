@@ -76,24 +76,34 @@ function deleteALLPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserN
     });
 }
 
-function deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(set_num, loggedInUserName, partsPercentageToRemove) {
-    console.log("inside the deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs function", set_num, loggedInUserName, partsPercentageToRemove);
+function deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(deleteWhat, deleteSetIDValue, loggedInUserName) {
+    //console.log("inside the deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs function");
+    //console.log(deleteSetIDValue, "<== req.body.deleteSetIDValue");
+    if (deleteWhat == "set") {
+        Part.deleteMany({
+            from_set_id: deleteSetIDValue,
+            loggedInUserName
+        }).exec().then(function (entry) {
+            console.log("updated part results is ===> ", entry.message);
+            return entry.message;
+        }).catch(function (err) {
+            console.log("fail updated part results is ===>", err);
+            return err;
+        });
+    } else {
+        Part.deleteMany({
+            from_moc_id: deleteSetIDValue,
+            loggedInUserName
+        }).exec().then(function (entry) {
+            console.log("updated part results is ===> ", entry.message);
+            return entry.message;
+        }).catch(function (err) {
+            console.log("fail updated part results is ===>", err);
+            return err;
+        });
+    }
 
-    //decrease quantity is not ideal; find and remove unique parts
-    Part.updateMany({
-        set_num,
-        loggedInUserName
-    }, {
-        $mul: {
-            quantity: (parseFloat(partsPercentageToRemove / 100))
-        }
-    }).exec().then(function (items) {
-        console.log("updated part results is ===> ", items);
-        return items;
-    }).catch(function (err) {
-        console.log("fail updated part results is ===>", err);
-        return err;
-    });
+
 }
 
 app.post('/item/create', function (req, res) {
@@ -720,7 +730,7 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
             res.status(200).json(entry.deletedCount);
 
         }).catch(function (err) {
-            console.log("fail");
+            console.log("delete all sets fail");
             return {
                 message: err
             };
@@ -729,19 +739,19 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
     }
     // otherwise update only the quantity (https://stackoverflow.com/questions/19065615/how-to-delete-n-numbers-of-documents-in-mongodb)
     else {
-        Set.update({
+        //        console.log("setId to delete ==> ", req.body.deleteSetIDValue);
+        Set.deleteMany({
             _id: req.body.deleteSetIDValue
-        }, {
-            $set: {
-                quantity: (req.body.deleteSetMaxQuantityValue - req.body.deleteFromInventoryValue)
-            }
-        }, function (items) {
-            //calculate % of the parts that need deleteing by updating the quantity for them (parseInt = convert strings into numbers)
-            let partsPercentageToRemove = (100 * parseInt(req.body.deleteFromInventoryValue)) / parseInt(req.body.deleteSetMaxQuantityValue);
-            console.log(partsPercentageToRemove, "<== partsPercentageToRemove")
-            deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(req.body.set_num, req.body.loggedInUserName, partsPercentageToRemove);
+        }).exec().then(function (items) {
+            deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs("set", req.body.deleteSetIDValue, req.body.loggedInUserName);
             res.status(200).json(items);
+        }).catch(function (err) {
+            console.log("delete only some sets fail");
+            return {
+                message: err
+            };
         });
+
     }
 });
 
@@ -952,7 +962,7 @@ app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
             res.status(200).json(entry.deletedCount);
 
         }).catch(function (err) {
-            console.log("fail");
+            console.log("delete all MOCs fail");
             return {
                 message: err
             };
@@ -961,15 +971,28 @@ app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
     }
     // otherwise update only the quantity
     else {
-        Moc.update({
+
+        Moc.deleteMany({
             _id: req.body.deleteMocIDValue
-        }, {
-            $set: {
-                quantity: (req.body.deleteMocMaxQuantityValue - req.body.deleteFromInventoryValue)
-            }
-        }, function (items) {
-            res.status(201).json(items);
+        }).exec().then(function (items) {
+            deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs("moc", req.body.deleteMocIDValue, req.body.loggedInUserName);
+            res.status(200).json(items);
+        }).catch(function (err) {
+            console.log("delete only some MOCs fail");
+            return {
+                message: err
+            };
         });
+        //
+        //        Moc.update({
+        //            _id: req.body.deleteMocIDValue
+        //        }, {
+        //            $set: {
+        //                quantity: (req.body.deleteMocMaxQuantityValue - req.body.deleteFromInventoryValue)
+        //            }
+        //        }, function (items) {
+        //            res.status(201).json(items);
+        //        });
     }
 });
 

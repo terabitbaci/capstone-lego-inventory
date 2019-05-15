@@ -79,14 +79,12 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '<table>';
                     buildTheHtmlOutput += '<tr>';
 
-                    buildTheHtmlOutput += '<td>Delete up to ';
-                    buildTheHtmlOutput += (resultKey + 1);
-                    buildTheHtmlOutput += ' set(s) ';
+                    buildTheHtmlOutput += '<td>Delete 1 set at a time (';
                     buildTheHtmlOutput += resultValue.set_num;
-                    buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += ')</td>';
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.set_num + '" value="0" min="1" max="1">';
                     buildTheHtmlOutput += '<input type="hidden" class="sm-input deleteSetMaxQuantityValue' + resultValue.set_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetNumValue" value="' + resultValue.set_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteSetIDValue" value="' + resultValue._id + '" >';
@@ -131,14 +129,14 @@ function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
                     buildTheHtmlOutput += '<table>';
 
                     buildTheHtmlOutput += '<tr>';
-                    buildTheHtmlOutput += '<td>Delete up to ';
-                    buildTheHtmlOutput += (resultKey + 1);
-                    buildTheHtmlOutput += ' MOC(s) ';
+
+                    buildTheHtmlOutput += '<td>Delete 1 MOC at a time (';
                     buildTheHtmlOutput += resultValue.moc_num;
-                    buildTheHtmlOutput += '</td>';
+                    buildTheHtmlOutput += ')</td>';
+
 
                     buildTheHtmlOutput += '<td>';
-                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="' + (resultKey + 1) + '">';
+                    buildTheHtmlOutput += '<input type="number" class="sm-input deleteFromInventoryValue' + resultValue.moc_num + '" value="0" min="1" max="1">';
                     buildTheHtmlOutput += '<input type="hidden" class="sm-input deleteMocMaxQuantityValue' + resultValue.moc_num + '" value="' + (resultKey + 1) + '">';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocNumValue" value="' + resultValue.moc_num + '" >';
                     buildTheHtmlOutput += '<input type="hidden" class="deleteMocIDValue" value="' + resultValue._id + '" >';

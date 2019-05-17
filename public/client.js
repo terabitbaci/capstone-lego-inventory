@@ -1,10 +1,15 @@
 //jquery related functionality
 //definitions: function , objects/data, variables, etc.
 
-function displayError(message) {
+//DOM error logger
+function displayError(message, identifier, timer = 1) {
     $("#messageBox span").html(message);
+    console.log("=====> ", message, identifier, timer);
     $("#messageBox").fadeIn();
-    $("#messageBox").fadeOut(3000);
+    if (timer != 0) {
+        $("#messageBox").fadeOut(3000);
+    }
+
 };
 
 function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
@@ -325,7 +330,7 @@ function showSetsInInventory(loggedInUserName) {
             $("#inventory-table #inventory-sets-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
-                displayError("no sets in the inventory");
+                displayError("no sets in the inventory", "showSetsInInventory-function");
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
@@ -364,7 +369,7 @@ function showSetsInInventory(loggedInUserName) {
                             let oldSetNumber = "";
                             // check to see if there are any sets in the inventory
                             if (detailedResult.sets.length == 0) {
-                                displayError("no sets in the inventory");
+                                displayError("no sets in the inventory", "showSetsInInventory-function");
                             } else {
                                 $.each(detailedResult.sets, function (resultKey, resultValue) {
                                     currentSetNumber = resultValue.set_num;
@@ -557,7 +562,7 @@ function showMocsInInventory(loggedInUserName) {
             $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
-                displayError("no mocs in the inventory");
+                displayError("no mocs in the inventory", "showMocsInInventory-function");
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
@@ -594,7 +599,7 @@ function showMocsInInventory(loggedInUserName) {
                             let oldMocNumber = "";
                             // check to see if there are any mocs in the inventory
                             if (detailedResult.mocs.length == 0) {
-                                displayError("no mocs in the inventory");
+                                displayError("no mocs in the inventory", "showMocsInInventory-function");
                             } else {
                                 $.each(detailedResult.mocs, function (resultKey, resultValue) {
                                     currentMocNumber = resultValue.moc_num;
@@ -771,7 +776,7 @@ function showMocsInInventory(loggedInUserName) {
         });
 }
 
-
+//here
 function showPartsInInventory(loggedInUserName) {
     //    console.log("inside showPartsInInventory");
     $.ajax({
@@ -786,7 +791,7 @@ function showPartsInInventory(loggedInUserName) {
             $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
-                displayError("no parts in the inventory");
+                displayError("no parts in the inventory", "showPartsInInventory-function");
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
@@ -823,7 +828,7 @@ function showPartsInInventory(loggedInUserName) {
                             let oldPartNumber = "";
                             // check to see if there are any parts in the inventory
                             if (detailedResult.parts.length == 0) {
-                                displayError("no parts in the inventory");
+                                displayError("no parts in the inventory", "showPartsInInventory-function");
                             } else {
                                 $.each(detailedResult.parts, function (resultKey, resultValue) {
                                     currentPartNumber = resultValue.part_num;
@@ -1076,9 +1081,9 @@ $(".login-form").submit(function (event) {
 
     //validate the input
     if (username == "") {
-        displayError('Please input user name');
+        displayError('Please input user name', "login-form-trigger");
     } else if (password == "") {
-        displayError('Please input password');
+        displayError('Please input password', "login-form-trigger");
     }
     //if the input is valid
     else {
@@ -1113,7 +1118,7 @@ $(".login-form").submit(function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
+                displayError('Incorrect Username or Password', "login-form-trigger");
             });
     };
 });
@@ -1133,9 +1138,9 @@ $(".signup-form").submit(function (event) {
 
     //validate the input
     if (username == "") {
-        displayError('Please add a user name');
+        displayError('Please add a user name', "signup-form-trigger");
     } else if (password == "") {
-        displayError('Please add a password');
+        displayError('Please add a password', "signup-form-trigger");
     }
     //if the input is valid
     else {
@@ -1189,7 +1194,7 @@ $(".add-to-inventory-form").submit(function (event) {
 
     //validate the input
     if (itemNum == "") {
-        displayError('Please enter item number');
+        displayError('Please enter item number', "add-to-inventory-form-trigger");
     }
     //if the input is valid
     else {
@@ -1202,7 +1207,7 @@ $(".add-to-inventory-form").submit(function (event) {
             loggedInUserName: loggedInUserName,
         };
         //        console.log(entryObject);
-        displayError("Loading...");
+        displayError("Loading...", "add-to-inventory-form-trigger", 0);
         //make the api call using the payload above
         $.ajax({
                 type: 'POST',
@@ -1221,7 +1226,7 @@ $(".add-to-inventory-form").submit(function (event) {
                 showPartsInInventory(loggedInUserName);
                 showSetsInInventory(loggedInUserName);
                 showMocsInInventory(loggedInUserName);
-                displayError("Loaded");
+                displayError("Loaded", "add-to-inventory-form-trigger");
                 $('#inventoryPage').show();
                 $('#inventory-filters').show();
                 $('#inventory-table').show();
@@ -1230,7 +1235,7 @@ $(".add-to-inventory-form").submit(function (event) {
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR.status);
                 if (jqXHR.status == "444") {
-                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1...")
+                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1...", "add-to-inventory-form-trigger")
                 }
                 console.log(error);
                 console.log(errorThrown);
@@ -1269,7 +1274,7 @@ $(".add-to-inventory-form").submit(function (event) {
                         .fail(function (jqXHR, error, errorThrown) {
                             console.log(jqXHR.status);
                             if (jqXHR.status == "444") {
-                                displayError("The second search for the " + itemType + " with number " + itemNum + "-1 also returned no results")
+                                displayError("The second search for the " + itemType + " with number " + itemNum + "-1 also returned no results", "add-to-inventory-form-trigger")
                             }
                             console.log(error);
                             console.log(errorThrown);
@@ -1287,12 +1292,12 @@ $('#filterViewButtons select').change(function (event) {
         $("#inventory-sets-table").show();
         $("#inventory-mocs-table").show();
         $("#inventory-parts-table").show();
-        displayError("Displaying MOCs, sets and parts");
+        displayError("Displaying MOCs, sets and parts", "filterViewButtons-trigger");
     } else if (selectedOption == "viewSets") {
         $("#inventory-sets-table").show();
         $("#inventory-mocs-table").hide();
         $("#inventory-parts-table").hide();
-        displayError("Displaying sets only");
+        displayError("Displaying sets only", "filterViewButtons-trigger");
     } else if (selectedOption == "viewMOCs") {
         $("#inventory-sets-table").hide();
         $("#inventory-mocs-table").show();
@@ -1302,7 +1307,7 @@ $('#filterViewButtons select').change(function (event) {
         $("#inventory-sets-table").hide();
         $("#inventory-mocs-table").hide();
         $("#inventory-parts-table").show();
-        displayError("Displaying parts only");
+        displayError("Displaying parts only", "filterViewButtons-trigger");
     }
 });
 
@@ -1313,11 +1318,11 @@ $('#filterLockButtons select').change(function (event) {
         $(".itemLockSet").parent().parent().show();
         $(".itemLockMoc").parent().parent().show();
         $(".itemLockPart").parent().parent().show();
-        displayError("Displaying locked and unlocked items");
+        displayError("Displaying locked and unlocked items", "filterLockButtons-trigger");
     } else if (selectedOption == "hide") {
         $(".itemLockActive").parent().parent().hide();
         $(".itemLockActive").parent().parent().next().hide();
-        displayError("Displaying only unlocked items");
+        displayError("Displaying only unlocked items", "filterLockButtons-trigger");
     }
 });
 
@@ -1394,7 +1399,6 @@ $(document).on('click', '.itemLockPart', function (event) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
-            displayError('Incorrect Username or Password');
         });
 });
 
@@ -1412,7 +1416,7 @@ $(document).on('click', '.storageBinButtonPart', function (event) {
 
     //basic validation
     if (storageBinValuePart == "") {
-        displayError("Type a bin/drawer storage location");
+        displayError("Type a bin/drawer storage location", "storageBinButtonPart-trigger");
     }
     //if the input is valid ...
     else {
@@ -1438,7 +1442,7 @@ $(document).on('click', '.storageBinButtonPart', function (event) {
             //if call is successful
             .done(function (result) {
                 //                console.log(result);
-                displayError("Added bin/storage location");
+                displayError("Added bin/storage location", "storageBinButtonPart-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1450,7 +1454,6 @@ $(document).on('click', '.storageBinButtonPart', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1473,9 +1476,9 @@ $(document).on('click', '.deleteBtnPart', function (event) {
 
     //basic validation (not able to delete 0 parts or more parts than we have in the inventory)
     if (deletePartMaxQuantityValue < deleteFromInventoryValue) {
-        displayError("You only have " + deletePartMaxQuantityValue + " parts to delete.");
+        displayError("You only have " + deletePartMaxQuantityValue + " parts to delete.", "deleteBtnPart-trigger");
     } else if (deleteFromInventoryValue == 0) {
-        displayError("Enter the number of parts to delete.");
+        displayError("Enter the number of parts to delete.", "deleteBtnPart-trigger");
     }
     //if the input is valid ...
     else {
@@ -1505,7 +1508,7 @@ $(document).on('click', '.deleteBtnPart', function (event) {
                 //                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
-                displayError("item(s) deleted from Inventory");
+                displayError("item(s) deleted from Inventory", "deleteBtnPart-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1517,7 +1520,6 @@ $(document).on('click', '.deleteBtnPart', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1572,7 +1574,6 @@ $(document).on('click', '.itemLockSet', function (event) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
-            displayError('Incorrect Username or Password');
         });
 });
 
@@ -1589,7 +1590,7 @@ $(document).on('click', '.storageBinButtonSet', function (event) {
 
     //basic validation
     if (storageBinValueSet == "") {
-        displayError("Type a bin/drawer storage location");
+        displayError("Type a bin/drawer storage location", "storageBinButtonSet-trigger");
     }
     //if the input is valid ...
     else {
@@ -1615,7 +1616,7 @@ $(document).on('click', '.storageBinButtonSet', function (event) {
             //if call is successful
             .done(function (result) {
                 //                console.log(result);
-                displayError("Added bin/storage location");
+                displayError("Added bin/storage location", "storageBinButtonSet-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1628,7 +1629,6 @@ $(document).on('click', '.storageBinButtonSet', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1651,9 +1651,9 @@ $(document).on('click', '.deleteBtnSet', function (event) {
 
     //basic validation (not able to delete 0 sets or more sets than we have in the inventory)
     if (deleteSetMaxQuantityValue < deleteFromInventoryValue) {
-        displayError("You only have " + deleteSetMaxQuantityValue + " sets to delete.");
+        displayError("You only have " + deleteSetMaxQuantityValue + " sets to delete.", "deleteBtnSet-trigger");
     } else if (deleteFromInventoryValue == 0) {
-        displayError("Enter the number of sets to delete.");
+        displayError("Enter the number of sets to delete.", "deleteBtnSet-trigger");
     }
     //if the input is valid ...
     else {
@@ -1684,7 +1684,7 @@ $(document).on('click', '.deleteBtnSet', function (event) {
                 //                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockSet").toggleClass("itemLockActive");
-                displayError("item(s) deleted from Inventory");
+                displayError("item(s) deleted from Inventory", "deleteBtnSet-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1696,7 +1696,6 @@ $(document).on('click', '.deleteBtnSet', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1754,7 +1753,6 @@ $(document).on('click', '.itemLockMoc', function (event) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
-            displayError('Incorrect Username or Password');
         });
 });
 
@@ -1771,7 +1769,7 @@ $(document).on('click', '.storageBinButtonMoc', function (event) {
 
     //basic validation
     if (storageBinValueMoc == "") {
-        displayError("Type a bin/drawer storage location");
+        displayError("Type a bin/drawer storage location", "storageBinButtonMoc-trigger");
     }
     //if the input is valid ...
     else {
@@ -1797,7 +1795,7 @@ $(document).on('click', '.storageBinButtonMoc', function (event) {
             //if call is successful
             .done(function (result) {
                 //                console.log(result);
-                displayError("Added bin/storage location");
+                displayError("Added bin/storage location", "storageBinButtonMoc-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1809,7 +1807,6 @@ $(document).on('click', '.storageBinButtonMoc', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1832,9 +1829,9 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
 
     //basic validation (not able to delete 0 mocs or more mocs than we have in the inventory)
     if (deleteMocMaxQuantityValue < deleteFromInventoryValue) {
-        displayError("You only have " + deleteMocMaxQuantityValue + " mocs to delete.");
+        displayError("You only have " + deleteMocMaxQuantityValue + " mocs to delete.", "deleteBtnMoc-trigger");
     } else if (deleteFromInventoryValue == 0) {
-        displayError("Enter the number of mocs to delete.");
+        displayError("Enter the number of mocs to delete.", "deleteBtnMoc-trigger");
     }
     //if the input is valid ...
     else {
@@ -1865,7 +1862,7 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
                 //                console.log(result);
                 //show that the button is locked
                 $(this).parent().find(".itemLockMoc").toggleClass("itemLockActive");
-                displayError("item(s) deleted from Inventory");
+                displayError("item(s) deleted from Inventory", "deleteBtnMoc-trigger");
 
                 //update the inventory after lock
                 showPartsInInventory(loggedInUserName);
@@ -1877,7 +1874,6 @@ $(document).on('click', '.deleteBtnMoc', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                displayError('Incorrect Username or Password');
             });
     }
 });
@@ -1892,17 +1888,17 @@ $(".search-form").submit(function (event) {
 
 $('.newTabRebrickable').click(function (event) {
     event.preventDefault();
-    displayError("open a new tab in Rebrickable");
+    displayError("open a new tab in Rebrickable", "newTabRebrickable-trigger");
 });
 
 $('.inventoryAddBtn').click(function (event) {
     event.preventDefault();
-    displayError("item(s) added to Inventory");
+    displayError("item(s) added to Inventory", "inventoryAddBtn-trigger");
 });
 
 $('.addWishBtn').click(function (event) {
     event.preventDefault();
-    displayError("item(s) added to Wishlist");
+    displayError("item(s) added to Wishlist", "addWishBtn-trigger");
 });
 
 $(".plan-form").submit(function (event) {
@@ -1914,7 +1910,7 @@ $(".plan-form").submit(function (event) {
 
 $('.printBtn').click(function (event) {
     event.preventDefault();
-    displayError("list of needed parts sent to printer");
+    displayError("list of needed parts sent to printer", "printBtn-trigger");
 });
 
 $(".wishlist-form").submit(function (event) {
@@ -1927,19 +1923,19 @@ $('.viewBuild').click(function (event) {
     event.preventDefault();
     $(this).parent().find(".viewBuild").removeClass("fa-toggle-on");
     $(this).parent().find(".viewBuild").addClass("fa-toggle-off");
-    displayError("viewing the build")
+    displayError("viewing the build", "viewBuild-trigger")
 });
 
 $('.removeBuild').click(function (event) {
     event.preventDefault();
-    displayError("build is removed\r(Removing a MOC build subtracts the needed parts from your Wishlist)");
+    displayError("build is removed\r(Removing a MOC build subtracts the needed parts from your Wishlist)", "removeBuild-trigger");
 });
 
 $(".recalculate").click(function (event) {
     event.preventDefault();
     $('.hide-everything').hide();
     $('#wishlistPage').show();
-    displayError("recalculating")
+    displayError("recalculating", "recalculate-trigger")
 });
 
 $('#logout').click(function (event) {

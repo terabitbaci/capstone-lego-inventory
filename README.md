@@ -234,7 +234,7 @@ Inventory Page Review April 21, 2019
 * (done)Remove the message "see" (during filtering)
 * Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
 
-
+DONE 05/07/2019
 Data flow testing results
 - parts
     - parts lock works but is not refreshing showing the locked part
@@ -242,6 +242,7 @@ Data flow testing results
 - sets
     - sets not diplaying properly when the page loads
 
+DONE 05/15/2019
 Delete parts related to a set or moc
 - when deleting fewer sets or mocs than the maximum, find unique parts and delete them instead of decreasing the quantity of each
 

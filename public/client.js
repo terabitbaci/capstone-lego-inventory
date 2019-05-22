@@ -3,13 +3,23 @@
 
 //DOM error logger
 function displayError(message, identifier, timer = 1) {
-    $("#messageBox span").html(message);
+    //    get the last message that was displayed
+    let lastMessage = $("#messageBox span").text();
+    console.log("compare message ==>", message, lastMessage);
     console.log("=====> ", message, identifier, timer);
-    $("#messageBox").fadeIn();
-    if (timer != 0) {
-        $("#messageBox").fadeOut(3000);
-    }
+    if (lastMessage == message) {
+        //        $("#messageBox span").html(message);
+        console.log("message duplicated ", message, lastMessage);
+    } else {
 
+        $("#messageBox span").html(message);
+        $("#messageBox").fadeIn();
+        //    $("#messageBox").show();
+        if (timer != 0) {
+            $("#messageBox").fadeOut(5000);
+        }
+        console.log("new message ", message, lastMessage);
+    }
 };
 
 function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
@@ -369,7 +379,7 @@ function showSetsInInventory(loggedInUserName) {
                             let oldSetNumber = "";
                             // check to see if there are any sets in the inventory
                             if (detailedResult.sets.length == 0) {
-                                displayError("no sets in the inventory", "showSetsInInventory-function");
+                                displayError("no aggregated sets in the inventory", "showSetsInInventory-function");
                             } else {
                                 $.each(detailedResult.sets, function (resultKey, resultValue) {
                                     currentSetNumber = resultValue.set_num;
@@ -599,7 +609,7 @@ function showMocsInInventory(loggedInUserName) {
                             let oldMocNumber = "";
                             // check to see if there are any mocs in the inventory
                             if (detailedResult.mocs.length == 0) {
-                                displayError("no mocs in the inventory", "showMocsInInventory-function");
+                                displayError("no aggregated mocs in the inventory", "showMocsInInventory-function");
                             } else {
                                 $.each(detailedResult.mocs, function (resultKey, resultValue) {
                                     currentMocNumber = resultValue.moc_num;
@@ -828,7 +838,7 @@ function showPartsInInventory(loggedInUserName) {
                             let oldPartNumber = "";
                             // check to see if there are any parts in the inventory
                             if (detailedResult.parts.length == 0) {
-                                displayError("no parts in the inventory", "showPartsInInventory-function");
+                                displayError("no aggregated parts in the inventory", "showPartsInInventory-function");
                             } else {
                                 $.each(detailedResult.parts, function (resultKey, resultValue) {
                                     currentPartNumber = resultValue.part_num;

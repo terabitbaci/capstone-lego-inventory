@@ -148,6 +148,8 @@ body {
 
 .demoMessage span {
     color: #2c3531;
+    display: block;
+    clear: both;
 }
 
 main {

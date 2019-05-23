@@ -3,23 +3,36 @@
 
 //DOM error logger
 function displayError(message, identifier, timer = 1) {
+
     //    get the last message that was displayed
-    let lastMessage = $("#messageBox span").text();
+    let lastMessage = $("#lastMessageValue").val();
     console.log("compare message ==>", message, lastMessage);
-    console.log("=====> ", message, identifier, timer);
+    //    console.log("=====> ", message, identifier, timer);
+
+    //check if the last message is the  same with the new one
     if (lastMessage == message) {
         //        $("#messageBox span").html(message);
         console.log("message duplicated ", message, lastMessage);
-    } else {
 
-        $("#messageBox span").html(message);
+        //if the message is already displayed remove it
+        $("#messageBox span:first-child ").remove();
+    } else {
+        //if the message is new add to the existing container
+        $("#messageBox").append("<span>" + message + "</span>");
+
+        //show the container with all the the messages
         $("#messageBox").fadeIn();
-        //    $("#messageBox").show();
+
+        //if the timer is active hide the container
         if (timer != 0) {
             $("#messageBox").fadeOut(5000);
+            //            $("#messageBox span:first-child ").remove();
         }
         console.log("new message ", message, lastMessage);
     }
+
+    //update the value of the last message with the new message which was just displayed
+    $("#lastMessageValue").val(message);
 };
 
 function getPartsToDelete(itemNumber, itemType, loggedInUserName) {

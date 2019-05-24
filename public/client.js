@@ -18,19 +18,24 @@ function displayError(message, identifier, timer = 1) {
         $("#messageBox span:first-child ").remove();
     } else {
         //if the message is new add to the existing container
-        $("#messageBox").append("<span>" + message + "</span>");
-
-        //show the container with all the the messages
-        $("#messageBox").fadeIn();
+        $("#messageBox").html("<span>" + message + "</span>");
+        console.log("new message ", message, lastMessage);
 
         //if the timer is active hide the container
         if (timer != 0) {
-            $("#messageBox").fadeOut(5000);
-            //            $("#messageBox span:first-child ").remove();
+            //show the container with all the the messages
+            $('#messageBox').fadeIn().queue(function (next) {
+
+                next(); //Important to continue running the queue
+            }).fadeOut(5000);
+
+        } else {
+            //show the container with all the the messages
+            $("#messageBox").fadeIn();
         }
-        console.log("new message ", message, lastMessage);
     }
 
+    //    $("#messageBox span:first-child ").remove();
     //update the value of the last message with the new message which was just displayed
     $("#lastMessageValue").val(message);
 };
@@ -338,7 +343,7 @@ function getInYourSets(itemNumber, itemType, loggedInUserName) {
 }
 
 
-function showSetsInInventory(loggedInUserName) {
+function showSetsInInventory(loggedInUserName, callback) {
     //    console.log("inside showSetsInInventory");
     $.ajax({
             type: 'GET',
@@ -569,9 +574,14 @@ function showSetsInInventory(loggedInUserName) {
             console.log(error);
             console.log(errorThrown);
         });
+
+    if (callback && typeof (callback) === "function") {
+        //run the call back function too
+        callback();
+    }
 }
 
-function showMocsInInventory(loggedInUserName) {
+function showMocsInInventory(loggedInUserName, callback) {
     //    console.log("inside showMocsInInventory");
     $.ajax({
             type: 'GET',
@@ -797,10 +807,15 @@ function showMocsInInventory(loggedInUserName) {
             console.log(error);
             console.log(errorThrown);
         });
+
+    if (callback && typeof (callback) === "function") {
+        //run the call back function too
+        callback();
+    }
 }
 
-//here
-function showPartsInInventory(loggedInUserName) {
+
+function showPartsInInventory(loggedInUserName, callback) {
     //    console.log("inside showPartsInInventory");
     $.ajax({
             type: 'GET',
@@ -1027,6 +1042,11 @@ function showPartsInInventory(loggedInUserName) {
             console.log(error);
             console.log(errorThrown);
         });
+
+    if (callback && typeof (callback) === "function") {
+        //run the call back function too
+        callback();
+    }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1055,6 +1075,7 @@ $('#menu-inventory').click(function (event) {
     showPartsInInventory(loggedInUserName);
     showSetsInInventory(loggedInUserName);
     showMocsInInventory(loggedInUserName);
+
     $('#inventory-filters').hide();
     $('#inventory-table').hide();
     $('.inventory-part-details-wrapper').parent().hide();
@@ -1132,9 +1153,13 @@ $(".login-form").submit(function (event) {
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
-                showPartsInInventory(result.username);
-                showSetsInInventory(result.username);
-                showMocsInInventory(result.username);
+                //                showPartsInInventory(result.username);
+                //                showSetsInInventory(result.username);
+                //                showMocsInInventory(result.username);
+
+
+                showSetsInInventory(result.username, showMocsInInventory(result.username, showPartsInInventory(result.username)));
+
             })
             //if the call is failing
             .fail(function (jqXHR, error, errorThrown) {

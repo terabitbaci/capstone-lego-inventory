@@ -358,12 +358,15 @@ function showSetsInInventory(loggedInUserName, callback) {
             $("#inventory-table #inventory-sets-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.sets.length == 0) {
-                displayError("no sets in the inventory", "showSetsInInventory-function");
+                //displayError("no sets in the inventory", "showSetsInInventory-function");
+                let displayErrorSets = '<tr class="inventory-item"><td>No sets in the inventory</td></tr>';
+                $("#inventory-table #inventory-sets-table").html(displayErrorSets);
+                $("#inventory-table").show();
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';
-                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th>Set number</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
                 buildTheHeaderOutput += '<th>name</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">';
@@ -595,12 +598,15 @@ function showMocsInInventory(loggedInUserName, callback) {
             $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
-                displayError("no mocs in the inventory", "showMocsInInventory-function");
+                //displayError("no mocs in the inventory", "showMocsInInventory-function");
+                let displayErrorMocs = '<tr class="inventory-item"><td>No MOCs in the inventory</td></tr>';
+                $("#inventory-table #inventory-mocs-table").html(displayErrorMocs);
+                $("#inventory-table").show();
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';
-                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th>MOC number</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
                 buildTheHeaderOutput += '<th>name</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">';
@@ -829,12 +835,15 @@ function showPartsInInventory(loggedInUserName, callback) {
             $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
-                displayError("no parts in the inventory", "showPartsInInventory-function");
+                //displayError("no parts in the inventory", "showPartsInInventory-function");
+                let displayErrorParts = '<tr class="inventory-item"><td>No parts in the inventory</td></tr>';
+                $("#inventory-table #inventory-parts-table").html(displayErrorParts);
+                $("#inventory-table").show();
             } else {
                 //create the table head separately from the rest of the rows
                 let buildTheHeaderOutput = "";
                 buildTheHeaderOutput += '<tr>';
-                buildTheHeaderOutput += '<th>number</th>';
+                buildTheHeaderOutput += '<th>Part number</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">image</th>';
                 buildTheHeaderOutput += '<th>name</th>';
                 buildTheHeaderOutput += '<th class="table-center-cell">';

@@ -225,7 +225,7 @@ In the client.js update the following part functionalities to work with the mocs
 * '/inventory-part/delete-part-by-id',
 
 Inventory Page Review April 21, 2019
-* Add bin location to a part is successful, but closes the details table
+* (done)Add bin location to a part is successful, but closes the details table
 * (done)Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
 * Deleting a set/moc does not also delete their respective parts (server)
 * Show message when no sets/mocs/parts are viewable because of filtering

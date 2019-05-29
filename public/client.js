@@ -378,7 +378,7 @@ function showSetsInInventory(loggedInUserName, callback) {
                             let oldSetNumber = "";
                             // check to see if there are any sets in the inventory
                             if (detailedResult.sets.length == 0) {
-                                displayError("no aggregated sets in the inventory", "showSetsInInventory-function");
+                                //                                displayError("no aggregated sets in the inventory", "showSetsInInventory-function");
                             } else {
                                 $.each(detailedResult.sets, function (resultKey, resultValue) {
                                     currentSetNumber = resultValue.set_num;
@@ -616,7 +616,7 @@ function showMocsInInventory(loggedInUserName, callback) {
                             let oldMocNumber = "";
                             // check to see if there are any mocs in the inventory
                             if (detailedResult.mocs.length == 0) {
-                                displayError("no aggregated mocs in the inventory", "showMocsInInventory-function");
+                                //                                displayError("no aggregated mocs in the inventory", "showMocsInInventory-function");
                             } else {
                                 $.each(detailedResult.mocs, function (resultKey, resultValue) {
                                     currentMocNumber = resultValue.moc_num;
@@ -853,7 +853,7 @@ function showPartsInInventory(loggedInUserName, callback) {
                             let oldPartNumber = "";
                             // check to see if there are any parts in the inventory
                             if (detailedResult.parts.length == 0) {
-                                displayError("no aggregated parts in the inventory", "showPartsInInventory-function");
+                                //                                displayError("no aggregated parts in the inventory", "showPartsInInventory-function");
                             } else {
                                 $.each(detailedResult.parts, function (resultKey, resultValue) {
                                     currentPartNumber = resultValue.part_num;
@@ -1040,6 +1040,10 @@ function showPartsInInventory(loggedInUserName, callback) {
 //Invocations (calling)& function Triggers
 // When the page loads
 $(function () {
+    // if the user is not logged in, don't show top navigation
+    if ($("#loggedInUserName").val() == '') {
+        $('.menu-wrapper').hide();
+    }
     $('.hide-everything').hide();
     $('#landingPage').show();
     $('#inventory-filters').hide();
@@ -1140,6 +1144,7 @@ $(".login-form").submit(function (event) {
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
+                $('.menu-wrapper').show();
                 //                showPartsInInventory(result.username);
                 //                showSetsInInventory(result.username);
                 //                showMocsInInventory(result.username);
@@ -1201,6 +1206,7 @@ $(".signup-form").submit(function (event) {
                 $('#inventoryPage').show();
                 $('#loggedInName').text(result.username);
                 $('#loggedInUserName').val(result.username);
+                $('.menu-wrapper').show();
                 showPartsInInventory(result.username);
                 showSetsInInventory(result.username);
                 showMocsInInventory(result.username);

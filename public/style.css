@@ -139,7 +139,7 @@ body {
     left: 35%;
     background-color: #ffce00;
     color: #2c3531;
-    padding: 10px 5%;
+    padding: 10px 10px;
     width: 30%;
     text-align: center;
     border-bottom-left-radius: 15px;
@@ -150,6 +150,10 @@ body {
     color: #2c3531;
     display: block;
     clear: both;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid gray;
+    width: 100%;
 }
 
 main {

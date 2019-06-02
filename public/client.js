@@ -7,14 +7,21 @@ function displayError(message, identifier, timer = 1) {
     //console.log(message, identifier);
 
     //create the new message html
-    $("#messageBox span").html(message);
+    $("#messageBox").append("<span>" + message + "</span>");
 
     //display the new message
     $("#messageBox").fadeIn();
 
     //only hide the old message if a new one becomes active
     if (timer != 0) {
-        $("#messageBox").fadeOut(3000);
+        $("#messageBox").fadeOut(15000);
+    }
+
+    // if there are more than 3 spans, delete the first one
+    let count = $("#messageBox").children().length;
+    //    console.log(count);
+    if (count > 3) {
+        $("#messageBox span:first-child").remove();
     }
 };
 
@@ -1276,7 +1283,7 @@ $(".add-to-inventory-form").submit(function (event) {
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR.status);
                 if (jqXHR.status == "444") {
-                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1...", "add-to-inventory-form-trigger")
+                    displayError("The " + itemType + " with number " + itemNum + " was not found. Searching for " + itemNum + "-1...", "add-to-inventory-form-trigger", 0)
                 }
                 console.log(error);
                 console.log(errorThrown);
@@ -1300,7 +1307,7 @@ $(".add-to-inventory-form").submit(function (event) {
                         })
                         //if call is successful
                         .done(function (result) {
-                            //                            console.log(result);
+                            console.log(result);
                             //                            $('#loggedInName').text(result.name);
                             //                            $('#loggedInUserName').val(result.username);
                             $('.hide-everything').hide();
@@ -1316,10 +1323,16 @@ $(".add-to-inventory-form").submit(function (event) {
                             console.log(jqXHR.status);
                             if (jqXHR.status == "444") {
                                 displayError("The second search for the " + itemType + " with number " + itemNum + "-1 also returned no results", "add-to-inventory-form-trigger")
+                            } else {
+                                displayError("The second search for the " + itemType + " with number " + itemNum + "-1 returned an error", "add-to-inventory-form-trigger")
                             }
                             console.log(error);
                             console.log(errorThrown);
                         });
+                }
+                // if no results, check if the item number ends with "-1"
+                else {
+                    displayError("Searching for the " + itemType + " with number " + itemNum + " returned no results", "add-to-inventory-form-trigger")
                 }
 
             });

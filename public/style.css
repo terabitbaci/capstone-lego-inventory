@@ -147,13 +147,17 @@ body {
 }
 
 .demoMessage span {
-    color: #2c3531;
+    color: white;
     display: block;
     clear: both;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid gray;
     width: 100%;
+}
+
+.demoMessage span:last-child {
+    color: #2c3531;
 }
 
 main {

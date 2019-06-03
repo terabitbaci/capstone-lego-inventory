@@ -588,11 +588,20 @@ app.put('/inventory-set/add-storage-bin', function (req, res) {
 app.get('/inventory-set/show-aggregate/:username', function (req, res) {
     // retrieve distinct sets
     Set
-        .aggregate({
-            $group: {
-                _id: "$set_num"
+        .aggregate(
+        [
+                {
+                    $match: {
+                        loggedInUserName: req.params.username,
+                    }
+            },
+                {
+                    $group: {
+                        _id: "$set_num"
+                    }
             }
-        })
+        ]
+        )
         .sort('-addedToDB')
         .then(function (sets) {
             res.json({
@@ -821,11 +830,19 @@ app.put('/inventory-moc/add-storage-bin', function (req, res) {
 app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
     // retrieve distinct mocs
     Moc
-        .aggregate({
-            $group: {
-                _id: "$moc_num"
+        .aggregate(
+        [
+                {
+                    $match: {
+                        loggedInUserName: req.params.username,
+                    }
+            },
+                {
+                    $group: {
+                        _id: "$moc_num"
+                    }
             }
-        })
+        ])
         .sort('-addedToDB')
         .then(function (mocs) {
             res.json({
@@ -1063,11 +1080,20 @@ app.put('/inventory-part/add-storage-bin', function (req, res) {
 app.get('/inventory-part/show-aggregate/:username', function (req, res) {
     // retrieve distinct parts
     Part
-        .aggregate({
-            $group: {
-                _id: "$part_num"
+        .aggregate(
+        [
+                {
+                    $match: {
+                        loggedInUserName: req.params.username,
+                    }
+            },
+                {
+                    $group: {
+                        _id: "$part_num"
+                    }
             }
-        })
+        ]
+        )
         .sort('-addedToDB')
         .then(function (parts) {
             res.json({

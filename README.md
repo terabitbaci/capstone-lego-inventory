@@ -227,12 +227,12 @@ In the client.js update the following part functionalities to work with the mocs
 Inventory Page Review April 21, 2019
 * (done)Add bin location to a part is successful, but closes the details table
 * (done)Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
-* Deleting a set/moc does not also delete their respective parts (server)
-* Show message when no sets/mocs/parts are viewable because of filtering
+* (done)Deleting a set/moc does not also delete their respective parts (server)
+* (done)Show message when no sets/mocs/parts are viewable because of filtering
 * (done)Show message describing what filtering is present
 * (done)Remove the message "hide" (during filtering for permanent builds
 * (done)Remove the message "see" (during filtering)
-* Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
+
 
 DONE 05/07/2019
 Data flow testing results
@@ -246,3 +246,7 @@ DONE 05/15/2019
 Delete parts related to a set or moc
 - when deleting fewer sets or mocs than the maximum, find unique parts and delete them instead of decreasing the quantity of each
 
+
+Review 06/03/2019
+* Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
+* (done 06/03/2019)parts or mocs or sets from one user get to be visible for the other (server)

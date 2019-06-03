@@ -338,7 +338,7 @@ function showSetsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //console.log(aggregateResult);
+            console.log(aggregateResult);
 
             $("#inventory-table #inventory-sets-table").html("");
             // check to see if there are any parts in the inventory
@@ -579,7 +579,7 @@ function showMocsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //console.log(aggregateResult);
+            console.log(aggregateResult);
             $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
@@ -816,7 +816,7 @@ function showPartsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //            console.log(aggregateResult);
+            console.log(aggregateResult);
             $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {

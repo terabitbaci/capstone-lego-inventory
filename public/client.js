@@ -25,6 +25,20 @@ function displayError(message, identifier, timer = 1) {
     }
 };
 
+function applyFilterLockButtons() {
+    let selectedOption = $("#filterLockButtons select").val();
+    //console.log("applyFilterLockButtons ==>", selectedOption);
+    if (selectedOption == "see") {
+        $(".itemLockSet").parent().parent().show();
+        $(".itemLockMoc").parent().parent().show();
+        $(".itemLockPart").parent().parent().show();
+    } else if (selectedOption == "hide") {
+        console.log("applyFilterLockButtons else ==>", $(".itemLockActive").parent().parent().next());
+        $(".itemLockActive").parent().parent().hide();
+        $(".itemLockActive").parent().parent().next().hide();
+    }
+}
+
 function getPartsToDelete(itemNumber, itemType, loggedInUserName) {
     if (itemType == 'part') {
         // search for total number of this part in the inventory
@@ -338,7 +352,7 @@ function showSetsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
+            //console.log(aggregateResult);
 
             $("#inventory-table #inventory-sets-table").html("");
             // check to see if there are any parts in the inventory
@@ -544,6 +558,7 @@ function showSetsInInventory(loggedInUserName, callback) {
                                 $('#inventory-filters').show();
                                 $('#inventory-table').show();
                                 $('#inventory-set-details-wrapper').hide();
+                                applyFilterLockButtons();
                             }
                         })
                         //if the call is failing
@@ -579,7 +594,7 @@ function showMocsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
+            //console.log(aggregateResult);
             $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
@@ -780,6 +795,7 @@ function showMocsInInventory(loggedInUserName, callback) {
                                 $('#inventory-filters').show();
                                 $('#inventory-table').show();
                                 $('#inventory-moc-details-wrapper').hide();
+                                applyFilterLockButtons();
                             }
                         })
                         //if the call is failing
@@ -816,7 +832,7 @@ function showPartsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            console.log(aggregateResult);
+            //console.log(aggregateResult);
             $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
@@ -1018,6 +1034,7 @@ function showPartsInInventory(loggedInUserName, callback) {
                                 $('#inventory-filters').show();
                                 $('#inventory-table').show();
                                 $('#inventory-part-details-wrapper').hide();
+                                applyFilterLockButtons();
                             }
                         })
                         //if the call is failing
@@ -1367,15 +1384,13 @@ $('#filterViewButtons select').change(function (event) {
 
 $('#filterLockButtons select').change(function (event) {
     event.preventDefault();
-    let selectedOption = $("#filterLockButtons select").val();
-    if (selectedOption == "see") {
-        $(".itemLockSet").parent().parent().show();
-        $(".itemLockMoc").parent().parent().show();
-        $(".itemLockPart").parent().parent().show();
+    //hiding and showing the locked items
+    applyFilterLockButtons();
+    //display the message related to the hiding and showing
+    let selectedOptionForErrorDisplay = $("#filterLockButtons select").val();
+    if (selectedOptionForErrorDisplay == "see") {
         displayError("Displaying locked and unlocked items", "filterLockButtons-trigger");
-    } else if (selectedOption == "hide") {
-        $(".itemLockActive").parent().parent().hide();
-        $(".itemLockActive").parent().parent().next().hide();
+    } else if (selectedOptionForErrorDisplay == "hide") {
         displayError("Displaying only unlocked items", "filterLockButtons-trigger");
     }
 });
@@ -1423,7 +1438,7 @@ $(document).on('click', '.itemLockPart', function (event) {
     } else {
         updatedItemLockPermanentBuildValue = 1;
     }
-    console.log(itemLockPartNameValue);
+    //console.log(itemLockPartNameValue);
     //create the payload object (what data we send to the api call)
     const updatePartByNameObject = {
         part_name: itemLockPartNameValue,
@@ -1443,10 +1458,12 @@ $(document).on('click', '.itemLockPart', function (event) {
             //            console.log(result);
             //show that the button is locked
             $(this).parent().find(".itemLockPart").toggleClass("itemLockActive");
+
             //update the inventory after lock
             showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
             showMocsInInventory(loggedInUserName);
+
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {
@@ -1622,6 +1639,7 @@ $(document).on('click', '.itemLockSet', function (event) {
             showPartsInInventory(loggedInUserName);
             showSetsInInventory(loggedInUserName);
             showMocsInInventory(loggedInUserName);
+
         })
         //if the call is failing
         .fail(function (jqXHR, error, errorThrown) {

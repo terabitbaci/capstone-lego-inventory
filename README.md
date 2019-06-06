@@ -249,4 +249,4 @@ Delete parts related to a set or moc
 
 Review 06/03/2019
 * Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
-* (done 06/03/2019)parts or mocs or sets from one user get to be visible for the other (server)
+* (done 06/03/2019) parts or mocs or sets from one user get to be visible for the other (server)

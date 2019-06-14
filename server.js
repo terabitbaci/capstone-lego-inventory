@@ -595,14 +595,27 @@ app.get('/inventory-set/show-aggregate/:username', function (req, res) {
                         loggedInUserName: req.params.username,
                     }
             },
+
                 {
                     $group: {
-                        _id: "$set_num"
+                        _id: {
+                            set_num: "$set_num",
+                            set_name: "$set_name"
+                        },
+                        count: {
+                            $sum: 1
+                        }
+                    }
+            },
+
+                {
+                    $sort: {
+                        "_id.set_name": 1
                     }
             }
         ]
         )
-        .sort('-addedToDB')
+        .sort('set_name')
         .then(function (sets) {
             res.json({
                 sets
@@ -837,13 +850,27 @@ app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
                         loggedInUserName: req.params.username,
                     }
             },
+
                 {
                     $group: {
-                        _id: "$moc_num"
+                        _id: {
+                            moc_num: "$moc_num",
+                            moc_name: "$moc_name"
+                        },
+                        count: {
+                            $sum: 1
+                        }
+                    }
+            },
+
+                {
+                    $sort: {
+                        "_id.moc_name": 1
                     }
             }
-        ])
-        .sort('-addedToDB')
+        ]
+        )
+        .sort('moc_name')
         .then(function (mocs) {
             res.json({
                 mocs
@@ -1078,7 +1105,7 @@ app.put('/inventory-part/add-storage-bin', function (req, res) {
 // GET ------------------------------------
 // accessing all of a user's items
 app.get('/inventory-part/show-aggregate/:username', function (req, res) {
-    // retrieve distinct parts
+    // retrieve distinct parts (search all the parts for the existing username, sort them by name (ascending) and show only one instance of each)
     Part
         .aggregate(
         [
@@ -1087,14 +1114,27 @@ app.get('/inventory-part/show-aggregate/:username', function (req, res) {
                         loggedInUserName: req.params.username,
                     }
             },
+
                 {
                     $group: {
-                        _id: "$part_num"
+                        _id: {
+                            part_num: "$part_num",
+                            part_name: "$part_name"
+                        },
+                        count: {
+                            $sum: 1
+                        }
                     }
-            }
-        ]
+            },
+
+                {
+                    $sort: {
+                        "_id.part_name": 1
+                    }
+                }
+            ]
         )
-        .sort('-addedToDB')
+        .sort('part_name')
         .then(function (parts) {
             res.json({
                 parts
@@ -1115,7 +1155,7 @@ app.get('/inventory-part/show-details/:username/:partNumber', function (req, res
             loggedInUserName: req.params.username,
             part_num: req.params.partNumber
         })
-        .sort('-addedToDB')
+        .sort('part_name')
         .then(function (parts) {
             res.json({
                 parts

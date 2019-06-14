@@ -383,7 +383,7 @@ function showSetsInInventory(loggedInUserName, callback) {
                     //show the details of the aggregated parts
                     $.ajax({
                             type: 'GET',
-                            url: '/inventory-set/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            url: '/inventory-set/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id.set_num,
                             dataType: 'json',
                             contentType: 'application/json'
                         })
@@ -594,7 +594,7 @@ function showMocsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //console.log(aggregateResult);
+            console.log(aggregateResult);
             $("#inventory-table #inventory-mocs-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.mocs.length == 0) {
@@ -624,13 +624,13 @@ function showMocsInInventory(loggedInUserName, callback) {
                     //show the details of the aggregated parts
                     $.ajax({
                             type: 'GET',
-                            url: '/inventory-moc/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            url: '/inventory-moc/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id.moc_num,
                             dataType: 'json',
                             contentType: 'application/json'
                         })
                         //if call is successful
                         .done(function (detailedResult) {
-                            //console.log("detailed results mocs", detailedResult);
+                            console.log("detailed results mocs", detailedResult);
                             //                            console.log(detailedResult.parts);
                             let buildTheHtmlOutput = "";
 
@@ -832,7 +832,7 @@ function showPartsInInventory(loggedInUserName, callback) {
         })
         //if call is successful
         .done(function (aggregateResult) {
-            //console.log(aggregateResult);
+            //console.log("aggregate results parts", aggregateResult);
             $("#inventory-table #inventory-parts-table").html("");
             // check to see if there are any parts in the inventory
             if (aggregateResult.parts.length == 0) {
@@ -857,12 +857,17 @@ function showPartsInInventory(loggedInUserName, callback) {
                 $("#inventory-table #inventory-parts-table").append(buildTheHeaderOutput);
 
 
+                //console.log("aggregate results parts", aggregateResult.parts);
                 //add the rest of the rows to the table
                 $.each(aggregateResult.parts, function (aggregatedResultKey, aggregatedResultValue) {
+
+                    //console.log(aggregatedResultValue._id.part_num, aggregatedResultValue._id.part_name);
+
+
                     //show the details of the aggregated parts
                     $.ajax({
                             type: 'GET',
-                            url: '/inventory-part/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id,
+                            url: '/inventory-part/show-details/' + loggedInUserName + '/' + aggregatedResultValue._id.part_num,
                             dataType: 'json',
                             contentType: 'application/json'
                         })

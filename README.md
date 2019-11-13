@@ -3,23 +3,9 @@
 My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) using the following tools:
 HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
 
-## Screenshots
 
-Landing/Login Page | Sign Up Page
-:-------------------------:|:-------------------------:
-![Landing Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
-Inventory Page - View 1 | Inventory Page - View 2
-![Inventory Page View 1](/github-images/inventory-page-1.png) | ![Inventory Page View 2](/github-images/inventory-page-2.png)
-Inventory Page - Part Details | Inventory Page - MOC Details
-![Inventory Page - Part Details](/github-images/inventory-part-detail.png) | ![Inventory Page - MOC Details](/github-images/inventory-MOC-detail.png)
-Inventory Page - Set Details | Planned Build and Calculation Views
-![Inventory Page - Part Details](/github-images/inventory-set-detail.png) | ![Inventory Page - Planned Build and Calculation Views](/github-images/build-plan-and-calculation-views.png)
-Search Views | Wishlist Page
-![Inventory Page - Part Details](/github-images/search-views-1-and-2.png) | ![Wishlist Page](/github-images/wishlist.png)
-
-
-## User Cases
-This app is for three types of users:
+## User Stories
+This app is for two types of users; a visitor, and a logged-in user
 
 ##### Landing Page
 * as a visitor
@@ -112,6 +98,18 @@ Plan a Build | Build Calculation
 Wishlist | Wishlist Options
 ![Wishlist](/github-images/wireframes/Wishlist.png) | ![Wishlist Options](/github-images/wireframes/Wishlist-Item-Options.png)
 
+## Screenshots
+Landing/Login Page | Sign Up Page
+:-------------------------:|:-------------------------:
+![Landing Page](/github-images/login-page.png)  |  ![Sign Up Page](/github-images/signup-page.png)
+Inventory Page - View 1 | Inventory Page - View 2
+![Inventory Page View 1](/github-images/inventory-page-1.png) | ![Inventory Page View 2](/github-images/inventory-page-2.png)
+Inventory Page - Part Details | Inventory Page - MOC Details
+![Inventory Page - Part Details](/github-images/inventory-part-detail.png) | ![Inventory Page - MOC Details](/github-images/inventory-MOC-detail.png)
+Inventory Page - Set Details | Planned Build and Calculation Views
+![Inventory Page - Part Details](/github-images/inventory-set-detail.png) | ![Inventory Page - Planned Build and Calculation Views](/github-images/build-plan-and-calculation-views.png)
+Search Views | Wishlist Page
+![Inventory Page - Part Details](/github-images/search-views-1-and-2.png) | ![Wishlist Page](/github-images/wishlist.png)
 
 ## Working Prototype
 You can access a working prototype of the app here: https://legoinventory.herokuapp.com/
@@ -182,8 +180,8 @@ Search feature looks for user's number (XXXXX) and possible Rebrickable number (
 
 
 ## Technology
-* Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery
-* Back-End: Node.js | Express.js | Mocha | Chai | RESTful API Endpoints | MongoDB | Mongoose
+* Front-End: HTML5, CSS3, JavaScript ES6, jQuery
+* Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose
 * Development Environment: Heroku, mLab, Robo 3T
 
 ## Responsive
@@ -193,7 +191,7 @@ App is built to be usable on mobile devices, as well as responsive across mobile
 This is v1.0 of the app, but future enhancements are expected to include:
 * Wishlist (from the inventory page part details);
         (1) see how many parts there are in the Wishlist, and
-        (2) if there none, have a button (Add part to Wishlist) to add the part to the Wishlist by pre-populating the form at the top of the Wishlist page, but
+        (2) if there are none, have a button (Add part to Wishlist) to add the part to the Wishlist by pre-populating the form at the top of the Wishlist page, but
         (3) if there are parts in the Wishlist, click on the link to see them in the Wishlist page (button: Go to Wishlist)
 * Search: to allow the user to search for sets/mocs/parts
 * Plan a build: to help the user see what parts are needed to build another MOC or set

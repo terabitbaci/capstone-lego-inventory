@@ -24,9 +24,9 @@ This app is for three types of users:
 
 update the use cases in the sticky notes at the top of each wireframe
 
-Landing Page (code)
-as a visitor
-I want to understand what I can do with this app (or sign up, or log in)
+### Landing Page (code)
+* as a visitor
+* I want to understand what I can do with this app (or sign up, or log in)
 so I can decide if I want to use it
 
 Sign Up (code)
@@ -142,111 +142,74 @@ Search feature looks for user's number (XXXXX) and possible Rebrickable number (
 * User (collection)
     * Username
     * Password
-* Lego Item (collection) (unique Lego elements saved in the database, and used to make inventories and Wishlists; these items don't belong to anybody)
-    * number (Lego)
-    * number (Rebrickable)
-    * type (set/MOC/part)
-    * image URL to Rebrickable set/MOC/part
-    * name
-    * username of owner
-    * source of part (sets the part is found in)
-    * number of parts (in set/MOC)
-    * years offered / year design was released
-    * designer of MOC
-    * designer's website
-    * quantity in Wishlist
-    * quantity of parts in a set/MOC
-    * username
-* Inventory (collection) (user-specific inventory)
-    * number (Lego)
-    * number (Rebrickable)
-    * quantity (in inventory)
-    * name
-    * status (y/n permanent build)
-    * quantity available
-    * bin (customer organization number)
-    * username
-    * 'in your sets' calculation ("good to have" feature)(from Show Details wireframe)
-    * type (set, MOC or part)
-* Wishlist (collection) (user-specific wishlist)
-    * number (Lego)
-    * number (Rebrickable)
-    * quantity (in Wishlist)
-    * name
-    * username
-    * 'in these sets/MOCs' calculation
-    * type (set, MOC or part)
+* Sets
+    * set_num: Number entered by user; example, "42053-1"
+    * set_name: Name of the set; example, "Volvo EW 160E"
+    * year: Year(s) the set was active; example, "2016"
+    * theme_id: Lego theme ID; example, "1"
+    * num_parts: Number of parts in the set; example, "1166"
+    * set_img_url: Location of photo of the set; example, "https://cdn.rebrickable.com/media/sets/42053-1.jpg"
+    * set_url: Location of the set's data in the API; example, "https://rebrickable.com/sets/42053-1/volvo-ew-160e/"
+    * permanent_build: A filter added by the user to indicate whether the set is part of a permanent build (1) (its parts are not available), or not (0)
+    * in_wishlist: (for future release) Added to Wishlist by the user (1) or not (0)
+    * storage_location: (optional to user) Location entered by user indicating where the set is kept; example, "bin 7-1"
+    * loggedInUserName: The user who is logged in
+    * addedToDB: Date/time the user added this set to their inventory; example, "ISODate("2019-06-12T15:31:27.084-07:00")"
+
+* MOCs (My Original Creation)
+    * moc_num: Number entered by user; example, "MOC-4096"
+    * moc_name: Name of the MOC; example, "Trammel of Archimedes"
+    * year: Year(s) the MOC was released; example, "2015"
+    * theme_id: Lego theme ID; example, "1"
+    * num_parts: Number of parts in the MOC; example, "47"
+    * moc_img_url: Location of photo of the MOC; example, "https://cdn.rebrickable.com/media/mocs/moc-4096.jpg"
+    * moc_url: Location of the MOC's data in the API; example, "https://rebrickable.com/mocs/MOC-4096/JKBrickworks/trammel-of-archimedes/"
+    * designer_name: Credit to the designer of the MOC; example, "JKBrickworks"
+    * designer_url: Location of the designer's page on the Rebrickable site; example, "https://rebrickable.com/users/JKBrickworks/mocs/"
+    * permanent_build: A filter added by the user to indicate whether the MOC is part of a permanent build (1) (its parts are not available), or not (0)
+    * in_wishlist: (for future release) Added to Wishlist by the user (1) or not (0)
+    * storage_location: (optional to user) Location entered by user indicating where the MOC is kept; example, "middle shelf"
+    * loggedInUserName: The user who is logged in
+    * addedToDB: Date/time the user added this MOC to their inventory; example, "ISODate("2019-06-03T15:17:11.323-07:00")"
+
+* Parts
+    * element_id: 300226,
+    * inv_part_id: 351988,
+    * is_spare: "false",
+    * num_sets: 512,
+    * part_name: "Brick 2 x 3",
+    * part_cat_id: 11,
+    * part_img_url: "https://cdn.rebrickable.com/media/parts/elements/300226.jpg",
+    * part_num: "3002",
+    * part_url: "https://rebrickable.com/parts/3002/brick-2-x-3/",
+    * part_year_from: 1969,
+    * part_year_to: 2019,
+    * quantity: 1,
+    * set_num: "MOC-5982",
+    * from_set_id: "0",
+    * from_moc_id: "5d0425e3619861e096154354",
+    * permanent_build: 0,
+    * in_wishlist: 0,
+    * storage_location: "",
+    * loggedInUserName: "username",
+    * addedToDB: ISODate("2019-06-14T15:55:38.353-07:00"),
+
 
 ## Technology
 * Front-End: HTML5 | CSS3 | JavaScript ES6 | jQuery
 * Back-End: Node.js | Express.js | Mocha | Chai | RESTful API Endpoints | MongoDB | Mongoose
-
-// Heroku, mLab, Robo 3T
+* Development Environment: Heroku, mLab, Robo 3T
 
 ## Responsive
 App is built to be usable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.
 
 ## Development Roadmap
 This is v1.0 of the app, but future enhancements are expected to include:
-* Part details functionality to-do list:
-    * (done 01/07/19) make parts permanent build
-    * (done 12/28/18) total in inventory
-    * (done 01/09/19) available (total minus the number in permanent builds)
-    * (done 01/14/19) in your sets (example: 10220, 10356, 10646)
-    * (done 12/21/18) appears in years
-    * (done 01/30/19) Wishlist (from the inventory page part details);
-            (1) see how many parts there are in the Wishlist, and
-            (2) if there none, have a button (Add part to Wishlist) to add the part to the Wishlist by pre-populating the form at the top of the Wishlist page, but
-            (3) if there are parts in the Wishlist, click on the link to see them in the Wishlist page (button: Go to Wishlist)
-    * (done 01/25/19) delete from inventory
-    * (done 01/30/19) bin/storage location (entered by user)
-
-* Set and mocs functionality to do list
-    * filter out the part inventory details to match the sets and mocs
-    * duplicate "showPartsInInventory" function
-    * duplicate "/inventory-part/show-aggregate/" api endpoint
-    * duplicate "/inventory-part/show-details/" api endpoint
-    * update "getTotalInInventory" function to support sets and mocs
-    * duplicate "getPartsToDelete" function to support sets and mocs
-    * ignore "getInYourSets" function to support sets and mocs
+* Wishlist (from the inventory page part details);
+        (1) see how many parts there are in the Wishlist, and
+        (2) if there none, have a button (Add part to Wishlist) to add the part to the Wishlist by pre-populating the form at the top of the Wishlist page, but
+        (3) if there are parts in the Wishlist, click on the link to see them in the Wishlist page (button: Go to Wishlist)
+* Search: to allow the user to search for sets/mocs/parts
+* Plan a build: to help the user see what parts are needed to build another MOC or set
 
 
-DONE: 03/15/2019
-1 inside the trigger " $(".add-to-inventory-form").submit(function (event) { " duplicate
-- showPartsInInventory(loggedInUserName);
-to create:
-- showSetsInInventory(loggedInUserName); start from 226 and 456
-- showMocsInInventory(loggedInUserName);
-
-DONE 03/20/2019
-In the client.js update the following part functionalities to work with the mocs and sets
-* '/inventory-part/update-permanent-build',
-* '/inventory-part/add-storage-bin',
-* '/inventory-part/delete-part-by-id',
-
-Inventory Page Review April 21, 2019
-* (done)Add bin location to a part is successful, but closes the details table
-* (done)Filter out permanent builds removes the locked part, but the details for that part remain (if was already open)
-* (done)Deleting a set/moc does not also delete their respective parts (server)
-* (done)Show message when no sets/mocs/parts are viewable because of filtering
-* (done)Show message describing what filtering is present
-* (done)Remove the message "hide" (during filtering for permanent builds
-* (done)Remove the message "see" (during filtering)
-
-
-DONE 05/07/2019
-Data flow testing results
-- parts
-    - parts lock works but is not refreshing showing the locked part
-    - check duplicated triggers
-- sets
-    - sets not diplaying properly when the page loads
-
-DONE 05/15/2019
-Delete parts related to a set or moc
-- when deleting fewer sets or mocs than the maximum, find unique parts and delete them instead of decreasing the quantity of each
-
-
-Review 06/03/2019
-* Locking a part with filtering out permanent builds does not work (makes all permanent builds visible) (server)
-* (done 06/03/2019) parts or mocs or sets from one user get to be visible for the other (server)

@@ -1,8 +1,12 @@
 # capstone-lego-inventory
 
 My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) using the following tools:
-HTML, Node, Robo 3T, CSS, Heroku, JavaScript, mLab
+* Front-End: HTML5, CSS3, JavaScript ES6, jQuery
+* Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose
+* Development Environment: Heroku, mLab, Robo 3T
 
+## Working Prototype
+You can access a working prototype of the app here: https://legoinventory.herokuapp.com/
 
 ## User Stories
 This app is for two types of users; a visitor, and a logged-in user
@@ -111,8 +115,6 @@ Inventory Page - Set Details | Planned Build and Calculation Views
 Search Views | Wishlist Page
 ![Inventory Page - Part Details](/github-images/search-views-1-and-2.png) | ![Wishlist Page](/github-images/wishlist.png)
 
-## Working Prototype
-You can access a working prototype of the app here: https://legoinventory.herokuapp.com/
 
 ## Functionality
 The app's functionality includes:

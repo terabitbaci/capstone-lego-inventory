@@ -102,9 +102,10 @@ function deleteSOMEPartsCorrespondingWithDeletedSetsOrMocs(deleteWhat, deleteSet
             return err;
         });
     }
-
-
 }
+
+
+// --------------- CREATE ITEM ENDPOINTS ----------------------------
 
 app.post('/item/create', function (req, res) {
     let itemNum = req.body.itemNum;
@@ -522,9 +523,7 @@ app.post('/users/login', function (req, res) {
 
 
 
-//=============== SETS api endpoints=======================================================
-
-
+// --------------- SETS ENDPOINTS -----------------------------------
 // PUT --------------------------------------
 app.put('/inventory-set/update-permanent-build', function (req, res) {
     let toUpdate = {};
@@ -735,7 +734,7 @@ app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, 
         });
 });
 
-// DELETE ----------------------------------------
+// --------------- DELETE ENDPOINTS ------------------------------
 // deleting a set by name
 
 app.delete('/inventory-set/delete-set-by-number', function (req, res) {
@@ -778,7 +777,7 @@ app.delete('/inventory-set/delete-set-by-number', function (req, res) {
 });
 
 
-//=============== MOC api endpoints=======================================================
+// --------------- MOC ENDPOINTS ---------------------------------
 
 // PUT --------------------------------------
 app.put('/inventory-moc/update-permanent-build', function (req, res) {
@@ -1042,7 +1041,7 @@ app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
 
 
 
-//=============== PART api endpoints=======================================================
+// --------------- PART ENDPOINTS ---------------------------------
 
 // PUT --------------------------------------
 app.put('/inventory-part/update-permanent-build', function (req, res) {
@@ -1396,7 +1395,7 @@ app.get('/entry/:id', function (req, res) {
 
 
 
-// MISC ------------------------------------------
+// --------------- MISC ENDPOINTS ---------------------------------
 // catch-all endpoint if client makes request to non-existent endpoint
 app.use('*', (req, res) => {
     res.status(404).json({

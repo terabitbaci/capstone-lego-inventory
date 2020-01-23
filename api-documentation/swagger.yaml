@@ -17,11 +17,21 @@ tags:
   externalDocs:
     description: "Paste this YAML file into"
     url: "http://editor.swagger.io"  
-- name: "sets"
+- name: "inventory-set"
   description: "Sets in the user's inventory"
   externalDocs:
     description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"  
+    url: "http://editor.swagger.io" 
+- name: "inventory-moc"
+  description: "Sets in the user's inventory"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"
+- name: "inventory-part"
+  description: "Sets in the user's inventory"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"      
 schemes:
 - "https"
 paths:

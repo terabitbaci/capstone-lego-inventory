@@ -147,7 +147,7 @@ app.post('/item/create', function (req, res) {
                             message: 'Internal Server Error'
                         });
                     }
-                    //if creating a new set in the DB is successfull
+                    //if creating a new set in the DB is successful
                     if (newSet) {
                         console.log("newSet ==>", newSet);
                         //                        console.log(JSON.parse(body));
@@ -194,7 +194,7 @@ app.post('/item/create', function (req, res) {
                                                 message: 'Internal Server Error'
                                             });
                                         }
-                                        //if creating a new part in the DB is succefull
+                                        //if creating a new part in the DB is successful
                                         if (item) {
                                             //                        return res.json(JSON.parse(body));
                                         }
@@ -260,7 +260,7 @@ app.post('/item/create', function (req, res) {
                             message: 'Internal Server Error'
                         });
                     }
-                    //if creating a new moc in the DB is successfull
+                    //if creating a new moc in the DB is successful
                     if (newMoc) {
 
                         console.log("newMoc ==> ", newMoc);
@@ -308,7 +308,7 @@ app.post('/item/create', function (req, res) {
                                                 message: 'Internal Server Error'
                                             });
                                         }
-                                        //if creating a new part in the DB is succefull
+                                        //if creating a new part in the DB is successful
                                         if (item) {
                                             //                        return res.json(JSON.parse(body));
                                         }
@@ -377,7 +377,7 @@ app.post('/item/create', function (req, res) {
                             message: 'Internal Server Error'
                         });
                     }
-                    //if creating a new part in the DB is succefull
+                    //if creating a new part in the DB is successful
                     if (item) {
                         return res.json(JSON.parse(body));
                         //                        return res.json({
@@ -448,7 +448,7 @@ app.post('/users/create', (req, res) => {
                         message: 'Internal Server Error'
                     });
                 }
-                //if creating a new user in the DB is successfull
+                //if creating a new user in the DB is successful
                 if (item) {
 
                     //display the new user

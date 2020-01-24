@@ -1299,8 +1299,6 @@ app.delete('/inventory-part/delete-part-by-id', function (req, res) {
     }
 });
 
-
-
 app.get('/entry-read/:user', function (req, res) {
 
     Entry

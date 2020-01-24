@@ -23,7 +23,7 @@ tags:
     description: "Paste this YAML file into"
     url: "http://editor.swagger.io" 
 - name: "inventory-moc"
-  description: "Sets in the user's inventory"
+  description: "MOCs in the user's inventory (MOC is ''My Original Creation'')"
   externalDocs:
     description: "Paste this YAML file into"
     url: "http://editor.swagger.io"
@@ -77,14 +77,17 @@ paths:
         description: "The password for login in clear text"
         required: true
         type: "string"      
-        schema:
-          $ref: "#/definitions/User"
+        # schema:
+          # $ref: "#/definitions/User"
       responses:
         401:
           description: "Not found"
         500:
           description: "Internal server error"
   
+
+
+
 
   /store/inventory:
     get:

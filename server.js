@@ -648,6 +648,7 @@ app.get('/inventory-set/show-details/:username/:setNumber', function (req, res) 
             });
         });
 });
+
 app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
 
     Set
@@ -733,6 +734,7 @@ app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, 
             });
         });
 });
+
 
 // --------------- DELETE ENDPOINTS ------------------------------
 // deleting a set by name
@@ -903,6 +905,7 @@ app.get('/inventory-moc/show-details/:username/:mocNumber', function (req, res) 
             });
         });
 });
+
 app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
 
     Moc
@@ -1167,6 +1170,7 @@ app.get('/inventory-part/show-details/:username/:partNumber', function (req, res
             });
         });
 });
+
 app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
 
     Part
@@ -1255,7 +1259,7 @@ app.get('/inventory-part/get-in-your-sets/:username/:itemNumber', function (req,
 
 // DELETE ----------------------------------------
 // deleting a part by name
-//bookmark - delete only parts that not inside the mocs and sets
+//bookmark - delete only parts that are not inside the mocs and sets
 app.delete('/inventory-part/delete-part-by-name', function (req, res) {
     Part.deleteMany({
         part_name: req.body.part_name
@@ -1297,12 +1301,6 @@ app.delete('/inventory-part/delete-part-by-id', function (req, res) {
 
 
 
-
-
-
-
-
-
 app.get('/entry-read/:user', function (req, res) {
 
     Entry
@@ -1328,6 +1326,7 @@ app.get('/entry-read/:user', function (req, res) {
             });
         });
 });
+
 app.get('/entry-seen/:user', function (req, res) {
 
     Entry
@@ -1353,6 +1352,7 @@ app.get('/entry-seen/:user', function (req, res) {
             });
         });
 });
+
 app.get('/entry-performed/:user', function (req, res) {
 
     Entry

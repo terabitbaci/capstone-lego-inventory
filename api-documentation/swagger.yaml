@@ -12,6 +12,11 @@ info:
 host: "legoinventory.herokuapp.com"
 basePath: "/"
 tags:
+- name: "item"
+  description: "Operations about items"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"  
 - name: "user"
   description: "Operations about user"
   externalDocs:
@@ -31,11 +36,18 @@ tags:
   description: "Sets in the user's inventory"
   externalDocs:
     description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"      
+    url: "http://editor.swagger.io"
+- name: "Store"
+  description: "Access to Petstore orders"
 schemes:
 - "https"
-paths:
 
+paths:
+  /item/create:
+    post:
+      tags:
+      - item
+      summary: "Create a new set item"
 
   /users/create:
     post:
@@ -85,6 +97,32 @@ paths:
         500:
           description: "Internal server error"
   
+  /inventory-set/update-permanent-build:
+    put:
+      tags:
+      - "inventory-set"
+      summary: "Adds a new set"
+      description: "Adds a new set to the inventory"
+      operationId: "addSet"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "set_name"
+        in: "body"
+        description: "The Lego set name"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "body"
+        description: "The user wants the set to remain intact"
+        required: false
+        type: boolean
+        # schema:
+          # $ref: "#/definitions/User"
+      responses:
+        500:
+          description: "Updating the permanent build failed"
+        
 
 
 

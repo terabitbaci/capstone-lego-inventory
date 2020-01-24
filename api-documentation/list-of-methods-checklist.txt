@@ -1,0 +1,149 @@
+List of methods from capstone-lego-inventory/server.js
+
+Legend
+METHOD
+  for 
+  line from server.js file
+
+
+ITEM endpoints
+
+- [ ] app.post('/item/create', function (req, res) {
+	for set, MOC, part
+	line 110
+
+
+SET endpoints
+
+- [x] app.post('/users/create', (req, res) => {
+	user
+	line 404
+
+- [x] app.post('/users/login', function (req, res) {
+	user
+	line 463
+
+- [ ] app.put('/inventory-set/update-permanent-build', function (req, res) {
+	set
+	line 528
+
+- [ ] app.put('/inventory-set/add-storage-bin', function (req, res) {
+set
+line 557
+
+- [ ] app.get('/inventory-set/show-aggregate/:username', function (req, res) {
+set
+line 587
+	
+- [ ] app.get('/inventory-set/show-details/:username/:setNumber', function (req, res) {
+set
+line 631
+	
+- [ ] app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
+set
+line 652
+	
+- [ ] app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, res) {
+set
+line 699
+	
+- [ ] app.delete('/inventory-set/delete-set-by-number', function (req, res) {
+set
+line 742
+
+
+MOC endpoints
+
+- [ ] app.put('/inventory-moc/update-permanent-build', function (req, res) {
+	MOC
+	line 785
+
+- [ ] app.put('/inventory-moc/add-storage-bin', function (req, res) {
+	MOC
+	line 814
+
+- [ ] app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
+	MOC
+	line 844
+
+- [ ] app.get('/inventory-moc/show-details/:username/:mocNumber', function (req, res) {
+	MOC
+	line 888
+
+- [ ] app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
+	MOC
+	line 909
+
+- [ ] app.get('/inventory-moc/get-in-your-sets/:username/:itemNumber', function (req, res) {
+	MOC
+	line 956
+
+- [ ] app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
+	MOC
+	line 997
+
+
+PART endpoints
+
+- [ ] app.put('/inventory-part/update-permanent-build', function (req, res) {
+	part
+	line 1050
+
+- [ ] app.put('/inventory-part/add-storage-bin', function (req, res) {
+	part
+	line 1079
+
+- [ ] app.get('/inventory-part/show-aggregate/:username', function (req, res) {
+	part
+	line 1109
+
+- [ ] app.get('/inventory-part/show-details/:username/:partNumber', function (req, res) {
+	part
+	line 1153
+
+- [ ] app.get('/inventory-part/count/:username/:itemNumber', function (req, res) {
+	part
+	line 1174
+
+- [ ] app.get('/inventory-part/get-in-your-sets/:username/:itemNumber', function (req, res) {
+	part
+	line 1221
+
+- [ ] app.delete('/inventory-part/delete-part-by-name', function (req, res) {
+	part
+	line 1263
+
+- [ ] app.delete('/inventory-part/delete-part-by-id', function (req, res) {
+	part
+	line 1275
+
+
+ENTRY endpoints
+
+- [ ] app.get('/entry-read/:user', function (req, res) {
+	read
+	line 1304
+
+- [ ] app.get('/entry-seen/:user', function (req, res) {
+	seen
+	line 1330
+
+- [ ] app.get('/entry-performed/:user', function (req, res) {
+	performed
+	line 1356
+
+- [ ] app.get('/entry/:id', function (req, res) {
+	find
+	line 1383
+
+
+CATCH-ALL endpoints
+
+- [ ] app.use('*', (req, res) => {
+	*
+	line 1400
+
+
+
+
+

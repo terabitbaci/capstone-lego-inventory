@@ -12,11 +12,11 @@ info:
 host: "legoinventory.herokuapp.com"
 basePath: "/"
 tags:
-# - name: "item"
-#   description: "Operations about items"
-#   externalDocs:
-#     description: "Paste this YAML file into"
-#     url: "http://editor.swagger.io"  
+- name: "item"
+  description: "Operations about items"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"  
 - name: "user"
   description: "Operations about user"
   externalDocs:
@@ -42,31 +42,45 @@ schemes:
 - "https"
 
 paths:
-  # /item/create:
-  #   post:
-  #     tags:
-  #     - item
-  #     summary: "Create a new set item"
-  #     responses:
-  #       500:
-  #         description: "Internal server error"
-  #       444:
-  #         description: "Invalid part number"
+  /item/create:
+    post:
+      tags:
+      - item
+      summary: "Create a new set item"
+      description: "Takes the name, username, and password from the ajax api call."
+      operationId: "createItem"
+      consumes:
+      - "application/x-www-form-urlencoded"      
+      produces:
+      - "application/json"    
+      responses:
+        500:
+          description: "Internal server error"
+        444:
+          description: "Invalid part number"
 
   /users/create:
     post:
       tags:
       - "user"
       summary: "Create a new user"
-      description: "Takes the name, username, and password from the ajax api call."
+      description: "Takes the username and password from the ajax api call."
       operationId: "createUser"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
+      - name: "username"
+        in: "formData"
+        description: "The user's username"
         required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The user's password in clear text"
+        required: true
+        type: "string"      
         schema:
           $ref: "#/definitions/User"
       responses:

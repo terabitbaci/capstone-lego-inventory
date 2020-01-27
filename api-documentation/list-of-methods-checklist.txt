@@ -23,15 +23,15 @@ SET endpoints
 	user
 	line 463
 
-- [ ] app.put('/inventory-set/update-permanent-build', function (req, res) {
+- [x] app.put('/inventory-set/update-permanent-build', function (req, res) {
 	set
 	line 528
 
-- [ ] app.put('/inventory-set/add-storage-bin', function (req, res) {
+- [x] app.put('/inventory-set/add-storage-bin', function (req, res) {
 set
 line 557
 
-- [ ] app.get('/inventory-set/show-aggregate/:username', function (req, res) {
+- [x] app.get('/inventory-set/show-aggregate/:username', function (req, res) {
 set
 line 587
 	

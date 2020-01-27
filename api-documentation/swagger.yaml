@@ -45,19 +45,37 @@ paths:
   /item/create:
     post:
       tags:
-      - item
+      - "item"
       summary: "Create a new set item"
-      description: "Takes the name, username, and password from the ajax api call."
+      description: "Takes the username, item number, and item type from the ajax api call."
       operationId: "createItem"
       consumes:
       - "application/x-www-form-urlencoded"      
       produces:
-      - "application/json"    
+      - "application/json" 
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's sign-in name"
+        required: true
+        type: "string"
+      - name: "itemNum"
+        in: "formData"
+        description: "The number of the Lego item"
+        required: true
+        type: "string"  
+      - name: "itemType"
+        in: "formData"
+        description: "The type of the item (set, MOC or part)"
+        required: true
+        type: "string"              
+        schema:
+          $ref: "#/definitions/User"      
       responses:
         500:
           description: "Internal server error"
         444:
-          description: "Invalid part number"
+          description: "Invalid (set, MOC or) part number"
 
   /users/create:
     post:

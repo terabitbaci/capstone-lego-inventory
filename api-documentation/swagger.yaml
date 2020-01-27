@@ -139,8 +139,8 @@ paths:
       tags:
       - "inventory-set"
       summary: "Add a new set"
-      description: "Adds a new set to the inventory"
-      operationId: "addSet"
+      description: "Indicates this set is a permanent build"
+      operationId: "updatePermanentBuild"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
@@ -154,13 +154,14 @@ paths:
       - name: "permanent_build"
         in: "formData"
         description: "The user wants the set to remain intact"
-        required: false
+        required: true
         type: boolean
+        default: false
         schema:
-           $ref: "#/definitions/User"
+          $ref: "#/definitions/User"
       responses:
         204:
-          description: "No content"        
+          description: "Returns updated set"        
         500:
           description: "Updating the permanent build failed"
 
@@ -184,13 +185,13 @@ paths:
       - name: "storage_location"
         in: "formData"
         description: "User-added string for storage location"
-        required: false
+        required: true
         type: string
         schema:
            $ref: "#/definitions/User"
       responses:
         204:
-          description: "No content"        
+          description: "Returns updated set"        
         500:
           description: "Updating the storage location failed"
 
@@ -211,21 +212,11 @@ paths:
         description: "The user name for login"
         required: true
         type: "string"
-      - name: "set_num"
-        in: "formData"
-        description: "Number of the Lego set"
-        required: true
-        type: string
-      - name: "set_name"
-        in: "formData"
-        description: "Name of the Lego set"
-        required: true
-        type: string    
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Updating the storage location failed"        
+          description: "Inventory set not found"        
 
 
 

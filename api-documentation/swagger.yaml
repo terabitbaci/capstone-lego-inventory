@@ -37,9 +37,9 @@ tags:
   externalDocs:
     description: "Paste this YAML file into"
     url: "http://editor.swagger.io"
-
 schemes:
 - "https"
+
 paths:
   /item/create:
     post:
@@ -138,7 +138,7 @@ paths:
     put:
       tags:
       - "inventory-set"
-      summary: "Adds a new set"
+      summary: "Add a new set"
       description: "Adds a new set to the inventory"
       operationId: "addSet"
       consumes:
@@ -156,11 +156,43 @@ paths:
         description: "The user wants the set to remain intact"
         required: false
         type: boolean
-        # schema:
-          # $ref: "#/definitions/User"
+        schema:
+           $ref: "#/definitions/User"
       responses:
+        204:
+          description: "No content"        
         500:
           description: "Updating the permanent build failed"
+
+  /inventory-set/add-storage-bin:
+    put:
+      tags:
+      - "inventory-set"
+      summary: "User adds a physical location for the set"
+      description: "User can enter a physical location where they store this set"
+      operationId: "addSetBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: false
+        type: string
+        schema:
+           $ref: "#/definitions/User"
+      responses:
+        204:
+          description: "No content"        
+        500:
+          description: "Updating the storage location failed"
         
 
 

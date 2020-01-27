@@ -193,7 +193,39 @@ paths:
           description: "No content"        
         500:
           description: "Updating the storage location failed"
-        
+
+  /inventory-set/show-aggregate:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access all the user's sets"
+      description: "Retrieve all the user's sets"
+      operationId: "showSets"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: string
+      - name: "set_name"
+        in: "formData"
+        description: "Name of the Lego set"
+        required: true
+        type: string    
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Updating the storage location failed"        
 
 
 

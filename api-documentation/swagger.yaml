@@ -544,14 +544,14 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "moc_name"
+      - name: "part_name"
         in: "formData"
-        description: "Name of the Lego MOC"
+        description: "Name of the Lego part"
         required: true
         type: string
       - name: "permanent_build"
         in: "formData"
-        description: "The user wants the MOC to remain intact"
+        description: "The user wants the part to remain intact"
         required: true
         type: boolean
         default: false
@@ -559,7 +559,7 @@ paths:
           $ref: "#/definitions/User"
       responses:
         204:
-          description: "Returns updated MOC"        
+          description: "Returns updated part"        
         500:
           description: "Updating the permanent build failed"
 
@@ -575,9 +575,9 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "moc_num"
+      - name: "part_num"
         in: "formData"
-        description: "Number of the MOC"
+        description: "Number of the Lego part"
         required: true
         type: string
       - name: "storage_location"
@@ -589,7 +589,7 @@ paths:
            $ref: "#/definitions/User"
       responses:
         204:
-          description: "Returns updated MOC"        
+          description: "Returns updated part"        
         500:
           description: "Updating the storage location failed"
 
@@ -597,8 +597,8 @@ paths:
     get:
       tags:
       - "inventory-part"
-      summary: "Access all the user's MOCs"
-      description: "Retrieve all the user's MOCs"
+      summary: "Access all the user's parts"
+      description: "Retrieve all the user's parts"
       operationId: "showParts"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -614,7 +614,7 @@ paths:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory moc not found"
+          description: "Inventory part not found"
 
   /inventory-part/show-details:
     get:
@@ -633,16 +633,16 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-      - name: "mocNumber"
+      - name: "partNumber"
         in: "formData"
-        description: "Number of the MOC"
+        description: "Number of the part"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory MOC not found"        
+          description: "Inventory part not found"        
 
   /inventory-part/count:
     get:
@@ -663,14 +663,14 @@ paths:
         type: "string"
       - name: "itemNumber"
         in: "formData"
-        description: "Number of the MOC"
+        description: "Number of the Lego part"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory moc not found"        
+          description: "Inventory part not found"        
 
   /inventory-part/get-in-your-sets:
     get:
@@ -698,35 +698,32 @@ paths:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory moc not found"        
+          description: "Inventory part not found"        
 
-  /inventory-part/delete-part-by-number:
+  /inventory-part/delete-part-by-name:
     get:
       tags:
       - "inventory-part"
-      summary: "Delete a specific part"
-      description: "Remove a user-specified quantity of a specific part from the inventory"
+      summary: "Delete a specific part that is not inside the MOCs or sets"
+      description: "Remove a specific part from the inventory"
       operationId: "deletePart"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - name: "loggedInUserName"
+      - name: "part_name"
         in: "formData"
-        description: "The user's login name"
-        required: true
-        type: "string"
-      - name: "set_num"
-        in: "formData"
-        description: "Number of the MOC to delete"
+        description: "Name of the part to delete"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
-        200:
-          description: "OK"        
+        204:
+          description: "Returns updated part"        
+        500:
+          description: "Internal server error"     
 
 
 

@@ -543,7 +543,9 @@ app.put('/inventory-set/update-permanent-build', function (req, res) {
             $set: {
                 permanent_build: req.body.permanent_build
             }
-        }).exec().then(function (updated_set) {
+        })
+        // Success: return the updated set
+        .exec().then(function (updated_set) {
             return res.status(204).json({
                 updated_set: updated_set
             });

@@ -419,9 +419,9 @@ paths:
   /inventory-moc/show-details:
     get:
       tags:
-      - "inventory-set"
-      summary: "Access the details of each of the user's sets"
-      description: "Retrieve the details for all the user's sets"
+      - "inventory-moc"
+      summary: "Access the details of each of the user's MOCs"
+      description: "Retrieve the details for all the user's MOCs"
       operationId: "showMocDetails"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -433,23 +433,23 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-      - name: "setNumber"
+      - name: "mocNumber"
         in: "formData"
-        description: "Number of the Lego set"
+        description: "Number of the MOC"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory set not found"        
+          description: "Inventory MOC not found"        
 
   /inventory-moc/count:
     get:
       tags:
-      - "inventory-set"
-      summary: "Access the details of each of the user's sets"
-      description: "Retrieve the details for all the user's sets"
+      - "inventory-moc"
+      summary: "Access the details of each of the user's MOCs"
+      description: "Retrieve the details for all the user's MOCs"
       operationId: "showMocQuantities"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -463,21 +463,21 @@ paths:
         type: "string"
       - name: "itemNumber"
         in: "formData"
-        description: "Number of the Lego set"
+        description: "Number of the MOC"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory set not found"        
+          description: "Inventory moc not found"        
 
   /inventory-moc/get-in-your-sets:
     get:
       tags:
-      - "inventory-set"
-      summary: "Access the details of each of the user's sets"
-      description: "Retrieve the details for all the user's sets"
+      - "inventory-moc"
+      summary: "Access the details of each of the user's MOCs"
+      description: "Retrieve the details for all the user's MOCs"
       operationId: "getInYourMocDetails"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -491,14 +491,14 @@ paths:
         type: "string"
       - name: "itemNumber"
         in: "formData"
-        description: "Number of the Lego item"
+        description: "Number of the item"
         required: true
         type: "string"        
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
-          description: "Inventory set not found"        
+          description: "Inventory moc not found"        
 
   /inventory-moc/delete-set-by-number:
     get:

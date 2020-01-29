@@ -1,5 +1,4 @@
 const User = require('./models/user');
-const Entry = require('./models/entry');
 const Set = require('./models/set');
 const Moc = require('./models/moc');
 const Part = require('./models/part');
@@ -1301,97 +1300,7 @@ app.delete('/inventory-part/delete-part-by-id', function (req, res) {
     }
 });
 
-app.get('/entry-read/:user', function (req, res) {
 
-    Entry
-        .find({
-            "entryType": "read"
-        })
-        .sort('inputDate')
-        .then(function (entries) {
-            let entriesOutput = [];
-            entries.map(function (entry) {
-                if (entry.loggedInUserName == req.params.user) {
-                    entriesOutput.push(entry);
-                }
-            });
-            res.json({
-                entriesOutput
-            });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
-
-app.get('/entry-seen/:user', function (req, res) {
-
-    Entry
-        .find({
-            "entryType": "seen"
-        })
-        .sort('inputDate')
-        .then(function (entries) {
-            let entriesOutput = [];
-            entries.map(function (entry) {
-                if (entry.loggedInUserName == req.params.user) {
-                    entriesOutput.push(entry);
-                }
-            });
-            res.json({
-                entriesOutput
-            });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
-
-app.get('/entry-performed/:user', function (req, res) {
-
-    Entry
-        .find({
-            "entryType": "performed"
-        })
-        .sort('inputDate')
-        .then(function (entries) {
-            let entriesOutput = [];
-            entries.map(function (entry) {
-                if (entry.loggedInUserName == req.params.user) {
-                    entriesOutput.push(entry);
-                }
-            });
-            res.json({
-                entriesOutput
-            });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
-
-// accessing a single achievement by id
-app.get('/entry/:id', function (req, res) {
-    Entry
-        .findById(req.params.id).exec().then(function (entry) {
-            return res.json(entry);
-        })
-        .catch(function (entries) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
-});
 
 
 

@@ -8,7 +8,7 @@ METHOD
 
 ITEM endpoints
 
-- [ ] app.post('/item/create', function (req, res) {
+- [x] app.post('/item/create', function (req, res) {
 	for set, MOC, part
 	line 110
 
@@ -35,34 +35,34 @@ line 557
 set
 line 587
 	
-- [ ] app.get('/inventory-set/show-details/:username/:setNumber', function (req, res) {
+- [x] app.get('/inventory-set/show-details/:username/:setNumber', function (req, res) {
 set
 line 631
 	
-- [ ] app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
+- [x] app.get('/inventory-set/count/:username/:itemNumber', function (req, res) {
 set
 line 652
 	
-- [ ] app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, res) {
+- [x] app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, res) {
 set
 line 699
 	
-- [ ] app.delete('/inventory-set/delete-set-by-number', function (req, res) {
+- [x] app.delete('/inventory-set/delete-set-by-number', function (req, res) {
 set
 line 742
 
 
 MOC endpoints
 
-- [ ] app.put('/inventory-moc/update-permanent-build', function (req, res) {
+- [x] app.put('/inventory-moc/update-permanent-build', function (req, res) {
 	MOC
 	line 785
 
-- [ ] app.put('/inventory-moc/add-storage-bin', function (req, res) {
+- [x] app.put('/inventory-moc/add-storage-bin', function (req, res) {
 	MOC
 	line 814
 
-- [ ] app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
+- [x] app.get('/inventory-moc/show-aggregate/:username', function (req, res) {
 	MOC
 	line 844
 

@@ -530,6 +530,206 @@ paths:
 
 
 
+
+
+  /inventory-part/update-permanent-build:
+    put:
+      tags:
+      - "inventory-part"
+      summary: "Add a new part"
+      description: "Indicates this part is in a permanent build"
+      operationId: "updatePartPermanentBuild"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_name"
+        in: "formData"
+        description: "Name of the Lego MOC"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "formData"
+        description: "The user wants the MOC to remain intact"
+        required: true
+        type: boolean
+        default: false
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the permanent build failed"
+
+  /inventory-part/add-storage-bin:
+    put:
+      tags:
+      - "inventory-part"
+      summary: "User adds a physical location for the part"
+      description: "User can enter a physical location where they store this part"
+      operationId: "addPartBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_num"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: true
+        type: string
+        schema:
+           $ref: "#/definitions/User"
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the storage location failed"
+
+  /inventory-part/show-aggregate:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access all the user's MOCs"
+      description: "Retrieve all the user's MOCs"
+      operationId: "showParts"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory moc not found"
+
+  /inventory-part/show-details:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the details of each of the user's parts"
+      description: "Retrieve the details for all the user's parts"
+      operationId: "showPartDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "mocNumber"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory MOC not found"        
+
+  /inventory-part/count:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the details of each of the user's parts"
+      description: "Retrieve the details for all the user's parts"
+      operationId: "showPartQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory moc not found"        
+
+  /inventory-part/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the details of each of the user's parts"
+      description: "Retrieve the details for all the user's parts"
+      operationId: "getInYourPartDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the item"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory moc not found"        
+
+  /inventory-part/delete-part-by-number:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Delete a specific part"
+      description: "Remove a user-specified quantity of a specific part from the inventory"
+      operationId: "deletePart"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the MOC to delete"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        200:
+          description: "OK"        
+
+
+
 definitions:
 
   User:

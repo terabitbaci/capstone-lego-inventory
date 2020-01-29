@@ -422,7 +422,7 @@ paths:
       - "inventory-set"
       summary: "Access the details of each of the user's sets"
       description: "Retrieve the details for all the user's sets"
-      operationId: "showSetDetails"
+      operationId: "showMocDetails"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
@@ -450,7 +450,7 @@ paths:
       - "inventory-set"
       summary: "Access the details of each of the user's sets"
       description: "Retrieve the details for all the user's sets"
-      operationId: "showSetQuantities"
+      operationId: "showMocQuantities"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
@@ -478,7 +478,7 @@ paths:
       - "inventory-set"
       summary: "Access the details of each of the user's sets"
       description: "Retrieve the details for all the user's sets"
-      operationId: "getInYourSetDetails"
+      operationId: "getInYourMocDetails"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
@@ -506,7 +506,7 @@ paths:
       - "inventory-set"
       summary: "Delete a specific set"
       description: "Remove a user-specified number of a specific set from the inventory"
-      operationId: "deleteSet"
+      operationId: "deleteMoc"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:

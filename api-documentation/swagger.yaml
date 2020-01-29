@@ -307,7 +307,7 @@ paths:
       tags:
       - "inventory-set"
       summary: "Delete a specific set"
-      description: "Remove a user-specified number of a specific set from the inventory"
+      description: "Remove a user-specified quantity of a specific set from the inventory"
       operationId: "deleteSet"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -500,12 +500,12 @@ paths:
         500:
           description: "Inventory moc not found"        
 
-  /inventory-moc/delete-set-by-number:
+  /inventory-moc/delete-moc-by-number:
     get:
       tags:
       - "inventory-set"
-      summary: "Delete a specific set"
-      description: "Remove a user-specified number of a specific set from the inventory"
+      summary: "Delete a specific MOC"
+      description: "Remove a user-specified quantity of a specific MOC from the inventory"
       operationId: "deleteMoc"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -519,7 +519,7 @@ paths:
         type: "string"
       - name: "set_num"
         in: "formData"
-        description: "Number of the Lego set to delete"
+        description: "Number of the MOC to delete"
         required: true
         type: "string"        
         schema:

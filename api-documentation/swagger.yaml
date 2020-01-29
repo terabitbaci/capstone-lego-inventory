@@ -209,14 +209,126 @@ paths:
       parameters:
       - name: "username"
         in: "formData"
-        description: "The user name for login"
+        description: "The user's login name"
         required: true
         type: "string"
         schema:
            $ref: "#/definitions/User"
       responses:      
         500:
+          description: "Inventory set not found"
+
+  /inventory-set/show-details:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "setNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
           description: "Inventory set not found"        
+
+  /inventory-set/count:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-set/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "getInYourSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego item"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-set/delete-set-by-number:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Delete a specific set"
+      description: "Remove a user-specified number of a specific set from the inventory"
+      operationId: "deleteSet"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set to delete"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        200:
+          description: "OK"        
 
 
 

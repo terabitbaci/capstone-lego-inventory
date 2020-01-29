@@ -66,19 +66,19 @@ MOC endpoints
 	MOC
 	line 844
 
-- [ ] app.get('/inventory-moc/show-details/:username/:mocNumber', function (req, res) {
+- [x] app.get('/inventory-moc/show-details/:username/:mocNumber', function (req, res) {
 	MOC
 	line 888
 
-- [ ] app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
+- [x] app.get('/inventory-moc/count/:username/:itemNumber', function (req, res) {
 	MOC
 	line 909
 
-- [ ] app.get('/inventory-moc/get-in-your-sets/:username/:itemNumber', function (req, res) {
+- [x] app.get('/inventory-moc/get-in-your-sets/:username/:itemNumber', function (req, res) {
 	MOC
 	line 956
 
-- [ ] app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
+- [x] app.delete('/inventory-moc/delete-moc-by-number', function (req, res) {
 	MOC
 	line 997
 

@@ -332,6 +332,204 @@ paths:
 
 
 
+  /inventory-moc/update-permanent-build:
+    put:
+      tags:
+      - "inventory-moc"
+      summary: "Add a new MOC"
+      description: "Indicates this MOC is a permanent build"
+      operationId: "updateMocPermanentBuild"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_name"
+        in: "formData"
+        description: "Name of the Lego MOC"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "formData"
+        description: "The user wants the MOC to remain intact"
+        required: true
+        type: boolean
+        default: false
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the permanent build failed"
+
+  /inventory-moc/add-storage-bin:
+    put:
+      tags:
+      - "inventory-moc"
+      summary: "User adds a physical location for the MOC"
+      description: "User can enter a physical location where they store this MOC"
+      operationId: "addMocBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_num"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: true
+        type: string
+        schema:
+           $ref: "#/definitions/User"
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the storage location failed"
+
+  /inventory-moc/show-aggregate:
+    get:
+      tags:
+      - "inventory-moc"
+      summary: "Access all the user's MOCs"
+      description: "Retrieve all the user's MOCs"
+      operationId: "showMocs"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory moc not found"
+
+  /inventory-moc/show-details:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "setNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-moc/count:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-moc/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "getInYourSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego item"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-moc/delete-set-by-number:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Delete a specific set"
+      description: "Remove a user-specified number of a specific set from the inventory"
+      operationId: "deleteSet"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set to delete"
+        required: true
+        type: "string"        
+        schema:
+           $ref: "#/definitions/User"
+      responses:      
+        200:
+          description: "OK"        
+
+
+
 definitions:
 
   User:

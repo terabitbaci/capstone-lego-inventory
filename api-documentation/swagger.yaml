@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) using the following tools:  Front-End: HTML5, CSS3, JavaScript ES6, jQuery; Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose; Development Environment: Heroku, mLab, Robo 3T. [Item types are sets (boxed Lego sets), parts (individual Lego parts), and MOCS (My Original Creations  developed by fans of Lego®)]."
+  description: "My Lego® Inventory was created by Teresa Bacigalupi (a Lego Technic fan) using the following tools:  Front-End: HTML5, CSS3, JavaScript ES6, jQuery; Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose; Development Environment: Heroku, mLab, Robo 3T. [Item types are sets (boxed Lego sets), MOCs (My Original Creations developed by fans of Lego), and parts (individual Lego parts).]"
   version: "1.0.0"
   title: "Lego Inventory"
   termsOfService: "https://legoinventory.herokuapp.com/"

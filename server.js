@@ -482,7 +482,7 @@ app.post('/users/login', function (req, res) {
         if (!items) {
             //display it
             return res.status(401).json({
-                message: "Not found!"
+                message: "username not found!"
             });
         }
         //if the username is found
@@ -723,7 +723,7 @@ app.get('/inventory-set/get-in-your-sets/:username/:itemNumber', function (req, 
             //convert the array to string
             let totalInYourSetsString = totalInYourSetsArray.toString();
 
-            //return all the set numbers for a specific set
+            //return all the part numbers for a specific set
             res.json({
                 totalInYourSetsString
             });

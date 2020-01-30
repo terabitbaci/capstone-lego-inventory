@@ -130,7 +130,7 @@ paths:
           $ref: "#/definitions/User"
       responses:
         401:
-          description: "Not found"
+          description: "username not found!"
         500:
           description: "Internal server error"
   
@@ -278,8 +278,8 @@ paths:
     get:
       tags:
       - "inventory-set"
-      summary: "Access the details of each of the user's sets"
-      description: "Retrieve the details for all the user's sets"
+      summary: "Access the list of parts in this set"
+      description: "Retrieve the list of parts in this set"
       operationId: "getInYourSetDetails"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -476,8 +476,8 @@ paths:
     get:
       tags:
       - "inventory-moc"
-      summary: "Access the details of each of the user's MOCs"
-      description: "Retrieve the details for all the user's MOCs"
+      summary: "Access the list of parts in this MOC"
+      description: "Retrieve the list of parts in this MOC"
       operationId: "getInYourMocDetails"
       consumes:
       - "application/x-www-form-urlencoded"
@@ -676,8 +676,8 @@ paths:
     get:
       tags:
       - "inventory-part"
-      summary: "Access the details of each of the user's parts"
-      description: "Retrieve the details for all the user's parts"
+      summary: "Access the set or MOC number this part is found in"
+      description: "Retrieve the set or MOC number this part is found in"
       operationId: "getInYourPartDetails"
       consumes:
       - "application/x-www-form-urlencoded"

@@ -144,6 +144,15 @@ CATCH-ALL endpoints
 	line 1400
 
 
+SCHEMAS
+
+- [ ] mocSchema
+
+- [ ] partSchema
+
+- [ ] setSchema
+
+- [ ] userSchema
 
 
 

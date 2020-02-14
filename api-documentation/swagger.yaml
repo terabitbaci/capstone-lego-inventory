@@ -67,9 +67,7 @@ paths:
         in: "formData"
         description: "The type of the Lego item (set, MOC or part)"
         required: true
-        type: "string"              
-        schema:
-          $ref: "#/definitions/User"      
+        type: "string" 
       responses:
         500:
           description: "Internal server error"
@@ -98,8 +96,6 @@ paths:
         description: "The user's password in clear text"
         required: true
         type: "string"      
-        schema:
-          $ref: "#/definitions/User"
       responses:
         500:
           description: "Internal server error"
@@ -126,8 +122,6 @@ paths:
         description: "The password for login in clear text"
         required: true
         type: "string"      
-        schema:
-          $ref: "#/definitions/User"
       responses:
         401:
           description: "username not found!"
@@ -157,8 +151,6 @@ paths:
         required: true
         type: boolean
         default: false
-        schema:
-          $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated set"        
@@ -187,8 +179,6 @@ paths:
         description: "User-added string for storage location"
         required: true
         type: string
-        schema:
-           $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated set"        
@@ -212,8 +202,6 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory set not found"
@@ -240,8 +228,6 @@ paths:
         description: "Number of the Lego set"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory set not found"        
@@ -268,8 +254,6 @@ paths:
         description: "Number of the Lego set"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory set not found"        
@@ -296,8 +280,6 @@ paths:
         description: "Number of the Lego item"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory set not found"        
@@ -324,8 +306,6 @@ paths:
         description: "Number of the Lego set to delete"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         200:
           description: "OK"        
@@ -355,8 +335,6 @@ paths:
         required: true
         type: boolean
         default: false
-        schema:
-          $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated MOC"        
@@ -385,8 +363,6 @@ paths:
         description: "User-added string for storage location"
         required: true
         type: string
-        schema:
-           $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated MOC"        
@@ -410,8 +386,6 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory moc not found"
@@ -438,8 +412,6 @@ paths:
         description: "Number of the MOC"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory MOC not found"        
@@ -466,8 +438,6 @@ paths:
         description: "Number of the MOC"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory moc not found"        
@@ -494,8 +464,6 @@ paths:
         description: "Number of the item"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory moc not found"        
@@ -522,8 +490,6 @@ paths:
         description: "Number of the MOC to delete"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         200:
           description: "OK"        
@@ -555,8 +521,6 @@ paths:
         required: true
         type: boolean
         default: false
-        schema:
-          $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated part"        
@@ -585,8 +549,6 @@ paths:
         description: "User-added string for storage location"
         required: true
         type: string
-        schema:
-           $ref: "#/definitions/User"
       responses:
         204:
           description: "Returns updated part"        
@@ -610,8 +572,6 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory part not found"
@@ -638,8 +598,6 @@ paths:
         description: "Number of the part"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory part not found"        
@@ -666,8 +624,6 @@ paths:
         description: "Number of the Lego part"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory part not found"        
@@ -694,8 +650,6 @@ paths:
         description: "Number of the item"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         500:
           description: "Inventory part not found"        
@@ -717,8 +671,6 @@ paths:
         description: "Name of the part to delete"
         required: true
         type: "string"        
-        schema:
-           $ref: "#/definitions/User"
       responses:      
         204:
           description: "Returns updated part"        
@@ -726,9 +678,7 @@ paths:
           description: "Internal server error"     
 
 
-
 definitions:
-
   User:
     type: "object"
     properties:
@@ -737,11 +687,25 @@ definitions:
         format: "int64"
       username:
         type: "string"
-        description: "at least 8 characters and no spaces"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
       password:
         type: "string"
-        description: "at least 8 characters and no spaces"
-
+      phone:
+        type: "string"
+      userStatus:
+        type: "integer"
+        format: "int32"
+        description: "User Status"
+    xml:
+      name: "User"
+      
+      
+      
 externalDocs:
   description: "For the Rebrickable API"
   url: "https://rebrickable.com/api/v3/docs/?key=4f8845c5d9212c179c08fe6f0e0d2d0c"

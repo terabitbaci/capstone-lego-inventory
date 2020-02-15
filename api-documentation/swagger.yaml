@@ -683,19 +683,63 @@ paths:
 
 
 definitions:
-  User:
-    type: "object"
-    properties:
-      username:
-        type: "string"
-        required: false
-      password:
-        type: "string"
-        required: false
-    xml:
-      name: "User"
+  # User:
+  #   type: "object"
+  #   properties:
+  #     username:
+  #       type: "string"
+  #       required: false
+  #     password:
+  #       type: "string"
+  #       required: false
+  #   xml:
+  #     name: "User"
       
-      
+
+  # Sets:
+  #   type: "object"
+  #   properties:
+  #     set_num:
+  #       type: "string"
+  #       required: false
+  #     set_name:
+  #       type: "string"
+  #       required: false
+  #     year:
+  #       type: "number"
+  #       required: false
+  #     theme_id:
+  #       type: "number"
+  #       required: false
+  #     num_parts:
+  #       type: "number"
+  #       required: false
+  #     set_img_url:
+  #       type: "string"
+  #       required: false
+  #     set_url:
+  #       type: "string"
+  #       required: false
+  #     permanent_build:
+  #       type: "number"
+  #       required: false
+  #     in_wishlist:
+  #       type: "number"
+  #       required: false
+  #     storage_location:
+  #       type: "string"
+  #       required: false
+  #     loggedInUserName:
+  #       type: "string"
+  #       required: false
+  #     addedToDb:
+  #       type: "date"
+  #       default: Date.now    
+  #   xml:
+  #     name: "User"
+
+
+
       
 externalDocs:
   description: "For the Rebrickable API"

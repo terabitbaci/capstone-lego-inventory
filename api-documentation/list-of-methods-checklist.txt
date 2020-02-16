@@ -6,6 +6,7 @@ METHOD
   line from server.js file
 
 
+
 ITEM endpoints
 
 - [x] app.post('/item/create', function (req, res) {
@@ -13,7 +14,7 @@ ITEM endpoints
 	line 110
 
 
-SET endpoints
+USER endpoints
 
 - [x] app.post('/users/create', (req, res) => {
 	user
@@ -22,6 +23,9 @@ SET endpoints
 - [x] app.post('/users/login', function (req, res) {
 	user
 	line 463
+
+
+SET endpoints
 
 - [x] app.put('/inventory-set/update-permanent-build', function (req, res) {
 	set
@@ -50,6 +54,14 @@ line 699
 - [x] app.delete('/inventory-set/delete-set-by-number', function (req, res) {
 set
 line 742
+
+
+
+DELETE endpoints
+
+- [x] app.delete('/inventory-set/delete-set-by-number', function (req, res) {
+	set MOC
+	line 743
 
 
 MOC endpoints
@@ -118,41 +130,103 @@ PART endpoints
 	line 1275
 
 
-ENTRY endpoints
-
-- [ ] app.get('/entry-read/:user', function (req, res) {
-	read
-	line 1304
-
-- [ ] app.get('/entry-seen/:user', function (req, res) {
-	seen
-	line 1330
-
-- [ ] app.get('/entry-performed/:user', function (req, res) {
-	performed
-	line 1356
-
-- [ ] app.get('/entry/:id', function (req, res) {
-	find
-	line 1383
-
 
 CATCH-ALL endpoints
 
 - [ ] app.use('*', (req, res) => {
 	*
-	line 1400
+	line 1309
 
 
 SCHEMAS
 
-- [ ] mocSchema
+- [x] setSchema
 
-- [ ] partSchema
+- [x] userSchema
 
-- [ ] setSchema
+- [x] mocSchema
 
-- [ ] userSchema
+- [x] partSchema
 
+
+- [x] element_id:
+        type: Number,
+        required: false
+   
+- [x] inv_part_id:
+        type: Number,
+        required: false
+   
+- [x] is_spare: 
+        type: String,
+        required: false
+   
+- [x] num_sets: 
+        type: Number,
+        required: false
+   
+- [x] part_name: 
+        type: String,
+        required: false
+   
+- [x] part_cat_id: 
+        type: Number,
+        required: false
+   
+- [x] part_img_url: 
+        type: String,
+        required: false
+   
+- [x] part_num: 
+        type: String,
+        required: false
+   
+- [x] part_url: 
+        type: String,
+        required: false
+   
+- [x] part_year_from: 
+        type: Number,
+        required: false
+   
+- [x] part_year_to: 
+        type: Number,
+        required: false
+   
+- [x] quantity: 
+        type: Number,
+        required: false
+   
+- [x] set_num: 
+        type: String,
+        required: false
+   
+- [x] from_set_id: 
+        type: String,
+        required: false
+   
+- [x] from_moc_id: 
+        type: String,
+        required: false
+   
+- [x] permanent_build: 
+        type: Number,
+        required: false
+   
+- [x] in_wishlist: 
+        type: Number,
+        required: false
+   
+- [x] storage_location: 
+        type: String,
+        required: false
+   
+- [x] loggedInUserName: 
+        type: String,
+        required: false
+   
+- [x] addedToDB: 
+        type: Date,
+        default: Date.now
 
 

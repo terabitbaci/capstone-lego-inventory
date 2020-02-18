@@ -8,7 +8,7 @@ My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) usin
 ## Working Prototype
 You can access a working prototype of the app here: https://legoinventory.herokuapp.com/ and
 ## API Documentation based on Swagger 2.0
-* Swagger documentation here https://lego-inventory-swagger-ui.herokuapp.com/
+Swagger documentation here https://lego-inventory-swagger-ui.herokuapp.com/
 
 
 ## User Stories
@@ -190,7 +190,7 @@ Search feature looks for user's number (XXXXX) and possible Rebrickable number (
 * Development Environment: Heroku, mLab, Robo 3T
 
 ## API Documentation based on Swagger 2.0
-* View the Swagger API documentation here https://lego-inventory-swagger-ui.herokuapp.com/
+View the Swagger API documentation here https://lego-inventory-swagger-ui.herokuapp.com/
 
 ## Responsive
 App is built to be usable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.

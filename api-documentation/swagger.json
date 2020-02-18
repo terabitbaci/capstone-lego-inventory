@@ -20,40 +20,40 @@
       "name": "item",
       "description": "Operations about items",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "user",
       "description": "Operations about user",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-set",
       "description": "Sets in the user's inventory",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-moc",
       "description": "MOCs in the user's inventory (MOC is ''My Original Creation'')",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-part",
       "description": "Sets in the user's inventory",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     }
   ],
@@ -956,43 +956,6 @@
             "description": "Internal server error"
           }
         }
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "username": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "userStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "User Status"
-        }
-      },
-      "xml": {
-        "name": "User"
       }
     }
   },

@@ -15,28 +15,28 @@ tags:
 - name: "item"
   description: "Operations about items"
   externalDocs:
-    description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"  
+    description: "Documentation demo"
+    url: "https://lego-inventory-swagger-ui.herokuapp.com"
 - name: "user"
   description: "Operations about user"
   externalDocs:
-    description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"  
+    description: "Documentation demo"
+    url: "https://lego-inventory-swagger-ui.herokuapp.com"
 - name: "inventory-set"
   description: "Sets in the user's inventory"
   externalDocs:
-    description: "Paste this YAML file into"
-    url: "http://editor.swagger.io" 
+    description: "Documentation demo"
+    url: "https://lego-inventory-swagger-ui.herokuapp.com"
 - name: "inventory-moc"
   description: "MOCs in the user's inventory (MOC is ''My Original Creation'')"
   externalDocs:
-    description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"
+    description: "Documentation demo"
+    url: "https://lego-inventory-swagger-ui.herokuapp.com"
 - name: "inventory-part"
   description: "Sets in the user's inventory"
   externalDocs:
-    description: "Paste this YAML file into"
-    url: "http://editor.swagger.io"
+    description: "Documentation demo"
+    url: "https://lego-inventory-swagger-ui.herokuapp.com"
 schemes:
 - "https"
 
@@ -49,9 +49,9 @@ paths:
       description: "Takes the username, item number, and item type from the ajax api call."
       operationId: "createItem"
       consumes:
-      - "application/x-www-form-urlencoded"      
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/json" 
+      - "application/json"
       parameters:
       - name: "loggedInUserName"
         in: "formData"
@@ -62,12 +62,12 @@ paths:
         in: "formData"
         description: "The number of the Lego item"
         required: true
-        type: "string"  
+        type: "string"
       - name: "itemType"
         in: "formData"
         description: "The type of the Lego item (set, MOC or part)"
         required: true
-        type: "string" 
+        type: "string"
       responses:
         500:
           description: "Internal server error"
@@ -103,7 +103,7 @@ paths:
       responses:
         500:
           description: "Internal server error"
-  
+
   /users/login:
     post:
       tags:
@@ -125,13 +125,13 @@ paths:
         in: "formData"
         description: "The password for login in clear text"
         required: true
-        type: "string"      
+        type: "string"
       responses:
         401:
           description: "username not found!"
         500:
           description: "Internal server error"
-  
+
   /inventory-set/update-permanent-build:
     put:
       tags:
@@ -157,7 +157,7 @@ paths:
         default: false
       responses:
         204:
-          description: "Returns updated set"        
+          description: "Returns updated set"
         500:
           description: "Updating the permanent build failed"
 
@@ -185,7 +185,7 @@ paths:
         type: string
       responses:
         204:
-          description: "Returns updated set"        
+          description: "Returns updated set"
         500:
           description: "Updating the storage location failed"
 
@@ -206,7 +206,7 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-      responses:      
+      responses:
         500:
           description: "Inventory set not found"
 
@@ -231,10 +231,10 @@ paths:
         in: "formData"
         description: "Number of the Lego set"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory set not found"        
+          description: "Inventory set not found"
 
   /inventory-set/count:
     get:
@@ -257,10 +257,10 @@ paths:
         in: "formData"
         description: "Number of the Lego set"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory set not found"        
+          description: "Inventory set not found"
 
   /inventory-set/get-in-your-sets:
     get:
@@ -283,10 +283,10 @@ paths:
         in: "formData"
         description: "Number of the Lego item"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory set not found"        
+          description: "Inventory set not found"
 
   /inventory-set/delete-set-by-number:
     get:
@@ -309,10 +309,10 @@ paths:
         in: "formData"
         description: "Number of the Lego set to delete"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         200:
-          description: "OK"        
+          description: "OK"
 
 
 
@@ -341,7 +341,7 @@ paths:
         default: false
       responses:
         204:
-          description: "Returns updated MOC"        
+          description: "Returns updated MOC"
         500:
           description: "Updating the permanent build failed"
 
@@ -369,7 +369,7 @@ paths:
         type: string
       responses:
         204:
-          description: "Returns updated MOC"        
+          description: "Returns updated MOC"
         500:
           description: "Updating the storage location failed"
 
@@ -390,7 +390,7 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-      responses:      
+      responses:
         500:
           description: "Inventory moc not found"
 
@@ -415,10 +415,10 @@ paths:
         in: "formData"
         description: "Number of the MOC"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory MOC not found"        
+          description: "Inventory MOC not found"
 
   /inventory-moc/count:
     get:
@@ -441,10 +441,10 @@ paths:
         in: "formData"
         description: "Number of the MOC"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory moc not found"        
+          description: "Inventory moc not found"
 
   /inventory-moc/get-in-your-sets:
     get:
@@ -467,10 +467,10 @@ paths:
         in: "formData"
         description: "Number of the item"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory moc not found"        
+          description: "Inventory moc not found"
 
   /inventory-moc/delete-moc-by-number:
     get:
@@ -493,10 +493,10 @@ paths:
         in: "formData"
         description: "Number of the MOC to delete"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         200:
-          description: "OK"        
+          description: "OK"
 
 
 
@@ -527,7 +527,7 @@ paths:
         default: false
       responses:
         204:
-          description: "Returns updated part"        
+          description: "Returns updated part"
         500:
           description: "Updating the permanent build failed"
 
@@ -555,7 +555,7 @@ paths:
         type: string
       responses:
         204:
-          description: "Returns updated part"        
+          description: "Returns updated part"
         500:
           description: "Updating the storage location failed"
 
@@ -576,7 +576,7 @@ paths:
         description: "The user's login name"
         required: true
         type: "string"
-      responses:      
+      responses:
         500:
           description: "Inventory part not found"
 
@@ -601,10 +601,10 @@ paths:
         in: "formData"
         description: "Number of the part"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory part not found"        
+          description: "Inventory part not found"
 
   /inventory-part/count:
     get:
@@ -627,10 +627,10 @@ paths:
         in: "formData"
         description: "Number of the Lego part"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory part not found"        
+          description: "Inventory part not found"
 
   /inventory-part/get-in-your-sets:
     get:
@@ -653,10 +653,10 @@ paths:
         in: "formData"
         description: "Number of the item"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         500:
-          description: "Inventory part not found"        
+          description: "Inventory part not found"
 
   /inventory-part/delete-part-by-name:
     get:
@@ -674,12 +674,12 @@ paths:
         in: "formData"
         description: "Name of the part to delete"
         required: true
-        type: "string"        
-      responses:      
+        type: "string"
+      responses:
         204:
-          description: "Returns updated part"        
+          description: "Returns updated part"
         500:
-          description: "Internal server error"     
+          description: "Internal server error"
 
 
 # definitions:
@@ -694,7 +694,7 @@ paths:
 #         required: false
 #     xml:
 #       name: "User"
-      
+
 
 #   Sets:
 #     type: "object"
@@ -734,7 +734,7 @@ paths:
 #         required: false
 #       addedToDb:
 #         type: "date"
-#         default: Date.now    
+#         default: Date.now
 #     xml:
 #       name: "User"
 
@@ -782,7 +782,7 @@ paths:
 #         required: false
 #       addedToDb:
 #         type: "date"
-#         default: Date.now    
+#         default: Date.now
 #     xml:
 #       name: "User"
 
@@ -809,7 +809,7 @@ paths:
 #         required: false
 #       part_img_url:
 #         type: "string"
-#         required: false    
+#         required: false
 #       part_num:
 #         type: "string"
 #         required: false
@@ -848,12 +848,12 @@ paths:
 #         required: false
 #       addedToDb:
 #         type: "date"
-#         default: Date.now    
+#         default: Date.now
 #     xml:
 #       name: "User"
 
 
-      
+
 externalDocs:
   description: "For the Rebrickable API"
   url: "https://rebrickable.com/api/v3/docs/?key=4f8845c5d9212c179c08fe6f0e0d2d0c"

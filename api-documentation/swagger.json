@@ -1203,7 +1203,7 @@
           "type": "string"
         },
         "addedToDb": {
-          "type": "date",
+          "type": "string",
           "default": "Date.now"
         }
       },
@@ -1254,7 +1254,7 @@
           "type": "string"
         },
         "addedToDb": {
-          "type": "date",
+          "type": "string",
           "default": "Date.now"
         }
       },
@@ -1323,7 +1323,7 @@
           "type": "string"
         },
         "addedToDb": {
-          "type": "date",
+          "type": "string",
           "default": "Date.now"
         }
       },

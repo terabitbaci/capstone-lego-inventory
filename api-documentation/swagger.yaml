@@ -840,7 +840,7 @@ definitions:
       loggedInUserName:
         type: "string"
       addedToDb:
-        type: "date"
+        type: "string"
         default: Date.now
     xml:
       name: "User"
@@ -875,7 +875,7 @@ definitions:
       loggedInUserName:
         type: "string"
       addedToDb:
-        type: "date"
+        type: "string"
         default: Date.now
     xml:
       name: "User"
@@ -922,7 +922,7 @@ definitions:
       loggedInUserName:
         type: "string"
       addedToDb:
-        type: "date"
+        type: "string"
         default: Date.now
     xml:
       name: "User"

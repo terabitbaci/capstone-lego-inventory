@@ -864,6 +864,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },
@@ -904,6 +913,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },
@@ -937,6 +955,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -974,6 +1001,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -1011,6 +1047,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -1048,6 +1093,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -1078,6 +1132,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },

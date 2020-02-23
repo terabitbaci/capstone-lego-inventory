@@ -101,6 +101,12 @@ paths:
         #   items:
         #     $ref: "#/definitions/User"
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/User"
         500:
           description: "Internal server error"
 
@@ -682,18 +688,16 @@ paths:
           description: "Internal server error"
 
 
-# definitions:
-#   User:
-#     type: "object"
-#     properties:
-#       username:
-#         type: "string"
-#         required: false
-#       password:
-#         type: "string"
-#         required: false
-#     xml:
-#       name: "User"
+definitions:
+  User:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
 
 
 #   Sets:

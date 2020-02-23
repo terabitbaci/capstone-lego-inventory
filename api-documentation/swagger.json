@@ -226,6 +226,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated set"
           },
@@ -266,6 +275,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated set"
           },
@@ -299,6 +317,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -336,6 +363,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -373,6 +409,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -410,6 +455,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -448,7 +502,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
           }
         }
       }
@@ -977,6 +1037,51 @@
         },
         "password": {
           "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Sets": {
+      "type": "object",
+      "properties": {
+        "set_num": {
+          "type": "string"
+        },
+        "set_name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "theme_id": {
+          "type": "number"
+        },
+        "num_parts": {
+          "type": "number"
+        },
+        "set_img_url": {
+          "type": "string"
+        },
+        "set_url": {
+          "type": "string"
+        },
+        "permanent_build": {
+          "type": "number"
+        },
+        "in_wishlist": {
+          "type": "number"
+        },
+        "storage_location": {
+          "type": "string"
+        },
+        "loggedInUserName": {
+          "type": "string"
+        },
+        "addedToDb": {
+          "type": "date",
+          "default": "Date.now"
         }
       },
       "xml": {

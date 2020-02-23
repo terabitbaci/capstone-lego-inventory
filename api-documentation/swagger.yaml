@@ -96,10 +96,6 @@ paths:
         description: "The user's password in clear text"
         required: true
         type: "string"
-        # schema:
-        #   type: "array"
-        #   items:
-        #     $ref: "#/definitions/User"
       responses:
         200:
           description: "successful operation"
@@ -162,6 +158,12 @@ paths:
         type: boolean
         default: false
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         204:
           description: "Returns updated set"
         500:
@@ -190,6 +192,12 @@ paths:
         required: true
         type: string
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         204:
           description: "Returns updated set"
         500:
@@ -213,6 +221,12 @@ paths:
         required: true
         type: "string"
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         500:
           description: "Inventory set not found"
 
@@ -239,6 +253,12 @@ paths:
         required: true
         type: "string"
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         500:
           description: "Inventory set not found"
 
@@ -265,6 +285,12 @@ paths:
         required: true
         type: "string"
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         500:
           description: "Inventory set not found"
 
@@ -291,6 +317,12 @@ paths:
         required: true
         type: "string"
       responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
         500:
           description: "Inventory set not found"
 
@@ -318,9 +350,12 @@ paths:
         type: "string"
       responses:
         200:
-          description: "OK"
-
-
+          description: "successful operation"
+          schema:
+            type: "string"
+            items:
+              $ref: "#/definitions/Sets"
+              
 
   /inventory-moc/update-permanent-build:
     put:
@@ -700,47 +735,36 @@ definitions:
       name: "User"
 
 
-#   Sets:
-#     type: "object"
-#     properties:
-#       set_num:
-#         type: "string"
-#         required: false
-#       set_name:
-#         type: "string"
-#         required: false
-#       year:
-#         type: "number"
-#         required: false
-#       theme_id:
-#         type: "number"
-#         required: false
-#       num_parts:
-#         type: "number"
-#         required: false
-#       set_img_url:
-#         type: "string"
-#         required: false
-#       set_url:
-#         type: "string"
-#         required: false
-#       permanent_build:
-#         type: "number"
-#         required: false
-#       in_wishlist:
-#         type: "number"
-#         required: false
-#       storage_location:
-#         type: "string"
-#         required: false
-#       loggedInUserName:
-#         type: "string"
-#         required: false
-#       addedToDb:
-#         type: "date"
-#         default: Date.now
-#     xml:
-#       name: "User"
+  Sets:
+    type: "object"
+    properties:
+      set_num:
+        type: "string"
+      set_name:
+        type: "string"
+      year:
+        type: "number"
+      theme_id:
+        type: "number"
+      num_parts:
+        type: "number"
+      set_img_url:
+        type: "string"
+      set_url:
+        type: "string"
+      permanent_build:
+        type: "number"
+      in_wishlist:
+        type: "number"
+      storage_location:
+        type: "string"
+      loggedInUserName:
+        type: "string"
+      addedToDb:
+        type: "date"
+        default: Date.now
+    xml:
+      name: "User"
 
 #   Mocs:
 #     type: "object"

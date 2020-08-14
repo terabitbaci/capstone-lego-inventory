@@ -1,0 +1,47 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//RemoteApi//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-ORIGINAL-URL:https://www.meetup.com/apidiscovery/events/269046685/ical/
+ API+Experience:+APIs+and+IPAs.ics
+X-WR-CALNAME:Events - API Experience%3A APIs and IPAs.ics
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Los_Angeles
+X-LIC-LOCATION:America/Los_Angeles
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20200305T001623Z
+DTSTART;TZID=America/Los_Angeles:20200324T180000
+DTEND;TZID=America/Los_Angeles:20200324T200000
+STATUS:CONFIRMED
+SUMMARY:API Experience: APIs and IPAs
+DESCRIPTION:APIs & IPAs (API Discovery)\nTuesday\, March 24 at 6:00 PM\n\
+ nJoin us every month for a fun\, quirky\, and interesting event about wh
+ at goes into creating amazing APIs. Discuss the developer experience of 
+ APIs\, get...\n\nhttps://www.meetup.com/apidiscovery/events/269046685/
+CLASS:PUBLIC
+CREATED:20200228T001112Z
+GEO:37.79;-122.40
+LOCATION:ReadMe (445 Bush St #800\, San Francisco\, CA 94108)
+URL:https://www.meetup.com/apidiscovery/events/269046685/
+LAST-MODIFIED:20200228T002401Z
+UID:event_269046685@meetup.com
+END:VEVENT
+END:VCALENDAR

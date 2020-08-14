@@ -3,7 +3,7 @@
 My Lego® Inventory was created by Teresa Bacigalupi (a Lego® Technic fan) using the following tools:
 * Front-End: HTML5, CSS3, JavaScript ES6, jQuery
 * Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose
-* Development Environment: Heroku, mLab, Robo 3T
+* Development Environment: Postman, Heroku, mLab, Robo 3T
 
 ## Working Prototype
 You can access a working prototype of the app here: https://legoinventory.herokuapp.com/ and
@@ -121,7 +121,7 @@ Search Views | Wishlist Page
 
 ## Functionality
 The app's functionality includes:
-Search feature looks for user's number (XXXXX) and possible Rebrickable number (XXXXX-1)
+The search feature looks for the part number provided by the user (XXXXX) and possible Rebrickable number (XXXXX-1)
 
 * Every User has the ability to create an account that stores information unique to them
 * User can Add Entries, Update Entries, and Delete Entries
@@ -187,7 +187,7 @@ Search feature looks for user's number (XXXXX) and possible Rebrickable number (
 ## Technology
 * Front-End: HTML5, CSS3, JavaScript ES6, jQuery
 * Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose
-* Development Environment: Heroku, mLab, Robo 3T
+* Development Environment: Postman, Heroku, mLab, Robo 3T
 
 ## API Documentation based on Swagger 2.0
 View the Swagger API documentation here https://lego-inventory-swagger-ui.herokuapp.com/

@@ -450,10 +450,11 @@ app.post('/users/create', (req, res) => {
 
         //if creating the key returns an error...
         if (err) {
+            console.log(err);
 
             //display it
             return res.status(500).json({
-                message: 'Internal server error'
+                message: 'Internal server error' + err
             });
         }
 

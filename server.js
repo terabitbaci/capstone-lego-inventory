@@ -23,7 +23,7 @@ mongoose.Promise = global.Promise;
 // ---------------- RUN/CLOSE SERVER -----------------------------------------------------
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://lego-inventory-user:Password1@lego-inventory-cluster.uvoen.mongodb.net/admin?retryWrites=true&w=majority";
+const uri = "mongodb+srv://lego-inventory-user:Password1@lego-inventory-cluster.uvoen.mongodb.net/admin?retryWrites=true&w=majority&ssl=true";
 //const client = new MongoClient(uri, {
 //    useNewUrlParser: true,
 //    useUnifiedTopology: true

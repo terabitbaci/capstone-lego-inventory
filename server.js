@@ -507,7 +507,7 @@ app.post('/users/login', function (req, res) {
 
         //if the there is an error connecting to the DB
         if (err) {
-
+            console.log(err);
             //display it
             return res.status(500).json({
                 message: "Internal server error" + err

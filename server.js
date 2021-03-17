@@ -21,11 +21,30 @@ mongoose.Promise = global.Promise;
 
 
 // ---------------- RUN/CLOSE SERVER -----------------------------------------------------
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://lego-inventory-user:Password1@lego-inventory-cluster.uvoen.mongodb.net/admin?retryWrites=true&w=majority";
+//const client = new MongoClient(uri, {
+//    useNewUrlParser: true,
+//    useUnifiedTopology: true
+//});
+//client.connect(err => {
+//    const collection = client.db("admin").collection("devices");
+//    // perform actions on the collection object
+//    client.close();
+//});
+
 let server = undefined;
 
 function runServer(urlToUse) {
+    const client = new MongoClient(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
     return new Promise((resolve, reject) => {
-        mongoose.connect(urlToUse, err => {
+        client.connect(err => {
+            const collection = client.db("admin").collection("devices");
+            // perform actions on the collection object
             if (err) {
                 return reject(err);
             }
@@ -33,12 +52,28 @@ function runServer(urlToUse) {
                 console.log(`Listening on localhost:${config.PORT}`);
                 resolve();
             }).on('error', err => {
-                mongoose.disconnect();
+                client.close();
                 reject(err);
             });
         });
-    });
+    })
 }
+//function runServer(urlToUse) {
+//    return new Promise((resolve, reject) => {
+//        mongoose.connect(urlToUse, err => {
+//            if (err) {
+//                return reject(err);
+//            }
+//            server = app.listen(config.PORT, () => {
+//                console.log(`Listening on localhost:${config.PORT}`);
+//                resolve();
+//            }).on('error', err => {
+//                mongoose.disconnect();
+//                reject(err);
+//            });
+//        });
+//    });
+//}
 
 if (require.main === module) {
     runServer(config.DATABASE_URL).catch(err => console.error(err));
@@ -475,7 +510,7 @@ app.post('/users/login', function (req, res) {
 
             //display it
             return res.status(500).json({
-                message: "Internal server error"
+                message: "Internal server error" + err
             });
         }
         // if there are no users with that username

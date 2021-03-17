@@ -1,0 +1,41 @@
+{
+    "name": "capstone-lego-inventory",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "dependencies": {
+        "bcryptjs": "^2.3.0",
+        "body-parser": "^1.15.2",
+        "cors": "^2.8.4",
+        "express": "^4.14.0",
+        "moment": "^2.18.1",
+        "mongodb": "^3.6.4",
+        "mongoose": "^5.12.0",
+        "npm": "^6.7.0",
+        "passport": "^0.3.2",
+        "passport-http": "^0.3.0",
+        "request": "^2.88.0",
+        "unirest": "^0.6.0"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-http": "^4.3.0",
+        "faker": "^3.1.0",
+        "mocha": "^8.3.2"
+    },
+    "scripts": {
+        "test": "mocha",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/terabitbaci/capstone-lego-inventory.git"
+    },
+    "author": "Teresa Bacigalupi",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/terabitbaci/capstone-lego-inventory/issues"
+    },
+    "homepage": "https://github.com/terabitbaci/capstone-lego-inventory#readme"
+}
+npm install bcryptjs body-parser cors express moment mongodb mongoose npm passport passport-http request unirest

@@ -454,7 +454,7 @@ app.post('/users/create', (req, res) => {
 
             //display it
             return res.status(500).json({
-                message: 'Internal server error' + err
+                message: 'Internal server error - creating the key returns an error' + err
             });
         }
 
@@ -463,10 +463,10 @@ app.post('/users/create', (req, res) => {
 
             //if creating the ncrypted pasword returns an error..
             if (err) {
-
+                console.log(err);
                 //display it
                 return res.status(500).json({
-                    message: 'Internal server error'
+                    message: 'Internal server error - creating the ncrypted pasword returns an error' + err
                 });
             }
 
@@ -478,9 +478,10 @@ app.post('/users/create', (req, res) => {
 
                 //if creating a new user in the DB returns an error..
                 if (err) {
+                    console.log(err);
                     //display it
                     return res.status(500).json({
-                        message: 'Internal Server Error'
+                        message: 'Internal Server Error - creating a new user in the DB returns an error' + err
                     });
                 }
                 //if creating a new user in the DB is successful

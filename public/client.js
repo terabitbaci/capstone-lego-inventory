@@ -1073,7 +1073,7 @@ $(function () {
     if ($("#loggedInUserName").val() == '') {
         $('.menu-wrapper').hide();
     }
-//    $('.hide - everything').hide();
+    $('.hide-everything').hide();
     $('#landingPage').show();
     $('#inventory-filters').hide();
     $('#inventory-table').hide();

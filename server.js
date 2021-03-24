@@ -23,8 +23,7 @@ mongoose.Promise = global.Promise;
 // ---------------- RUN/CLOSE SERVER -----------------------------------------------------
 
 const MongoClient = require('mongodb').MongoClient;
-//const uri = "mongodb+srv://lego-inventory-user:Password1@lego-inventory-cluster.uvoen.mongodb.net/lego-inventory-for-heroku?retryWrites=true&w=majority&ssl=true";
-const uri = "mongodb://lego-inventory-14249:8sfBtEnjAL7D12lEs14oQMaRc2DXvN@db-lego-inventory-14249.nodechef.com:5362/lego-inventory";
+const uri = "mongodb+srv://lego-inventory-user:Password1@lego-inventory-cluster.uvoen.mongodb.net/lego-inventory-for-heroku?retryWrites=true&w=majority&ssl=true";
 
 let server = undefined;
 
